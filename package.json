@@ -1,0 +1,15 @@
+{
+  "name": "prs-atm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leask Wong <i@leaskh.com>",
+  "license": "ISC",
+  "dependencies": {
+    "mathjs": "^6.5.0",
+    "uuid": "^3.3.3"
+  }
+}
