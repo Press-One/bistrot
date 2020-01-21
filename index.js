@@ -232,7 +232,7 @@ const deposit = async (account, amount, memo) => {
 
 (async () => {
     try {
-        console.log(await deposit('testbp2', 1));
+        console.log(await deposit('test.bp2', 1));
     } catch (err) {
         console.log(err);
     }
