@@ -10,9 +10,11 @@ const config = require('./config');
 const fetch = require('node-fetch');
 const rpc = new JsonRpc(config.chainApi, { fetch });
 
+const defaultTransMemo = 'Transfer via PRESS.one';
+
 const defaultDepositMemo = 'Deposit on PRESS.one';
 
-const defaultTransMemo = 'Transfer via PRESS.one';
+const defaultWithdrawMemo = 'Withdraw from PRESS.one';
 
 const chainRpcApi = `${config.chainApi}/v1/`;
 
@@ -202,6 +204,12 @@ const requestDeposit = async (account, amount, memo) => {
     );
 };
 
+const requestWithdraw = async (account, amount, memo) => {
+    return await requestPayment(
+        'reqwithdraw', account, mixinCurrency, amount, uuidV1(), memo
+    );
+};
+
 const createMixinPaymentUrl = (
     recipient, currency, amount, trace, memo, options
 ) => {
@@ -230,10 +238,24 @@ const deposit = async (account, amount, memo) => {
     return result;
 };
 
+const withdraw = async (recipient, amount, memo) => {
+    assert(models.utility.verifyUuid(recipient), 'Invalid mixin recipient');
+    memo = memo || defaultWithdrawMemo;
+    let result = await requestWithdraw(config.eosAccountBp, amount);
+    result.mixin_snapshot = await models.mixin.transferFromSystemAccount(
+        recipient, amount, result.trace, withdrawMemo
+    );
+    return result;
+};
+
 (async () => {
-    try {
-        console.log(await deposit('test.bp2', 1));
-    } catch (err) {
-        console.log(err);
-    }
+    // try {
+    //     console.log(await deposit('test.bp2', 1));
+    // } catch (err) {
+    //     console.log(err);
+    // }
+
+    console.log(await withdraw(
+        '36029b33-838f-4dbe-ae9b-f0e86226d53d', 1
+    ));
 })();
