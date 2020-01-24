@@ -36,6 +36,11 @@ const currencies = {
     EOS: '6cfe566e-4aad-470b-8c9a-2fd35b49c68d',
 };
 
+const verifyAccountName = (name) => {
+    return typeof name === 'string'
+        && /(^[a-z1-5\.]{1,11}[a-z1-5]$)|(^[a-z1-5\.]{12}[a-j1-5]$)/.test(name);
+};
+
 const verifyUuid = (uuid) => {
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
         uuid
@@ -46,7 +51,7 @@ const bigFormat = (bignumber) => {
     return mathjs.format(bignumber, {
         notation: 'fixed',
         precision: 4,
-    });
+    }).replace(/"/g, '');
 };
 
 const parseAmount = (amount) => {
@@ -74,15 +79,23 @@ const getTimestampFromUuid = (uuid) => {
     ) - 122192928000000000) / 10000) : 0;
 };
 
-const verifyPaymentArgs = (recipient, currency, amount, trace, memo) => {
+const verifyPaymentArgs = (
+    chainAccount, mixinAccount, currency, amount, trace, memo, options
+) => {
+    options = options || {};
     let currencyId = currencies[currency];
+    mixinAccount = mixinAccount || '';
     amount = parseAndFormat(amount);
-    assert(recipient, 'Invalid recipient');
+    trace = trace || uuidV1();
+    assert(!options.chainAccountRequired
+        || verifyAccountName(chainAccount), 'Invalid account');
+    assert(!options.mixinAccountRequired
+        || verifyUuid(mixinAccount), 'Invalid Mixin account');
     assert(currencyId, 'Invalid currency');
     assert(amount, 'Invalid amount');
     assert(verifyUuid(trace), 'Invalid trace');
     return {
-        recipient, currency, currencyId, amount, trace,
+        chainAccount, mixinAccount, currency, currencyId, amount, trace,
         requestId: getTimestampFromUuid(trace),
         memo: memo || defaultTransMemo,
     };
@@ -164,59 +177,69 @@ const bpTransact = async (account, name, data, options) => {
 };
 
 const requestPayment = async (
-    transType, recipient, currency, amount, trace, memo, options
+    transType, chainAccount, mixinAccount, currency, amount, memo, options
 ) => {
-    var { recipient, currency, currencyId, amount, trace, requestId, memo }
-        = verifyPaymentArgs(recipient, currency, amount, trace, memo);
+    options = options || {};
+    options.chainAccountRequired = true;
     let key = null;
     switch (transType) {
         case 'reqdeposit':
             key = 'deposit_id';
+            memo = memo || defaultDepositMemo;
             break;
         case 'reqwithdraw':
             key = 'withdraw_id';
+            memo = memo || defaultWithdrawMemo;
+            options.mixinAccountRequired = true;
             break;
         default:
             assert(false, 'Invalid transaction type');
     }
+    var {
+        chainAccount, mixinAccount, currency, amount, trace, requestId, memo
+    } = verifyPaymentArgs(
+        chainAccount, mixinAccount, currency, amount, null, memo, options
+    );
     // @todo ///////////////////////////////////////////////////////////////////
     // if (config.debug) {
     //     currency = 'EOS';
     // }
     ////////////////////////////////////////////////////////////////////////////
     return {
-        requestId, trace, transaction: await bpTransact(
-            'prs.tproxy', transType,
-            {
-                user: recipient,
-                [key]: requestId,
-                mixin_trace_id: trace,
-                amount: `${amount} ${currency}`,
-                memo,
-            }
-        )
+        chainAccount, mixinAccount, currency, amount, trace, requestId, memo,
+        transaction: await bpTransact('prs.tproxy', transType, {
+            user: chainAccount,
+            [key]: requestId,
+            mixin_trace_id: trace,
+            mixin_account_id: mixinAccount,
+            amount: `${amount} ${currency}`,
+            memo,
+        })
     };
 };
 
-const requestDeposit = async (account, amount, memo) => {
+const requestDeposit = async (account, amount, memo, options) => {
     return await requestPayment(
-        'reqdeposit', account, mixinCurrency, amount, uuidV1(), memo
+        'reqdeposit', account, null, mixinCurrency, amount, memo, options
     );
 };
 
-const requestWithdraw = async (account, amount, memo) => {
+const requestWithdraw = async (account, mixinId, amount, memo, options) => {
     return await requestPayment(
-        'reqwithdraw', account, mixinCurrency, amount, uuidV1(), memo
+        'reqwithdraw', account, mixinId, mixinCurrency, amount, memo, options
     );
 };
 
 const createMixinPaymentUrl = (
-    recipient, currency, amount, trace, memo, options
+    mixinAccount, currency, amount, trace, memo, options
 ) => {
-    var { recipient, currencyId, amount, trace, memo }
-        = verifyPaymentArgs(recipient, currency, amount, trace, memo);
+    options = options || {};
+    options.mixinAccountRequired = true;
+    var { mixinAccount, currencyId, amount, trace, memo } = verifyPaymentArgs(
+        null, mixinAccount, currency, amount, trace, memo, options
+    );
     return 'https://mixin.one/pay'
-        + '?recipient=' + encodeURIComponent(recipient)
+        + '?recipient=' + encodeURIComponent(mixinAccount)
         + '&asset=' + encodeURIComponent(currencyId)
         + '&amount=' + encodeURIComponent(amount)
         + '&trace=' + encodeURIComponent(trace)
@@ -229,33 +252,28 @@ const createMixinPaymentUrlToSystemAccount = (amount, trace, memo, options) => {
     );
 };
 
-const deposit = async (account, amount, memo) => {
-    memo = memo || defaultDepositMemo;
-    let result = await requestDeposit(account, amount, memo);
+const deposit = async (account, amount, memo, options) => {
+    let result = await requestDeposit(account, amount, memo, options);
+    assert(result, 'Error requesting deposit.');
     result.paymentUrl = createMixinPaymentUrlToSystemAccount(
-        amount, result.trace, memo
+        result.amount, result.trace, result.memo, options
     );
     return result;
 };
 
-const withdraw = async (recipient, amount, memo) => {
-    assert(models.utility.verifyUuid(recipient), 'Invalid mixin recipient');
-    memo = memo || defaultWithdrawMemo;
-    let result = await requestWithdraw(config.eosAccountBp, amount);
-    result.mixin_snapshot = await models.mixin.transferFromSystemAccount(
-        recipient, amount, result.trace, withdrawMemo
-    );
+const withdraw = async (account, mixinId, amount, memo, options) => {
+    let result = await requestWithdraw(account, mixinId, amount, memo, options);
+    assert(result, 'Error requesting withdraw.');
     return result;
 };
 
 (async () => {
-    // try {
-    //     console.log(await deposit('test.bp2', 1));
-    // } catch (err) {
-    //     console.log(err);
-    // }
 
-    console.log(await withdraw(
-        '36029b33-838f-4dbe-ae9b-f0e86226d53d', 1
-    ));
+    try {
+        console.log(await deposit('test.bp2', 1));
+        // console.log(await withdraw('36029b33-838f-4dbe-ae9b-f0e86226d53d', 1));
+    } catch (err) {
+        console.log(err);
+    }
+
 })();
