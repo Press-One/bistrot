@@ -230,6 +230,14 @@ const requestWithdraw = async (account, mixinId, amount, memo, options) => {
     );
 };
 
+const assemblyUrl = (url, componens) => {
+    let args = [];
+    for (let i in componens) {
+        args.push(`${i}=${encodeURIComponent(componens[i])}`);
+    }
+    return `${url}?${args.join('&')}`;
+};
+
 const createMixinPaymentUrl = (
     mixinAccount, currency, amount, trace, memo, options
 ) => {
@@ -238,12 +246,9 @@ const createMixinPaymentUrl = (
     var { mixinAccount, currencyId, amount, trace, memo } = verifyPaymentArgs(
         null, mixinAccount, currency, amount, trace, memo, options
     );
-    return 'https://mixin.one/pay'
-        + '?recipient=' + encodeURIComponent(mixinAccount)
-        + '&asset=' + encodeURIComponent(currencyId)
-        + '&amount=' + encodeURIComponent(amount)
-        + '&trace=' + encodeURIComponent(trace)
-        + '&memo=' + encodeURIComponent(memo);
+    return assemblyUrl('https://mixin.one/pay', {
+        recipient: mixinAccount, asset: currencyId, amount, trace, memo
+    });
 };
 
 const createMixinPaymentUrlToSystemAccount = (amount, trace, memo, options) => {
