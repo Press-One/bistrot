@@ -6,7 +6,6 @@ const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig');
 const assert = require('assert');
 const mathjs = require('mathjs');
 const uuidV1 = require('uuid/v1');
-const config = require('./config');
 const fetch = require('node-fetch');
 const rpc = new JsonRpc(config.chainApi, { fetch });
 

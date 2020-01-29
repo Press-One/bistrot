@@ -1,8 +1,8 @@
 'use strict';
 
 const yargs = require('yargs');
-const atm = require('./atm');
 const fs = require('fs');
+global.config = require('./config');
 
 const argv = yargs.default({
     'action': 'help',
@@ -14,7 +14,8 @@ const argv = yargs.default({
     'amount': null,
     'email': null,
     'memo': null,
-    'debug': false,
+    'debug': null,
+    'api': null,
 }).argv;
 
 const getVersion = () => {
@@ -79,6 +80,11 @@ const help = () => {
 
 (async () => {
     try {
+        config.debug = { 'true': true, 'false': false }[
+            String(argv.debug || '').toUpperCase()
+        ];
+        config.chainApi = argv.api || config.chainApi;
+        const atm = require('./atm');
         switch (String(argv.action || '').toLowerCase()) {
             case 'balance':
                 const bResult = await atm.getBalance(
