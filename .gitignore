@@ -107,6 +107,7 @@ dist
 .vscode-test
 
 # System Files by @leaskh
+.history
 .DS_Store
 .sync
 .swp
