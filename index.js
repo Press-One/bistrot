@@ -4,20 +4,6 @@ const yargs = require('yargs');
 const fs = require('fs');
 global.config = require('./config');
 
-const argv = yargs.default({
-    'action': 'help',
-    'key': null,
-    'account': null,
-    'mx-id': null,
-    'mx-num': null,
-    'mx-name': null,
-    'amount': null,
-    'email': null,
-    'memo': null,
-    'debug': null,
-    'api': null,
-}).argv;
-
 const getVersion = () => {
     let version = null;
     try {
@@ -46,7 +32,8 @@ const help = () => {
         + '\n\n* Balance:'
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
         + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
+        + '\n    --debug    Enable or disable debug mode   [BOOLEAN / OPTIONAL]'
+        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Deposit:'
         + "\n    --action   Set as 'deposit'               [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -55,6 +42,7 @@ const help = () => {
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
         + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
+        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Withdraw to Mixin user id:'
         + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -64,6 +52,7 @@ const help = () => {
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
         + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
+        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Withdraw to Mixin number (with Mixin user name):'
         + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -74,17 +63,54 @@ const help = () => {
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
         + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
+        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Demo:'
+        + '\n    $ prs-atm --action=balance \\'
+        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
+        + '\n              --account=ABCDE'
+        + '\n    $ prs-atm --action=deposit \\'
+        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
+        + '\n              --account=ABCDE \\'
+        + '\n              --amount=12.3456 \\'
+        + '\n              --email=abc@def.com'
+        // + '\n    $ prs-atm --action=withdraw \\'
+        // + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
+        // + '\n              --account=ABCDE \\'
+        // + '\n              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\'
+        // + '\n              --amount=12.3456 \\'
+        // + '\n              --email=abc@def.com'
+        + '\n    $ prs-atm --action=withdraw \\'
+        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
+        + '\n              --account=ABCDE \\'
+        + '\n              --mx-num=12345 \\'
+        + '\n              --mx-name=ABC \\'
+        + '\n              --amount=12.3456 \\'
+        + '\n              --email=abc@def.com'
     );
 };
 
+const argv = yargs.default({
+    'action': 'help',
+    'key': null,
+    'account': null,
+    'mx-id': null,
+    'mx-num': null,
+    'mx-name': null,
+    'amount': null,
+    'email': null,
+    'memo': null,
+    'debug': null,
+    'api': null,
+}).help(false).argv;
+
+config.debug = { 'true': true, 'false': false }[
+    String(argv.debug || '').toUpperCase()
+];
+config.chainApi = argv.api || config.chainApi;
+const atm = require('./atm');
+
 (async () => {
     try {
-        config.debug = { 'true': true, 'false': false }[
-            String(argv.debug || '').toUpperCase()
-        ];
-        config.chainApi = argv.api || config.chainApi;
-        const atm = require('./atm');
         switch (String(argv.action || '').toLowerCase()) {
             case 'balance':
                 const bResult = await atm.getBalance(
