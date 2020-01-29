@@ -17,11 +17,13 @@ const randerResult = (result) => {
     const json = ['transaction'];
     const out = {};
     for (let i in result || {}) {
-        const oi = map[i] ? map[i] : i;
-        if (json.includes(i)) {
-            result[i] = JSON.stringify(result[i]);
+        if (i !== 'options') {
+            const oi = map[i] ? map[i] : i;
+            if (json.includes(i)) {
+                result[i] = JSON.stringify(result[i]);
+            }
+            out[oi] = result[i];
         }
-        out[oi] = result[i];
     }
     console.log(out);
 };
@@ -104,7 +106,7 @@ const argv = yargs.default({
 }).help(false).argv;
 
 config.debug = { 'true': true, 'false': false }[
-    String(argv.debug || '').toUpperCase()
+    String(argv.debug || '').toLowerCase()
 ];
 config.chainApi = argv.api || config.chainApi;
 const atm = require('./atm');
