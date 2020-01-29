@@ -1,6 +1,6 @@
 # PRS-ATM
 
-A CLI tool for financing on PRESS.one .
+A CLI tool for financing on [PRESS.one](https://press.one/) .
 
 ```
 PRESS.one ATM usage:
