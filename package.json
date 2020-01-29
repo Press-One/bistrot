@@ -7,11 +7,12 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Leask Wong <i@leaskh.com>",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "eosjs": "^20.0.3",
         "mathjs": "^6.5.0",
         "node-fetch": "^2.6.0",
-        "uuid": "^3.3.3"
+        "uuid": "^3.3.3",
+        "yargs": "^15.1.0"
     }
 }
