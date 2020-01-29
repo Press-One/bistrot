@@ -34,8 +34,6 @@ const help = () => {
         + '\n\n* Balance:'
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
         + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n    --debug    Enable or disable debug mode   [BOOLEAN / OPTIONAL]'
-        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Deposit:'
         + "\n    --action   Set as 'deposit'               [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -43,8 +41,6 @@ const help = () => {
         + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
-        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Withdraw to Mixin user id:'
         + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -53,8 +49,6 @@ const help = () => {
         + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
-        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Withdraw to Mixin number (with Mixin user name):'
         + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
         + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
@@ -64,7 +58,8 @@ const help = () => {
         + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
         + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
         + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n    --debug    Enable or disable verbose log  [BOOLEAN / OPTIONAL]'
+        + '\n\n* Advanced:'
+        + '\n    --debug    Enable or disable debug mode   [BOOLEAN / OPTIONAL]'
         + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
         + '\n\n* Demo:'
         + '\n    $ prs-atm --action=balance \\'
