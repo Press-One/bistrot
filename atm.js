@@ -59,6 +59,36 @@ const parseAmount = (amount) => {
         && amount;
 };
 
+const makeStringByLength = (string, length) => {
+    string = String(string || '');
+    length = parseInt(length) || 0;
+    let result = '';
+    while (string && length && result.length < length) {
+        result += string;
+    }
+    return result;
+};
+
+const fullLengthLog = (string, maxLength) => {
+    string = String(string || '');
+    maxLength = parseInt(maxLength) || process.stdout.columns;
+    const pad = '=';
+    if (string.length + 4 > maxLength) {
+        console.log(makeStringByLength(pad, maxLength));
+        console.log(string);
+        console.log(makeStringByLength(pad, maxLength));
+    } else {
+        string = string ? ` ${string} ` : '';
+        const lLen = Math.floor((maxLength - string.length) / 2);
+        const rLen = maxLength - lLen - string.length;
+        console.log(
+            `${makeStringByLength(pad, lLen)}${string}`
+            + `${makeStringByLength(pad, rLen)}`
+        );
+    }
+    return { string, maxLength };
+};
+
 const parseAndFormat = (amount) => {
     return parseAmount(amount) && bigFormat(amount);
 };
@@ -189,15 +219,22 @@ const transact = async (actor, privateKey, account, name, data, options) => {
             result = {};
             // console.log(err);
         } else {
-            // @todo enabled this before ship! by @leaskh
-            // if (config.debug) {
-            //     console.log(`PRS API > ${err}`);
-            //     console.log(client, account, name, data);
-            //     if (err instanceof RpcError) {
-            //         console.log(JSON.stringify(err.json, null, 2));
-            //     }
-            // }
-            assert(false, `PRS API > ${String(err)}`);
+            const strErr = `PRS API > ${String(err)}`;
+            if (config.debug) {
+                fullLengthLog('VERBOSE LOG FOR DEBUG ONLY');
+                // console.log(strErr);
+                console.log('Client: \n', JSON.stringify(client));
+                console.log('\nActor: ', `${actor} ( ${privateKey} )`);
+                console.log('\nAction: ', `${account} -> ${name}`);
+                console.log('\nPayload: \n', data);
+                if (err instanceof RpcError) {
+                    console.log(
+                        '\nRPC Error: \n', JSON.stringify(err.json, null, 2)
+                    );
+                }
+                fullLengthLog();
+            }
+            assert(false, strErr);
         }
     }
     assert(result, 'Error pushing PRS transaction.');
