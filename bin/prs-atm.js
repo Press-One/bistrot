@@ -15,10 +15,14 @@ const getVersion = () => {
 
 const randerResult = (result) => {
     const map = { mixinAccount: 'mixinId', mixinId: 'mixinNumber' };
+    const verbose = ['transaction', 'options'];
     const json = ['transaction'];
     const out = {};
     for (let i in result || {}) {
-        if (i !== 'options') {
+        // if (!global.prsAtmConfig.debug && verbose.includes(i)) {
+        if (verbose.includes(i)) {
+            continue;
+        } else {
             const oi = map[i] ? map[i] : i;
             if (json.includes(i)) {
                 result[i] = JSON.stringify(result[i]);
