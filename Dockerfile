@@ -1,4 +1,5 @@
 FROM node:alpine
-MAINTAINER Leask Wong <i@leaskh.com>
+
+LABEL maintainer="i@leaskh.com"
 
 RUN npm install -g prs-atm
