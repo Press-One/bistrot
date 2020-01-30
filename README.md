@@ -2,6 +2,22 @@
 
 A CLI tool for financing on [PRESS.one](https://press.one/) .
 
+## Install with npm
+
+```
+$ npm install -g prs-atm
+$ prs-atm --action=help
+```
+
+## Run a prs-atm container
+
+```
+$ docker pull pressone/prs-atm
+$ docker run -it --rm pressone/prs-atm prs-atm --action=help
+```
+
+## Instruction
+
 ```
 PRESS.one ATM usage:
 
