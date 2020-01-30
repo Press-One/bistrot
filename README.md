@@ -32,15 +32,11 @@ PRESS.one ATM usage:
     --amount   Number like xx.xxxx            [STRING  / REQUIRED]
     --email    Email for notification         [STRING  / OPTIONAL]
     --memo     Comment to this transaction    [STRING  / OPTIONAL]
-
-* Withdraw to Mixin user id:
-    --action   Set as 'withdraw'              [STRING  / REQUIRED]
-    --key      PRESS.one private key          [STRING  / REQUIRED]
-    --account  PRESS.one account              [STRING  / REQUIRED]
-    --mx-id    Mixin user id                  [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx            [STRING  / REQUIRED]
-    --email    Email for notification         [STRING  / OPTIONAL]
-    --memo     Comment to this transaction    [STRING  / OPTIONAL]
+    ┌------------------------------------------------------------┐
+    | (1) After successful execution, you will get a URL.        |
+    | (2) Open this URL in your browser.                         |
+    | (3) Scan the QR code with Mixin to Complete the payment.   |
+    └------------------------------------------------------------┘
 
 * Withdraw to Mixin number (with Mixin user name):
     --action   Set as 'withdraw'              [STRING  / REQUIRED]
@@ -48,6 +44,15 @@ PRESS.one ATM usage:
     --account  PRESS.one account              [STRING  / REQUIRED]
     --mx-num   Mixin user number              [STRING  / REQUIRED]
     --mx-name  Mixin user name                [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx            [STRING  / REQUIRED]
+    --email    Email for notification         [STRING  / OPTIONAL]
+    --memo     Comment to this transaction    [STRING  / OPTIONAL]
+
+* Withdraw to Mixin user id:
+    --action   Set as 'withdraw'              [STRING  / REQUIRED]
+    --key      PRESS.one private key          [STRING  / REQUIRED]
+    --account  PRESS.one account              [STRING  / REQUIRED]
+    --mx-id    Mixin user id                  [STRING  / REQUIRED]
     --amount   Number like xx.xxxx            [STRING  / REQUIRED]
     --email    Email for notification         [STRING  / OPTIONAL]
     --memo     Comment to this transaction    [STRING  / OPTIONAL]
