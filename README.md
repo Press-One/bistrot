@@ -62,14 +62,17 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
     --api      Customize RPC API endpoint     [STRING  / OPTIONAL]
 
 * Demo:
+    $ # Balance
     $ prs-atm --action=balance \
               --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
               --account=ABCDE
+    $ # Deposit
     $ prs-atm --action=deposit \
               --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
               --account=ABCDE \
               --amount=12.3456 \
               --email=abc@def.com
+    $ # Withdraw to Mixin number (with Mixin user name)
     $ prs-atm --action=withdraw \
               --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
               --account=ABCDE \
@@ -77,6 +80,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
               --mx-name=ABC \
               --amount=12.3456 \
               --email=abc@def.com
+    $ # Withdraw to Mixin user id
     $ prs-atm --action=withdraw \
               --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
               --account=ABCDE \
