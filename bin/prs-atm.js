@@ -50,7 +50,8 @@ const help = () => {
         + '\n    | (1) After successful execution, you will get a URL.        |'
         + '\n    | (2) Open this URL in your browser.                         |'
         + '\n    | (3) Scan the QR code with Mixin to complete the payment.   |'
-        + '\n    | (4) You have to complete the payment within `10` minutes.  |'
+        + '\n    | (4) You have to complete the payment within `'
+        + `${atm.paymentTimeout}\` minutes.  |`
         + '\n    └------------------------------------------------------------┘'
         + '\n\n* Withdraw to Mixin number (with Mixin user name):'
         + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
