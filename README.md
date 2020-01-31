@@ -19,7 +19,6 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM usage:
 
 * Balance:
     --key      PRESS.one private key          [STRING  / REQUIRED]
@@ -35,7 +34,7 @@ PRESS.one ATM usage:
     ┌------------------------------------------------------------┐
     | (1) After successful execution, you will get a URL.        |
     | (2) Open this URL in your browser.                         |
-    | (3) Scan the QR code with Mixin to Complete the payment.   |
+    | (3) Scan the QR code with Mixin to complete the payment.   |
     | (4) You have to complete the payment within `10` minutes.  |
     └------------------------------------------------------------┘
 
@@ -53,7 +52,7 @@ PRESS.one ATM usage:
     --action   Set as 'withdraw'              [STRING  / REQUIRED]
     --key      PRESS.one private key          [STRING  / REQUIRED]
     --account  PRESS.one account              [STRING  / REQUIRED]
-    --mx-id    Mixin user id                  [STRING  / REQUIRED]
+    --mx-id    Mixin user id (UUID)           [STRING  / REQUIRED]
     --amount   Number like xx.xxxx            [STRING  / REQUIRED]
     --email    Email for notification         [STRING  / OPTIONAL]
     --memo     Comment to this transaction    [STRING  / OPTIONAL]
@@ -76,6 +75,12 @@ PRESS.one ATM usage:
               --account=ABCDE \
               --mx-num=12345 \
               --mx-name=ABC \
+              --amount=12.3456 \
+              --email=abc@def.com
+    $ prs-atm --action=withdraw \
+              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
+              --account=ABCDE \
+              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --amount=12.3456 \
               --email=abc@def.com
 ```
