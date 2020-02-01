@@ -22,6 +22,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 PRESS.one ATM usage:
 
 * Balance:
+    --action   Set as 'balance'                  [STRING  / REQUIRED]
     --key      PRESS.one private key             [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
 

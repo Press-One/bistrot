@@ -39,6 +39,7 @@ const help = () => {
         `PRESS.one ATM ${version ? `(v${version})` : ''} usage:`,
         '',
         '* Balance:',
+        "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
         '    --key      PRESS.one private key             [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',
