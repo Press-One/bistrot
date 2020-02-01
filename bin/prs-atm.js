@@ -122,7 +122,7 @@ global.prsAtmConfig = {
         String(argv.debug || '').toLowerCase()
     ],
 };
-const atm = require('../index');
+const atm = require('../main');
 
 (async () => {
     try {
