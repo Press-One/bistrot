@@ -35,71 +35,78 @@ const randerResult = (result) => {
 
 const help = () => {
     let version = getVersion();
-    console.log('PRESS.one ATM' + (version ? ` (v${version})` : '') + ' usage:'
-        + '\n\n* Balance:'
-        + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
-        + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n\n* Deposit:'
-        + "\n    --action   Set as 'deposit'               [STRING  / REQUIRED]"
-        + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
-        + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
-        + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
-        + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n    ┌------------------------------------------------------------┐'
-        + '\n    | (1) After successful execution, you will get a URL.        |'
-        + '\n    | (2) Open this URL in your browser.                         |'
-        + '\n    | (3) Scan the QR code with Mixin to complete the payment.   |'
-        + '\n    | (4) You have to complete the payment within `'
-        + `${atm.paymentTimeout}\` minutes.  |`
-        + '\n    └------------------------------------------------------------┘'
-        + '\n\n* Withdraw to Mixin number (with Mixin user name):'
-        + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
-        + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
-        + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n    --mx-num   Mixin user number              [STRING  / REQUIRED]'
-        + '\n    --mx-name  Mixin user name                [STRING  / REQUIRED]'
-        + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
-        + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
-        + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n\n* Withdraw to Mixin user id:'
-        + "\n    --action   Set as 'withdraw'              [STRING  / REQUIRED]"
-        + '\n    --key      PRESS.one private key          [STRING  / REQUIRED]'
-        + '\n    --account  PRESS.one account              [STRING  / REQUIRED]'
-        + '\n    --mx-id    Mixin user id (UUID)           [STRING  / REQUIRED]'
-        + '\n    --amount   Number like xx.xxxx            [STRING  / REQUIRED]'
-        + '\n    --email    Email for notification         [STRING  / OPTIONAL]'
-        + '\n    --memo     Comment to this transaction    [STRING  / OPTIONAL]'
-        + '\n\n* Advanced:'
-        + '\n    --debug    Enable or disable debug mode   [BOOLEAN / OPTIONAL]'
-        + '\n    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]'
-        + '\n\n* Demo:'
-        + '\n    $ # Balance'
-        + '\n    $ prs-atm --action=balance \\'
-        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
-        + '\n              --account=ABCDE'
-        + '\n    $ # Deposit'
-        + '\n    $ prs-atm --action=deposit \\'
-        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
-        + '\n              --account=ABCDE \\'
-        + '\n              --amount=12.3456 \\'
-        + '\n              --email=abc@def.com'
-        + '\n    $ # Withdraw to Mixin number(with Mixin user name)'
-        + '\n    $ prs-atm --action=withdraw \\'
-        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
-        + '\n              --account=ABCDE \\'
-        + '\n              --mx-num=12345 \\'
-        + '\n              --mx-name=ABC \\'
-        + '\n              --amount=12.3456 \\'
-        + '\n              --email=abc@def.com'
-        + '\n    $ # Withdraw to Mixin user id'
-        + '\n    $ prs-atm --action=withdraw \\'
-        + '\n              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \\'
-        + '\n              --account=ABCDE \\'
-        + '\n              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\'
-        + '\n              --amount=12.3456 \\'
-        + '\n              --email=abc@def.com'
-    );
+    console.log([
+        `PRESS.one ATM ${(version ? `(v${version})` : '')} usage:`,
+        '',
+        '* Balance:',
+        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '',
+        '* Deposit:',
+        "    --action   Set as 'deposit'                  [STRING  / REQUIRED]",
+        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --email    Email for notification            [STRING  / OPTIONAL]',
+        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | (1) After successful execution, you will get a URL.           |',
+        '    | (2) Open this URL in your browser.                            |',
+        '    | (3) Scan the QR code with Mixin to complete the payment.      |',
+        '    | (4) You have to complete the payment within `'
+        + `${atm.paymentTimeout}\` minutes.     |`,
+        '    └---------------------------------------------------------------┘',
+        '',
+        '* Withdraw to Mixin number (with Mixin user name):',
+        "    --action   Set as 'withdraw'                 [STRING  / REQUIRED]",
+        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --mx-num   Mixin user number                 [STRING  / REQUIRED]',
+        '    --mx-name  Mixin user name                   [STRING  / REQUIRED]',
+        '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --email    Email for notification            [STRING  / OPTIONAL]',
+        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
+        '',
+        '* Withdraw to Mixin user id:',
+        "    --action   Set as 'withdraw'                 [STRING  / REQUIRED]",
+        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --mx-id    Mixin user id (UUID)              [STRING  / REQUIRED]',
+        '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --email    Email for notification            [STRING  / OPTIONAL]',
+        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
+        '',
+        '* Advanced:',
+        '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
+        '    --api      Customize RPC API endpoint        [STRING  / OPTIONAL]',
+        '',
+        '* Demo:',
+        '    $ # Balance',
+        '    $ prs-atm --action=balance \\',
+        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \\',
+        '              --account=ABCDE',
+        '    $ # Deposit',
+        '    $ prs-atm --action=deposit \\',
+        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \\',
+        '              --account=ABCDE \\',
+        '              --amount=12.3456 \\',
+        '              --email=abc@def.com',
+        '    $ # Withdraw to Mixin number(with Mixin user name)',
+        '    $ prs-atm --action=withdraw \\',
+        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \\',
+        '              --account=ABCDE \\',
+        '              --mx-num=12345 \\',
+        '              --mx-name=ABC \\',
+        '              --amount=12.3456 \\',
+        '              --email=abc@def.com',
+        '    $ # Withdraw to Mixin user id',
+        '    $ prs-atm --action=withdraw \\',
+        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \\',
+        '              --account=ABCDE \\',
+        '              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\',
+        '              --amount=12.3456 \\',
+        '              --email=abc@def.com',
+    ].join('\n'));
 };
 
 const argv = yargs.default({

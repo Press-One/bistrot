@@ -19,63 +19,63 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM usage:
+PRESS.one ATM (v1.1.11) usage:
 
 * Balance:
-    --key      PRESS.one private key          [STRING  / REQUIRED]
-    --account  PRESS.one account              [STRING  / REQUIRED]
+    --key      PRESS.one private key             [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
 
 * Deposit:
-    --action   Set as 'deposit'               [STRING  / REQUIRED]
-    --key      PRESS.one private key          [STRING  / REQUIRED]
-    --account  PRESS.one account              [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx            [STRING  / REQUIRED]
-    --email    Email for notification         [STRING  / OPTIONAL]
-    --memo     Comment to this transaction    [STRING  / OPTIONAL]
-    ┌------------------------------------------------------------┐
-    | (1) After successful execution, you will get a URL.        |
-    | (2) Open this URL in your browser.                         |
-    | (3) Scan the QR code with Mixin to complete the payment.   |
-    | (4) You have to complete the payment within `10` minutes.  |
-    └------------------------------------------------------------┘
+    --action   Set as 'deposit'                  [STRING  / REQUIRED]
+    --key      PRESS.one private key             [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | (1) After successful execution, you will get a URL.           |
+    | (2) Open this URL in your browser.                            |
+    | (3) Scan the QR code with Mixin to complete the payment.      |
+    | (4) You have to complete the payment within `10` minutes.     |
+    └---------------------------------------------------------------┘
 
 * Withdraw to Mixin number (with Mixin user name):
-    --action   Set as 'withdraw'              [STRING  / REQUIRED]
-    --key      PRESS.one private key          [STRING  / REQUIRED]
-    --account  PRESS.one account              [STRING  / REQUIRED]
-    --mx-num   Mixin user number              [STRING  / REQUIRED]
-    --mx-name  Mixin user name                [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx            [STRING  / REQUIRED]
-    --email    Email for notification         [STRING  / OPTIONAL]
-    --memo     Comment to this transaction    [STRING  / OPTIONAL]
+    --action   Set as 'withdraw'                 [STRING  / REQUIRED]
+    --key      PRESS.one private key             [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --mx-num   Mixin user number                 [STRING  / REQUIRED]
+    --mx-name  Mixin user name                   [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
 
 * Withdraw to Mixin user id:
-    --action   Set as 'withdraw'              [STRING  / REQUIRED]
-    --key      PRESS.one private key          [STRING  / REQUIRED]
-    --account  PRESS.one account              [STRING  / REQUIRED]
-    --mx-id    Mixin user id (UUID)           [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx            [STRING  / REQUIRED]
-    --email    Email for notification         [STRING  / OPTIONAL]
-    --memo     Comment to this transaction    [STRING  / OPTIONAL]
+    --action   Set as 'withdraw'                 [STRING  / REQUIRED]
+    --key      PRESS.one private key             [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --mx-id    Mixin user id (UUID)              [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
 
 * Advanced:
-    --debug    Enable or disable debug mode   [BOOLEAN / OPTIONAL]
-    --api      Customize RPC API endpoint     [STRING  / OPTIONAL]
+    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]
+    --api      Customize RPC API endpoint        [STRING  / OPTIONAL]
 
 * Demo:
     $ # Balance
     $ prs-atm --action=balance \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
+              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
               --account=ABCDE
     $ # Deposit
     $ prs-atm --action=deposit \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
+              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
               --account=ABCDE \
               --amount=12.3456 \
               --email=abc@def.com
-    $ # Withdraw to Mixin number (with Mixin user name)
+    $ # Withdraw to Mixin number(with Mixin user name)
     $ prs-atm --action=withdraw \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
+              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
               --account=ABCDE \
               --mx-num=12345 \
               --mx-name=ABC \
@@ -83,7 +83,7 @@ PRESS.one ATM usage:
               --email=abc@def.com
     $ # Withdraw to Mixin user id
     $ prs-atm --action=withdraw \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 \
+              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
               --account=ABCDE \
               --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --amount=12.3456 \
