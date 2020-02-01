@@ -36,7 +36,7 @@ const randerResult = (result) => {
 const help = () => {
     let version = getVersion();
     console.log([
-        `PRESS.one ATM ${(version ? `(v${version})` : '')} usage:`,
+        `PRESS.one ATM ${version ? `(v${version})` : ''} usage:`,
         '',
         '* Balance:',
         '    --key      PRESS.one private key             [STRING  / REQUIRED]',
