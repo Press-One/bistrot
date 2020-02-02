@@ -34,10 +34,10 @@ PRESS.one ATM usage:
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | (1) After successful execution, you will get a URL.           |
-    | (2) Open this URL in your browser.                            |
-    | (3) Scan the QR code with Mixin to complete the payment.      |
-    | (4) You have to complete the payment within `10` minutes.     |
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You have to complete the payment within `10` minutes.      |
     └---------------------------------------------------------------┘
 
 * Withdraw to Mixin number (with Mixin user name):
