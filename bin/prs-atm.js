@@ -17,6 +17,23 @@ const getVersion = () => {
     return version;
 };
 
+const unlockKeystore = () => {
+    assert(fs.existsSync(argv.keystore), 'File does not exist.');
+    let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
+    try {
+        kObj = JSON.parse(kFile);
+    } catch (e) {
+        assert(false, 'Invalid keystore file.');
+    }
+    while (!argv.password) {
+        console.log('Input password to decrypt the keystore.');
+        argv.password = readline.question('Password: ', rCnf);
+    }
+    const result = wallet.recoverPrivateKey(argv.password, kObj);
+    argv.pvtkey = result.privatekey;
+    return result;
+};
+
 const randerResult = (result) => {
     const map = { mixinAccount: 'mixinId', mixinId: 'mixinNumber' };
     const verbose = ['transaction', 'options'];
@@ -76,69 +93,80 @@ const help = () => {
         '* Balance:',
         '',
         "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
-        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `keystore` or `pvtkey` must be provided.                   |',
+        '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
         '    $ prs-atm --action=balance \\',
-        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --account=ABCDE',
+        '              --account=ABCDE \\',
+        '              --keystore=keystore.json',
         '',
         '',
         '* Deposit:',
         '',
         "    --action   Set as 'deposit'                  [STRING  / REQUIRED]",
-        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. After successful execution, you will get a URL.            |',
-        '    | 2. Open this URL in your browser.                             |',
-        '    | 3. Scan the QR code with Mixin to complete the payment.       |',
-        '    | 4. You have to complete the payment within `'
+        '    | 1. `keystore` or `pvtkey` must be provided.                   |',
+        '    | 2. After successful execution, you will get a URL.            |',
+        '    | 3. Open this URL in your browser.                             |',
+        '    | 4. Scan the QR code with Mixin to complete the payment.       |',
+        '    | 5. You have to complete the payment within `'
         + `${atm.paymentTimeout}\` minutes.      |`,
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
         '    $ prs-atm --action=deposit \\',
-        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --account=ABCDE \\',
         '              --amount=12.3456 \\',
+        '              --keystore=keystore.json \\',
         '              --email=abc@def.com',
         '',
         '',
         '* Withdraw:',
         '',
         "    --action   Set as 'withdraw'                 [STRING  / REQUIRED]",
-        '    --key      PRESS.one private key             [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --mx-id    Mixin user id (UUID)              [STRING  / REQUIRED]',
-        '    --mx-num   Mixin user number                 [STRING  / REQUIRED]',
-        '    --mx-name  Mixin user name                   [STRING  / REQUIRED]',
         '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]',
+        '    --mx-num   Mixin user number                 [STRING  / OPTIONAL]',
+        '    --mx-name  Mixin user name                   [STRING  / OPTIONAL]',
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | You have to provide `mx-id` or `mx-num with mx-name`.         |',
+        '    | 1. `keystore` or `pvtkey` must be provided.                   |',
+        '    | 2. `mx-num with mx-name` or `mx-id` must be provided.         |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example of Withdrawing to Mixin number (with Mixin user name):',
         '    $ prs-atm --action=withdraw \\',
-        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --account=ABCDE \\',
+        '              --amount=12.3456 \\',
+        '              --keystore=keystore.json \\',
         '              --mx-num=12345 \\',
         '              --mx-name=ABC \\',
-        '              --amount=12.3456 \\',
         '              --email=abc@def.com',
         '',
         '    > Example of Withdrawing to Mixin user id:',
         '    $ prs-atm --action=withdraw \\',
-        '              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --account=ABCDE \\',
-        '              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\',
         '              --amount=12.3456 \\',
+        '              --keystore=keystore.json \\',
+        '              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\',
         '              --email=abc@def.com',
         '',
         '',
@@ -182,7 +210,7 @@ const { atm, wallet } = require('../main');
 
 (async () => {
     try {
-        switch (String(argv.action || '').toLowerCase()) {
+        switch ((argv.action = String(argv.action || '').toLowerCase())) {
             case 'keystore':
                 let repeat = argv.password;
                 while (!argv.password || !repeat || argv.password !== repeat) {
@@ -204,28 +232,19 @@ const { atm, wallet } = require('../main');
                 }
                 return randerResult(cResult);
             case 'unlock':
-                assert(fs.existsSync(argv.keystore), 'File does not exist.');
-                let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
-                try {
-                    kObj = JSON.parse(kFile);
-                } catch (e) {
-                    assert(false, 'Invalid keystore file.');
-                }
-                while (!argv.password) {
-                    console.log('Input password to decrypt the keystore.');
-                    argv.password = readline.question('Password: ', rCnf);
-                }
-                const rResult = wallet.recoverPrivateKey(argv.password, kObj);
+                const rResult = unlockKeystore();
                 return randerResult(rResult);
             case 'balance':
+                argv.keystore && unlockKeystore();
                 const bResult = await atm.getBalance(
-                    argv.key,
+                    argv.pvtkey,
                     argv.account
                 );
                 return randerResult(bResult);
             case 'deposit':
+                argv.keystore && unlockKeystore();
                 const dResult = await atm.deposit(
-                    argv.key,
+                    argv.pvtkey,
                     argv.account,
                     argv.email,
                     argv.amount,
@@ -233,8 +252,9 @@ const { atm, wallet } = require('../main');
                 )
                 return randerResult(dResult);
             case 'withdraw':
+                argv.keystore && unlockKeystore();
                 const wResult = await atm.withdraw(
-                    argv.key,
+                    argv.pvtkey,
                     argv.account,
                     argv['mx-id'],
                     argv['mx-num'],
@@ -244,8 +264,10 @@ const { atm, wallet } = require('../main');
                     argv.memo
                 );
                 return randerResult(wResult);
-            case 'help':
             default:
+                assert(
+                    !argv.action || argv.action === 'help', 'Unknown action.'
+                );
                 return help();
         }
     } catch (err) {

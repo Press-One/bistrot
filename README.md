@@ -21,72 +21,126 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ```
 PRESS.one ATM usage:
 
+
+* Keystore:
+
+    --action   Set as 'keystore'                 [STRING  / REQUIRED]
+    --password Use to encrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   Import existing public key        [STRING  / OPTIONAL]
+    --pvtkey   Import existing private key       [STRING  / OPTIONAL]
+    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]
+
+    > Example of creating a new keystore:
+    $ prs-atm --action=keystore \
+              --dump=keystore.json
+
+    > Example of creating a keystore with existing keys:
+    $ prs-atm --action=keystore \
+              --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --dump=keystore.json
+
+
+* Unlock:
+
+    --action   Set as 'unlock'                   [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+
+    > Example:
+    $ prs-atm --action=unlock \
+              --keystore=keystore.json
+
+
 * Balance:
+
     --action   Set as 'balance'                  [STRING  / REQUIRED]
-    --key      PRESS.one private key             [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` or `pvtkey` must be provided.                   |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=balance \
+              --account=ABCDE \
+              --keystore=keystore.json
+
 
 * Deposit:
+
     --action   Set as 'deposit'                  [STRING  / REQUIRED]
-    --key      PRESS.one private key             [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. After successful execution, you will get a URL.            |
-    | 2. Open this URL in your browser.                             |
-    | 3. Scan the QR code with Mixin to complete the payment.       |
-    | 4. You have to complete the payment within `10` minutes.      |
+    | 1. `keystore` or `pvtkey` must be provided.                   |
+    | 2. After successful execution, you will get a URL.            |
+    | 3. Open this URL in your browser.                             |
+    | 4. Scan the QR code with Mixin to complete the payment.       |
+    | 5. You have to complete the payment within `10` minutes.      |
     └---------------------------------------------------------------┘
 
-* Withdraw to Mixin number (with Mixin user name):
-    --action   Set as 'withdraw'                 [STRING  / REQUIRED]
-    --key      PRESS.one private key             [STRING  / REQUIRED]
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --mx-num   Mixin user number                 [STRING  / REQUIRED]
-    --mx-name  Mixin user name                   [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
-    --email    Email for notification            [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    > Example:
+    $ prs-atm --action=deposit \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --email=abc@def.com
 
-* Withdraw to Mixin user id:
+
+* Withdraw:
+
     --action   Set as 'withdraw'                 [STRING  / REQUIRED]
-    --key      PRESS.one private key             [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
-    --mx-id    Mixin user id (UUID)              [STRING  / REQUIRED]
     --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
+    --mx-num   Mixin user number                 [STRING  / OPTIONAL]
+    --mx-name  Mixin user name                   [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` or `pvtkey` must be provided.                   |
+    | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
+    └---------------------------------------------------------------┘
+
+    > Example of Withdrawing to Mixin number (with Mixin user name):
+    $ prs-atm --action=withdraw \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --mx-num=12345 \
+              --mx-name=ABC \
+              --email=abc@def.com
+
+    > Example of Withdrawing to Mixin user id:
+    $ prs-atm --action=withdraw \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
+              --email=abc@def.com
+
 
 * Advanced:
+
     --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]
     --api      Customize RPC API endpoint        [STRING  / OPTIONAL]
 
-* Demo:
-    $ # Balance
-    $ prs-atm --action=balance \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
-              --account=ABCDE
-    $ # Deposit
-    $ prs-atm --action=deposit \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
-              --account=ABCDE \
-              --amount=12.3456 \
-              --email=abc@def.com
-    $ # Withdraw to Mixin number(with Mixin user name)
-    $ prs-atm --action=withdraw \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
-              --account=ABCDE \
-              --mx-num=12345 \
-              --mx-name=ABC \
-              --amount=12.3456 \
-              --email=abc@def.com
-    $ # Withdraw to Mixin user id
-    $ prs-atm --action=withdraw \
-              --key=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 \
-              --account=ABCDE \
-              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
-              --amount=12.3456 \
-              --email=abc@def.com
+
+* Security:
+
+    Using passwords or private keys on the command line interface can
+    be insecure. In most cases you don't need to provide passwords or
+    private keys in parameters. The program will request sensitive
+    information in a secure way.
 ```
