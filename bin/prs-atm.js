@@ -2,9 +2,12 @@
 
 'use strict';
 
+const readline = require('readline-sync');
 const assert = require('assert');
 const yargs = require('yargs');
 const fs = require('fs');
+
+const rCnf = { hideEchoBack: true, mask: '' };
 
 const getVersion = () => {
     let version = null;
@@ -43,22 +46,31 @@ const help = () => {
         '* Keystore:',
         '',
         "    --action   Set as 'keystore'                 [STRING  / REQUIRED]",
-        '    --password Use to encrypt the private key    [STRING  / REQUIRED]',
+        '    --password Use to encrypt the keystore       [STRING  / OPTIONAL]',
         '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',
         '    --pvtkey   Import existing private key       [STRING  / OPTIONAL]',
         '    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]',
         '',
         '    > Example of creating a new keystore:',
         '    $ prs-atm --action=keystore \\',
-        "              --password='ABC-def-123-!@#' \\",
         '              --dump=keystore.json',
         '',
         '    > Example of creating a keystore with existing keys:',
         '    $ prs-atm --action=keystore \\',
-        "              --password='ABC-def-123-!@#' \\",
         '              --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --dump=keystore.json',
+        '',
+        '',
+        '* Unlock:',
+        '',
+        "    --action   Set as 'unlock'                   [STRING  / REQUIRED]",
+        '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=unlock \\',
+        '              --keystore=keystore.json',
         '',
         '',
         '* Balance:',
@@ -74,6 +86,7 @@ const help = () => {
         '',
         '',
         '* Deposit:',
+        '',
         "    --action   Set as 'deposit'                  [STRING  / REQUIRED]",
         '    --key      PRESS.one private key             [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -130,8 +143,17 @@ const help = () => {
         '',
         '',
         '* Advanced:',
+        '',
         '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
         '    --api      Customize RPC API endpoint        [STRING  / OPTIONAL]',
+        '',
+        '',
+        '* Security:',
+        '',
+        '    Using passwords or private keys on the command line interface can',
+        "    be insecure. In most cases you don't need to provide passwords or",
+        '    private keys in parameters. The program will request sensitive ',
+        '    information in a secure way.',
         '',
     ].join('\n'));
 };
@@ -162,6 +184,15 @@ const { atm, wallet } = require('../main');
     try {
         switch (String(argv.action || '').toLowerCase()) {
             case 'keystore':
+                let repeat = argv.password;
+                while (!argv.password || !repeat || argv.password !== repeat) {
+                    console.log('Input password to encrypt the keystore.');
+                    argv.password = readline.question('New password: ', rCnf);
+                    repeat = readline.question('Repeat password: ', rCnf);
+                    if (argv.password !== repeat) {
+                        console.log('Passwords do not match.');
+                    }
+                }
                 const cResult = await wallet.createKeystore(
                     String(argv.password || ''),
                     argv.pubkey,
@@ -172,6 +203,20 @@ const { atm, wallet } = require('../main');
                     fs.writeFileSync(argv.dump, JSON.stringify(cResult));
                 }
                 return randerResult(cResult);
+            case 'unlock':
+                assert(fs.existsSync(argv.keystore), 'File does not exist.');
+                let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
+                try {
+                    kObj = JSON.parse(kFile);
+                } catch (e) {
+                    assert(false, 'Invalid keystore file.');
+                }
+                while (!argv.password) {
+                    console.log('Input password to decrypt the keystore.');
+                    argv.password = readline.question('Password: ', rCnf);
+                }
+                const rResult = wallet.recoverPrivateKey(argv.password, kObj);
+                return randerResult(rResult);
             case 'balance':
                 const bResult = await atm.getBalance(
                     argv.key,

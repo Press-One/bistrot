@@ -17,6 +17,7 @@
         "keythereum-pure-js": "^1.1.7",
         "mathjs": "^6.5.0",
         "node-fetch": "^2.6.0",
+        "readline-sync": "^1.4.10",
         "uuid": "^3.3.3",
         "yargs": "^15.1.0"
     }
