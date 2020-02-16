@@ -13,6 +13,8 @@
     "license": "MIT",
     "dependencies": {
         "eosjs": "^20.0.3",
+        "eosjs-keygen": "^1.3.2",
+        "keythereum-pure-js": "^1.1.7",
         "mathjs": "^6.5.0",
         "node-fetch": "^2.6.0",
         "uuid": "^3.3.3",

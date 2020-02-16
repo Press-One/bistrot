@@ -1,3 +1,6 @@
 'use strict';
 
-module.exports = require('./lib/atm');
+module.exports = {
+    atm: require('./lib/atm'),
+    wallet: require('./lib/wallet'),
+};
