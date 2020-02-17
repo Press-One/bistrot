@@ -48,15 +48,15 @@ PRESS.one ATM usage:
     --action   Set as 'unlock'                   [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+
+    > Example:
+    $ prs-atm --action=unlock \
+              --keystore=keystore.json
     ┌---------------------------------------------------------------┐
     | This command will decrypt your keystore and display the       |
     | public key and private key. It's for advanced users only.     |
     | You don't have to do this unless you know what you are doing. |
     └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm --action=unlock \
-              --keystore=keystore.json
 
 
 * Balance:
@@ -67,7 +67,7 @@ PRESS.one ATM usage:
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` or `pvtkey` must be provided.                   |
+    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     └---------------------------------------------------------------┘
 
     > Example:
@@ -87,7 +87,7 @@ PRESS.one ATM usage:
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` or `pvtkey` must be provided.                   |
+    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. After successful execution, you will get a URL.            |
     | 3. Open this URL in your browser.                             |
     | 4. Scan the QR code with Mixin to complete the payment.       |
@@ -116,7 +116,7 @@ PRESS.one ATM usage:
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` or `pvtkey` must be provided.                   |
+    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
     └---------------------------------------------------------------┘
 
@@ -150,4 +150,5 @@ PRESS.one ATM usage:
     be insecure. In most cases you don't need to provide passwords or
     private keys in parameters. The program will request sensitive
     information in a secure way.
+
 ```
