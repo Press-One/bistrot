@@ -4,10 +4,13 @@
 
 const readline = require('readline-sync');
 const assert = require('assert');
+const table = require('table').table;
 const yargs = require('yargs');
 const fs = require('fs');
 
 const rCnf = { hideEchoBack: true, mask: '' };
+
+const defTblConf = { table: { KeyValue: true } };
 
 const getVersion = () => {
     let version = null;
@@ -34,24 +37,80 @@ const unlockKeystore = () => {
     return result;
 };
 
-const randerResult = (result) => {
-    const map = { mixinAccount: 'mixinId', mixinId: 'mixinNumber' };
-    const verbose = ['transaction', 'options'];
+const randerResult = (result, options) => {
+    options = options || {};
+    const map = {
+        mixinAccount: 'mixinId',
+        mixinId: 'mixinNumber',
+        transactions_trx_id: 'transaction_id',
+        transactions_trx_transaction_actions_account: 'counter',
+        transactions_trx_transaction_actions_data_type: 'description',
+        transactions_trx_transaction_actions_data__from_user: 'from',
+        transactions_trx_transaction_actions_data__to_user: 'to',
+        transactions_trx_transaction_actions_data__amount_quantity__amt: 'amount',
+        transactions_trx_transaction_actions_data__amount_quantity__cur: 'currency',
+        transactions_trx_transaction_actions_data_mixin_trace_id: 'mixin_trace_id',
+    };
+    const verbose = [
+        'transaction',
+        'options',
+        'transactions_trx_transaction_actions_name',
+        'transactions_trx_transaction_actions_data_id',
+        'transactions_trx_transaction_actions_data_user_address',
+        'transactions_trx_transaction_actions_data_oracleservice',
+        'transactions_trx_transaction_actions_data_meta',
+        'transactions_trx_transaction_actions_data_data',
+        'previous',
+        'block',
+        'transactions_trx_transaction_actions_data__dp_wd_req__id',
+        'transactions_trx_transaction_actions_data__sync_auth__result',
+    ];
     const json = ['transaction'];
-    const out = {};
-    for (let i in result || {}) {
-        // if (!global.prsAtmConfig.debug && verbose.includes(i)) {
-        if (verbose.includes(i)) {
-            continue;
-        } else {
-            const oi = map[i] ? map[i] : i;
-            if (json.includes(i)) {
-                result[i] = JSON.stringify(result[i]);
+    const deep = statement.isArray(result);
+    let out = [];
+    result = deep ? result : [result];
+    for (let i in result) {
+        out[i] = {};
+        for (let j in result[i]) {
+            // if (!global.prsAtmConfig.debug && verbose.includes(i)) {
+            if (verbose.includes(j)) {
+                continue;
+            } else if (json.includes(j)) {
+                result[i][j] = JSON.stringify(result[i][j]);
             }
-            out[oi] = result[i];
+            out[i][map[j] ? map[j] : j] = result[i][j];
         }
     }
-    console.log(out);
+    out = deep ? out : out[0];
+    if (options.table) {
+        const data = [];
+        if (deep && options.table.columns) {
+            data.push(options.table.columns.map(x => {
+                return x.toUpperCase();
+            }));
+            out.map(x => {
+                const row = [];
+                for (let i of options.table.columns) {
+                    row.push(x[i]);
+                }
+                data.push(row);
+            });
+        } else if (!deep && options.table.KeyValue) {
+            for (let i in out) {
+                data.push([i.toUpperCase(), [
+                    'number', 'string', 'boolean'
+                ].includes(typeof out[i]) ? out[i] : JSON.stringify(out[i])]);
+            }
+            options.table.config = Object.assign(
+                { columns: { 1: { width: 60 } } }, options.table.config || {}
+            );
+        }
+        out = table(data, options.table.config);
+    }
+    if (!options.returnOnly) {
+        console.log(out);
+    };
+    return out;
 };
 
 const help = () => {
@@ -178,7 +237,7 @@ const help = () => {
         '* Advanced:',
         '',
         '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
-        '    --api      Customize RPC API endpoint        [STRING  / OPTIONAL]',
+        '    --rpcapi   Customize RPC API endpoint        [STRING  / OPTIONAL]',
         '',
         '',
         '* Security:',
@@ -201,17 +260,22 @@ const argv = yargs.default({
     'amount': null,
     'email': null,
     'memo': null,
+    'timestamp': null,
+    'type': null,
+    'count': null,
     'debug': null,
-    'api': null,
+    'rpcapi': null,
+    'chainapi': null,
 }).help(false).argv;
 
 global.prsAtmConfig = {
-    chainApi: argv.api || undefined,
+    rpcApi: argv.rpcapi || undefined,
+    chainApi: argv.chainApi || undefined,
     debug: { 'true': true, 'false': false }[
         String(argv.debug || '').toLowerCase()
     ],
 };
-const { atm, wallet } = require('../main');
+const { atm, wallet, statement } = require('../main');
 
 (async () => {
     try {
@@ -235,17 +299,17 @@ const { atm, wallet } = require('../main');
                     assert(!fs.existsSync(argv.dump), 'File already exists.');
                     fs.writeFileSync(argv.dump, JSON.stringify(cResult));
                 }
-                return randerResult(cResult);
+                return randerResult(cResult, defTblConf);
             case 'unlock':
                 const rResult = unlockKeystore();
-                return randerResult(rResult);
+                return randerResult(rResult, defTblConf);
             case 'balance':
                 argv.keystore && unlockKeystore();
                 const bResult = await atm.getBalance(
                     argv.pvtkey,
                     argv.account
                 );
-                return randerResult(bResult);
+                return randerResult(bResult, defTblConf);
             case 'deposit':
                 argv.keystore && unlockKeystore();
                 const dResult = await atm.deposit(
@@ -254,8 +318,11 @@ const { atm, wallet } = require('../main');
                     argv.email,
                     argv.amount,
                     argv.memo
-                )
-                return randerResult(dResult);
+                );
+                if (dResult && dResult.paymentUrl) {
+                    console.log(`\nOpen this URL in your browser:\n\n${dResult.paymentUrl}\n`);
+                }
+                return randerResult(dResult, defTblConf);
             case 'withdraw':
                 argv.keystore && unlockKeystore();
                 const wResult = await atm.withdraw(
@@ -268,7 +335,44 @@ const { atm, wallet } = require('../main');
                     argv.amount,
                     argv.memo
                 );
-                return randerResult(wResult);
+                return randerResult(wResult, defTblConf);
+            case 'statement':
+                const sResult = await statement.query(
+                    argv.account,
+                    argv.timestamp,
+                    argv.type,
+                    argv.count,
+                );
+                return randerResult(sResult, {
+                    table: {
+                        columns: [
+                            'timestamp',
+                            'block_num',
+                            'counter',
+                            'type',
+                            'description',
+                            'from',
+                            'to',
+                            'amount',
+                            'currency',
+                        ],
+                        config: {
+                            singleLine: true,
+                            columns: {
+                                0: { alignment: 'right' },
+                                1: { alignment: 'right' },
+                                2: { alignment: 'right' },
+                                3: { alignment: 'right' },
+                                4: { alignment: 'right' },
+                                5: { alignment: 'right' },
+                                6: { alignment: 'right' },
+                                7: { alignment: 'right' },
+                                8: { alignment: 'right' },
+                            }
+
+                        }
+                    }
+                });
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'

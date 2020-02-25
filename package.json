@@ -18,6 +18,9 @@
         "mathjs": "^6.5.0",
         "node-fetch": "^2.6.0",
         "readline-sync": "^1.4.10",
+        "request": "^2.88.2",
+        "request-promise": "^4.2.5",
+        "table": "^5.4.6",
         "uuid": "^3.3.3",
         "yargs": "^15.1.0"
     }
