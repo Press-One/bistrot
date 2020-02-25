@@ -20,6 +20,10 @@ const getVersion = () => {
     return version;
 };
 
+const getBoolean = (str) => {
+    return { 'true': true, 'false': false }[String(str || '').toLowerCase()];
+};
+
 const unlockKeystore = () => {
     assert(fs.existsSync(argv.keystore), 'File does not exist.');
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
@@ -82,7 +86,7 @@ const randerResult = (result, options) => {
         }
     }
     out = deep ? out : out[0];
-    if (options.table) {
+    if (!global.prsAtmConfig.json && options.table) {
         const data = [];
         if (deep && options.table.columns) {
             data.push(options.table.columns.map(x => {
@@ -234,10 +238,30 @@ const help = () => {
         '              --email=abc@def.com',
         '',
         '',
+        '* Statement:',
+        '',
+        "    --action   Set as 'statement'                [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
+        "    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]",
+        '    --count    Page size                         [NUMBER  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        "    | 1. Default `type` is 'ALL'.                                   |",
+        "    | 2. Default `count` is 100.                                    |",
+        "    | 3. Set `time` as `timestamp` of last item to get next page.   |",
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=statement \\',
+        '              --account=ABCDE',
+        '',
+        '',
         '* Advanced:',
         '',
+        '    --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]',
         '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
-        '    --rpcapi   Customize RPC API endpoint        [STRING  / OPTIONAL]',
+        '    --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]',
+        '    --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]',
         '',
         '',
         '* Security:',
@@ -260,9 +284,10 @@ const argv = yargs.default({
     'amount': null,
     'email': null,
     'memo': null,
-    'timestamp': null,
+    'time': null,
     'type': null,
     'count': null,
+    'json': null,
     'debug': null,
     'rpcapi': null,
     'chainapi': null,
@@ -271,9 +296,8 @@ const argv = yargs.default({
 global.prsAtmConfig = {
     rpcApi: argv.rpcapi || undefined,
     chainApi: argv.chainApi || undefined,
-    debug: { 'true': true, 'false': false }[
-        String(argv.debug || '').toLowerCase()
-    ],
+    json: getBoolean(argv.json),
+    debug: getBoolean(argv.debug),
 };
 const { atm, wallet, statement } = require('../main');
 
@@ -319,8 +343,9 @@ const { atm, wallet, statement } = require('../main');
                     argv.amount,
                     argv.memo
                 );
-                if (dResult && dResult.paymentUrl) {
-                    console.log(`\nOpen this URL in your browser:\n\n${dResult.paymentUrl}\n`);
+                if (!global.prsAtmConfig.json && dResult && dResult.paymentUrl) {
+                    console.log(`\nOpen this URL in your browser:`
+                        + `\n\n${dResult.paymentUrl}\n`);
                 }
                 return randerResult(dResult, defTblConf);
             case 'withdraw':
@@ -339,7 +364,7 @@ const { atm, wallet, statement } = require('../main');
             case 'statement':
                 const sResult = await statement.query(
                     argv.account,
-                    argv.timestamp,
+                    argv.time,
                     argv.type,
                     argv.count,
                 );

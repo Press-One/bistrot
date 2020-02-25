@@ -21,7 +21,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM usage:
+PRESS.one ATM (v1.1.18) usage:
 
 
 * Keystore:
@@ -138,10 +138,30 @@ PRESS.one ATM usage:
               --email=abc@def.com
 
 
+* Statement:
+
+    --action   Set as 'statement'                [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --time     Timestamp for paging              [STRING  / OPTIONAL]
+    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]
+    --count    Page size                         [NUMBER  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `type` is 'ALL'.                                   |
+    | 2. Default `count` is 100.                                    |
+    | 3. Set `time` as `timestamp` of last item to get next page.   |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=statement \
+              --account=ABCDE
+
+
 * Advanced:
 
+    --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]
     --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]
-    --api      Customize RPC API endpoint        [STRING  / OPTIONAL]
+    --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]
+    --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]
 
 
 * Security:
