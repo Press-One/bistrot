@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t pressone/prs-atm . && docker push pressone/prs-atm
+docker build ––no-cache -t pressone/prs-atm . && docker push pressone/prs-atm
