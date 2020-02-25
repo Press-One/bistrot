@@ -101,9 +101,9 @@ const randerResult = (result, options) => {
                     'number', 'string', 'boolean'
                 ].includes(typeof out[i]) ? out[i] : JSON.stringify(out[i])]);
             }
-            options.table.config = Object.assign(
-                { columns: { 1: { width: 60 } } }, options.table.config || {}
-            );
+            options.table.config = Object.assign({
+                columns: { 0: { width: 20 }, 1: { width: 53 } }
+            }, options.table.config || {});
         }
         out = table(data, options.table.config);
     }
