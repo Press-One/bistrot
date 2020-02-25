@@ -21,7 +21,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.18) usage:
+PRESS.one ATM (v1.1.19) usage:
 
 
 * Keystore:
@@ -168,7 +168,7 @@ PRESS.one ATM (v1.1.18) usage:
 
     Using passwords or private keys on the command line interface can
     be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive
+    private keys in parameters. The program will request sensitive 
     information in a secure way.
 
 ```
