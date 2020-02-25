@@ -21,7 +21,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.22) usage:
+PRESS.one ATM (v1.1.23) usage:
 
 
 * Keystore:
