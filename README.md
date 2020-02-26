@@ -21,7 +21,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.24) usage:
+PRESS.one ATM (v1.1.25) usage:
 
 
 * Keystore:
@@ -138,7 +138,7 @@ PRESS.one ATM (v1.1.24) usage:
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
-    | 3. Before the first withdrawal, execute the `updateauth` cmd. |
+    | 3. Execute the `updateauth` cmd before the first withdrawal.  |
     └---------------------------------------------------------------┘
 
     > Example of Withdrawing to Mixin number (with Mixin user name):
