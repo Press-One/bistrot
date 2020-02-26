@@ -37,6 +37,7 @@ const unlockKeystore = () => {
         argv.password = readline.question('Password: ', rCnf);
     }
     const result = wallet.recoverPrivateKey(argv.password, kObj);
+    argv.pubkey = result.publickey;
     argv.pvtkey = result.privatekey;
     return result;
 };
@@ -334,6 +335,14 @@ const { atm, wallet, statement } = require('../main');
                     argv.account
                 );
                 return randerResult(bResult, defTblConf);
+            case 'updateauth':
+                argv.keystore && unlockKeystore();
+                const uResult = await atm.updateauth(
+                    argv.account,
+                    argv.pubkey,
+                    argv.pvtkey,
+                );
+                return randerResult(uResult, defTblConf);
             case 'deposit':
                 argv.keystore && unlockKeystore();
                 const dResult = await atm.deposit(
