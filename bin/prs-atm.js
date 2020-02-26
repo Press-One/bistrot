@@ -239,7 +239,7 @@ const help = () => {
         '    ┌---------------------------------------------------------------┐',
         '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
         '    | 2. `mx-num with mx-name` or `mx-id` must be provided.         |',
-        '    | 3. Before the first withdrawal, execute the `updateauth` cmd. |',
+        '    | 3. Execute the `updateauth` cmd before the first withdrawal.  |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example of Withdrawing to Mixin number (with Mixin user name):',
