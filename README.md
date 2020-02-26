@@ -21,7 +21,7 @@ $ docker run -it --rm pressone/prs-atm prs-atm --action=help
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.23) usage:
+PRESS.one ATM (v1.1.24) usage:
 
 
 * Keystore:
@@ -48,15 +48,35 @@ PRESS.one ATM (v1.1.23) usage:
     --action   Set as 'unlock'                   [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-
-    > Example:
-    $ prs-atm --action=unlock \
-              --keystore=keystore.json
     ┌---------------------------------------------------------------┐
     | This command will decrypt your keystore and display the       |
     | public key and private key. It's for advanced users only.     |
     | You don't have to do this unless you know what you are doing. |
     └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=unlock \
+              --keystore=keystore.json
+
+
+* Updateauth:
+
+    --action   Set as 'updateauth'               [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    | 2. You have to execute this cmd to enable `withdraw` feature. |
+    | 3. This command only needs to be executed one time.           |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=updateauth \
+              --account=ABCDE \
+              --keystore=keystore.json
 
 
 * Balance:
@@ -118,6 +138,7 @@ PRESS.one ATM (v1.1.23) usage:
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
+    | 3. Before the first withdrawal, execute the `updateauth` cmd. |
     └---------------------------------------------------------------┘
 
     > Example of Withdrawing to Mixin number (with Mixin user name):
