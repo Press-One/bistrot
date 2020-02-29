@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.27) usage:
+PRESS.one ATM (v1.1.28) usage:
 
 
 * Keystore:
@@ -79,7 +79,7 @@ PRESS.one ATM (v1.1.27) usage:
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    | 2. You have to execute this cmd to enable `withdraw` feature. |
+    | 2. You have to execute this cmd to activate your new account. |
     | 3. This command only needs to be executed one time.           |
     └---------------------------------------------------------------┘
 
