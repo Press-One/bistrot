@@ -71,7 +71,7 @@ const randerResult = (result, options) => {
         'transactions_trx_transaction_actions_data__sync_auth__result',
     ];
     const json = ['transaction'];
-    const deep = statement.isArray(result);
+    const deep = utility.isArray(result);
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
@@ -113,7 +113,7 @@ const randerResult = (result, options) => {
         out = table(data, options.table.config);
     }
     if (!options.returnOnly) {
-        console.log(out);
+        console.log(global.prsAtmConfig.json ? atm.json(out) : out);
     };
     return out;
 };
@@ -178,6 +178,8 @@ const help = () => {
         '              --account=ABCDE \\',
         '              --keystore=keystore.json',
         '',
+        '',
+        '* Claimrewards:',
         '',
         '* Balance:',
         '',
@@ -321,7 +323,7 @@ global.prsAtmConfig = {
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
-const { atm, wallet, statement } = require('../main');
+const { atm, wallet, ballot, utility, statement } = require('../main');
 
 (async () => {
     try {
@@ -358,12 +360,19 @@ const { atm, wallet, statement } = require('../main');
                 return randerResult(bResult, defTblConf);
             case 'updateauth':
                 argv.keystore && unlockKeystore();
-                const uResult = await atm.updateauth(
+                const uResult = await atm.updateAuth(
                     argv.account,
                     argv.pubkey,
                     argv.pvtkey,
                 );
                 return randerResult(uResult, defTblConf);
+            case 'claimrewards':
+                argv.keystore && unlockKeystore();
+                const lResult = await atm.claimRewards(
+                    argv.account,
+                    argv.pvtkey,
+                );
+                return randerResult(lResult, defTblConf);
             case 'deposit':
                 argv.keystore && unlockKeystore();
                 const dResult = await atm.deposit(
@@ -424,10 +433,13 @@ const { atm, wallet, statement } = require('../main');
                                 7: { alignment: 'right' },
                                 8: { alignment: 'right' },
                             }
-
                         }
                     }
                 });
+            case 'ballot':
+                const aResult = await ballot.get();
+                return console.log(aResult);
+            // return randerResult(aResult, defTblConf);
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
