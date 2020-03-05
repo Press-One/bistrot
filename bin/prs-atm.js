@@ -201,17 +201,28 @@ const help = () => {
         '',
         "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
-        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
-        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
-        '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
         '    $ prs-atm --action=balance \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
+        '              --account=ABCDE',
+        '',
+        '',
+        '* Check Account:',
+        '',
+        "    --action   Set as 'account'                  [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=account \\',
+        '              --account=ABCDE',
+        '',
+        '',
+        '* Check PRS Chain Information:',
+        '',
+        "    --action   Set as 'info'                     [STRING  / REQUIRED]",
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=info',
         '',
         '',
         '* Check Statement:',
@@ -383,12 +394,14 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                 );
                 return randerResult(lResult, defTblConf);
             case 'balance':
-                argv.keystore && unlockKeystore();
-                const bResult = await atm.getBalance(
-                    argv.pvtkey,
-                    argv.account
-                );
+                const bResult = await atm.getBalance(argv.account);
                 return randerResult(bResult, defTblConf);
+            case 'account':
+                const oResult = await atm.getAccount(argv.account);
+                return randerResult(oResult, defTblConf);
+            case 'info':
+                const iResult = await atm.getInfo();
+                return randerResult(iResult, defTblConf);
             case 'statement':
                 const sResult = await statement.query(
                     argv.account,
