@@ -124,7 +124,7 @@ const help = () => {
         `PRESS.one ATM ${version ? `(v${version})` : ''} usage:`,
         '',
         '',
-        '* Keystore:',
+        '* Create a new Keystore / Import keys to a new Keystore:',
         '',
         "    --action   Set as 'keystore'                 [STRING  / REQUIRED]",
         '    --password Use to encrypt the keystore       [STRING  / OPTIONAL]',
@@ -143,7 +143,7 @@ const help = () => {
         '              --dump=keystore.json',
         '',
         '',
-        '* Unlock:',
+        '* Unlock a Keystore:',
         '',
         "    --action   Set as 'unlock'                   [STRING  / REQUIRED]",
         '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
@@ -159,7 +159,7 @@ const help = () => {
         '              --keystore=keystore.json',
         '',
         '',
-        '* Updateauth:',
+        '* Update Authorization:',
         '',
         "    --action   Set as 'updateauth'               [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -179,9 +179,25 @@ const help = () => {
         '              --keystore=keystore.json',
         '',
         '',
-        '* Claimrewards:',
+        '* Claim Rewards:',
         '',
-        '* Balance:',
+        "    --action   Set as 'reward'                   [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        '    | 2. You can only claim your reward once a day.                 |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=reward \\',
+        '              --account=ABCDE \\',
+        '              --keystore=keystore.json',
+        '',
+        '',
+        '* Check Balance:',
         '',
         "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -196,6 +212,24 @@ const help = () => {
         '    $ prs-atm --action=balance \\',
         '              --account=ABCDE \\',
         '              --keystore=keystore.json',
+        '',
+        '',
+        '* Check Statement:',
+        '',
+        "    --action   Set as 'statement'                [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
+        "    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]",
+        '    --count    Page size                         [NUMBER  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        "    | 1. Default `type` is 'ALL'.                                   |",
+        "    | 2. Default `count` is 100.                                    |",
+        "    | 3. Set `time` as `timestamp` of last item to get next page.   |",
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=statement \\',
+        '              --account=ABCDE',
         '',
         '',
         '* Deposit:',
@@ -225,7 +259,7 @@ const help = () => {
         '              --email=abc@def.com',
         '',
         '',
-        '* Withdraw:',
+        '* Withdrawal:',
         '',
         "    --action   Set as 'withdraw'                 [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -260,24 +294,6 @@ const help = () => {
         '              --keystore=keystore.json \\',
         '              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\',
         '              --email=abc@def.com',
-        '',
-        '',
-        '* Statement:',
-        '',
-        "    --action   Set as 'statement'                [STRING  / REQUIRED]",
-        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
-        "    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]",
-        '    --count    Page size                         [NUMBER  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        "    | 1. Default `type` is 'ALL'.                                   |",
-        "    | 2. Default `count` is 100.                                    |",
-        "    | 3. Set `time` as `timestamp` of last item to get next page.   |",
-        '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm --action=statement \\',
-        '              --account=ABCDE',
         '',
         '',
         '* Advanced:',
@@ -351,13 +367,6 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
             case 'unlock':
                 const rResult = unlockKeystore();
                 return randerResult(rResult, defTblConf);
-            case 'balance':
-                argv.keystore && unlockKeystore();
-                const bResult = await atm.getBalance(
-                    argv.pvtkey,
-                    argv.account
-                );
-                return randerResult(bResult, defTblConf);
             case 'updateauth':
                 argv.keystore && unlockKeystore();
                 const uResult = await atm.updateAuth(
@@ -366,40 +375,20 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                     argv.pvtkey,
                 );
                 return randerResult(uResult, defTblConf);
-            case 'claimrewards':
+            case 'reward':
                 argv.keystore && unlockKeystore();
                 const lResult = await atm.claimRewards(
                     argv.account,
                     argv.pvtkey,
                 );
                 return randerResult(lResult, defTblConf);
-            case 'deposit':
+            case 'balance':
                 argv.keystore && unlockKeystore();
-                const dResult = await atm.deposit(
+                const bResult = await atm.getBalance(
                     argv.pvtkey,
-                    argv.account,
-                    argv.email,
-                    argv.amount,
-                    argv.memo
+                    argv.account
                 );
-                if (!global.prsAtmConfig.json && dResult && dResult.paymentUrl) {
-                    console.log(`\nOpen this URL in your browser:`
-                        + `\n\n${dResult.paymentUrl}\n`);
-                }
-                return randerResult(dResult, defTblConf);
-            case 'withdraw':
-                argv.keystore && unlockKeystore();
-                const wResult = await atm.withdraw(
-                    argv.pvtkey,
-                    argv.account,
-                    argv['mx-id'],
-                    argv['mx-num'],
-                    argv['mx-name'],
-                    argv.email,
-                    argv.amount,
-                    argv.memo
-                );
-                return randerResult(wResult, defTblConf);
+                return randerResult(bResult, defTblConf);
             case 'statement':
                 const sResult = await statement.query(
                     argv.account,
@@ -436,6 +425,33 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                         }
                     }
                 });
+            case 'deposit':
+                argv.keystore && unlockKeystore();
+                const dResult = await atm.deposit(
+                    argv.pvtkey,
+                    argv.account,
+                    argv.email,
+                    argv.amount,
+                    argv.memo
+                );
+                if (!global.prsAtmConfig.json && dResult && dResult.paymentUrl) {
+                    console.log(`\nOpen this URL in your browser:`
+                        + `\n\n${dResult.paymentUrl}\n`);
+                }
+                return randerResult(dResult, defTblConf);
+            case 'withdraw':
+                argv.keystore && unlockKeystore();
+                const wResult = await atm.withdraw(
+                    argv.pvtkey,
+                    argv.account,
+                    argv['mx-id'],
+                    argv['mx-num'],
+                    argv['mx-name'],
+                    argv.email,
+                    argv.amount,
+                    argv.memo
+                );
+                return randerResult(wResult, defTblConf);
             case 'ballot':
                 const aResult = await ballot.get();
                 return console.log(aResult);
