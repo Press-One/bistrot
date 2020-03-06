@@ -467,8 +467,34 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                 return randerResult(wResult, defTblConf);
             case 'ballot':
                 const aResult = await ballot.get();
-                return console.log(aResult);
-            // return randerResult(aResult, defTblConf);
+                for (let item of aResult) {
+                    item.producers = item.producers.join('\n');
+                }
+                return randerResult(aResult, {
+                    table: {
+                        columns: [
+                            'owner',
+                            'proxy',
+                            'producers',
+                            'staked',
+                            'last_vote_weight',
+                            'proxied_vote_weight',
+                            'is_proxy',
+                        ],
+                        config: {
+                            singleLine: true,
+                            columns: {
+                                0: { alignment: 'right' },
+                                1: { alignment: 'right' },
+                                2: { alignment: 'right' },
+                                3: { alignment: 'right' },
+                                4: { alignment: 'right' },
+                                5: { alignment: 'right' },
+                                6: { alignment: 'right' },
+                            }
+                        }
+                    }
+                });
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
