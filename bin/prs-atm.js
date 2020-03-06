@@ -161,7 +161,7 @@ const help = () => {
         '',
         '* Update Authorization:',
         '',
-        "    --action   Set as 'updateauth'               [STRING  / REQUIRED]",
+        "    --action   Set as 'auth'                     [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
@@ -174,7 +174,7 @@ const help = () => {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=updateauth \\',
+        '    $ prs-atm --action=auth \\',
         '              --account=ABCDE \\',
         '              --keystore=keystore.json',
         '',
@@ -286,7 +286,7 @@ const help = () => {
         '    ┌---------------------------------------------------------------┐',
         '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
         '    | 2. `mx-num with mx-name` or `mx-id` must be provided.         |',
-        '    | 3. Execute the `updateauth` cmd before the first withdrawal.  |',
+        '    | 3. Execute the `auth` command before the first withdrawal.    |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example of Withdrawing to Mixin number (with Mixin user name):',
@@ -378,7 +378,7 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
             case 'unlock':
                 const rResult = unlockKeystore();
                 return randerResult(rResult, defTblConf);
-            case 'updateauth':
+            case 'auth':
                 argv.keystore && unlockKeystore();
                 const uResult = await atm.updateAuth(
                     argv.account,
