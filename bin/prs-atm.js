@@ -113,7 +113,7 @@ const randerResult = (result, options) => {
         out = table(data, options.table.config);
     }
     if (!options.returnOnly) {
-        console.log(global.prsAtmConfig.json ? atm.json(out) : out);
+        console.log(global.prsAtmConfig.json ? utility.json(out) : out);
     };
     return out;
 };
