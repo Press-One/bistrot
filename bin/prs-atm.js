@@ -466,7 +466,13 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                 );
                 return randerResult(wResult, defTblConf);
             case 'ballot':
-                const aResult = await ballot.get();
+                let aResult = null;
+                if (argv.account) {
+                    const resp = await ballot.queryByOwner(argv.account);
+                    aResult = resp ? [resp] : [];
+                } else {
+                    aResult = await ballot.queryAll();
+                }
                 for (let item of aResult) {
                     item.producers = item.producers.join('\n');
                 }
