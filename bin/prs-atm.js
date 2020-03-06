@@ -24,6 +24,17 @@ const getBoolean = (str) => {
     return { 'true': true, 'false': false }[String(str || '').toLowerCase()];
 };
 
+const getArray = (str) => {
+    const arr = String(str || '').split(/[,;\ ]/);
+    const result = [];
+    arr.map(x => {
+        if ((x = x.trim())) {
+            result.push(x);
+        }
+    });
+    return result;
+};
+
 const unlockKeystore = () => {
     assert(fs.existsSync(argv.keystore), 'File does not exist.');
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
@@ -110,7 +121,7 @@ const randerResult = (result, options) => {
                 columns: { 0: { width: 20 }, 1: { width: 53 } }
             }, options.table.config || {});
         }
-        out = table(data, options.table.config);
+        out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
         console.log(global.prsAtmConfig.json ? utility.json(out) : out);
@@ -338,6 +349,8 @@ const argv = yargs.default({
     'time': null,
     'type': null,
     'count': null,
+    'approve': null,
+    'unapprove': null,
     'json': null,
     'debug': null,
     'rpcapi': null,
@@ -501,6 +514,15 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                         }
                     }
                 });
+            case 'vote':
+                argv.keystore && unlockKeystore();
+                const vResult = await atm.vote(
+                    argv.account,
+                    getArray(argv.approve),
+                    getArray(argv.unapprove),
+                    argv.pvtkey
+                );
+                return randerResult(vResult, defTblConf);
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
