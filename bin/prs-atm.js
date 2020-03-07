@@ -337,24 +337,27 @@ const help = () => {
 };
 
 const argv = yargs.default({
-    'action': 'help',
-    'key': null,
-    'account': null,
+    action: 'help',
+    key: null,
+    account: null,
     'mx-id': null,
     'mx-num': null,
     'mx-name': null,
-    'amount': null,
-    'email': null,
-    'memo': null,
-    'time': null,
-    'type': null,
-    'count': null,
-    'approve': null,
-    'unapprove': null,
-    'json': null,
-    'debug': null,
-    'rpcapi': null,
-    'chainapi': null,
+    amount: null,
+    email: null,
+    memo: null,
+    time: null,
+    type: null,
+    count: null,
+    approve: null,
+    unapprove: null,
+    receiver: null,
+    cpu: null,
+    net: null,
+    json: null,
+    debug: null,
+    rpcapi: null,
+    chainapi: null,
 }).help(false).argv;
 
 global.prsAtmConfig = {
@@ -523,6 +526,26 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                     argv.pvtkey
                 );
                 return randerResult(vResult, defTblConf);
+            case 'delegate':
+                argv.keystore && unlockKeystore();
+                const eResult = await atm.delegateBw(
+                    argv.account,
+                    argv.receiver,
+                    argv.cpu,
+                    argv.net,
+                    argv.pvtkey
+                );
+                return randerResult(eResult, defTblConf);
+            case 'undelegate':
+                argv.keystore && unlockKeystore();
+                const nResult = await atm.undelegateBw(
+                    argv.account,
+                    argv.receiver,
+                    argv.cpu,
+                    argv.net,
+                    argv.pvtkey
+                );
+                return randerResult(nResult, defTblConf);
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
