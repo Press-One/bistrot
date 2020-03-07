@@ -516,7 +516,7 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                 });
             case 'vote':
                 argv.keystore && unlockKeystore();
-                const vResult = await atm.vote(
+                const vResult = await ballot.vote(
                     argv.account,
                     getArray(argv.approve),
                     getArray(argv.unapprove),
