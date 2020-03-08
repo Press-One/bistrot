@@ -363,8 +363,6 @@ const help = () => {
         '    $ prs-atm --action=ballot',
         '',
         "    > Example of checking account's voting information:",
-        '',
-        '    > Example of checking global voting information:',
         '    $ prs-atm --action=ballot \\',
         '              --account=ABCDE',
         '',
