@@ -409,7 +409,7 @@ const help = () => {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example of delegating CPU and NET:',
-        '    $ prs-atm --action=deposit \\',
+        '    $ prs-atm --action=delegate \\',
         '              --account=ABCDE \\',
         '              --receiver=FIJKL \\',
         '              --cpu=12.3456 \\',
