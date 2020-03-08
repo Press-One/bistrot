@@ -31,10 +31,11 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.28) usage:
+PRESS.one ATM (v1.1.29) usage:
 
+=====================================================================
 
-* Keystore:
+* Create a new Keystore / Import keys to a new Keystore:
 
     --action   Set as 'keystore'                 [STRING  / REQUIRED]
     --password Use to encrypt the keystore       [STRING  / OPTIONAL]
@@ -52,8 +53,9 @@ PRESS.one ATM (v1.1.28) usage:
               --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --dump=keystore.json
 
+=====================================================================
 
-* Unlock:
+* Unlock a Keystore:
 
     --action   Set as 'unlock'                   [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
@@ -68,10 +70,11 @@ PRESS.one ATM (v1.1.28) usage:
     $ prs-atm --action=unlock \
               --keystore=keystore.json
 
+=====================================================================
 
-* Updateauth:
+* Update Authorization:
 
-    --action   Set as 'updateauth'               [STRING  / REQUIRED]
+    --action   Set as 'auth'                     [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
@@ -84,27 +87,80 @@ PRESS.one ATM (v1.1.28) usage:
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm --action=updateauth \
+    $ prs-atm --action=auth \
               --account=ABCDE \
               --keystore=keystore.json
 
+=====================================================================
 
-* Balance:
+* Claim Rewards:
 
-    --action   Set as 'balance'                  [STRING  / REQUIRED]
+    --action   Set as 'reward'                   [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 2. You can only claim your reward once a day.                 |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm --action=balance \
+    $ prs-atm --action=reward \
               --account=ABCDE \
               --keystore=keystore.json
 
+=====================================================================
+
+* Check Balance:
+
+    --action   Set as 'balance'                  [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm --action=balance \
+              --account=ABCDE
+
+=====================================================================
+
+* Check Account:
+
+    --action   Set as 'account'                  [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm --action=account \
+              --account=ABCDE
+
+=====================================================================
+
+* Check PRS-chain Information:
+
+    --action   Set as 'info'                     [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm --action=info
+
+=====================================================================
+
+* Check Statement:
+
+    --action   Set as 'statement'                [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --time     Timestamp for paging              [STRING  / OPTIONAL]
+    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]
+    --count    Page size                         [NUMBER  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `type` is 'ALL'.                                   |
+    | 2. Default `count` is 100.                                    |
+    | 3. Set `time` as `timestamp` of last item to get next page.   |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=statement \
+              --account=ABCDE
+
+=====================================================================
 
 * Deposit:
 
@@ -121,7 +177,10 @@ PRESS.one ATM (v1.1.28) usage:
     | 2. After successful execution, you will get a URL.            |
     | 3. Open this URL in your browser.                             |
     | 4. Scan the QR code with Mixin to complete the payment.       |
-    | 5. You have to complete the payment within `10` minutes.      |
+    | 5. You have to complete the payment within `7` days.          |
+    | 6. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
+    | 7. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 8. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
 
     > Example:
@@ -131,8 +190,9 @@ PRESS.one ATM (v1.1.28) usage:
               --keystore=keystore.json \
               --email=abc@def.com
 
+=====================================================================
 
-* Withdraw:
+* Withdrawal:
 
     --action   Set as 'withdraw'                 [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -148,7 +208,9 @@ PRESS.one ATM (v1.1.28) usage:
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
-    | 3. Execute the `updateauth` cmd before the first withdrawal.  |
+    | 3. Execute the `auth` command before the first withdrawal.    |
+    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 5. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
 
     > Example of Withdrawing to Mixin number (with Mixin user name):
@@ -168,24 +230,101 @@ PRESS.one ATM (v1.1.28) usage:
               --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --email=abc@def.com
 
+=====================================================================
 
-* Statement:
+* Cancel a depositing payment request:
 
-    --action   Set as 'statement'                [STRING  / REQUIRED]
+    --action   Set as 'cancel'                   [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
-    --time     Timestamp for paging              [STRING  / OPTIONAL]
-    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]
-    --count    Page size                         [NUMBER  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. Default `type` is 'ALL'.                                   |
-    | 2. Default `count` is 100.                                    |
-    | 3. Set `time` as `timestamp` of last item to get next page.   |
+    | 1. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 2. Cancel a current trx by this cmd before issuing a new one. |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm --action=statement \
+    $ prs-atm --action=cancel \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* Check Voting Information:
+
+    --action   Set as 'ballot'                   [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / OPTIONAL]
+
+    > Example of checking global voting information:
+    $ prs-atm --action=ballot
+
+    > Example of checking account's voting information:
+
+    > Example of checking global voting information:
+    $ prs-atm --action=ballot \
               --account=ABCDE
 
+=====================================================================
+
+* Vote or Revoke Voting for Producers:
+
+    --action   Set as 'vote'                     [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / OPTIONAL]
+    --add      Add BP to list of voted producers [STRING  / OPTIONAL]
+    --remove   Del BP to list of voted producers [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. One of `add` or `remove` must be provided.                 |
+    | 2. `add` and `remove` can be a list split by ',' or ';'.      |
+    | 3. Use `ballot` cmd to check info brfore and after voting.    |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=vote \
+              --account=ABCDE \
+              --add=bp1,bp2 \
+              --remove=bp3,bp4 \
+              --keystore=keystore.json
+
+=====================================================================
+
+* Delegate/Undelegate CPU and/or Network Bandwidth:
+
+    --action   Set as 'deposit' or 'undelegate'  [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --net      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    | 2. One of `cpu` or `net` must be provided.                    |
+    └---------------------------------------------------------------┘
+
+    > Example of delegating CPU and NET:
+    $ prs-atm --action=deposit \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --cpu=12.3456 \
+              --net=12.3456 \
+              --keystore=keystore.json
+
+    > Example of undelegating CPU and NET:
+    $ prs-atm --action=undelegate \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --cpu=12.3456 \
+              --net=12.3456 \
+              --keystore=keystore.json
+
+=====================================================================
 
 * Advanced:
 
@@ -194,6 +333,7 @@ PRESS.one ATM (v1.1.28) usage:
     --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]
     --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]
 
+=====================================================================
 
 * Security:
 
