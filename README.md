@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.31) usage:
+PRESS.one ATM (v1.1.32) usage:
 
 =====================================================================
 
@@ -307,7 +307,7 @@ PRESS.one ATM (v1.1.31) usage:
     └---------------------------------------------------------------┘
 
     > Example of delegating CPU and NET:
-    $ prs-atm --action=deposit \
+    $ prs-atm --action=delegate \
               --account=ABCDE \
               --receiver=FIJKL \
               --cpu=12.3456 \
