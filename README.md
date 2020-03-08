@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.30) usage:
+PRESS.one ATM (v1.1.31) usage:
 
 =====================================================================
 
@@ -261,8 +261,6 @@ PRESS.one ATM (v1.1.30) usage:
     $ prs-atm --action=ballot
 
     > Example of checking account's voting information:
-
-    > Example of checking global voting information:
     $ prs-atm --action=ballot \
               --account=ABCDE
 
