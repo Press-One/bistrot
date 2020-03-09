@@ -238,9 +238,25 @@ const help = () => {
         '* Check PRS-chain Information:',
         '',
         "    --action   Set as 'info'                     [STRING  / REQUIRED]",
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. You can use `rpcapi` param to check the specific PRS-node. |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example of checking global PRS-chain Information:',
+        '    $ prs-atm --action=info',
+        '',
+        '    > Example of checking specific PRS-node Information:',
+        '    $ prs-atm --action=info \\',
+        '              --rpcapi=http://http://127.0.0.1/:8888',
+        '',
+        '=====================================================================',
+        '',
+        '* Check Producers Information:',
+        '',
+        "    --action   Set as 'producers'                [STRING  / REQUIRED]",
         '',
         '    > Example:',
-        '    $ prs-atm --action=info',
+        '    $ prs-atm --action=producers',
         '',
         '=====================================================================',
         '',
@@ -523,10 +539,68 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                 return randerResult(bResult, defTblConf);
             case 'account':
                 const oResult = await atm.getAccount(argv.account);
-                return randerResult(oResult, defTblConf);
+                return randerResult(oResult, {
+                    table: {
+                        KeyValue: true,
+                        config: {
+                            columns: { 0: { width: 24 }, 1: { width: 49 } }
+                        }
+                    }
+                });
             case 'info':
                 const iResult = await atm.getInfo();
-                return randerResult(iResult, defTblConf);
+                return randerResult(iResult, {
+                    table: {
+                        KeyValue: true,
+                        config: {
+                            columns: { 0: { width: 27 }, 1: { width: 46 } }
+                        }
+                    }
+                });
+            case 'producers':
+                const fResult = await atm.getProducers();
+                if (global.prsAtmConfig.json) {
+                    return console.log(utility.json(fResult));
+                }
+                fResult.rows.map(x => {
+                    x.total_votes = x.total_votes.replace(/\.0*$/, '');
+                });
+                randerResult({
+                    total_producer_vote_weight:
+                        fResult.total_producer_vote_weight
+                }, {
+                    table: {
+                        KeyValue: true,
+                        config: {
+                            columns: { 0: { width: 26 }, 1: { width: 47 } }
+                        }
+                    }
+                });
+                return randerResult(fResult.rows, {
+                    table: {
+                        columns: [
+                            'owner',
+                            'total_votes',
+                            'producer_key',
+                            'is_active',
+                            'unpaid_blocks',
+                            'last_claim_time',
+                            'location',
+                        ],
+                        config: {
+                            singleLine: true,
+                            columns: {
+                                0: { alignment: 'right' },
+                                1: { alignment: 'right' },
+                                2: { alignment: 'right' },
+                                3: { alignment: 'right' },
+                                5: { alignment: 'right' },
+                                6: { alignment: 'right' },
+                                7: { alignment: 'right' },
+                            }
+                        }
+                    }
+                });
             case 'statement':
                 const sResult = await statement.query(
                     argv.account,
