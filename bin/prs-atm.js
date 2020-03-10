@@ -143,10 +143,6 @@ const help = () => {
         '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',
         '    --pvtkey   Import existing private key       [STRING  / OPTIONAL]',
         '    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]',
-        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. Using param `force` will increase the risk of losing data. |',
-        '    └---------------------------------------------------------------┘',
         '',
         '    > Example of creating a new keystore:',
         '    $ prs-atm --action=keystore \\',
@@ -450,10 +446,6 @@ const help = () => {
         '',
         "    --action   Set as 'genesis'                  [STRING  / REQUIRED]",
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
-        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. Using param `force` will increase the risk of losing data. |',
-        '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
         '    $ prs-atm --action=genesis \\',
@@ -470,10 +462,8 @@ const help = () => {
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
-        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. Using param `force` will increase the risk of losing data. |',
-        "    | 1. Default `agent` is current `account` (pvtkey holder).      |",
+        '    | 1. Default `agent` is current `account` (pvtkey holder).      |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
@@ -484,12 +474,27 @@ const help = () => {
         '',
         '=====================================================================',
         '',
+        '* Generate the `runservice.sh` file:',
+        '',
+        "    --action   Set as 'runsrv'                   [STRING  / REQUIRED]",
+        '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=runsrv \\',
+        '              --path=.',
+        '',
+        '=====================================================================',
+        '',
         '* Advanced:',
         '',
         '    --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]',
+        '    --force    Force overwrite existing file     [BOOLEAN / OPTIONAL]',
         '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
         '    --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]',
         '    --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. Using param `force` will increase the risk of losing data. |',
+        '    └---------------------------------------------------------------┘',
         '',
         '=====================================================================',
         '',
@@ -832,6 +837,15 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                         }
                     }
                 });
+            case 'runsrv':
+                const jResult = await etc.buildRunservice();
+                if (argv.path) {
+                    await etc.dumpFile(`${argv.path}/runservice.sh`, jResult, {
+                        overwrite: global.prsAtmConfig.overwrite,
+                        executable: true,
+                    });
+                }
+                return console.log(`\n${jResult}`);
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
