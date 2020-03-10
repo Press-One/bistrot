@@ -480,6 +480,7 @@ const argv = yargs.default({
     cpu: null,
     net: null,
     json: null,
+    path: null,
     debug: null,
     rpcapi: null,
     chainapi: null,
@@ -491,7 +492,7 @@ global.prsAtmConfig = {
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
-const { atm, wallet, ballot, utility, statement } = require('../main');
+const { atm, wallet, ballot, utility, statement, etc } = require('../main');
 
 (async () => {
     try {
@@ -737,6 +738,14 @@ const { atm, wallet, ballot, utility, statement } = require('../main');
                     argv.pvtkey
                 );
                 return randerResult(nResult, defTblConf);
+            case 'genesis':
+                const gResult = await etc.buildGenesis();
+                if (argv.path) {
+                    const gPath = `${argv.path}/genesis.json`;
+                    assert(!fs.existsSync(gPath), 'File already exists.');
+                    await etc.dumpFile(gPath, gResult);
+                }
+                return randerResult(JSON.parse(gResult), defTblConf);
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'

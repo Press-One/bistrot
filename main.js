@@ -6,4 +6,5 @@ module.exports = {
     ballot: require('./lib/ballot'),
     utility: require('./lib/utility'),
     statement: require('./lib/statement'),
+    etc: require('./lib/etc'),
 };
