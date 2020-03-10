@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.34) usage:
+PRESS.one ATM (v1.1.35) usage:
 
 =====================================================================
 
@@ -340,12 +340,59 @@ PRESS.one ATM (v1.1.34) usage:
 
 =====================================================================
 
+* Generate the `genesis.json` file:
+
+    --action   Set as 'genesis'                  [STRING  / REQUIRED]
+    --path     Folder location for saving file   [STRING  / OPTIONAL]
+
+    > Example:
+    $ prs-atm --action=genesis \
+              --path=.
+
+=====================================================================
+
+* Generate the `config.ini` file:
+
+    --action   Set as 'config'                  [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --agent    Agent name for your PRS-node      [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --path     Folder location for saving file   [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `agent` is current `account` (pvtkey holder).      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=config \
+              --account=ABCDE \
+              --path=. \
+              --keystore=keystore.json
+
+=====================================================================
+
+* Generate the `runservice.sh` file:
+
+    --action   Set as 'runsrv'                   [STRING  / REQUIRED]
+    --path     Folder location for saving file   [STRING  / OPTIONAL]
+
+    > Example:
+    $ prs-atm --action=runsrv \
+              --path=.
+
+=====================================================================
+
 * Advanced:
 
     --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]
+    --force    Force overwrite existing file     [BOOLEAN / OPTIONAL]
     --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]
     --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]
     --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Using param `force` will increase the risk of losing data. |
+    └---------------------------------------------------------------┘
 
 =====================================================================
 
