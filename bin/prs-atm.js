@@ -143,6 +143,10 @@ const help = () => {
         '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',
         '    --pvtkey   Import existing private key       [STRING  / OPTIONAL]',
         '    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]',
+        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. Using param `force` will increase the risk of losing data. |',
+        '    └---------------------------------------------------------------┘',
         '',
         '    > Example of creating a new keystore:',
         '    $ prs-atm --action=keystore \\',
@@ -442,6 +446,44 @@ const help = () => {
         '',
         '=====================================================================',
         '',
+        '* Generate the `genesis.json` file:',
+        '',
+        "    --action   Set as 'genesis'                  [STRING  / REQUIRED]",
+        '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
+        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. Using param `force` will increase the risk of losing data. |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=genesis \\',
+        '              --path=.',
+        '',
+        '=====================================================================',
+        '',
+        '* Generate the `config.ini` file:',
+        '',
+        "    --action   Set as 'config'                  [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --agent    Agent name for your PRS-node      [STRING  / OPTIONAL]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
+        '    --force    Force overwrite existing file     [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. Using param `force` will increase the risk of losing data. |',
+        "    | 1. Default `agent` is current `account` (pvtkey holder).      |",
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=config \\',
+        '              --account=ABCDE \\',
+        '              --path=. \\',
+        '              --keystore=keystore.json',
+        '',
+        '=====================================================================',
+        '',
         '* Advanced:',
         '',
         '    --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]',
@@ -481,6 +523,7 @@ const argv = yargs.default({
     net: null,
     json: null,
     path: null,
+    force: null,
     debug: null,
     rpcapi: null,
     chainapi: null,
@@ -488,7 +531,8 @@ const argv = yargs.default({
 
 global.prsAtmConfig = {
     rpcApi: argv.rpcapi || undefined,
-    chainApi: argv.chainApi || undefined,
+    chainApi: argv.chainapi || undefined,
+    overwrite: getBoolean(argv.force),
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
@@ -513,8 +557,9 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                     argv.pvtkey,
                 );
                 if (argv.dump) {
-                    assert(!fs.existsSync(argv.dump), 'File already exists.');
-                    fs.writeFileSync(argv.dump, JSON.stringify(cResult));
+                    await etc.dumpFile(argv.dump, JSON.stringify(cResult), {
+                        overwrite: global.prsAtmConfig.overwrite,
+                    });
                 }
                 return randerResult(cResult, defTblConf);
             case 'unlock':
@@ -554,7 +599,7 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                     table: {
                         KeyValue: true,
                         config: {
-                            columns: { 0: { width: 27 }, 1: { width: 46 } }
+                            columns: { 0: { width: 27 }, 1: { width: 64 } }
                         }
                     }
                 });
@@ -647,7 +692,8 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                     argv.amount,
                     argv.memo
                 );
-                if (!global.prsAtmConfig.json && dResult && dResult.paymentUrl) {
+                if (!global.prsAtmConfig.json
+                    && dResult && dResult.paymentUrl) {
                     console.log(`\nOpen this URL in your browser:`
                         + `\n\n${dResult.paymentUrl}\n`);
                 }
@@ -741,11 +787,51 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
             case 'genesis':
                 const gResult = await etc.buildGenesis();
                 if (argv.path) {
-                    const gPath = `${argv.path}/genesis.json`;
-                    assert(!fs.existsSync(gPath), 'File already exists.');
-                    await etc.dumpFile(gPath, gResult);
+                    await etc.dumpFile(`${argv.path}/genesis.json`, gResult, {
+                        overwrite: global.prsAtmConfig.overwrite,
+                    });
                 }
-                return randerResult(JSON.parse(gResult), defTblConf);
+                return randerResult(JSON.parse(gResult), {
+                    table: {
+                        KeyValue: true,
+                        config: {
+                            columns: { 0: { width: 21 }, 1: { width: 64 } }
+                        }
+                    }
+                });
+            case 'config':
+                argv.keystore && unlockKeystore();
+                const content = await etc.buildConfig(
+                    argv.account,
+                    argv.agent,
+                    argv.pubkey,
+                    argv.pvtkey,
+                );
+                if (argv.path) {
+                    await etc.dumpFile(`${argv.path}/config.ini`, content, {
+                        overwrite: global.prsAtmConfig.overwrite,
+                    });
+                }
+                const hResult = {};
+                content.split(/\r|\n/).map(x => {
+                    const [key, value] = [
+                        x.replace(/([^=]*)=(.*)/, '$1').trim(),
+                        x.replace(/([^=]*)=(.*)/, '$2').trim(
+                        ).replace(/^[\ \'\"]*|[\ \'\"]*$/g, '').trim()
+                    ];
+                    if ((key || value)
+                        && key.toLocaleLowerCase() !== 'signature-provider') {
+                        hResult[key] = value;
+                    }
+                });
+                return randerResult(hResult, {
+                    table: {
+                        KeyValue: true,
+                        config: {
+                            columns: { 0: { width: 23 }, 1: { width: 50 } }
+                        }
+                    }
+                });
             default:
                 assert(
                     !argv.action || argv.action === 'help', 'Unknown action.'
