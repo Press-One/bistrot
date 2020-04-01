@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.35) usage:
+PRESS.one ATM (v1.1.36) usage:
 
 =====================================================================
 
@@ -218,15 +218,15 @@ PRESS.one ATM (v1.1.35) usage:
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
     --mx-num   Mixin user number                 [STRING  / OPTIONAL]
-    --mx-name  Mixin user name                   [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. `mx-num with mx-name` or `mx-id` must be provided.         |
+    | 2. One of `mx-num` or `mx-id` must be provided.               |
     | 3. Execute the `auth` command before the first withdrawal.    |
-    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 5. Finish, `cancel` or timeout a current trx before request.  |
+    | 4. You can only withdraw to the original MX payment accounts. |
+    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 6. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
 
     > Example of Withdrawing to Mixin number (with Mixin user name):
@@ -235,7 +235,6 @@ PRESS.one ATM (v1.1.35) usage:
               --amount=12.3456 \
               --keystore=keystore.json \
               --mx-num=12345 \
-              --mx-name=ABC \
               --email=abc@def.com
 
     > Example of Withdrawing to Mixin user id:
