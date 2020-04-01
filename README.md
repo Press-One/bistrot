@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.36) usage:
+PRESS.one ATM (v1.1.37) usage:
 
 =====================================================================
 
