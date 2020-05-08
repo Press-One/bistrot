@@ -233,6 +233,29 @@ const help = () => {
         '    $ prs-atm --action=account \\',
         '              --account=ABCDE',
         '',
+        // '=====================================================================',
+        // '',
+        // '* Create Account:',
+        // '',
+        // "    --action   Set as 'createaccount'            [STRING  / REQUIRED]",
+        // '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        // '    --naccount New PRESS.one account             [STRING  / REQUIRED]',
+        // '    --npubkey  Public key of the new account     [STRING  / REQUIRED]',
+        // '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        // '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        // '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        // '    ┌---------------------------------------------------------------┐',
+        // '    | 0. DO NOT USE THIS FEATURE CURRENTLY.                         | ',
+        // '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        // '    └---------------------------------------------------------------┘',
+        // '',
+        // '    > Example:',
+        // '    $ prs-atm --action=createaccount \\',
+        // '              --account=ABCDE \\',
+        // '              --naccount=FIJKL \\',
+        // '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
+        // '              --keystore=keystore.json',
+        // '',
         '=====================================================================',
         '',
         '* Check PRS-chain Information:',
@@ -522,6 +545,8 @@ const argv = yargs.default({
     add: null,
     remove: null,
     receiver: null,
+    naccount: null,
+    npubkey: null,
     cpu: null,
     net: null,
     json: null,
@@ -539,7 +564,9 @@ global.prsAtmConfig = {
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
-const { atm, wallet, ballot, utility, statement, etc } = require('../main');
+const {
+    atm, wallet, ballot, account, utility, statement, etc
+} = require('../main');
 
 (async () => {
     try {
@@ -596,6 +623,12 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                         }
                     }
                 });
+            case 'createaccount':
+                argv.keystore && unlockKeystore();
+                const kResult = await account.createAccount(
+                    argv.account, argv.pvtkey, argv.naccount, argv.npubkey
+                );
+                return randerResult(kResult, defTblConf);
             case 'info':
                 const iResult = await atm.getInfo();
                 return randerResult(iResult, {
