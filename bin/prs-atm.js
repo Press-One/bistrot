@@ -35,14 +35,17 @@ const getArray = (str) => {
     return result;
 };
 
-const unlockKeystore = () => {
+const unlockKeystore = (options) => {
+    options = options || {};
     assert(fs.existsSync(argv.keystore), 'File does not exist.');
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
         kObj = JSON.parse(kFile);
+        (argv.pubkey = kObj.publickey).length;
     } catch (e) {
         assert(false, 'Invalid keystore file.');
     }
+    if (options.pubkeyOnly) { return; }
     while (!argv.password) {
         console.log('Input password to decrypt the keystore.');
         argv.password = readline.question('Password: ', rCnf);
@@ -232,6 +235,23 @@ const help = () => {
         '    > Example:',
         '    $ prs-atm --action=account \\',
         '              --account=ABCDE',
+        '',
+        '=====================================================================',
+        '',
+        '* Open Account:',
+        '',
+        "    --action   Set as 'openaccount'              [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `keystore` (recommend) or `pubkey` must be provided.       |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=openaccount \\',
+        '              --account=ABCDE \\',
+        '              --keystore=keystore.json',
         '',
         // '=====================================================================',
         // '',
@@ -623,6 +643,15 @@ const {
                         }
                     }
                 });
+            case 'openaccount':
+                argv.keystore && unlockKeystore({ pubkeyOnly: true });
+                const mResult = account.openAccount(argv.account, argv.pubkey);
+                if (!global.prsAtmConfig.json
+                    && mResult && mResult.paymentUrl) {
+                    console.log(`\nOpen this URL in your browser:`
+                        + `\n\n${mResult.paymentUrl}\n`);
+                }
+                return randerResult(mResult, defTblConf);
             case 'createaccount':
                 argv.keystore && unlockKeystore();
                 const kResult = await account.createAccount(
