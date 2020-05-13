@@ -146,6 +146,8 @@ PRESS.one ATM (v1.1.42) usage:
     | 3. Open this URL in your browser.                             |
     | 4. Scan the QR code with Mixin to complete the payment.       |
     | 5. You will receive further notifications via Mixin.          |
+    | 6. It will cost 4 PRS (2 for RAM, 1 for NET, 1 for CPU).      |
+    | 7. Registration fee is NON-REFUNDABLE, EVEN IF IT FAILS.      |
     └---------------------------------------------------------------┘
     ┌- Standard Account Naming Conventions -------------------------┐
     | ■ Can only contain the characters                             |
