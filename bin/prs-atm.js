@@ -249,7 +249,7 @@ const help = () => {
         '    | 2. After successful execution, you will get a URL.            |',
         '    | 3. Open this URL in your browser.                             |',
         '    | 4. Scan the QR code with Mixin to complete the payment.       |',
-        '    | 5. You will receive further notifications via mixin.          |',
+        '    | 5. You will receive further notifications via Mixin.          |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
