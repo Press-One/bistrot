@@ -645,7 +645,10 @@ const {
                 });
             case 'openaccount':
                 argv.keystore && unlockKeystore({ pubkeyOnly: true });
-                const mResult = account.openAccount(argv.account, argv.pubkey);
+                const mResult = await account.openAccount(
+                    argv.account,
+                    argv.pubkey
+                );
                 if (!global.prsAtmConfig.json
                     && mResult && mResult.paymentUrl) {
                     console.log(`\nOpen this URL in your browser:`
