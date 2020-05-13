@@ -256,7 +256,7 @@ const help = () => {
         '    ┌- Standard Account Naming Conventions -------------------------┐',
         '    | ■ Can only contain the characters                             |',
         '    |   `.abcdefghijklmnopqrstuvwxyz12345`.                         |',
-        '    |   `a-z` (lowercase), `1-5` and . (period)                     | ',
+        '    |   `a-z` (lowercase), `1-5` and `.` (period)                   | ',
         '    | ■ Must start with a letter                                    |',
         '    | ■ Must be 12 characters                                       |',
         '    | ? https://eosio-cpp.readme.io/v1.1.0/docs/naming-conventions  |',
