@@ -134,6 +134,27 @@ PRESS.one ATM (v1.1.37) usage:
 
 =====================================================================
 
+* Open Account:
+
+    --action   Set as 'openaccount'              [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pubkey` must be provided.       |
+    | 2. After successful execution, you will get a URL.            |
+    | 3. Open this URL in your browser.                             |
+    | 4. Scan the QR code with Mixin to complete the payment.       |
+    | 5. You will receive further notifications via mixin.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm --action=openaccount \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
 * Check PRS-chain Information:
 
     --action   Set as 'info'                     [STRING  / REQUIRED]
