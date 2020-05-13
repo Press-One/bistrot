@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm --action=
 ## Instruction
 
 ```
-PRESS.one ATM (v1.1.39) usage:
+PRESS.one ATM (v1.1.40) usage:
 
 =====================================================================
 
@@ -145,7 +145,7 @@ PRESS.one ATM (v1.1.39) usage:
     | 2. After successful execution, you will get a URL.            |
     | 3. Open this URL in your browser.                             |
     | 4. Scan the QR code with Mixin to complete the payment.       |
-    | 5. You will receive further notifications via mixin.          |
+    | 5. You will receive further notifications via Mixin.          |
     └---------------------------------------------------------------┘
 
     > Example:
