@@ -35,14 +35,17 @@ const getArray = (str) => {
     return result;
 };
 
-const unlockKeystore = () => {
+const unlockKeystore = (options) => {
+    options = options || {};
     assert(fs.existsSync(argv.keystore), 'File does not exist.');
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
         kObj = JSON.parse(kFile);
+        (argv.pubkey = kObj.publickey).length;
     } catch (e) {
         assert(false, 'Invalid keystore file.');
     }
+    if (options.pubkeyOnly) { return; }
     while (!argv.password) {
         console.log('Input password to decrypt the keystore.');
         argv.password = readline.question('Password: ', rCnf);
@@ -233,6 +236,60 @@ const help = () => {
         '    $ prs-atm --action=account \\',
         '              --account=ABCDE',
         '',
+        '=====================================================================',
+        '',
+        '* Open Account:',
+        '',
+        "    --action   Set as 'openaccount'              [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `keystore` (recommend) or `pubkey` must be provided.       |',
+        '    | 2. After successful execution, you will get a URL.            |',
+        '    | 3. Open this URL in your browser.                             |',
+        '    | 4. Scan the QR code with Mixin to complete the payment.       |',
+        '    | 5. You will receive further notifications via Mixin.          |',
+        '    | 6. It will cost 4 PRS (2 for RAM, 1 for NET, 1 for CPU).      |',
+        '    | 7. Registration fee is NON-REFUNDABLE, EVEN IF IT FAILS.      |',
+        '    └---------------------------------------------------------------┘',
+        '    ┌- Standard Account Naming Conventions -------------------------┐',
+        '    | ■ Can only contain the characters                             |',
+        '    |   `.abcdefghijklmnopqrstuvwxyz12345`.                         |',
+        '    |   `a-z` (lowercase), `1-5` and `.` (period)                   | ',
+        '    | ■ Must start with a letter                                    |',
+        '    | ■ Must be 12 characters                                       |',
+        '    | ? https://eosio-cpp.readme.io/v1.1.0/docs/naming-conventions  |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=openaccount \\',
+        '              --account=ABCDE \\',
+        '              --keystore=keystore.json',
+        '',
+        // '=====================================================================',
+        // '',
+        // '* Create Account:',
+        // '',
+        // "    --action   Set as 'createaccount'            [STRING  / REQUIRED]",
+        // '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        // '    --naccount New PRESS.one account             [STRING  / REQUIRED]',
+        // '    --npubkey  Public key of the new account     [STRING  / REQUIRED]',
+        // '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        // '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        // '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        // '    ┌---------------------------------------------------------------┐',
+        // '    | 0. DO NOT USE THIS FEATURE CURRENTLY.                         | ',
+        // '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        // '    └---------------------------------------------------------------┘',
+        // '',
+        // '    > Example:',
+        // '    $ prs-atm --action=createaccount \\',
+        // '              --account=ABCDE \\',
+        // '              --naccount=FIJKL \\',
+        // '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
+        // '              --keystore=keystore.json',
+        // '',
         '=====================================================================',
         '',
         '* Check PRS-chain Information:',
@@ -522,6 +579,8 @@ const argv = yargs.default({
     add: null,
     remove: null,
     receiver: null,
+    naccount: null,
+    npubkey: null,
     cpu: null,
     net: null,
     json: null,
@@ -539,7 +598,9 @@ global.prsAtmConfig = {
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
-const { atm, wallet, ballot, utility, statement, etc } = require('../main');
+const {
+    atm, wallet, ballot, account, utility, statement, etc
+} = require('../main');
 
 (async () => {
     try {
@@ -596,6 +657,24 @@ const { atm, wallet, ballot, utility, statement, etc } = require('../main');
                         }
                     }
                 });
+            case 'openaccount':
+                argv.keystore && unlockKeystore({ pubkeyOnly: true });
+                const mResult = await account.openAccount(
+                    argv.account,
+                    argv.pubkey
+                );
+                if (!global.prsAtmConfig.json
+                    && mResult && mResult.paymentUrl) {
+                    console.log(`\nOpen this URL in your browser:`
+                        + `\n\n${mResult.paymentUrl}\n`);
+                }
+                return randerResult(mResult, defTblConf);
+            case 'createaccount':
+                argv.keystore && unlockKeystore();
+                const kResult = await account.createAccount(
+                    argv.account, argv.pvtkey, argv.naccount, argv.npubkey
+                );
+                return randerResult(kResult, defTblConf);
             case 'info':
                 const iResult = await atm.getInfo();
                 return randerResult(iResult, {
