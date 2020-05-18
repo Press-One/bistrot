@@ -14,6 +14,7 @@
     "dependencies": {
         "@nodeutils/defaults-deep": "^1.1.0",
         "aes-js": "^3.1.2",
+        "bignumber.js": "^9.0.0",
         "cids": "^0.8.0",
         "eosjs": "^20.0.3",
         "eosjs-ecc": "^4.0.7",
@@ -31,6 +32,7 @@
         "mime-types": "^2.1.26",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
+        "node-fetch": "^2.6.0",
         "peer-id": "^0.13.12",
         "peer-info": "^0.17.5",
         "promisify-es6": "^1.0.3",
