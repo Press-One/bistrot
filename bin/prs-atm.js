@@ -227,7 +227,7 @@ const help = () => {
         '',
         '=====================================================================',
         '',
-        '* Check Account:',
+        '* Check an Account:',
         '',
         "    --action   Set as 'account'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -238,7 +238,7 @@ const help = () => {
         '',
         '=====================================================================',
         '',
-        '* Open Account:',
+        '* Open an Account:',
         '',
         "    --action   Set as 'openaccount'              [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -269,7 +269,7 @@ const help = () => {
         '',
         // '=====================================================================',
         // '',
-        // '* Create Account:',
+        // '* Create an Account:',
         // '',
         // "    --action   Set as 'createaccount'            [STRING  / REQUIRED]",
         // '    --account  PRESS.one account                 [STRING  / REQUIRED]',
@@ -290,6 +290,27 @@ const help = () => {
         // '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         // '              --keystore=keystore.json',
         // '',
+        '=====================================================================',
+        '',
+        '* Register as a Producer:',
+        '',
+        "    --action   Set as 'regproducer'              [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --url      URL where info about producer     [STRING  / OPTIONAL]',
+        '    --location Relative location for scheduling  [INTEGER / OPTIONAL]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `keystore` (recommend) or `pubkey` must be provided.       |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=regproducer \\',
+        '              --account=ABCDE \\',
+        '              --keystore=keystore.json',
+        '',
         '=====================================================================',
         '',
         '* Check PRS-chain Information:',
@@ -583,6 +604,8 @@ const argv = yargs.default({
     npubkey: null,
     cpu: null,
     net: null,
+    url: null,
+    location: null,
     json: null,
     path: null,
     force: null,
@@ -675,6 +698,16 @@ const {
                     argv.account, argv.pvtkey, argv.naccount, argv.npubkey
                 );
                 return randerResult(kResult, defTblConf);
+            case 'regproducer':
+                argv.keystore && unlockKeystore();
+                const qResult = await account.regProducer(
+                    argv.account,
+                    argv.url,
+                    argv.location,
+                    argv.pubkey,
+                    argv.pvtkey,
+                );
+                return randerResult(qResult, defTblConf);
             case 'info':
                 const iResult = await atm.getInfo();
                 return randerResult(iResult, {
