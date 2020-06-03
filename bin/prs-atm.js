@@ -3,6 +3,7 @@
 'use strict';
 
 const readline = require('readline-sync');
+const utilitas = require('utilitas');
 const assert = require('assert');
 const table = require('table').table;
 const yargs = require('yargs');
@@ -85,7 +86,7 @@ const randerResult = (result, options) => {
         'transactions_trx_transaction_actions_data__sync_auth__result',
     ];
     const json = ['transaction'];
-    const deep = utility.isArray(result);
+    const deep = utilitas.isArray(result);
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
@@ -127,7 +128,7 @@ const randerResult = (result, options) => {
         out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
-        console.log(global.prsAtmConfig.json ? utility.json(out) : out);
+        console.log(global.prsAtmConfig.json ? utilitas.prettyJson(out) : out);
     };
     return out;
 };
@@ -621,9 +622,8 @@ global.prsAtmConfig = {
     json: getBoolean(argv.json),
     debug: getBoolean(argv.debug),
 };
-const {
-    atm, wallet, ballot, account, utility, statement, etc
-} = require('../main');
+
+const { atm, wallet, ballot, account, statement, etc } = require('../main');
 
 (async () => {
     try {
@@ -721,7 +721,7 @@ const {
             case 'producers':
                 const fResult = await atm.getProducers();
                 if (global.prsAtmConfig.json) {
-                    return console.log(utility.json(fResult));
+                    return console.log(utilitas.prettyJson(fResult));
                 }
                 fResult.rows.map(x => {
                     x.total_votes = x.total_votes.replace(/\.0*$/, '');
