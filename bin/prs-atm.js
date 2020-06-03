@@ -3,7 +3,7 @@
 'use strict';
 
 const readline = require('readline-sync');
-const utilitas = require('utilitas');
+const { utilitas } = require('utilitas');
 const assert = require('assert');
 const table = require('table').table;
 const yargs = require('yargs');
