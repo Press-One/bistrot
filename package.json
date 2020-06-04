@@ -1,0 +1,11 @@
+{
+    "name": "sushitrain",
+    "description": "EOS/PRS data access library for Node.js.",
+    "version": "1989.6.4",
+    "private": false,
+    "homepage": "https://github.com/Leask/sushitrain",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {},
+    "license": "MIT"
+}
