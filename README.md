@@ -2,10 +2,13 @@
 
 EOS/PRS data access library for Node.js.
 
-## Database config
+## Configuration
 
 ```
 global.chainConfig = {
     database: { host, port, user, password, database},
+    shpApi,
+    serviceStateHistoryPlugin,
+    serviceTransactionArchive,
 };
 ```
