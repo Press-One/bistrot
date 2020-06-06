@@ -108,3 +108,6 @@ dist
 
 # OS
 .DS_Store
+
+# Leask
+dev.js
