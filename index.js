@@ -3,10 +3,11 @@
 const path = require('path');
 const fs = require('fs');
 
-fs.readdirSync(__dirname).filter((file) => {
+const libPath = path.join(__dirname, 'lib');
+
+fs.readdirSync(libPath).filter((file) => {
     return /\.js$/i.test(file) && file.toLowerCase() !== 'config.js';
 }).forEach((file) => {
-    module.exports[file.replace(/^(.*)\.js$/, '$1')] = require(
-        path.join(__dirname, file)
-    );
+    module.exports[file.replace(/^(.*)\.js$/, '$1')]
+        = require(path.join(libPath, file));
 });
