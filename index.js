@@ -3,8 +3,6 @@
 const path = require('path');
 const fs = require('fs');
 
-const basename = path.basename(module.filename);
-
 fs.readdirSync(__dirname).filter((file) => {
     return /\.js$/i.test(file) && file.toLowerCase() !== 'config.js';
 }).forEach((file) => {
