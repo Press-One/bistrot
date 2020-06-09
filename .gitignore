@@ -110,4 +110,5 @@ dist
 .DS_Store
 
 # Leask
+package-lock.json
 dev.js
