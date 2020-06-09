@@ -1,9 +1,14 @@
-module.exports = {
-    account: require('./lib/account'),
-    database: require('./lib/database'),
-    finance: require('./lib/finance'),
-    pacman: require('./lib/pacman'),
-    prsc: require('./lib/prsc'),
-    sushitrain: require('./lib/sushitrain'),
-    table: require('./lib/table'),
-};
+'use strict';
+
+const path = require('path');
+const fs = require('fs');
+
+const basename = path.basename(module.filename);
+
+fs.readdirSync(__dirname).filter((file) => {
+    return /\.js$/i.test(file) && file.toLowerCase() !== 'config.js';
+}).forEach((file) => {
+    module.exports[file.replace(/^(.*)\.js$/, '$1')] = require(
+        path.join(__dirname, file)
+    );
+});
