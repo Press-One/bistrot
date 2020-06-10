@@ -92,7 +92,7 @@ const randerResult = (result, options) => {
     for (let i in result) {
         out[i] = {};
         for (let j in result[i]) {
-            // if (!global.prsAtmConfig.debug && verbose.includes(i)) {
+            // if (!global.chainConfig.debug && verbose.includes(i)) {
             if (verbose.includes(j)) {
                 continue;
             } else if (json.includes(j)) {
@@ -102,7 +102,7 @@ const randerResult = (result, options) => {
         }
     }
     out = deep ? out : out[0];
-    if (!global.prsAtmConfig.json && options.table) {
+    if (!global.chainConfig.json && options.table) {
         const data = [];
         if (deep && options.table.columns) {
             data.push(options.table.columns.map(x => {
@@ -128,7 +128,7 @@ const randerResult = (result, options) => {
         out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
-        console.log(global.prsAtmConfig.json ? utilitas.prettyJson(out) : out);
+        console.log(global.chainConfig.json ? utilitas.prettyJson(out) : out);
     };
     return out;
 };
@@ -615,7 +615,7 @@ const argv = yargs.default({
     chainapi: null,
 }).help(false).argv;
 
-global.prsAtmConfig = {
+global.chainConfig = {
     rpcApi: argv.rpcapi || undefined,
     chainApi: argv.chainapi || undefined,
     overwrite: getBoolean(argv.force),
@@ -645,7 +645,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                 );
                 if (argv.dump) {
                     await etc.dumpFile(argv.dump, JSON.stringify(cResult), {
-                        overwrite: global.prsAtmConfig.overwrite,
+                        overwrite: global.chainConfig.overwrite,
                     });
                 }
                 return randerResult(cResult, defTblConf);
@@ -686,7 +686,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                     argv.account,
                     argv.pubkey
                 );
-                if (!global.prsAtmConfig.json
+                if (!global.chainConfig.json
                     && mResult && mResult.paymentUrl) {
                     console.log(`\nOpen this URL in your browser:`
                         + `\n\n${mResult.paymentUrl}\n`);
@@ -720,7 +720,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                 });
             case 'producers':
                 const fResult = await atm.getProducers();
-                if (global.prsAtmConfig.json) {
+                if (global.chainConfig.json) {
                     return console.log(utilitas.prettyJson(fResult));
                 }
                 fResult.rows.map(x => {
@@ -807,7 +807,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                     argv.amount,
                     argv.memo
                 );
-                if (!global.prsAtmConfig.json
+                if (!global.chainConfig.json
                     && dResult && dResult.paymentUrl) {
                     console.log(`\nOpen this URL in your browser:`
                         + `\n\n${dResult.paymentUrl}\n`);
@@ -902,7 +902,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                 const gResult = await etc.buildGenesis();
                 if (argv.path) {
                     await etc.dumpFile(`${argv.path}/genesis.json`, gResult, {
-                        overwrite: global.prsAtmConfig.overwrite,
+                        overwrite: global.chainConfig.overwrite,
                     });
                 }
                 return randerResult(JSON.parse(gResult), {
@@ -923,7 +923,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                 );
                 if (argv.path) {
                     await etc.dumpFile(`${argv.path}/config.ini`, content, {
-                        overwrite: global.prsAtmConfig.overwrite,
+                        overwrite: global.chainConfig.overwrite,
                     });
                 }
                 const hResult = {};
@@ -950,7 +950,7 @@ const { atm, wallet, ballot, account, statement, etc } = require('../index');
                 const jResult = await etc.buildRunservice();
                 if (argv.path) {
                     await etc.dumpFile(`${argv.path}/runservice.sh`, jResult, {
-                        overwrite: global.prsAtmConfig.overwrite,
+                        overwrite: global.chainConfig.overwrite,
                         executable: true,
                     });
                 }
