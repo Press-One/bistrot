@@ -623,7 +623,7 @@ global.prsAtmConfig = {
     debug: getBoolean(argv.debug),
 };
 
-const { atm, wallet, ballot, account, statement, etc } = require('../main');
+const { atm, wallet, ballot, account, statement, etc } = require('../index');
 
 (async () => {
     try {
