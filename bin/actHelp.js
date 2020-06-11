@@ -15,21 +15,9 @@ const getVersion = () => {
     return version;
 };
 
-const getEngind = (load) => {
-    if (!load) { return []; }
+const getEngind = (skip) => {
+    if (!skip) { return []; }
     const ending = [
-        '',
-        l,
-        '',
-        '* Help:',
-        '',
-        `    --action   Set as 'help'                     [STRING  / REQUIRED]`,
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1: You can just list help info for actions you need.          |',
-        '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm --action=help ballot info',
         '',
         l,
         '',
@@ -44,8 +32,6 @@ const getEngind = (load) => {
         '    | 1. Using param `force` will increase the risk of losing data. |',
         '    └---------------------------------------------------------------┘',
         '',
-        l,
-        '',
         '* Security:',
         '',
         '    Using passwords or private keys on the command line interface can',
@@ -58,10 +44,9 @@ const getEngind = (load) => {
 
 const func = async (argv) => {
     const version = getVersion();
-    const ignore = [path.basename(__filename), 'prs-atm.js'];
     const acts = {};
     fs.readdirSync(__dirname).filter((file) => {
-        return /\.js$/i.test(file) && !ignore.includes(file);
+        return /\.js$/i.test(file) && file.toLowerCase() !== 'prs-atm.js';
     }).forEach((file) => {
         let actName = file.replace(
             /^(.*)\.js$/, '$1'
@@ -71,7 +56,6 @@ const func = async (argv) => {
     const info = [`PRESS.one ATM ${version ? `(v${version})` : ''} usage:`];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     const find = {};
-    let load = 0;
     for (let i in acts) {
         if (argv._.length && argv._.includes(i)) {
             find[i] = true;
@@ -80,17 +64,25 @@ const func = async (argv) => {
         }
         Array.prototype.push.apply(info, [
             '', l, '', `* ${acts[i].name || i}:`, '', ...acts[i].help || []]);
-        load++;
     }
     argv._.map(x => {
-        if (!find[x] && x !== 'help') {
+        if (!find[x]) {
             info.push('', l, '', `# Action not found: ${x}`);
         }
     });
-    Array.prototype.push.apply(info, getEngind(load || argv._.includes('help')));
+    Array.prototype.push.apply(info, getEngind(!argv._.length));
     console.log(info.join('\n'));
 };
 
 module.exports = {
     func,
+    help: [
+        `    --action   Set as 'help'                     [STRING  / REQUIRED]`,
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1: You can just list help info for actions you need.          |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=help ballot info',
+    ],
 };
