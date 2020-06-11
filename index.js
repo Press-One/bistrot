@@ -5,6 +5,8 @@ const fs = require('fs');
 
 const libPath = path.join(__dirname, 'lib');
 
+module.exports = require('sushitrain');
+
 fs.readdirSync(libPath).filter((file) => {
     return /\.js$/i.test(file) && file.toLowerCase() !== 'config.js';
 }).forEach((file) => {
