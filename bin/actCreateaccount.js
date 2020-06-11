@@ -3,7 +3,7 @@
 const { account } = require('sushitrain');
 
 const func = async (argv) => {
-    return await account.createAccount(
+    return await account.create(
         argv.account, argv.pvtkey, argv.naccount, argv.npubkey
     );
 };

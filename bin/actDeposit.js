@@ -1,8 +1,10 @@
 'use strict';
 
 const { finance } = require('sushitrain');
+const { atm } = require('../index');
 
 const func = async (argv) => {
+    console.log(argv);
     const resp = await atm.deposit(
         argv.pvtkey, argv.account, argv.email, argv.amount, argv.memo
     );

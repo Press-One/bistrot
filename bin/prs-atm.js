@@ -137,9 +137,6 @@ const actFile = `${__dirname}/act${(argv.action[0] || '').toUpperCase(
         const result = await act.func(argv);
         randerResult(result, act.render);
     } catch (err) {
-        if (global.chainConfig.debug) {
-            throw err;
-        }
-        return console.error('Error:', err.toString());
+        console.error(global.chainConfig.debug ? err.stack : err.toString());
     }
 })();
