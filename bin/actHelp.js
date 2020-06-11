@@ -76,6 +76,7 @@ const func = async (argv) => {
 
 module.exports = {
     func,
+    name: 'Help',
     help: [
         `    --action   Set as 'help'                     [STRING  / REQUIRED]`,
         '    ┌---------------------------------------------------------------┐',
