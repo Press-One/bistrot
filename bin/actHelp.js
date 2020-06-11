@@ -59,7 +59,7 @@ const func = async (argv) => {
     for (let i in acts) {
         if (argv._.length && argv._.includes(i)) {
             find[i] = true;
-        } else if (argv._.length && !argv._.includes(i)) {
+        } else if ((argv._.length && !argv._.includes(i)) || acts[i].hide) {
             continue;
         }
         Array.prototype.push.apply(info, [

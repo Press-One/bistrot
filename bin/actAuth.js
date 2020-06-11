@@ -1,14 +1,9 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
-    const resp = await atm.updateAuth(
-        argv.account,
-        argv.pubkey,
-        argv.pvtkey,
-    );
-    return resp;
+    return await atm.updateAuth(argv.account, argv.pubkey, argv.pvtkey);
 };
 
 module.exports = {

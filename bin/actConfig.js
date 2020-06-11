@@ -1,20 +1,17 @@
 'use strict';
 
-const { } = require('../index');
+const { etc } = require('../index');
 
 const func = async (argv) => {
     const content = await etc.buildConfig(
-        argv.account,
-        argv.agent,
-        argv.pubkey,
-        argv.pvtkey,
+        argv.account, argv.agent, argv.pubkey, argv.pvtkey,
     );
     if (argv.path) {
         await etc.dumpFile(`${argv.path}/config.ini`, content, {
             overwrite: global.chainConfig.overwrite,
         });
     }
-    const hResult = {};
+    const result = {};
     content.split(/\r|\n/).map(x => {
         const [key, value] = [
             x.replace(/([^=]*)=(.*)/, '$1').trim(),
@@ -23,17 +20,10 @@ const func = async (argv) => {
         ];
         if ((key || value)
             && key.toLocaleLowerCase() !== 'signature-provider') {
-            hResult[key] = value;
+            result[key] = value;
         }
     });
-    return randerResult(hResult, {
-        table: {
-            KeyValue: true,
-            config: {
-                columns: { 0: { width: 23 }, 1: { width: 50 } }
-            }
-        }
-    });
+    return result;
 };
 
 module.exports = {
@@ -59,4 +49,10 @@ module.exports = {
         '              --path=. \\',
         '              --keystore=keystore.json',
     ],
+    render: {
+        table: {
+            KeyValue: true,
+            config: { columns: { 0: { width: 23 }, 1: { width: 50 } } },
+        },
+    },
 };

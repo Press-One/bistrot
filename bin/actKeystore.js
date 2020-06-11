@@ -1,18 +1,23 @@
 'use strict';
 
 const { wallet, etc } = require('../index');
+const readline = require('readline-sync');
 
 const func = async (argv) => {
     let repeat = argv.password;
     while (!argv.password || !repeat || argv.password !== repeat) {
         console.log('Input password to encrypt the keystore.');
-        argv.password = readline.question('New password: ', rCnf);
-        repeat = readline.question('Repeat password: ', rCnf);
+        argv.password = readline.question(
+            'New password: ', global.chainConfig.readlineConfig
+        );
+        repeat = readline.question(
+            'Repeat password: ', global.chainConfig.readlineConfig
+        );
         if (argv.password !== repeat) {
             console.log('Passwords do not match.');
         }
     }
-    const resp = await wallet.createKeystore(
+    const result = await wallet.createKeystore(
         String(argv.password || ''), argv.pubkey, argv.pvtkey,
     );
     if (argv.dump) {
@@ -20,7 +25,7 @@ const func = async (argv) => {
             overwrite: global.chainConfig.overwrite,
         });
     }
-    return resp;
+    return result;
 };
 
 module.exports = {

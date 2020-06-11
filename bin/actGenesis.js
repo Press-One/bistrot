@@ -1,22 +1,15 @@
 'use strict';
 
-const { } = require('../index');
+const { etc } = require('../index');
 
 const func = async (argv) => {
-    const gResult = await etc.buildGenesis();
+    const resp = await etc.buildGenesis();
     if (argv.path) {
-        await etc.dumpFile(`${argv.path}/genesis.json`, gResult, {
+        await etc.dumpFile(`${argv.path}/genesis.json`, resp, {
             overwrite: global.chainConfig.overwrite,
         });
     }
-    return randerResult(JSON.parse(gResult), {
-        table: {
-            KeyValue: true,
-            config: {
-                columns: { 0: { width: 21 }, 1: { width: 64 } }
-            }
-        }
-    });
+    return JSON.parse(resp);
 };
 
 module.exports = {
@@ -30,4 +23,10 @@ module.exports = {
         '    $ prs-atm --action=genesis \\',
         '              --path=.',
     ],
+    render: {
+        table: {
+            KeyValue: true,
+            config: { columns: { 0: { width: 21 }, 1: { width: 64 } } },
+        },
+    },
 };

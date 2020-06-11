@@ -3,8 +3,7 @@
 const { account } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await account.getByName(argv.account);
-    return resp;
+    return await account.getByName(argv.account);
 };
 
 module.exports = {
@@ -21,9 +20,7 @@ module.exports = {
     render: {
         table: {
             KeyValue: true,
-            config: {
-                columns: { 0: { width: 24 }, 1: { width: 49 } }
-            }
-        }
+            config: { columns: { 0: { width: 24 }, 1: { width: 49 } } },
+        },
     },
 };

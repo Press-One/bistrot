@@ -1,16 +1,11 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
-    const eResult = await atm.delegateBw(
-        argv.account,
-        argv.receiver,
-        argv.cpu,
-        argv.net,
-        argv.pvtkey
+    return await atm.delegateBw(
+        argv.account, argv.receiver, argv.cpu, argv.net, argv.pvtkey
     );
-    return randerResult(eResult, defTblConf);
 };
 
 module.exports = {

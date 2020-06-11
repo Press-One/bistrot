@@ -3,8 +3,7 @@
 const { sushitrain } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await sushitrain.getInfo();
-    return resp;
+    return await sushitrain.getInfo();
 };
 
 module.exports = {
@@ -26,9 +25,7 @@ module.exports = {
     render: {
         table: {
             KeyValue: true,
-            config: {
-                columns: { 0: { width: 27 }, 1: { width: 64 } }
-            }
-        }
+            config: { columns: { 0: { width: 27 }, 1: { width: 64 } } },
+        },
     },
 };

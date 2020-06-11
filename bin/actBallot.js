@@ -1,19 +1,36 @@
 'use strict';
 
-const { } = require('../index');
+const { ballot } = require('../index');
 
 const func = async (argv) => {
-    let aResult = null;
+    let result = null;
     if (argv.account) {
         const resp = await ballot.queryByOwner(argv.account);
-        aResult = resp ? [resp] : [];
+        result = resp ? [resp] : [];
     } else {
-        aResult = await ballot.queryAll();
+        result = await ballot.queryAll();
     }
-    for (let item of aResult) {
+    for (let item of result) {
         item.producers = item.producers.join('\n');
     }
-    return randerResult(aResult, {
+    return result;
+};
+
+module.exports = {
+    func,
+    name: 'Check Voting Information',
+    help: [
+        "    --action   Set as 'ballot'                   [STRING  / REQUIRED]",
+        '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
+        '',
+        '    > Example of checking global voting information:',
+        '    $ prs-atm --action=ballot',
+        '',
+        "    > Example of checking account's voting information:",
+        '    $ prs-atm --action=ballot \\',
+        '              --account=ABCDE',
+    ],
+    render: {
         table: {
             columns: [
                 'owner',
@@ -34,24 +51,8 @@ const func = async (argv) => {
                     4: { alignment: 'right' },
                     5: { alignment: 'right' },
                     6: { alignment: 'right' },
-                }
-            }
-        }
-    });
-};
-
-module.exports = {
-    func,
-    name: 'Check Voting Information',
-    help: [
-        "    --action   Set as 'ballot'                   [STRING  / REQUIRED]",
-        '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
-        '',
-        '    > Example of checking global voting information:',
-        '    $ prs-atm --action=ballot',
-        '',
-        "    > Example of checking account's voting information:",
-        '    $ prs-atm --action=ballot \\',
-        '              --account=ABCDE',
-    ],
+                },
+            },
+        },
+    },
 };

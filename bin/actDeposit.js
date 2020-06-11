@@ -3,19 +3,14 @@
 const { finance } = require('sushitrain');
 
 const func = async (argv) => {
-    const dResult = await atm.deposit(
-        argv.pvtkey,
-        argv.account,
-        argv.email,
-        argv.amount,
-        argv.memo
+    const result = await atm.deposit(
+        argv.pvtkey, argv.account, argv.email, argv.amount, argv.memo
     );
-    if (!global.chainConfig.json
-        && dResult && dResult.paymentUrl) {
+    if (!global.chainConfig.json && result && result.paymentUrl) {
         console.log(`\nOpen this URL in your browser:`
-            + `\n\n${dResult.paymentUrl}\n`);
+            + `\n\n${result.paymentUrl}\n`);
     }
-    return randerResult(dResult, defTblConf);
+    return result;
 };
 
 module.exports = {

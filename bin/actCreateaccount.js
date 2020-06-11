@@ -3,10 +3,9 @@
 const { account } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await account.createAccount(
+    return await account.createAccount(
         argv.account, argv.pvtkey, argv.naccount, argv.npubkey
     );
-    return resp;
 };
 
 module.exports = {
@@ -34,5 +33,5 @@ module.exports = {
         '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --keystore=keystore.json',
     ],
-    hidden: true,
+    hide: true,
 };

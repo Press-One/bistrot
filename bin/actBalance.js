@@ -3,8 +3,7 @@
 const { account } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await account.getBalance(argv.account);
-    return resp;
+    return await account.getBalance(argv.account);
 };
 
 module.exports = {

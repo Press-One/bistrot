@@ -1,14 +1,9 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
-    const pResult = await atm.cancelPaymentRequest(
-        argv.pvtkey,
-        argv.account,
-        argv.memo
-    );
-    return randerResult(pResult, defTblConf);
+    return await atm.cancelPaymentRequest(argv.pvtkey, argv.account, argv.memo);
 };
 
 module.exports = {
