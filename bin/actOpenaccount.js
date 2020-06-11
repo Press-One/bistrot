@@ -3,14 +3,23 @@
 const { } = require('../index');
 
 const func = async (argv) => {
+    const resp = await account.openAccount(
+        argv.account,
+        argv.pubkey
+    );
+    if (!global.chainConfig.json
+        && resp && resp.paymentUrl) {
+        console.log(`\nOpen this URL in your browser:`
+            + `\n\n${resp.paymentUrl}\n`);
+    }
     return resp;
 };
 
 module.exports = {
+    pubkey: true,
     func,
+    name: 'Open an Account',
     help: [
-        '* Open an Account:',
-        '',
         "    --action   Set as 'openaccount'              [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',

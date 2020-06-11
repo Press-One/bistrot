@@ -3,14 +3,20 @@
 const { } = require('../index');
 
 const func = async (argv) => {
+    const resp = await atm.updateAuth(
+        argv.account,
+        argv.pubkey,
+        argv.pvtkey,
+    );
     return resp;
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Update Authorization',
     help: [
-        '* Update Authorization:',
-        '',
         "    --action   Set as 'auth'                     [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',

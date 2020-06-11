@@ -3,14 +3,47 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const sResult = await statement.query(
+        argv.account,
+        argv.time,
+        argv.type,
+        argv.count,
+    );
+    return randerResult(sResult, {
+        table: {
+            columns: [
+                'timestamp',
+                'block_num',
+                'counter',
+                'type',
+                'description',
+                'from',
+                'to',
+                'amount',
+                'currency',
+            ],
+            config: {
+                singleLine: true,
+                columns: {
+                    0: { alignment: 'right' },
+                    1: { alignment: 'right' },
+                    2: { alignment: 'right' },
+                    3: { alignment: 'right' },
+                    4: { alignment: 'right' },
+                    5: { alignment: 'right' },
+                    6: { alignment: 'right' },
+                    7: { alignment: 'right' },
+                    8: { alignment: 'right' },
+                }
+            }
+        }
+    });
 };
 
 module.exports = {
     func,
+    name: 'Check Statement',
     help: [
-        '* Check Statement:',
-        '',
         "    --action   Set as 'statement'                [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --time     Timestamp for paging              [STRING  / OPTIONAL]',

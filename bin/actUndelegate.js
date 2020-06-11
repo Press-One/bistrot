@@ -3,14 +3,22 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const nResult = await atm.undelegateBw(
+        argv.account,
+        argv.receiver,
+        argv.cpu,
+        argv.net,
+        argv.pvtkey
+    );
+    return randerResult(nResult, defTblConf);
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Undelegate CPU and/or Network Bandwidth',
     help: [
-        '* Undelegate CPU and/or Network Bandwidth:',
-        '',
         "    --action   Set as 'undelegate'               [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         "    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]",

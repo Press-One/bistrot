@@ -25,9 +25,8 @@ const func = async (argv) => {
 
 module.exports = {
     func,
+    name: 'Create a new Keystore / Import keys to a new Keystore',
     help: [
-        '* Create a new Keystore / Import keys to a new Keystore:',
-        '',
         "    --action   Set as 'keystore'                 [STRING  / REQUIRED]",
         '    --password Use to encrypt the keystore       [STRING  / OPTIONAL]',
         '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',

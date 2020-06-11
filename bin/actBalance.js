@@ -1,16 +1,16 @@
 'use strict';
 
-const { } = require('../index');
+const { account } = require('sushitrain');
 
 const func = async (argv) => {
+    const resp = await account.getBalance(argv.account);
     return resp;
 };
 
 module.exports = {
     func,
+    name: 'Check Balance',
     help: [
-        '* Check Balance:',
-        '',
         "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',

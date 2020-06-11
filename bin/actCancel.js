@@ -3,14 +3,20 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const pResult = await atm.cancelPaymentRequest(
+        argv.pvtkey,
+        argv.account,
+        argv.memo
+    );
+    return randerResult(pResult, defTblConf);
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Cancel a depositing payment request',
     help: [
-        '* Cancel a depositing payment request:',
-        '',
         "    --action   Set as 'cancel'                   [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',

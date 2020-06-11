@@ -3,14 +3,24 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const wResult = await atm.withdraw(
+        argv.pvtkey,
+        argv.account,
+        argv['mx-id'],
+        argv['mx-num'],
+        argv.email,
+        argv.amount,
+        argv.memo
+    );
+    return randerResult(wResult, defTblConf);
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Withdrawal',
     help: [
-        '* Withdrawal:',
-        '',
         "    --action   Set as 'withdraw'                 [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',

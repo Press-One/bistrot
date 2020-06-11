@@ -3,14 +3,45 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const content = await etc.buildConfig(
+        argv.account,
+        argv.agent,
+        argv.pubkey,
+        argv.pvtkey,
+    );
+    if (argv.path) {
+        await etc.dumpFile(`${argv.path}/config.ini`, content, {
+            overwrite: global.chainConfig.overwrite,
+        });
+    }
+    const hResult = {};
+    content.split(/\r|\n/).map(x => {
+        const [key, value] = [
+            x.replace(/([^=]*)=(.*)/, '$1').trim(),
+            x.replace(/([^=]*)=(.*)/, '$2').trim(
+            ).replace(/^[\ \'\"]*|[\ \'\"]*$/g, '').trim()
+        ];
+        if ((key || value)
+            && key.toLocaleLowerCase() !== 'signature-provider') {
+            hResult[key] = value;
+        }
+    });
+    return randerResult(hResult, {
+        table: {
+            KeyValue: true,
+            config: {
+                columns: { 0: { width: 23 }, 1: { width: 50 } }
+            }
+        }
+    });
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Generate the `config.ini` file',
     help: [
-        '* Generate the `config.ini` file:',
-        '',
         "    --action   Set as 'config'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --agent    Agent name for your PRS-node      [STRING  / OPTIONAL]',

@@ -3,14 +3,19 @@
 const { } = require('../index');
 
 const func = async (argv) => {
+    const resp = await atm.claimRewards(
+        argv.account,
+        argv.pvtkey,
+    );
     return resp;
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Claim Rewards',
     help: [
-        '* Claim Rewards:',
-        '',
         "    --action   Set as 'reward'                   [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',

@@ -3,14 +3,22 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const eResult = await atm.delegateBw(
+        argv.account,
+        argv.receiver,
+        argv.cpu,
+        argv.net,
+        argv.pvtkey
+    );
+    return randerResult(eResult, defTblConf);
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Delegate CPU and/or Network Bandwidth',
     help: [
-        '* Delegate CPU and/or Network Bandwidth:',
-        '',
         "    --action   Set as 'delegate'                 [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         "    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]",

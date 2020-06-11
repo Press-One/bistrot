@@ -3,14 +3,21 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    return resp;
+    const vResult = await ballot.vote(
+        argv.account,
+        getArray(argv.add),
+        getArray(argv.remove),
+        argv.pvtkey
+    );
+    return randerResult(vResult, defTblConf);
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Vote or Revoke Voting for Producers',
     help: [
-        '* Vote or Revoke Voting for Producers:',
-        '',
         "    --action   Set as 'vote'                     [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
         '    --add      Add BP to list of voted producers [STRING  / OPTIONAL]',

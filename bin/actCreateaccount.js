@@ -1,16 +1,20 @@
 'use strict';
 
-const { } = require('../index');
+const { account } = require('sushitrain');
 
 const func = async (argv) => {
+    const resp = await account.createAccount(
+        argv.account, argv.pvtkey, argv.naccount, argv.npubkey
+    );
     return resp;
 };
 
 module.exports = {
+    pubkey: true,
+    pvtkey: true,
     func,
+    name: 'Create an Account',
     help: [
-        '* Create an Account:',
-        '',
         "    --action   Set as 'createaccount'            [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --naccount New PRESS.one account             [STRING  / REQUIRED]',
