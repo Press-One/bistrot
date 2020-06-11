@@ -1,9 +1,9 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
-    const resp = await account.openAccount(argv.account, argv.pubkey);
+    const resp = await atm.openAccount(argv.account, argv.pubkey);
     if (!global.chainConfig.json
         && resp && resp.paymentUrl) {
         console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);

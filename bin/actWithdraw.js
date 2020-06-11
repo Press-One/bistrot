@@ -1,6 +1,6 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
     return await atm.withdraw(
