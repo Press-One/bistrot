@@ -3,14 +3,10 @@
 const { producer } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await producer.register(
-        argv.account,
-        argv.url,
-        argv.location,
-        argv.pubkey,
-        argv.pvtkey,
+    const result = await producer.register(
+        argv.account, argv.url, argv.location, argv.pubkey, argv.pvtkey,
     );
-    return resp;
+    return result;
 };
 
 module.exports = {

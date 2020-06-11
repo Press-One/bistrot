@@ -1,16 +1,16 @@
 'use strict';
 
-const { } = require('../index');
+const { etc } = require('../index');
 
 const func = async (argv) => {
-    const jResult = await etc.buildRunservice();
+    const filename = 'runservice.sh';
+    const resp = await etc.buildRunservice();
     if (argv.path) {
-        await etc.dumpFile(`${argv.path}/runservice.sh`, jResult, {
-            overwrite: global.chainConfig.overwrite,
-            executable: true,
+        await etc.dumpFile(`${argv.path}/${filename}`, resp, {
+            overwrite: global.chainConfig.overwrite, executable: true,
         });
     }
-    return console.log(`\n${jResult}`);
+    return { [filename]: resp };
 };
 
 module.exports = {

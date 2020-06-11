@@ -3,25 +3,28 @@
 const { producer } = require('sushitrain');
 
 const func = async (argv) => {
-    const fResult = await producer.getAll();
-    if (global.chainConfig.json) {
-        return console.log(utilitas.prettyJson(fResult));
+    const resp = await producer.getAll();
+    if (!global.chainConfig.json) {
+        console.log(
+            'TOTAL_PRODUCER_VOTE_WEIGHT:', resp.total_producer_vote_weight
+        );
     }
-    fResult.rows.map(x => {
+    resp.rows.map(x => {
         x.total_votes = x.total_votes.replace(/\.0*$/, '');
     });
-    randerResult({
-        total_producer_vote_weight:
-            fResult.total_producer_vote_weight
-    }, {
-        table: {
-            KeyValue: true,
-            config: {
-                columns: { 0: { width: 26 }, 1: { width: 47 } }
-            }
-        }
-    });
-    return randerResult(fResult.rows, {
+    return resp.rows;
+};
+
+module.exports = {
+    func,
+    name: 'Check Producers Information',
+    help: [
+        "    --action   Set as 'producers'                [STRING  / REQUIRED]",
+        '',
+        '    > Example:',
+        '    $ prs-atm --action=producers',
+    ],
+    render: {
         table: {
             columns: [
                 'owner',
@@ -42,19 +45,8 @@ const func = async (argv) => {
                     5: { alignment: 'right' },
                     6: { alignment: 'right' },
                     7: { alignment: 'right' },
-                }
-            }
-        }
-    });
-};
-
-module.exports = {
-    func,
-    name: 'Check Producers Information',
-    help: [
-        "    --action   Set as 'producers'                [STRING  / REQUIRED]",
-        '',
-        '    > Example:',
-        '    $ prs-atm --action=producers',
-    ],
+                },
+            },
+        },
+    },
 };

@@ -3,13 +3,9 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    const vResult = await ballot.vote(
-        argv.account,
-        getArray(argv.add),
-        getArray(argv.remove),
-        argv.pvtkey
+    return await ballot.vote(
+        argv.account, argv.add, argv.remove, argv.pvtkey
     );
-    return randerResult(vResult, defTblConf);
 };
 
 module.exports = {

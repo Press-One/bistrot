@@ -1,13 +1,9 @@
 'use strict';
 
-const { } = require('../index');
+const { atm } = require('../index');
 
 const func = async (argv) => {
-    const resp = await atm.claimRewards(
-        argv.account,
-        argv.pvtkey,
-    );
-    return resp;
+    return await atm.claimRewards(argv.account, argv.pvtkey);
 };
 
 module.exports = {

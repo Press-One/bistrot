@@ -21,7 +21,7 @@ const func = async (argv) => {
         String(argv.password || ''), argv.pubkey, argv.pvtkey,
     );
     if (argv.dump) {
-        await etc.dumpFile(argv.dump, JSON.stringify(cResult), {
+        await etc.dumpFile(argv.dump, JSON.stringify(result), {
             overwrite: global.chainConfig.overwrite,
         });
     }

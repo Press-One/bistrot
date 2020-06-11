@@ -3,7 +3,7 @@
 const { } = require('../index');
 
 const func = async (argv) => {
-    const wResult = await atm.withdraw(
+    return await atm.withdraw(
         argv.pvtkey,
         argv.account,
         argv['mx-id'],
@@ -12,7 +12,6 @@ const func = async (argv) => {
         argv.amount,
         argv.memo
     );
-    return randerResult(wResult, defTblConf);
 };
 
 module.exports = {

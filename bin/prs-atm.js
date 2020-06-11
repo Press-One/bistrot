@@ -48,9 +48,9 @@ const toArray = (str) => {
     return result;
 };
 
-const unlockKeystore = (options = {}) => {
+const unlockKeystore = async (options = {}) => {
     if (argv.keystore) {
-        const result = require('./actUnlock').func(argv, options);
+        const result = await require('./actUnlock').func(argv, options);
         argv.pubkey = result.publickey;
         argv.pvtkey = result.privatekey;
     }
@@ -124,20 +124,22 @@ for (let i in argv) {
 const actFile = `${__dirname}/act${(argv.action[0] || '').toUpperCase(
 )}${argv.action.slice(1).toLowerCase()}`;
 
-try {
-    utilitas.assert(fs.existsSync(`${actFile}.js`), 'Unknown action.');
-    const act = require(actFile);
-    utilitas.assert(act && act.func, 'Invalid action.');
-    if (act.pubkey && act.pvtkey) {
-        unlockKeystore(argv);
-    } else if (act.pubkey) {
-        unlockKeystore(argv, { pubkeyOnly: true });
+(async () => {
+    try {
+        utilitas.assert(fs.existsSync(`${actFile}.js`), 'Unknown action.');
+        const act = require(actFile);
+        utilitas.assert(act && act.func, 'Invalid action.');
+        if (act.pubkey && act.pvtkey) {
+            await unlockKeystore(argv);
+        } else if (act.pubkey) {
+            await unlockKeystore(argv, { pubkeyOnly: true });
+        }
+        const result = await act.func(argv);
+        randerResult(result, act.render);
+    } catch (err) {
+        if (global.chainConfig.debug) {
+            throw err;
+        }
+        return console.error('Error:', err.toString());
     }
-    const result = act.func(argv);
-    randerResult(result);
-} catch (err) {
-    if (global.chainConfig.debug) {
-        throw err;
-    }
-    return console.error('Error:', err.toString());
-}
+})();

@@ -3,14 +3,13 @@
 const { finance } = require('sushitrain');
 
 const func = async (argv) => {
-    const result = await atm.deposit(
+    const resp = await atm.deposit(
         argv.pvtkey, argv.account, argv.email, argv.amount, argv.memo
     );
-    if (!global.chainConfig.json && result && result.paymentUrl) {
-        console.log(`\nOpen this URL in your browser:`
-            + `\n\n${result.paymentUrl}\n`);
+    if (!global.chainConfig.json && resp && resp.paymentUrl) {
+        console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
     }
-    return result;
+    return resp;
 };
 
 module.exports = {
