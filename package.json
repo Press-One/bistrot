@@ -1,7 +1,9 @@
 {
     "name": "prs-atm",
+    "description": "A CLI tool for financing on PRESS.one.",
     "version": "1.1.50",
-    "description": "",
+    "private": false,
+    "homepage": "https://github.com/Press-One/prs-atm",
     "main": "index.js",
     "bin": {
         "prs-atm": "./bin/prs-atm.js"
@@ -16,6 +18,10 @@
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Press-One/prs-atm.git"
+    }
     "dependencies": {
         "@nodeutils/defaults-deep": "^1.1.0",
         "aes-js": "^3.1.2",
@@ -46,9 +52,9 @@
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
         "rimraf": "^3.0.2",
-        "sushitrain": "^1989.6.72",
+        "sushitrain": "^1989.6.80",
         "table": "^5.4.6",
-        "utilitas": "^1989.6.38",
+        "utilitas": "^1989.6.39",
         "uuid": "^3.4.0",
         "yargs": "^15.3.1"
     }
