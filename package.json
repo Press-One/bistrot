@@ -31,8 +31,8 @@
         "libp2p-mplex": "^0.9.5",
         "libp2p-secio": "^0.12.4",
         "libp2p-tcp": "^0.14.5",
-        "mathjs": "^6.5.0",
-        "mime-types": "^2.1.26",
+        "mathjs": "^6.6.5",
+        "mime-types": "^2.1.27",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
         "node-fetch": "^2.6.0",
@@ -44,10 +44,10 @@
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
         "rimraf": "^3.0.2",
-        "sushitrain": "^1989.6.61",
+        "sushitrain": "^1989.6.72",
         "table": "^5.4.6",
-        "utilitas": "^1989.6.26",
+        "utilitas": "^1989.6.38",
         "uuid": "^3.4.0",
-        "yargs": "^15.1.0"
+        "yargs": "^15.3.1"
     }
 }
