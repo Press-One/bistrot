@@ -6,6 +6,7 @@
     "homepage": "https://github.com/Leask/sushitrain",
     "main": "index.js",
     "scripts": {
+        "start": "node index.js",
         "debug": "node --inspect debug.js",
         "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
     },
