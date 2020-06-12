@@ -1,5 +1,5 @@
-.history
 gears
-package-lock.json
-ci-npm.sh
+.history
+build.sh
 debug.js
+package-lock.json
