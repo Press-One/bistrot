@@ -111,4 +111,4 @@ dist
 
 # Leask
 package-lock.json
-dev.js
+debug.js
