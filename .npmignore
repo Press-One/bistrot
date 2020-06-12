@@ -2,4 +2,4 @@
 gears
 package-lock.json
 ci-npm.sh
-dev.js
+debug.js
