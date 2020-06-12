@@ -10,6 +10,8 @@
         "start": "node index.js",
         "debug": "node --inspect debug.js",
         "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md",
+        "docker": "docker build --no-cache . -t pressone/prs-atm && docker push pressone/prs-atm",
+        "docker-cn": "docker build --no-cache . -t dockerhub.qingcloud.com/pressone/prs-atm && docker push dockerhub.qingcloud.com/pressone/prs-atm",
         "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
     },
     "author": "Leask Wong <i@leaskh.com>",
