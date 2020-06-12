@@ -5,6 +5,10 @@
     "private": false,
     "homepage": "https://github.com/Leask/sushitrain",
     "main": "index.js",
+    "scripts": {
+        "debug": "node --inspect debug.js",
+        "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
+    },
     "dependencies": {
         "eos-name-verify": "^1.0.1",
         "eosjs": "^20.0.3",
@@ -14,7 +18,7 @@
         "pg": "^8.2.1",
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
-        "utilitas": "^1989.6.31",
+        "utilitas": "^1989.6.37",
         "ws": "^7.3.0"
     },
     "devDependencies": {},
