@@ -12,6 +12,10 @@
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Leask/sushitrain"
+    },
     "dependencies": {
         "eos-name-verify": "^1.0.1",
         "eosjs": "^20.0.3",
