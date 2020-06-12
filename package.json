@@ -10,6 +10,8 @@
         "debug": "node --inspect debug.js",
         "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
     },
+    "author": "Leask Wong <i@leaskh.com>",
+    "license": "MIT",
     "dependencies": {
         "eos-name-verify": "^1.0.1",
         "eosjs": "^20.0.3",
@@ -19,9 +21,8 @@
         "pg": "^8.2.1",
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
-        "utilitas": "^1989.6.38",
+        "utilitas": "^1989.6.39",
         "ws": "^7.3.0"
     },
-    "devDependencies": {},
-    "license": "MIT"
+    "devDependencies": {}
 }
