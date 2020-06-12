@@ -9,7 +9,7 @@
     "scripts": {
         "start": "node index.js",
         "debug": "node --inspect debug.js",
-        "readme": "cat template.md > README.md && echo '```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md",
+        "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md",
         "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
     },
     "author": "Leask Wong <i@leaskh.com>",
