@@ -10,7 +10,7 @@
     },
     "scripts": {
         "start": "node index.js",
-        "debug": "node --inspect debug.js",
+        "debug": "node --inspect index.js",
         "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md",
         "docker": "docker build --no-cache . -t pressone/prs-atm && docker push pressone/prs-atm",
         "docker-cn": "docker build --no-cache . -t dockerhub.qingcloud.com/pressone/prs-atm && docker push dockerhub.qingcloud.com/pressone/prs-atm",
