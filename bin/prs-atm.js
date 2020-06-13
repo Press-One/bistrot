@@ -106,7 +106,8 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     return out;
 };
 
-const command = argv._.shift() || '';
+const command = String(argv._.shift() || 'help');
+const errNotFound = `Command not found: \`${command}\`.`;
 const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
 ['add', 'remove'].map(i => {
@@ -120,9 +121,9 @@ global.chainConfig = { debug: argv.debug, rpcApi: argv.rpcapi };
 
 (async () => {
     try {
-        utilitas.assert(fs.existsSync(`${actFile}.js`), 'Unknown command.');
+        utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
-        utilitas.assert(act && act.func, 'Invalid command.');
+        utilitas.assert(act && act.func, errNotFound);
         if (act.pubkey && act.pvtkey) {
             await unlockKeystore(argv);
         } else if (act.pubkey) {

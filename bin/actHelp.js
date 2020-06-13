@@ -6,7 +6,7 @@ const fs = require('fs');
 
 let l = '=====================================================================';
 
-const getEngind = (skip) => {
+const getEnding = (skip) => {
     if (!skip) { return []; }
     const ending = [
         '',
@@ -64,21 +64,21 @@ const func = async (argv) => {
     }
     argv._.map(x => {
         if (!find[x]) {
-            info.push('', l, '', `# Action not found: ${x}`);
+            info.push('', l, '', `* \`${x}\` > command not found.`);
         }
     });
-    Array.prototype.push.apply(info, getEngind(!argv._.length));
+    Array.prototype.push.apply(info, getEnding(!argv._.length));
     console.log(info.join('\n'));
 };
 
 module.exports = {
     func,
-    name: 'Get help info',
+    name: 'List help info',
     help: [
         '    > Example of listing all help info:',
         '    $ prs-atm help',
         '',
-        '    > Example of search help info you need:',
+        '    > Example of searching help info:',
         '    $ prs-atm help ballot info',
     ],
 };

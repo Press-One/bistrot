@@ -19,7 +19,7 @@ const func = (argv) => {
 
 module.exports = {
     func,
-    name: 'Get version',
+    name: 'List version info',
     help: [
         '    > Example of getting package version:',
         '    $ prs-atm version',
@@ -27,5 +27,4 @@ module.exports = {
         '    > Example of exporting info as json:',
         '    $ prs-atm version --json',
     ],
-    hide: true,
 };
