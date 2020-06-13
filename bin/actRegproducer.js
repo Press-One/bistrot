@@ -15,7 +15,6 @@ module.exports = {
     func,
     name: 'Register as a Producer',
     help: [
-        "    --action   Set as 'regproducer'              [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --url      URL where info about producer     [STRING  / OPTIONAL]',
         '    --location Relative location for scheduling  [INTEGER / OPTIONAL]',
@@ -28,8 +27,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=regproducer \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm regproducer --account=ABCDE --keystore=keystore.json',
     ],
 };

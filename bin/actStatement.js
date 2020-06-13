@@ -12,7 +12,6 @@ module.exports = {
     func,
     name: 'Check Statement',
     help: [
-        "    --action   Set as 'statement'                [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
         "    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]",
@@ -24,8 +23,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=statement \\',
-        '              --account=ABCDE',
+        '    $ prs-atm statement --account=ABCDE',
     ],
     render: {
         table: {

@@ -4,7 +4,7 @@ const { account } = require('sushitrain');
 
 const func = async (argv) => {
     return await account.create(
-        argv.account, argv.pvtkey, argv.naccount, argv.npubkey
+        argv.account, argv.pvtkey, argv.name, argv.npubkey
     );
 };
 
@@ -14,9 +14,8 @@ module.exports = {
     func,
     name: 'Create an Account',
     help: [
-        "    --action   Set as 'createaccount'            [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --naccount New PRESS.one account             [STRING  / REQUIRED]',
+        '    --name     New PRESS.one account             [STRING  / REQUIRED]',
         '    --npubkey  Public key of the new account     [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
@@ -27,9 +26,9 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=createaccount \\',
+        '    $ prs-atm createaccount \\',
         '              --account=ABCDE \\',
-        '              --naccount=FIJKL \\',
+        '              --name=FIJKL \\',
         '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
         '              --keystore=keystore.json',
     ],

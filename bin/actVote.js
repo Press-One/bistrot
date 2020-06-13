@@ -12,7 +12,6 @@ module.exports = {
     func,
     name: 'Vote or Revoke Voting for Producers',
     help: [
-        "    --action   Set as 'vote'                     [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
         '    --add      Add BP to list of voted producers [STRING  / OPTIONAL]',
         '    --remove   Del BP to list of voted producers [STRING  / OPTIONAL]',
@@ -26,7 +25,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=vote \\',
+        '    $ prs-atm vote \\',
         '              --account=ABCDE \\',
         '              --add=bp1,bp2 \\',
         '              --remove=bp3,bp4 \\',

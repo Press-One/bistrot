@@ -20,15 +20,13 @@ module.exports = {
     func,
     name: 'Check Voting Information',
     help: [
-        "    --action   Set as 'ballot'                   [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
         '',
         '    > Example of checking global voting information:',
-        '    $ prs-atm --action=ballot',
+        '    $ prs-atm ballot',
         '',
         "    > Example of checking account's voting information:",
-        '    $ prs-atm --action=ballot \\',
-        '              --account=ABCDE',
+        '    $ prs-atm ballot --account=ABCDE',
     ],
     render: {
         table: {

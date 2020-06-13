@@ -32,7 +32,6 @@ module.exports = {
     func,
     name: 'Generate the `config.ini` file',
     help: [
-        "    --action   Set as 'config'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --agent    Agent name for your PRS-node      [STRING  / OPTIONAL]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
@@ -44,10 +43,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=config \\',
-        '              --account=ABCDE \\',
-        '              --path=. \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm config --account=ABCD --path=. --keystore=keystore.json',
     ],
     render: {
         table: {

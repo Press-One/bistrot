@@ -19,7 +19,6 @@ module.exports = {
     func,
     name: 'Deposit',
     help: [
-        "    --action   Set as 'deposit'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
@@ -40,7 +39,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=deposit \\',
+        '    $ prs-atm deposit \\',
         '              --account=ABCDE \\',
         '              --amount=12.3456 \\',
         '              --keystore=keystore.json \\',

@@ -19,10 +19,8 @@ module.exports = {
     func,
     name: 'Check Producers Information',
     help: [
-        "    --action   Set as 'producers'                [STRING  / REQUIRED]",
-        '',
         '    > Example:',
-        '    $ prs-atm --action=producers',
+        '    $ prs-atm producers',
     ],
     render: {
         table: {

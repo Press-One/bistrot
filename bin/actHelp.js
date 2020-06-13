@@ -53,7 +53,7 @@ const func = async (argv) => {
             continue;
         }
         Array.prototype.push.apply(info, [
-            '', l, '', `* ${acts[i].name || i}:`, '', ...acts[i].help || []]);
+            '', l, '', `* \`${i}\` > ${acts[i].name || i}:`, '', ...acts[i].help || []]);
     }
     argv._.map(x => {
         if (!find[x]) {
@@ -66,14 +66,12 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'Help',
+    name: 'List help info',
     help: [
-        `    --action   Set as 'help'                     [STRING  / REQUIRED]`,
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1: You can just list help info for actions you need.          |',
-        '    └---------------------------------------------------------------┘',
+        '    > Example of listing all help info:',
+        '    $ prs-atm help',
         '',
-        '    > Example:',
-        '    $ prs-atm --action=help ballot info',
+        '    > Example of listing help info you need:',
+        '    $ prs-atm help ballot info',
     ],
 };

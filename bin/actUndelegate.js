@@ -14,7 +14,6 @@ module.exports = {
     func,
     name: 'Undelegate CPU and/or Network Bandwidth',
     help: [
-        "    --action   Set as 'undelegate'               [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         "    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]",
         '    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]',
@@ -29,7 +28,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example of undelegating CPU and NET:',
-        '    $ prs-atm --action=undelegate \\',
+        '    $ prs-atm undelegate \\',
         '              --account=ABCDE \\',
         '              --receiver=FIJKL \\',
         '              --cpu=12.3456 \\',

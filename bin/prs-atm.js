@@ -4,7 +4,7 @@
 
 const { utilitas } = require('utilitas');
 const table = require('table').table;
-const yargs = require('yargs');
+const argv = require('yargs').help(false).argv;
 const fs = require('fs');
 
 const map = {
@@ -104,8 +104,6 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     return out;
 };
 
-const argv = yargs.default({ action: 'help' }).help(false).argv;
-
 global.chainConfig = {
     rpcApi: argv.rpcapi || undefined,
     chainApi: argv.chainapi || undefined,
@@ -121,14 +119,15 @@ for (let i in argv) {
     }
 };
 
-const actFile = `${__dirname}/act${(argv.action[0] || '').toUpperCase(
-)}${argv.action.slice(1).toLowerCase()}`;
+const command = argv._.shift() || '';
+const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
+)}${command.slice(1).toLowerCase()}`;
 
 (async () => {
     try {
-        utilitas.assert(fs.existsSync(`${actFile}.js`), 'Unknown action.');
+        utilitas.assert(fs.existsSync(`${actFile}.js`), 'Unknown command.');
         const act = require(actFile);
-        utilitas.assert(act && act.func, 'Invalid action.');
+        utilitas.assert(act && act.func, 'Invalid command.');
         if (act.pubkey && act.pvtkey) {
             await unlockKeystore(argv);
         } else if (act.pubkey) {

@@ -28,7 +28,6 @@ module.exports = {
     func,
     name: 'Unlock a Keystore',
     help: [
-        "    --action   Set as 'unlock'                   [STRING  / REQUIRED]",
         '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
@@ -38,7 +37,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=unlock \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm unlock --keystore=keystore.json',
     ],
 };

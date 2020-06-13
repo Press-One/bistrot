@@ -10,11 +10,9 @@ module.exports = {
     func,
     name: 'Check Balance',
     help: [
-        "    --action   Set as 'balance'                  [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',
         '    > Example:',
-        '    $ prs-atm --action=balance \\',
-        '              --account=ABCDE',
+        '    $ prs-atm balance --account=ABCDE',
     ],
 };

@@ -12,7 +12,6 @@ module.exports = {
     func,
     name: 'Cancel a depositing payment request',
     help: [
-        "    --action   Set as 'cancel'                   [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
@@ -24,8 +23,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=cancel \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm cancel --account=ABCDE --keystore=keystore.json',
     ],
 };

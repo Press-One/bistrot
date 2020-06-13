@@ -10,7 +10,6 @@ module.exports = {
     func,
     name: 'Check PRS-chain Information',
     help: [
-        "    --action   Set as 'info'                     [STRING  / REQUIRED]",
         '    ┌---------------------------------------------------------------┐',
         '    | 1. You can use `rpcapi` param to check the specific PRS-node. |',
         '    └---------------------------------------------------------------┘',

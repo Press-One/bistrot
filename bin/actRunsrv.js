@@ -17,11 +17,9 @@ module.exports = {
     func,
     name: 'Generate the `runservice.sh` file',
     help: [
-        "    --action   Set as 'runsrv'                   [STRING  / REQUIRED]",
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
         '',
         '    > Example:',
-        '    $ prs-atm --action=runsrv \\',
-        '              --path=.',
+        '    $ prs-atm runsrv --path=.',
     ],
 };

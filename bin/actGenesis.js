@@ -16,12 +16,10 @@ module.exports = {
     func,
     name: 'Generate the `genesis.json` file',
     help: [
-        "    --action   Set as 'genesis'                  [STRING  / REQUIRED]",
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
         '',
         '    > Example:',
-        '    $ prs-atm --action=genesis \\',
-        '              --path=.',
+        '    $ prs-atm genesis --path=.',
     ],
     render: {
         table: {

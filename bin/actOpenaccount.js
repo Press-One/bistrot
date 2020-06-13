@@ -3,7 +3,7 @@
 const { atm } = require('../index');
 
 const func = async (argv) => {
-    const resp = await atm.openAccount(argv.account, argv.pubkey);
+    const resp = await atm.openAccount(argv.name, argv.pubkey);
     if (!global.chainConfig.json
         && resp && resp.paymentUrl) {
         console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
@@ -16,8 +16,7 @@ module.exports = {
     func,
     name: 'Open an Account',
     help: [
-        "    --action   Set as 'openaccount'              [STRING  / REQUIRED]",
-        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --name     PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
@@ -39,8 +38,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=openaccount \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm openaccount --name=ABCDE --keystore=keystore.json',
     ],
 };

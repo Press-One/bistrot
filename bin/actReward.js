@@ -12,7 +12,6 @@ module.exports = {
     func,
     name: 'Claim Rewards',
     help: [
-        "    --action   Set as 'reward'                   [STRING  / REQUIRED]",
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
@@ -23,8 +22,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm --action=reward \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
+        '    $ prs-atm reward --account=ABCDE --keystore=keystore.json',
     ],
 };
