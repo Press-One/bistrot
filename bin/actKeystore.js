@@ -7,12 +7,8 @@ const func = async (argv) => {
     let repeat = argv.password;
     while (!argv.password || !repeat || argv.password !== repeat) {
         console.log('Input password to encrypt the keystore.');
-        argv.password = readline.question(
-            'New password: ', global.chainConfig.readlineConfig
-        );
-        repeat = readline.question(
-            'Repeat password: ', global.chainConfig.readlineConfig
-        );
+        argv.password = readline.question('New password: ', argv.readlineConf);
+        repeat = readline.question('Repeat password: ', argv.readlineConf);
         if (argv.password !== repeat) {
             console.log('Passwords do not match.');
         }
@@ -22,7 +18,7 @@ const func = async (argv) => {
     );
     if (argv.dump) {
         await etc.dumpFile(argv.dump, JSON.stringify(result), {
-            overwrite: global.chainConfig.overwrite,
+            overwrite: argv.force,
         });
     }
     return result;

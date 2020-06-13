@@ -17,9 +17,7 @@ const func = async (argv, options = {}) => {
     if (options.pubkeyOnly) { return; }
     while (!argv.password) {
         console.log('Input password to decrypt the keystore.');
-        argv.password = readline.question(
-            'Password: ', global.chainConfig.overwrite
-        );
+        argv.password = readline.question('Password: ', argv.readlineConf);
     }
     return wallet.recoverPrivateKey(argv.password, kObj);
 };

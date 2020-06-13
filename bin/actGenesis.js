@@ -6,7 +6,7 @@ const func = async (argv) => {
     const resp = await etc.buildGenesis();
     if (argv.path) {
         await etc.dumpFile(`${argv.path}/genesis.json`, resp, {
-            overwrite: global.chainConfig.overwrite,
+            overwrite: argv.force,
         });
     }
     return JSON.parse(resp);

@@ -4,7 +4,7 @@ const { producer } = require('sushitrain');
 
 const func = async (argv) => {
     const resp = await producer.getAll();
-    if (!global.chainConfig.json) {
+    if (!argv.json) {
         console.log(
             'TOTAL_PRODUCER_VOTE_WEIGHT:', resp.total_producer_vote_weight
         );

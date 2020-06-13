@@ -14,11 +14,10 @@ const getEngind = (skip) => {
         '',
         '* Advanced:',
         '',
-        '    --json     Printing the result as JSON       [BOOLEAN / OPTIONAL]',
-        '    --force    Force overwrite existing file     [BOOLEAN / OPTIONAL]',
-        '    --debug    Enable or disable debug mode      [BOOLEAN / OPTIONAL]',
-        '    --rpcapi   Customize RPC-API endpoint        [STRING  / OPTIONAL]',
-        '    --chainapi Customize Chain-API endpoint      [STRING  / OPTIONAL]',
+        '    --json     Printing the result as JSON       [WITH  OR  WITHOUT ]',
+        '    --force    Force overwrite existing file     [WITH  OR  WITHOUT ]',
+        '    --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]',
+        '    --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Using param `force` will increase the risk of losing data. |',
         '    └---------------------------------------------------------------┘',
@@ -43,7 +42,10 @@ const func = async (argv) => {
         ).replace(/^act/i, '').toLowerCase();
         acts[actName] = require(path.join(__dirname, file));
     });
-    const info = [`${utilitas.which().title} usage: `];
+    const info = [
+        `${utilitas.which().title}`, '',
+        'usage: prs-atm <command> [<args>]'
+    ];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     const find = {};
     for (let i in acts) {

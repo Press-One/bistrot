@@ -8,7 +8,7 @@ const func = async (argv) => {
     );
     if (argv.path) {
         await etc.dumpFile(`${argv.path}/config.ini`, content, {
-            overwrite: global.chainConfig.overwrite,
+            overwrite: argv.force,
         });
     }
     const result = {};

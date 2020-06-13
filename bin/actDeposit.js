@@ -7,7 +7,7 @@ const func = async (argv) => {
     const resp = await atm.deposit(
         argv.pvtkey, argv.account, argv.email, argv.amount, argv.memo
     );
-    if (!global.chainConfig.json && resp && resp.paymentUrl) {
+    if (!argv.json && resp && resp.paymentUrl) {
         console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
     }
     return resp;

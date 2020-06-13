@@ -37,12 +37,14 @@ const verbose = [
 
 const json = ['transaction'];
 
-const toBoolean = (str) => {
-    return { 'true': true, 'false': false }[String(str || '').toLowerCase()];
+const toBoolean = (input) => {
+    const str = String(input || '').toLowerCase();
+    return !utilitas.isUndefined(input) && !str.length
+        || ['true', 'yes', '1'].includes(str);
 };
 
-const toArray = (str) => {
-    const arr = String(str || '').split(/[,;\ ]/);
+const toArray = (input) => {
+    const arr = String(input || '').split(/[,;\ ]/);
     const result = [];
     arr.map(x => { if ((x = x.trim())) { result.push(x); } });
     return result;
@@ -73,7 +75,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
         }
     }
     out = deep ? out : out[0];
-    if (!global.chainConfig.json && options.table) {
+    if (!argv.json && options.table) {
         const data = [];
         if (deep && options.table.columns) {
             data.push(options.table.columns.map(x => {
@@ -99,29 +101,22 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
         out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
-        console.log(global.chainConfig.json ? utilitas.prettyJson(out) : out);
+        console.log(argv.json ? utilitas.prettyJson(out) : out);
     };
     return out;
-};
-
-global.chainConfig = {
-    rpcApi: argv.rpcapi || undefined,
-    chainApi: argv.chainapi || undefined,
-    overwrite: toBoolean(argv.force),
-    json: toBoolean(argv.json),
-    debug: toBoolean(argv.debug),
-    readlineConfig: { hideEchoBack: true, mask: '' },
-};
-
-for (let i in argv) {
-    if (['add', 'remove'].includes(i)) {
-        argv[i] = toArray(argv[i]);
-    }
 };
 
 const command = argv._.shift() || '';
 const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
+['add', 'remove'].map(i => {
+    argv[i] = toArray(argv[i]);
+});
+['force', 'json', 'debug'].map(i => {
+    argv[i] = toBoolean(argv[i]);
+});
+argv.readlineConf = { hideEchoBack: true, mask: '' };
+global.chainConfig = { debug: argv.debug, rpcApi: argv.rpcapi };
 
 (async () => {
     try {

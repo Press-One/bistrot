@@ -7,7 +7,7 @@ const func = async (argv) => {
     const resp = await etc.buildRunservice();
     if (argv.path) {
         await etc.dumpFile(`${argv.path}/${filename}`, resp, {
-            overwrite: global.chainConfig.overwrite, executable: true,
+            overwrite: argv.force, executable: true,
         });
     }
     return { [filename]: resp };

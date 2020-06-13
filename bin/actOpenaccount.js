@@ -4,8 +4,7 @@ const { atm } = require('../index');
 
 const func = async (argv) => {
     const resp = await atm.openAccount(argv.name, argv.pubkey);
-    if (!global.chainConfig.json
-        && resp && resp.paymentUrl) {
+    if (!argv.json && resp && resp.paymentUrl) {
         console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
     }
     return resp;
