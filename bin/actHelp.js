@@ -47,13 +47,18 @@ const func = async (argv) => {
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     const find = {};
     for (let i in acts) {
-        if (argv._.length && argv._.includes(i)) {
-            find[i] = true;
-        } else if ((argv._.length && !argv._.includes(i)) || acts[i].hide) {
-            continue;
-        }
+        if (argv._.length) {
+            let check = false;
+            for (let j of argv._) {
+                if (`${i}${acts[i].name}`.includes(j)) {
+                    check = find[j] = true; break;
+                }
+            }
+            if (!check) { continue; }
+        } else if (acts[i].hide) { continue; }
         Array.prototype.push.apply(info, [
-            '', l, '', `* \`${i}\` > ${acts[i].name || i}:`, '', ...acts[i].help || []]);
+            '', l, '', `* \`${i}\` > ${acts[i].name || i}:`,
+            '', ...acts[i].help || []]);
     }
     argv._.map(x => {
         if (!find[x]) {
@@ -66,12 +71,12 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'List help info',
+    name: 'Get help info',
     help: [
         '    > Example of listing all help info:',
         '    $ prs-atm help',
         '',
-        '    > Example of listing help info you need:',
+        '    > Example of search help info you need:',
         '    $ prs-atm help ballot info',
     ],
 };
