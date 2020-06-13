@@ -1,5 +1,8 @@
 FROM node:alpine
 
-LABEL maintainer="i@leaskh.com"
+LABEL org.opencontainers.image.title=@LeaskH
 
-RUN npm install -g prs-atm
+RUN apk add --no-cache make g++ git python3 \
+    && npm config set user 0 \
+    && npm config set unsafe-perm true \
+    && npm install -g prs-atm
