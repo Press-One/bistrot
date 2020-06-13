@@ -47,7 +47,6 @@
         "peer-id": "^0.13.12",
         "peer-info": "^0.17.5",
         "promisify-es6": "^1.0.3",
-        "prs-utility": "0.0.7",
         "readline-sync": "^1.4.10",
         "request": "^2.88.2",
         "request-promise": "^4.2.5",
