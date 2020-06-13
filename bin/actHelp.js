@@ -1,19 +1,10 @@
 'use strict';
 
+const { utilitas } = require('utilitas');
 const path = require('path');
 const fs = require('fs');
 
 let l = '=====================================================================';
-
-const getVersion = () => {
-    let version = null;
-    try {
-        version = JSON.parse(
-            fs.readFileSync(`${__dirname}/../package.json`)
-        ).version;
-    } catch (e) { }
-    return version;
-};
 
 const getEngind = (skip) => {
     if (!skip) { return []; }
@@ -43,7 +34,6 @@ const getEngind = (skip) => {
 };
 
 const func = async (argv) => {
-    const version = getVersion();
     const acts = {};
     fs.readdirSync(__dirname).filter((file) => {
         return /\.js$/i.test(file) && file.toLowerCase() !== 'prs-atm.js';
@@ -53,7 +43,7 @@ const func = async (argv) => {
         ).replace(/^act/i, '').toLowerCase();
         acts[actName] = require(path.join(__dirname, file));
     });
-    const info = [`PRESS.one ATM ${version ? `(v${version})` : ''} usage:`];
+    const info = [`${utilitas.which().title} usage: `];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     const find = {};
     for (let i in acts) {
