@@ -5,9 +5,9 @@
 const multihashing = require('multihashing');
 const { utilitas } = require('utilitas');
 const cryptoKeys = require('libp2p-crypto/src/keys');
-const encryption = require('./encryption');
+const encryption = require('./encryption.js_');
 // const prsUtility = require('prs-utility');
-const ipfsUtils = require('./ipfsUtils');
+const ipfsUtils = require('./ipfsUtils.js_');
 const libPeerId = require('peer-id');
 const request = require('request-promise');
 const Bitswap = require('ipfs-bitswap');
