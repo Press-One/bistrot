@@ -23,7 +23,7 @@
         "mathjs": "^7.0.1",
         "node-fetch": "^2.6.0",
         "pg": "^8.2.1",
-        "utilitas": "^1989.6.43",
+        "utilitas": "^1989.6.47",
         "ws": "^7.3.0"
     },
     "devDependencies": {}
