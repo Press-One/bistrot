@@ -27,11 +27,6 @@ const os = require('os');
 // const config = require('./config');
 // const pExec = util.promisify(childProcess.exec);
 
-// for (let i in global.chainConfig || {}) {
-//     config[i] = typeof global.chainConfig[i] === 'undefined'
-//         ? config[i] : global.chainConfig[i];
-// }
-
 const ipfsError = 'Error querying IPFS.';
 const hashAlg = 'keccak256';
 const minStorageSlices = 2;
@@ -94,7 +89,7 @@ const ipfsLs = async (cid) => {
 };
 
 const buildIpfsUri = (cid) => {
-    const isArray = utilitas.isArray(cid);
+    const isArray = Array.isArray(cid);
     let cids = isArray ? cid : [cid];
     cids = cids.map(x => { return `ipfs://${x}`; });
     return isArray ? cids : cids[0];
@@ -121,7 +116,7 @@ const add = async (filename, options) => {
 };
 
 const getIpfsCid = (uri) => {
-    const [isArray, result] = [utilitas.isArray(uri), []];
+    const [isArray, result] = [Array.isArray(uri), []];
     (isArray ? uri : [uri]).map(x => {
         const y = String(x || '');
         result.push(/^ipfs:\/\//i.test(y) ? y.replace(/^ipfs:\/\//i, '') : y);
@@ -157,7 +152,7 @@ const ipfsPin = async (uri) => {
     const result = await request(req).promise();
     assert(result
         && result.Pins
-        && result.Pins.length === (utilitas.isArray(uri) ? uri : [url]).length,
+        && result.Pins.length === (Array.isArray(uri) ? uri : [url]).length,
         ipfsError
     );
     return result;
@@ -167,7 +162,7 @@ const verifyFormula = (formula) => {
     assert(formula, 'Invalid formula.');
     assert(formula.hash, 'Invalid hash in formula.');
     assert(formula.hash_alg, 'Invalid hash_alg in formula.');
-    assert(utilitas.isArray(formula.slices)
+    assert(Array.isArray(formula.slices)
         && formula.slices.length, 'Invalid slices in formula.');
 };
 

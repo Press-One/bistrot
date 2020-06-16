@@ -59,7 +59,7 @@ const unlockKeystore = async (options = {}) => {
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
-    const deep = utilitas.isArray(result);
+    const deep = Array.isArray(result);
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
