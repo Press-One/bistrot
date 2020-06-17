@@ -33,6 +33,7 @@
         "yargs": "^15.3.1"
     },
     "devDependencies": {
+        "prs-utility": "0.0.7",
         "request": "^2.88.2",
         "request-promise": "",
         "@nodeutils/defaults-deep": "^1.1.0",
