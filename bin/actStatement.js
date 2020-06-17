@@ -41,15 +41,8 @@ module.exports = {
             config: {
                 singleLine: true,
                 columns: {
-                    0: { alignment: 'right' },
                     1: { alignment: 'right' },
-                    2: { alignment: 'right' },
-                    3: { alignment: 'right' },
-                    4: { alignment: 'right' },
-                    5: { alignment: 'right' },
-                    6: { alignment: 'right' },
                     7: { alignment: 'right' },
-                    8: { alignment: 'right' },
                 },
             },
         },
