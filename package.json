@@ -33,6 +33,8 @@
         "yargs": "^15.3.1"
     },
     "devDependencies": {
+        "request": "^2.88.2",
+        "request-promise": "",
         "@nodeutils/defaults-deep": "^1.1.0",
         "aes-js": "^3.1.2",
         "bignumber.js": "^9.0.0",
