@@ -60,6 +60,7 @@ const unlockKeystore = async (options = {}) => {
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
     const deep = Array.isArray(result);
+    options = utilitas.isFunction(options) ? options(argv) : options;
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
@@ -113,7 +114,7 @@ const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 ['add', 'remove'].map(i => {
     argv[i] = toArray(argv[i]);
 });
-['force', 'json', 'debug'].map(i => {
+['detail', 'force', 'json', 'debug'].map(i => {
     argv[i] = toBoolean(argv[i]);
 });
 argv.readlineConf = { hideEchoBack: true, mask: '' };
