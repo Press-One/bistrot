@@ -14,10 +14,11 @@ module.exports = {
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
-        "    --type     Can be 'INCOME', 'EXPENSE', 'ALL' [STRING  / OPTIONAL]",
+        "    --type     Transaction Type, default 'ALL'.  [STRING  / OPTIONAL]",
         '    --count    Page size                         [NUMBER  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        "    | 1. Default `type` is 'ALL'.                                   |",
+        "    | 1. All available transaction `type`s:                         | ",
+        '    |    ' + statement.transactionTypes.join(', ') + '. | ',
         "    | 2. Default `count` is 100.                                    |",
         "    | 3. Set `time` as `timestamp` of last item to get next page.   |",
         '    └---------------------------------------------------------------┘',
