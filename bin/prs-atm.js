@@ -67,7 +67,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
         out[i] = {};
         for (let j in result[i]) {
             // if (!global.chainConfig.debug && verbose.includes(i)) {
-            if (verbose.includes(j)) {
+            if (!options.renderAll && verbose.includes(j)) {
                 continue;
             } else if (json.includes(j)) {
                 result[i][j] = JSON.stringify(result[i][j]);
