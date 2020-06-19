@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.12
+prs-atm v2.0.13
 
 usage: prs-atm <command> [<args>]
 
@@ -82,6 +82,18 @@ usage: prs-atm <command> [<args>]
 
     > Example of checking account's voting information:
     $ prs-atm ballot --account=ABCDE
+
+=====================================================================
+
+* `block` > Get block by block id or block number:
+
+    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--json` to get complete block data.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm block --id=26621512 --json
 
 =====================================================================
 
@@ -196,6 +208,9 @@ usage: prs-atm <command> [<args>]
 
     > Example of listing all help info:
     $ prs-atm help
+
+    > Example of listing help info for current command:
+    $ prs-atm withdraw --help
 
     > Example of searching help info:
     $ prs-atm help ballot info
@@ -333,6 +348,18 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `trx` > Get transaction by id:
+
+    --id       Transaction id                    [STRING  / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Use option `--json` to get complete transaction data.      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm trx --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --json
+
+=====================================================================
+
 * `undelegate` > Undelegate CPU and/or Network Bandwidth:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -447,6 +474,7 @@ usage: prs-atm <command> [<args>]
 
 * Advanced:
 
+    --help     List help info for current cmd    [WITH  OR  WITHOUT ]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
