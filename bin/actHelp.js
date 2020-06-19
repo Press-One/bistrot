@@ -14,6 +14,7 @@ const getEnding = (skip) => {
         '',
         '* Advanced:',
         '',
+        '    --help     List help info for current cmd    [WITH  OR  WITHOUT ]',
         '    --json     Printing the result as JSON       [WITH  OR  WITHOUT ]',
         '    --force    Force overwrite existing file     [WITH  OR  WITHOUT ]',
         '    --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]',
@@ -33,9 +34,12 @@ const getEnding = (skip) => {
 };
 
 const func = async (argv) => {
+    argv.command = String(argv.command || '').toLowerCase();
     const acts = {};
     fs.readdirSync(__dirname).filter((file) => {
-        return /\.js$/i.test(file) && file.toLowerCase() !== 'prs-atm.js';
+        file = file.toLowerCase();
+        if (argv.command) { return `act${argv.command}.js` === file; }
+        return /\.js$/i.test(file) && file !== 'prs-atm.js';
     }).forEach((file) => {
         let actName = file.replace(
             /^(.*)\.js$/, '$1'
@@ -47,7 +51,7 @@ const func = async (argv) => {
         'usage: prs-atm <command> [<args>]'
     ];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
-    const find = {};
+    let find = {};
     for (let i in acts) {
         if (argv._.length) {
             let check = false;
@@ -62,6 +66,7 @@ const func = async (argv) => {
             '', l, '', `* \`${i}\` > ${acts[i].name || i}:`,
             '', ...acts[i].help || []]);
     }
+    if (argv.command) { argv._ = [argv.command]; find = acts; }
     argv._.map(x => {
         if (!find[x]) {
             info.push('', l, '', `* \`${x}\` > command not found.`);
@@ -77,6 +82,9 @@ module.exports = {
     help: [
         '    > Example of listing all help info:',
         '    $ prs-atm help',
+        '',
+        '    > Example of listing help info for current command:',
+        '    $ prs-atm withdraw --help',
         '',
         '    > Example of searching help info:',
         '    $ prs-atm help ballot info',

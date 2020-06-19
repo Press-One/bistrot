@@ -9,9 +9,12 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'Get transaction by ID',
+    name: 'Get transaction by id',
     help: [
-        '    --id       Transaction ID                    [STRING  / REQUIRED]',
+        '    --id       Transaction id                    [STRING  / REQUIRED]',
+        '    ┌---------------------------------------------------------------┐',
+        "    | 1. Use option `--json` to get complete transaction data.      |",
+        '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
         '    $ prs-atm trx --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --json',

@@ -107,16 +107,17 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     return out;
 };
 
-const command = String(argv._.shift() || 'help');
-const errNotFound = `Command not found: \`${command}\`.`;
-const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
-)}${command.slice(1).toLowerCase()}`;
 ['add', 'remove'].map(i => {
     argv[i] = toArray(argv[i]);
 });
-['detail', 'force', 'json', 'debug'].map(i => {
+['help', 'detail', 'force', 'json', 'debug'].map(i => {
     argv[i] = toBoolean(argv[i]);
 });
+let command = String(argv._.shift() || 'help');
+if (argv.help) { argv.command = command; command = 'help'; }
+const errNotFound = `Command not found: \`${command}\`.`;
+const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
+)}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 global.chainConfig = { debug: argv.debug, rpcApi: argv.rpcapi };
 
