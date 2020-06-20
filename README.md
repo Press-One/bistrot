@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.14
+prs-atm v2.0.15
 
 usage: prs-atm <command> [<args>]
 
@@ -449,7 +449,7 @@ usage: prs-atm <command> [<args>]
     | 2. One of `mx-num` or `mx-id` must be provided.               |
     | 3. Execute the `auth` command before the first withdrawal.    |
     | 4. You can only withdraw to the original MX payment accounts. |
-    | 5. The amount greater than `200000` requires manual review.   |
+    | 5. Sum greater than 200000 in last 24H requires manual review.| 
     | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
     | 7. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
