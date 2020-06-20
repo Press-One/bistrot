@@ -4,7 +4,7 @@ const { utilitas } = require('utilitas');
 
 const func = (argv) => {
     const data = utilitas.which();
-    return {
+    return data && {
         package_name: data.name,
         description: data.description,
         package_version: `v${data.version}`,
