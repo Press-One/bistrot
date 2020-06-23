@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.16
+prs-atm v2.0.17
 
 usage: prs-atm <command> [<args>]
 
