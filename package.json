@@ -52,7 +52,7 @@
         "mime-types": "^2.1.27",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
-        "peer-id": "^0.13.12",
+        "peer-id": "^0.13.13",
         "peer-info": "^0.17.5",
         "promisify-es6": "^1.0.3",
         "rimraf": "^3.0.2"

@@ -1,6 +1,6 @@
 # PRS-ATM
 
-A CLI client for [PRESS.one](https://press.one/).
+A CLI tool for financing on [PRESS.one](https://press.one/) .
 
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.17
+prs-atm v2.0.18
 
 usage: prs-atm <command> [<args>]
 
