@@ -2,11 +2,14 @@
 
 const { sushitrain } = require('sushitrain');
 
+const maxTrxLength = 288;
+
 const func = async (argv) => {
     let resp = await sushitrain.getBlockByNumOrId(argv.id);
     if (!argv.json) {
-        resp.transactions = JSON.stringify(resp.transactions).substr(0, 288)
-            + '...';
+        const trx = JSON.stringify(resp.transactions);
+        resp.transactions = trx.substr(0, maxTrxLength)
+            + (trx.length > maxTrxLength ? '...' : '');
     }
     return resp;
 };
