@@ -1,6 +1,8 @@
 'use strict';
 
 const { finance, producer } = require('sushitrain');
+const { utilitas } = require('utilitas');
+const colors = require('colors/safe');
 const mathjs = require('mathjs');
 
 const func = async (argv) => {
@@ -11,11 +13,18 @@ const func = async (argv) => {
         );
     }
     const total = mathjs.bignumber(resp.total_producer_vote_weight);
+    let priority = 0;
     resp.rows.map(x => {
+        x.priority = ++priority;
         x.total_votes = x.total_votes.replace(/\.\d*$/, '');
         x.scaled_votes = finance.bigFormat(
             mathjs.divide(mathjs.bignumber(x.total_votes), total)
         );
+        if (!argv.json && x.priority <= 21) {
+            for (let i in x) {
+                try { x[i] = colors.green(x[i]); } catch (err) { }
+            }
+        }
     });
     return resp.rows;
 };
@@ -30,6 +39,7 @@ module.exports = {
     render: {
         table: {
             columns: [
+                'priority',
                 'owner',
                 'total_votes',
                 'scaled_votes',
@@ -41,10 +51,11 @@ module.exports = {
             config: {
                 singleLine: true,
                 columns: {
-                    1: { alignment: 'right' },
+                    0: { alignment: 'right' },
                     2: { alignment: 'right' },
-                    4: { alignment: 'right' },
+                    3: { alignment: 'right' },
                     5: { alignment: 'right' },
+                    6: { alignment: 'right' },
                 },
             },
         },
