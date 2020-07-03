@@ -1,7 +1,7 @@
 {
     "name": "prs-atm",
     "description": "A CLI tool for financing on PRESS.one.",
-    "version": "2.0.19",
+    "version": "2.0.20",
     "private": false,
     "homepage": "https://github.com/Press-One/prs-atm",
     "main": "index.js",
