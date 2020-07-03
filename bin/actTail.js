@@ -7,9 +7,18 @@ const { utilitas } = require('utilitas');
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };
-    console.log((
-        argv.json ? utilitas.prettyJson(content) : JSON.stringify(content)
-    ) + '\n');
+    const compactJson = JSON.stringify(content);
+    if (argv.grep && !/^\/|\/$/.test(argv.grep)) {
+        if (compactJson.toLowerCase().indexOf(argv.grep.toLowerCase()) === -1) {
+            return;
+        }
+    } else if (argv.grep && /^\/|\/$/.test(argv.grep)) {
+        const regExp = new RegExp(argv.grep.replace(/^\/|\/$/g, ''), 'i');
+        if (!regExp.test(compactJson)) { return; }
+    }
+    console.log(
+        (argv.json ? utilitas.prettyJson(content) : compactJson) + '\n'
+    );
 };
 
 const func = async (argv) => {
@@ -31,6 +40,7 @@ module.exports = {
     name: 'Display the last block / transaction of the chain',
     help: [
         '    --blocknum Initial block num                 [NUMBER  / OPTIONAL]',
+        '    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]',
         '    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]',
         '    --detail   Show socket channel status        [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
@@ -39,6 +49,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm tail --blocknum=1000000 --trxonly --json',
+        '    $ prs-atm tail --blocknum=999999 --trxonly --json',
+        '    $ prs-atm tail --blocknum=999999 --trxonly --json --grep=PIP:2001',
     ],
 };
