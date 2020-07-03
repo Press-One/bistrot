@@ -28,11 +28,11 @@
         "eosjs-keygen": "^1.3.2",
         "keythereum-pure-js": "^1.1.8",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.6.93",
+        "sushitrain": "^1989.6.99",
         "table": "^5.4.6",
-        "utilitas": "^1989.6.50",
+        "utilitas": "^1989.6.56",
         "uuid": "^3.4.0",
-        "yargs": "^15.3.1"
+        "yargs": "^15.4.0"
     },
     "devDependencies": {
         "@nodeutils/defaults-deep": "^1.1.0",

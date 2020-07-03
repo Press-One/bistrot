@@ -348,6 +348,21 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `tail` > Display the last block / transaction of the chain:
+
+    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
+    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
+    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. Follow the latest block / trx while `blocknum` is missing. |
+    | 2. Follow trxes instead of blocks while `trxonly` is set.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm tail --blocknum=1000000 --trxonly --json
+
+=====================================================================
+
 * `trx` > Get transaction by id:
 
     --id       Transaction id                    [STRING  / REQUIRED]
@@ -489,5 +504,4 @@ usage: prs-atm <command> [<args>]
     be insecure. In most cases you don't need to provide passwords or
     private keys in parameters. The program will request sensitive 
     information in a secure way.
-
 ```
