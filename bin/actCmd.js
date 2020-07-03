@@ -43,4 +43,11 @@ module.exports = {
         '    > Example of searching commands:',
         '    $ prs-atm cmd ballot info',
     ],
+    render: {
+        renderAll: true,
+        table: {
+            KeyValue: true,
+            config: { columns: { 0: { width: 13 }, 1: { width: 60 } } },
+        },
+    },
 };

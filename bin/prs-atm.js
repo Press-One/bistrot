@@ -59,14 +59,16 @@ const unlockKeystore = async (options = {}) => {
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
+    if (utilitas.isUndefined(result)) { return; }
     const deep = Array.isArray(result);
+    options = utilitas.isFunction(options) ? options(argv) : options;
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
         out[i] = {};
         for (let j in result[i]) {
             // if (!global.chainConfig.debug && verbose.includes(i)) {
-            if (verbose.includes(j)) {
+            if (!options.renderAll && verbose.includes(j)) {
                 continue;
             } else if (json.includes(j)) {
                 result[i][j] = JSON.stringify(result[i][j]);
@@ -106,16 +108,17 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     return out;
 };
 
-const command = String(argv._.shift() || 'help');
-const errNotFound = `Command not found: \`${command}\`.`;
-const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
-)}${command.slice(1).toLowerCase()}`;
 ['add', 'remove'].map(i => {
     argv[i] = toArray(argv[i]);
 });
-['force', 'json', 'debug'].map(i => {
+['trxonly', 'help', 'detail', 'force', 'json', 'debug'].map(i => {
     argv[i] = toBoolean(argv[i]);
 });
+let command = String(argv._.shift() || 'help');
+if (argv.help) { argv.command = command; command = 'help'; }
+const errNotFound = `Command not found: \`${command}\`.`;
+const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
+)}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 global.chainConfig = { debug: argv.debug, rpcApi: argv.rpcapi };
 

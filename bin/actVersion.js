@@ -1,10 +1,12 @@
 'use strict';
 
 const { utilitas } = require('utilitas');
+const path = require('path');
 
 const func = (argv) => {
-    const data = utilitas.which();
-    return {
+    const pkg = path.join(path.dirname(__filename), '..', 'package.json');
+    const data = utilitas.which(pkg);
+    return data && {
         package_name: data.name,
         description: data.description,
         package_version: `v${data.version}`,

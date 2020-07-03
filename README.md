@@ -31,7 +31,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.10
+prs-atm v2.0.20
 
 usage: prs-atm <command> [<args>]
 
@@ -82,6 +82,18 @@ usage: prs-atm <command> [<args>]
 
     > Example of checking account's voting information:
     $ prs-atm ballot --account=ABCDE
+
+=====================================================================
+
+* `block` > Get block by block id or block number:
+
+    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--json` to get complete block data.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm block --id=26621512 --json
 
 =====================================================================
 
@@ -196,6 +208,9 @@ usage: prs-atm <command> [<args>]
 
     > Example of listing all help info:
     $ prs-atm help
+
+    > Example of listing help info for current command:
+    $ prs-atm withdraw --help
 
     > Example of searching help info:
     $ prs-atm help ballot info
@@ -317,17 +332,46 @@ usage: prs-atm <command> [<args>]
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --time     Timestamp for paging              [STRING  / OPTIONAL]
-    --type     Transaction Type, default 'ALL'.  [STRING  / OPTIONAL]
+    --type     Transaction Type (default 'ALL')  [STRING  / OPTIONAL]
     --count    Page size                         [NUMBER  / OPTIONAL]
+    --detail   Including failed transactions     [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
     | 1. All available transaction `type`s:                         | 
     |    INCOME, EXPENSE, TRANSFER, DEPOSIT, WITHDRAW, REWARD, ALL. | 
-    | 2. Default `count` is 100.                                    |
-    | 3. Set `time` as `timestamp` of last item to get next page.   |
+    | 2. Default `count` is `100`.                                  |
+    | 3. Default `detail` is `false`.                               |
+    | 4. Set `time` as `timestamp` of last item to get next page.   |
     └---------------------------------------------------------------┘
 
     > Example:
     $ prs-atm statement --account=ABCDE
+
+=====================================================================
+
+* `tail` > Display the last block / transaction of the chain:
+
+    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
+    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
+    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. Follow the latest block / trx while `blocknum` is missing. |
+    | 2. Follow trxes instead of blocks while `trxonly` is set.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm tail --blocknum=1000000 --trxonly --json
+
+=====================================================================
+
+* `trx` > Get transaction by id:
+
+    --id       Transaction id                    [STRING  / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Use option `--json` to get complete transaction data.      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm trx --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --json
 
 =====================================================================
 
@@ -420,8 +464,9 @@ usage: prs-atm <command> [<args>]
     | 2. One of `mx-num` or `mx-id` must be provided.               |
     | 3. Execute the `auth` command before the first withdrawal.    |
     | 4. You can only withdraw to the original MX payment accounts. |
-    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 6. Finish, `cancel` or timeout a current trx before request.  |
+    | 5. Sum greater than 200000 in last 24H requires manual review.| 
+    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 7. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
 
     > Example of withdrawing to Mixin number (with Mixin user name):
@@ -444,6 +489,7 @@ usage: prs-atm <command> [<args>]
 
 * Advanced:
 
+    --help     List help info for current cmd    [WITH  OR  WITHOUT ]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
@@ -458,5 +504,4 @@ usage: prs-atm <command> [<args>]
     be insecure. In most cases you don't need to provide passwords or
     private keys in parameters. The program will request sensitive 
     information in a secure way.
-
 ```
