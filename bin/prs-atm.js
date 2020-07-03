@@ -59,6 +59,7 @@ const unlockKeystore = async (options = {}) => {
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
+    if (utilitas.isUndefined(result)) { return; }
     const deep = Array.isArray(result);
     options = utilitas.isFunction(options) ? options(argv) : options;
     let out = [];
@@ -110,7 +111,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
 ['add', 'remove'].map(i => {
     argv[i] = toArray(argv[i]);
 });
-['help', 'detail', 'force', 'json', 'debug'].map(i => {
+['trxonly', 'help', 'detail', 'force', 'json', 'debug'].map(i => {
     argv[i] = toBoolean(argv[i]);
 });
 let command = String(argv._.shift() || 'help');
