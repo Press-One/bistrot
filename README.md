@@ -351,6 +351,7 @@ usage: prs-atm <command> [<args>]
 * `tail` > Display the last block / transaction of the chain:
 
     --blocknum Initial block num                 [NUMBER  / OPTIONAL]
+    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
     --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
     --detail   Show socket channel status        [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
@@ -359,7 +360,8 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm tail --blocknum=1000000 --trxonly --json
+    $ prs-atm tail --blocknum=999999 --trxonly --json
+    $ prs-atm tail --blocknum=999999 --trxonly --json --grep=PIP:2001
 
 =====================================================================
 
