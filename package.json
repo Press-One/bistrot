@@ -26,13 +26,13 @@
     "dependencies": {
         "colors": "^1.4.0",
         "eosjs-keygen": "^1.3.2",
-        "keythereum-pure-js": "^1.1.8",
+        "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.6.99",
+        "sushitrain": "^1989.6.100",
         "table": "^5.4.6",
         "utilitas": "^1989.6.56",
         "uuid": "^3.4.0",
-        "yargs": "^15.4.0"
+        "yargs": "^15.4.1"
     },
     "devDependencies": {
         "@nodeutils/defaults-deep": "^1.1.0",
@@ -43,10 +43,10 @@
         "ipfs": "^0.43.0",
         "ipfs-bitswap": "^0.29.1",
         "ipfs-repo": "^2.0.1",
-        "libp2p": "^0.27.7",
+        "libp2p": "^0.27.9",
         "libp2p-kad-dht": "^0.18.7",
         "libp2p-mplex": "^0.9.5",
-        "libp2p-secio": "^0.12.4",
+        "libp2p-secio": "^0.12.6",
         "libp2p-tcp": "^0.14.5",
         "mathjs": "^6.6.5",
         "mime-types": "^2.1.27",
