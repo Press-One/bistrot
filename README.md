@@ -5,7 +5,8 @@ A CLI client for [PRESS.one](https://press.one/) .
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
-$ npm install -g prs-atm
+# npm config set unsafe-perm true
+# npm install -g prs-atm
 $ prs-atm help
 ```
 
@@ -31,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.21
+prs-atm v2.0.22
 
 usage: prs-atm <command> [<args>]
 
