@@ -20,6 +20,7 @@ const getEnding = (skip) => {
         '    --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]',
         '    --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]',
         '    --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]',
+        '    --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Using param `force` will increase the risk of losing data. |',
         '    └---------------------------------------------------------------┘',
