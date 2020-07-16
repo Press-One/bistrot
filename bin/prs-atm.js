@@ -111,7 +111,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
 ['add', 'remove'].map(i => {
     argv[i] = toArray(argv[i]);
 });
-['trxonly', 'help', 'detail', 'force', 'json', 'debug'].map(i => {
+['trxonly', 'help', 'detail', 'force', 'json', 'spdTest', 'debug'].map(i => {
     argv[i] = toBoolean(argv[i]);
 });
 let command = String(argv._.shift() || 'help');
@@ -120,7 +120,9 @@ const errNotFound = `Command not found: \`${command}\`.`;
 const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
-global.chainConfig = { debug: argv.debug, rpcApi: argv.rpcapi };
+global.chainConfig = {
+    debug: argv.debug, rpcApi: argv.rpcapi, speedTest: argv.spdTest,
+};
 
 (async () => {
     try {
