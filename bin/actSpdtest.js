@@ -15,12 +15,8 @@ module.exports = {
     help: [
         '    > Example of evaluating all pre-configured nodes:',
         '    $ prs-atm spdtest',
-
-        '    > Example of evaluating a designated nodes:',
-        '    $ prs-atm spdtest --rpcapi=http://',
         '',
-        '    > Example of exporting info as json:',
-        '    $ prs-atm version --json',
-
+        '    > Example of evaluating a designated node:',
+        '    $ prs-atm spdtest --rpcapi=http://51.68.201.144:8888',
     ],
 };
