@@ -121,7 +121,10 @@ const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 global.chainConfig = {
-    debug: argv.debug, rpcApi: argv.rpcapi, speedTest: argv.spdTest,
+    debug: argv.debug,
+    rpcApi: argv.rpcapi,
+    chainApi: argv.chainapi,
+    speedTest: argv.spdtest,
 };
 
 (async () => {
