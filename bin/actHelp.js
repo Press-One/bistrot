@@ -17,6 +17,7 @@ const getEnding = (skip) => {
         '    --help     List help info for current cmd    [WITH  OR  WITHOUT ]',
         '    --json     Printing the result as JSON       [WITH  OR  WITHOUT ]',
         '    --force    Force overwrite existing file     [WITH  OR  WITHOUT ]',
+        '    --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]',
         '    --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]',
         '    --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
