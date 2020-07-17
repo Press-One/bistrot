@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.22
+prs-atm v2.0.23
 
 usage: prs-atm <command> [<args>]
 
@@ -329,6 +329,18 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `spdtest` > Evaluate the connection speed of server nodes:
+
+    > Example of evaluating all pre-configured nodes:
+    $ prs-atm spdtest
+
+    > Example of evaluating a designated node:
+    $ prs-atm spdtest \
+              --rpcapi=http://51.68.201.144:8888 \
+              --chainapi=https://prs-bp3.press.one
+
+=====================================================================
+
 * `statement` > Check Statement:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -495,8 +507,10 @@ usage: prs-atm <command> [<args>]
     --help     List help info for current cmd    [WITH  OR  WITHOUT ]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
+    --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
+    --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
     └---------------------------------------------------------------┘
