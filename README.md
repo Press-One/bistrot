@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.23
+prs-atm v2.0.24
 
 usage: prs-atm <command> [<args>]
 
@@ -331,6 +331,10 @@ usage: prs-atm <command> [<args>]
 
 * `spdtest` > Evaluate the connection speed of server nodes:
 
+    ┌---------------------------------------------------------------┐
+    | 1. `spdtest` feature depends on the system `ping` command.    |
+    └---------------------------------------------------------------┘
+
     > Example of evaluating all pre-configured nodes:
     $ prs-atm spdtest
 
@@ -478,10 +482,19 @@ usage: prs-atm <command> [<args>]
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. One of `mx-num` or `mx-id` must be provided.               |
     | 3. Execute the `auth` command before the first withdrawal.    |
-    | 4. You can only withdraw to the original MX payment accounts. |
-    | 5. Sum greater than 200000 in last 24H requires manual review.| 
-    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 7. Finish, `cancel` or timeout a current trx before request.  |
+    | 4. Sum greater than 200000 in last 24H requires manual review.| 
+    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 6. Finish, `cancel` or timeout a current trx before request.  |
+    └---------------------------------------------------------------┘
+    ┌- WARNING -----------------------------------------------------┐
+    | ▲ If you withdraw via `mx-num`, for your security, you can    |
+    |   only withdraw to your original Mixin payment accounts.      |
+    | ▲ If you withdraw via `mx-id`, you can withdraw to whatever   |
+    |   Mixin account you want.                                     |
+    | ▲ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
+    |   Wrong accounts will cause property loss.                    |
+    | ▲ We are not responsible for any loss of property due to the  |
+    |   mistake of withdraw accounts.                               |
     └---------------------------------------------------------------┘
 
     > Example of withdrawing to Mixin number (with Mixin user name):
@@ -513,6 +526,7 @@ usage: prs-atm <command> [<args>]
     --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
+    | 2. `spdtest` feature depends on the system `ping` command.    |
     └---------------------------------------------------------------┘
 
 * Security:
