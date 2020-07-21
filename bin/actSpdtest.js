@@ -17,6 +17,10 @@ module.exports = {
     func,
     name: 'Evaluate the connection speed of server nodes',
     help: [
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. `spdtest` feature depends on the system `ping` command.    |',
+        '    └---------------------------------------------------------------┘',
+        '',
         '    > Example of evaluating all pre-configured nodes:',
         '    $ prs-atm spdtest',
         '',
