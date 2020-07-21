@@ -23,6 +23,7 @@ const getEnding = (skip) => {
         '    --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Using param `force` will increase the risk of losing data. |',
+        '    | 2. `spdtest` feature depends on the system `ping` command.    |',
         '    └---------------------------------------------------------------┘',
         '',
         '* Security:',
