@@ -196,6 +196,28 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `evolve` > Evolve legacy PRESS.one accounts and Flying Pub topics:
+
+    --address  Legacy account, topic address     [STRING  / REQUIRED]
+    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore`(recommend) or `pubkey,pvtkey` must be provided. |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm evolve \
+              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `genesis` > Generate the `genesis.json` file:
 
     --path     Folder location for saving file   [STRING  / OPTIONAL]
@@ -487,13 +509,13 @@ usage: prs-atm <command> [<args>]
     | 6. Finish, `cancel` or timeout a current trx before request.  |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
-    | ▲ If you withdraw via `mx-num`, for your security, you can    |
+    | ⚠ If you withdraw via `mx-num`, for your security, you can    |
     |   only withdraw to your original Mixin payment accounts.      |
-    | ▲ If you withdraw via `mx-id`, you can withdraw to whatever   |
+    | ⚠ If you withdraw via `mx-id`, you can withdraw to whatever   |
     |   Mixin account you want.                                     |
-    | ▲ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
+    | ⚠ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
     |   Wrong accounts will cause property loss.                    |
-    | ▲ We are not responsible for any loss of property due to the  |
+    | ⚠ We are not responsible for any loss of property due to the  |
     |   mistake of withdraw accounts.                               |
     └---------------------------------------------------------------┘
 
