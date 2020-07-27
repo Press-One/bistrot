@@ -20,6 +20,9 @@ const func = async (argv) => {
         result.unstak_available_in = `${Math.round(avlIn * 100) / 100} HR `;
         result.unstak_request_time = reqTime.toUTCString();
         result.timestamp = now.toUTCString();
+        if (avlIn < 0) {
+            result.refund_available = true;
+        }
     }
     return result;
 };
