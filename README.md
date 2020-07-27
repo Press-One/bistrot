@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.24
+prs-atm v2.0.25
 
 usage: prs-atm <command> [<args>]
 
@@ -305,6 +305,22 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm producers
+
+=====================================================================
+
+* `refund` > Transfer the PRS in the refund to the balance:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 2. Applicable when REFUND_AVAILABLE shows in balance output.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm refund --account=ABCDE --keystore=keystore.json
 
 =====================================================================
 
