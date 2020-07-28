@@ -1,11 +1,12 @@
 # PRS-ATM
 
-A CLI tool for financing on [PRESS.one](https://press.one/) .
+A CLI client for [PRESS.one](https://press.one/) .
 
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
-$ npm install -g prs-atm
+# npm config set unsafe-perm true
+# npm install -g prs-atm
 $ prs-atm help
 ```
 
@@ -31,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.21
+prs-atm v2.0.25
 
 usage: prs-atm <command> [<args>]
 
@@ -195,6 +196,28 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `evolve` > Evolve legacy PRESS.one accounts and Flying Pub topics:
+
+    --address  Legacy account, topic address     [STRING  / REQUIRED]
+    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore`(recommend) or `pubkey,pvtkey` must be provided. |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm evolve \
+              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `genesis` > Generate the `genesis.json` file:
 
     --path     Folder location for saving file   [STRING  / OPTIONAL]
@@ -285,6 +308,22 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `refund` > Transfer the PRS in the refund to the balance:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 2. Applicable when REFUND_AVAILABLE shows in balance output.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm refund --account=ABCDE --keystore=keystore.json
+
+=====================================================================
+
 * `regproducer` > Register as a Producer:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -325,6 +364,22 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm runsrv --path=.
+
+=====================================================================
+
+* `spdtest` > Evaluate the connection speed of server nodes:
+
+    ┌---------------------------------------------------------------┐
+    | 1. `spdtest` feature depends on the system `ping` command.    |
+    └---------------------------------------------------------------┘
+
+    > Example of evaluating all pre-configured nodes:
+    $ prs-atm spdtest
+
+    > Example of evaluating a designated node:
+    $ prs-atm spdtest \
+              --rpcapi=http://51.68.201.144:8888 \
+              --chainapi=https://prs-bp3.press.one
 
 =====================================================================
 
@@ -465,10 +520,19 @@ usage: prs-atm <command> [<args>]
     | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 2. One of `mx-num` or `mx-id` must be provided.               |
     | 3. Execute the `auth` command before the first withdrawal.    |
-    | 4. You can only withdraw to the original MX payment accounts. |
-    | 5. Sum greater than 200000 in last 24H requires manual review.| 
-    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 7. Finish, `cancel` or timeout a current trx before request.  |
+    | 4. Sum greater than 200000 in last 24H requires manual review.| 
+    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 6. Finish, `cancel` or timeout a current trx before request.  |
+    └---------------------------------------------------------------┘
+    ┌- WARNING -----------------------------------------------------┐
+    | ⚠ If you withdraw via `mx-num`, for your security, you can    |
+    |   only withdraw to your original Mixin payment accounts.      |
+    | ⚠ If you withdraw via `mx-id`, you can withdraw to whatever   |
+    |   Mixin account you want.                                     |
+    | ⚠ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
+    |   Wrong accounts will cause property loss.                    |
+    | ⚠ We are not responsible for any loss of property due to the  |
+    |   mistake of withdraw accounts.                               |
     └---------------------------------------------------------------┘
 
     > Example of withdrawing to Mixin number (with Mixin user name):
@@ -494,10 +558,13 @@ usage: prs-atm <command> [<args>]
     --help     List help info for current cmd    [WITH  OR  WITHOUT ]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
+    --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
+    --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
+    | 2. `spdtest` feature depends on the system `ping` command.    |
     └---------------------------------------------------------------┘
 
 * Security:

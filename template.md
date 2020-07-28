@@ -1,11 +1,12 @@
 # PRS-ATM
 
-A CLI tool for financing on [PRESS.one](https://press.one/) .
+A CLI client for [PRESS.one](https://press.one/) .
 
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
-$ npm install -g prs-atm
+# npm config set unsafe-perm true
+# npm install -g prs-atm
 $ prs-atm help
 ```
 
