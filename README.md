@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.25
+prs-atm v2.0.27
 
 usage: prs-atm <command> [<args>]
 
@@ -560,11 +560,13 @@ usage: prs-atm <command> [<args>]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
     --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
+    --secret   Show sensitive info in debug logs [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
     --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
     | 2. `spdtest` feature depends on the system `ping` command.    |
+    | 3. WARNING: `secret` option may cause private key leaks.      |
     └---------------------------------------------------------------┘
 
 * Security:
