@@ -50,7 +50,7 @@
         "request": "^2.88.2",
         "request-promise": "^4.2.6",
         "rimraf": "^3.0.2",
-        "sushitrain": "^1989.6.109",
+        "sushitrain": "^1989.6.110",
         "table": "^5.4.6",
         "utilitas": "^1989.6.64",
         "uuid": "^3.4.0",
