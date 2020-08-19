@@ -1,6 +1,6 @@
 'use strict';
 
-const mission = require('../lib/yjpMission');
+const mission = require('../lib/yjpDaemon');
 
 const func = async (argv) => {
     await mission.up(argv.account, argv.pubkey, argv.pvtkey);
