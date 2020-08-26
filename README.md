@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.27
+prs-atm v2.0.28
 
 usage: prs-atm <command> [<args>]
 
@@ -98,6 +98,27 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `buyram` > Buy RAM:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    └---------------------------------------------------------------┘
+
+    > Example of delegating CPU and NET:
+    $ prs-atm buyram \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --ram=12.3456 \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `cancel` > Cancel a depositing payment request:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -142,6 +163,22 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `defi` > Launch a DeFi daemon:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm defi --account=ABCDE --keystore=keystore.json
+
+=====================================================================
+
 * `delegate` > Delegate CPU and/or Network Bandwidth:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -151,7 +188,6 @@ usage: prs-atm <command> [<args>]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Default `receiver` is current `account` (pvtkey holder).   |
     | 2. One of `cpu` or `net` must be provided.                    |
@@ -441,7 +477,6 @@ usage: prs-atm <command> [<args>]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Default `receiver` is current `account` (pvtkey holder).   |
     | 2. One of `cpu` or `net` must be provided.                    |
