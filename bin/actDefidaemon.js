@@ -10,7 +10,7 @@ module.exports = {
     pubkey: true,
     pvtkey: true,
     func,
-    name: 'Launch a DeFi daemon',
+    name: 'Launch a DeFi Daemon (beta)',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
@@ -22,6 +22,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm defi --account=ABCDE --keystore=keystore.json',
+        '    $ prs-atm defidaemon --account=ABCDE --keystore=keystore.json',
     ],
 };

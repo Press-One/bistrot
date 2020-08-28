@@ -8,7 +8,7 @@ const func = async (argv) => {
         const resp = await ballot.queryByOwner(argv.account);
         result = resp ? [resp] : [];
     } else {
-        result = await ballot.queryAll();
+        result = await ballot.getAll();
     }
     for (let item of result) {
         item.producers = item.producers.join('\n');
