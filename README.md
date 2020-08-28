@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.28
+prs-atm v2.0.29
 
 usage: prs-atm <command> [<args>]
 
@@ -163,7 +163,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `defi` > Launch a DeFi daemon:
+* `deficheck` > Check Coin Prices on DeFi (beta):
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -175,7 +175,23 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm defi --account=ABCDE --keystore=keystore.json
+    $ prs-atm deficheck --account=ABCDE --keystore=keystore.json
+
+=====================================================================
+
+* `defidaemon` > Launch a DeFi Daemon (beta):
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm defidaemon --account=ABCDE --keystore=keystore.json
 
 =====================================================================
 
