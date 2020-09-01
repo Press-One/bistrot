@@ -1,22 +1,41 @@
 'use strict';
 
+const colors = require('colors/safe');
 const defi = require('../lib/defi.js');
+
+const formatPrice = (price, maxAccuracy) => {
+    while (price.split('.')[1].length < maxAccuracy) { price += '0'; }
+    return price;
+};
 
 const func = async (argv) => {
     let resp = await defi.checkPrice(argv.account, argv.pubkey, argv.pvtkey);
     if (!argv.json) {
-        let maxAccuracy = 0;
+        const tweakResp = [];
+        let mxAcc = 0;
+        for (let i in resp) {
+            mxAcc = resp[i].accuracy > mxAcc ? resp[i].accuracy : mxAcc;
+        }
         for (let i in resp) {
             resp[i].time = resp[i].time.toISOString();
-            maxAccuracy = resp[i].accuracy > maxAccuracy
-                ? resp[i].accuracy : maxAccuracy;
-        }
-        for (let i in resp) {
-            while (resp[i].accuracy < maxAccuracy) {
-                resp[i].price += '0';
-                resp[i].accuracy++;
+            resp[i].price = formatPrice(resp[i].price, mxAcc);
+            resp[i].acc = resp[i].accuracy;
+            resp[i].provider = resp[i].submitter = 'PRESSone';
+            for (let j in resp[i]) {
+                if (j === 'prices') { continue; }
+                try { resp[i][j] = colors.green(resp[i][j]); } catch (err) { }
+            }
+            tweakResp.push(resp[i]);
+            for (let j in resp[i].prices) {
+                resp[i].prices[j].time = resp[i].prices[j].time.toISOString();
+                resp[i].prices[j].price = formatPrice(
+                    resp[i].prices[j].price, mxAcc
+                );
+                resp[i].prices[j].acc = resp[i].prices[j].accuracy;
+                tweakResp.push(resp[i].prices[j]);
             }
         }
+        resp = tweakResp;
     }
     return resp;
 };
@@ -45,12 +64,19 @@ module.exports = {
                 'currency',
                 'base',
                 'price',
+                'acc',
                 'provider',
                 'submitter',
                 'time',
                 'transaction_id',
             ],
-            config: { columns: { 2: { alignment: 'right' } } },
+            config: {
+                singleLine: true,
+                columns: {
+                    2: { alignment: 'right' },
+                    3: { alignment: 'right' }
+                }
+            },
         },
     },
 };
