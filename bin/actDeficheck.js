@@ -1,7 +1,7 @@
 'use strict';
 
+const { broker } = require('sushitrain');
 const colors = require('colors/safe');
-const defi = require('../lib/defi.js');
 
 const formatPrice = (price, maxAccuracy) => {
     while (price.split('.')[1].length < maxAccuracy) { price += '0'; }
@@ -9,7 +9,9 @@ const formatPrice = (price, maxAccuracy) => {
 };
 
 const func = async (argv) => {
-    let resp = await defi.checkPrice(argv.account, argv.pubkey, argv.pvtkey);
+    let resp = await broker.checkPrice(
+        argv.account, argv.pubkey, argv.pvtkey
+    );
     if (!argv.json) {
         const tweakResp = [];
         let mxAcc = 0;
