@@ -1,6 +1,6 @@
 'use strict';
 
-global.chainConfig.serviceDefiMine = true;
+global.chainConfig.serviceDefiPricesSubmit = true;
 
 const { defi } = require('sushitrain');
 
