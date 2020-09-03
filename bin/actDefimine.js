@@ -1,16 +1,18 @@
 'use strict';
 
-const defi = require('../lib/defi.js');
+global.chainConfig.serviceDefiMine = true;
+
+const { defi } = require('sushitrain');
 
 const func = async (argv) => {
-    await defi.watch(argv.account, argv.pubkey, argv.pvtkey);
+    await defi.initSubmit(argv.account, argv.pubkey, argv.pvtkey);
 };
 
 module.exports = {
     pubkey: true,
     pvtkey: true,
     func,
-    name: 'Launch a DeFi Daemon (beta)',
+    name: 'Launch a DeFi Miner Daemon (beta)',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
@@ -22,6 +24,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm defidaemon --account=ABCDE --keystore=keystore.json',
+        '    $ prs-atm defimine --account=ABCDE --keystore=keystore.json',
     ],
 };

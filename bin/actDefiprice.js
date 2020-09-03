@@ -1,6 +1,6 @@
 'use strict';
 
-const { broker } = require('sushitrain');
+const { defi } = require('sushitrain');
 const colors = require('colors/safe');
 
 const formatPrice = (price, maxAccuracy) => {
@@ -9,9 +9,7 @@ const formatPrice = (price, maxAccuracy) => {
 };
 
 const func = async (argv) => {
-    let resp = await broker.checkPrice(
-        argv.account, argv.pubkey, argv.pvtkey
-    );
+    let resp = await defi.checkPrice(argv.account, argv.pubkey, argv.pvtkey);
     if (!argv.json) {
         const tweakResp = [];
         let mxAcc = 0;
@@ -58,7 +56,7 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm deficheck --account=ABCDE --keystore=keystore.json',
+        '    $ prs-atm defiprice --account=ABCDE --keystore=keystore.json',
     ],
     render: {
         table: {
