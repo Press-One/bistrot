@@ -32,7 +32,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.30
+prs-atm v2.0.31
 
 usage: prs-atm <command> [<args>]
 
@@ -110,7 +110,7 @@ usage: prs-atm <command> [<args>]
     | 1. Default `receiver` is current `account` (pvtkey holder).   |
     └---------------------------------------------------------------┘
 
-    > Example of delegating CPU and NET:
+    > Example of purchasing RAM:
     $ prs-atm buyram \
               --account=ABCDE \
               --receiver=FIJKL \
@@ -163,7 +163,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `deficheck` > Check Coin Prices on DeFi (beta):
+* `defimine` > Launch a DeFi Miner Daemon (beta):
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -175,11 +175,11 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm deficheck --account=ABCDE --keystore=keystore.json
+    $ prs-atm defimine --account=ABCDE --keystore=keystore.json
 
 =====================================================================
 
-* `defidaemon` > Launch a DeFi Daemon (beta):
+* `defiprice` > Check Coin Prices on DeFi (beta):
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -191,7 +191,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm defidaemon --account=ABCDE --keystore=keystore.json
+    $ prs-atm defiprice --account=ABCDE --keystore=keystore.json
 
 =====================================================================
 
