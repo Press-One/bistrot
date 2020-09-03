@@ -24,7 +24,7 @@ module.exports = {
         "    | 1. Default `receiver` is current `account` (pvtkey holder).   |",
         '    └---------------------------------------------------------------┘',
         '',
-        '    > Example of delegating CPU and NET:',
+        '    > Example of purchasing CPU:',
         '    $ prs-atm buyram \\',
         '              --account=ABCDE \\',
         '              --receiver=FIJKL \\',
