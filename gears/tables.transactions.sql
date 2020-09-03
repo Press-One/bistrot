@@ -1,9 +1,7 @@
-create database sushitrain;
-
 \c sushitrain;
 
 create table transactions (
-    transactions_trx_id VARCHAR primary key,
+    transactions_trx_id VARCHAR PRIMARY KEY,
     transactions_trx_transaction_actions_account VARCHAR,
     transactions_trx_transaction_actions_name VARCHAR,
     transactions_trx_transaction_actions_data_id VARCHAR,
@@ -12,20 +10,20 @@ create table transactions (
     transactions_trx_transaction_actions_data_type VARCHAR,
     transactions_trx_transaction_actions_data__from_user VARCHAR,
     transactions_trx_transaction_actions_data__to_user VARCHAR,
-    transactions_trx_transaction_actions_data__amount_quantity__amt bigint,
+    transactions_trx_transaction_actions_data__amount_quantity__amt BIGINT,
     transactions_trx_transaction_actions_data__amount_quantity__cur VARCHAR,
-    transactions_trx_transaction_actions_data__dp_wd_req__id bigint,
-    transactions_trx_transaction_actions_data__sync_auth__result boolean,
+    transactions_trx_transaction_actions_data__dp_wd_req__id BIGINT,
+    transactions_trx_transaction_actions_data__sync_auth__result BOOLEAN,
     transactions_trx_transaction_actions_data_mixin_trace_id VARCHAR,
-    transactions_trx_transaction_actions_data_meta jsonb,
-    transactions_trx_transaction_actions_data_data jsonb,
+    transactions_trx_transaction_actions_data_meta JSONB,
+    transactions_trx_transaction_actions_data_data JSONB,
     transactions_trx_transaction_actions_data_data_topic VARCHAR,
-    block_num bigint,
+    block_num BIGINT,
     block_id VARCHAR,
-    timestamp timestamptz,
+    timestamp TIMESTAMPTZ,
     producer VARCHAR,
     previous VARCHAR,
-    block jsonb
+    block JSONB
 );
 
 CREATE INDEX transactions_trx_transaction_actions_account                    ON transactions(transactions_trx_transaction_actions_account);
