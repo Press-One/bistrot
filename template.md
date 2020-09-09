@@ -2,6 +2,8 @@
 
 A CLI client for [PRESS.one](https://press.one/) .
 
+![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg "defichart")
+
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
