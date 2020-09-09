@@ -13,7 +13,7 @@ const init = (currency) => {
     screen = blessed.screen();
     grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
     pricesLine = grid.set(0, 0, 10, 12, contrib.line, {
-        label: `${currency}-USDT`,
+        label: `${currency.toUpperCase()}-USDT`,
         style: { line: 'yellow', text: 'green', baseline: 'black' },
         xLabelPadding: 3,
         wholeNumbersOnly: false,
