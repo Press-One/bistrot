@@ -15,19 +15,15 @@ const init = (currency) => {
     pricesLine = grid.set(0, 0, 10, 12, contrib.line, {
         label: `${currency.toUpperCase()}-USDT`,
         style: { line: 'yellow', text: 'green', baseline: 'black' },
-        xLabelPadding: 3,
         wholeNumbersOnly: false,
-        xPadding: 5,
     });
     historyLog = grid.set(10, 0, 2, 8, contrib.log, {
         label: 'Price History',
         fg: 'green',
         scrollOnInput: true,
-        baseLimit: 10,
     });
     currentMarkdown = grid.set(10, 8, 2, 4, contrib.markdown, {
         label: 'Current Price',
-        // fg: 'yellow',
     });
     screen.key(['escape', 'q', 'C-c'], function(ch, key) {
         return process.exit(0);
