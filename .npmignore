@@ -1,6 +1,7 @@
-.history
 .github
+.history
 debug
+Dockerfile
 gears
 package-lock.json
 template.md
