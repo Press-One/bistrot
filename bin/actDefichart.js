@@ -9,11 +9,11 @@ const lpTime = (time) => { return time > 9 ? String(time) : `0${time}`; };
 
 let [screen, grid, pricesLine, historyLog, currentMarkdown, resp] = [];
 
-const init = () => {
+const init = (currency) => {
     screen = blessed.screen();
     grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
     pricesLine = grid.set(0, 0, 10, 12, contrib.line, {
-        label: 'BTC-USDT',
+        label: `${currency}-USDT`,
         style: { line: 'yellow', text: 'green', baseline: 'black' },
         xLabelPadding: 3,
         wholeNumbersOnly: false,
@@ -119,7 +119,7 @@ const func = async (argv) => {
     if (argv.json) {
         return await defi.queryPricesHistory(argv.currency, argv.period);
     }
-    init();
+    init(argv.currency);
     await defi.pricesHistoryDaemon(
         argv.currency, argv.period, argv.interval, (err, res) => {
             if (err) { return logError(err); }
