@@ -106,27 +106,31 @@ screen.key(['escape', 'q', 'C-c'], function(ch, key) {
 });
 
 const func = async (argv) => {
-    await defi.pricesHistoryDaemon('btc', '24h', (err, resp) => {
-        if (err) { return logError(err); }
-        renderAll(resp);
-    }, { silent: true });
+    argv.currency = argv.currency || 'BTC';
+    argv.period = argv.period || '24h';
+    argv.interval = argv.interval || null;
+    await defi.pricesHistoryDaemon(
+        argv.currency, argv.period, argv.interval, (err, resp) => {
+            if (err) { return logError(err); }
+            renderAll(resp);
+        }, { silent: true }
+    );
 };
 
 module.exports = {
     func,
-    name: 'Check Coin Prices on DeFi (beta)',
+    name: 'Show Price Chart on DeFi (beta)',
     help: [
-        // '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        // '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
-        // '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
-        // '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
-        // '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        // '    ┌---------------------------------------------------------------┐',
-        // '    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |',
-        // '    └---------------------------------------------------------------┘',
-        // '',
-        // '    > Example:',
-        // '    $ prs-atm defiprice --account=ABCDE --keystore=keystore.json',
+        '    --currency Cryptocurrency type               [STRING  / OPTIONAL]',
+        '    --period   Price period                      [STRING  / OPTIONAL]',
+        '    --interval Update interval in seconds        [INTEGER / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. Currency available: `BTC`(default), `ETH`, `EOS`, `PRS`.   |',
+        '    | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |',
+        '    └---------------------------------------------------------------┘',
+        '',
+        '    > Example:',
+        '    $ prs-atm defichart --currency=BTC --period=24h',
     ],
     render: {},
 };
