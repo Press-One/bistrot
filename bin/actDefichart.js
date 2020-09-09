@@ -113,10 +113,13 @@ const processData = (resp) => {
 };
 
 const func = async (argv) => {
-    init();
     argv.currency = argv.currency || 'BTC';
     argv.period = argv.period || '24h';
     argv.interval = argv.interval || null;
+    if (argv.json) {
+        return await defi.queryPricesHistory(argv.currency, argv.period);
+    }
+    init();
     await defi.pricesHistoryDaemon(
         argv.currency, argv.period, argv.interval, (err, res) => {
             if (err) { return logError(err); }
