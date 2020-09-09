@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.33
+prs-atm v2.0.34
 
 usage: prs-atm <command> [<args>]
 
@@ -173,6 +173,7 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. Currency available: `BTC`(default), `ETH`, `EOS`, `PRS`.   |
     | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |
+    | 3. Please use option `--json` to get raw price history.       |
     └---------------------------------------------------------------┘
 
     > Example:
