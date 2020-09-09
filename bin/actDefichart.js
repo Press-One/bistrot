@@ -27,7 +27,7 @@ const init = (currency) => {
     });
     currentMarkdown = grid.set(10, 8, 2, 4, contrib.markdown, {
         label: 'Current Price',
-        fg: 'yellow',
+        // fg: 'yellow',
     });
     screen.key(['escape', 'q', 'C-c'], function(ch, key) {
         return process.exit(0);
@@ -81,7 +81,7 @@ const renderCurrentMarkdown = (resp) => {
     const [item, arrLog] = [resp[resp.length - 1], []];
     logItem.map(k => {
         if (k === 'time') { item[k] = localTime(item[k]); }
-        arrLog.push(`${k}: ${item[k]}`);
+        arrLog.push(`\`${k}\`: ${item[k]}`);
     });
     currentMarkdown.setMarkdown(arrLog.join('\n'));
     currentMarkdown.screen.render();
