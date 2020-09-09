@@ -139,6 +139,7 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Currency available: `BTC`(default), `ETH`, `EOS`, `PRS`.   |',
         '    | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |',
+        '    | 3. Please use option `--json` to get raw price history.       |',
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
