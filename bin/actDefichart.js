@@ -5,29 +5,40 @@ const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 
 const logItem = ['time', 'currency', 'base', 'price'];
-const screen = blessed.screen();
-const grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
 const lpTime = (time) => { return time > 9 ? String(time) : `0${time}`; };
 
-const pricesLine = grid.set(0, 0, 10, 12, contrib.line, {
-    label: 'BTC-USDT',
-    style: { line: 'yellow', text: 'green', baseline: 'black' },
-    xLabelPadding: 3,
-    wholeNumbersOnly: false,
-    xPadding: 5,
-});
+let [screen, grid, pricesLine, historyLog, currentMarkdown, resp] = [];
 
-const historyLog = grid.set(10, 0, 2, 8, contrib.log, {
-    label: 'Price History',
-    fg: 'green',
-    scrollOnInput: true,
-    baseLimit: 10,
-});
-
-const currentMarkdown = grid.set(10, 8, 2, 4, contrib.markdown, {
-    label: 'Current Price',
-    fg: 'yellow',
-});
+const init = () => {
+    screen = blessed.screen();
+    grid = new contrib.grid({ rows: 12, cols: 12, screen: screen });
+    pricesLine = grid.set(0, 0, 10, 12, contrib.line, {
+        label: 'BTC-USDT',
+        style: { line: 'yellow', text: 'green', baseline: 'black' },
+        xLabelPadding: 3,
+        wholeNumbersOnly: false,
+        xPadding: 5,
+    });
+    historyLog = grid.set(10, 0, 2, 8, contrib.log, {
+        label: 'Price History',
+        fg: 'green',
+        scrollOnInput: true,
+        baseLimit: 10,
+    });
+    currentMarkdown = grid.set(10, 8, 2, 4, contrib.markdown, {
+        label: 'Current Price',
+        fg: 'yellow',
+    });
+    screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+        return process.exit(0);
+    });
+    screen.on('resize', function(e) {
+        pricesLine.emit('attach');
+        historyLog.emit('attach');
+        currentMarkdown.emit('attach');
+        renderAll();
+    });
+};
 
 const localTime = (time) => {
     return new Date(time).toString().replace(/\ \(.*\)$/, '');
@@ -76,7 +87,7 @@ const renderCurrentMarkdown = (resp) => {
     currentMarkdown.screen.render();
 };
 
-const renderAll = (resp) => {
+const renderAll = () => {
     renderPricesLine(resp);
     renderHistoryLog(resp);
     renderCurrentMarkdown(resp);
@@ -101,18 +112,16 @@ const processData = (resp) => {
     return [data, maxY, minY];
 };
 
-screen.key(['escape', 'q', 'C-c'], function(ch, key) {
-    return process.exit(0);
-});
-
 const func = async (argv) => {
+    init();
     argv.currency = argv.currency || 'BTC';
     argv.period = argv.period || '24h';
     argv.interval = argv.interval || null;
     await defi.pricesHistoryDaemon(
-        argv.currency, argv.period, argv.interval, (err, resp) => {
+        argv.currency, argv.period, argv.interval, (err, res) => {
             if (err) { return logError(err); }
-            renderAll(resp);
+            resp = res;
+            renderAll();
         }, { silent: true }
     );
 };
@@ -132,5 +141,4 @@ module.exports = {
         '    > Example:',
         '    $ prs-atm defichart --currency=BTC --period=24h',
     ],
-    render: {},
 };

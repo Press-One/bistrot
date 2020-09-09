@@ -2,6 +2,8 @@
 
 A CLI client for [PRESS.one](https://press.one/) .
 
+![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
+
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
@@ -160,6 +162,21 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm config --account=ABCD --path=. --keystore=keystore.json
+
+=====================================================================
+
+* `defichart` > Show Price Chart on DeFi (beta):
+
+    --currency Cryptocurrency type               [STRING  / OPTIONAL]
+    --period   Price period                      [STRING  / OPTIONAL]
+    --interval Update interval in seconds        [INTEGER / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Currency available: `BTC`(default), `ETH`, `EOS`, `PRS`.   |
+    | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm defichart --currency=BTC --period=24h
 
 =====================================================================
 
