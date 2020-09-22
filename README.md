@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.0.42
+prs-atm v2.0.43
 
 usage: prs-atm <command> [<args>]
 
@@ -58,6 +58,8 @@ usage: prs-atm <command> [<args>]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    | 2. You need `owner key permission` to execute this command.   |
+    | 3. Use `auth` to reauthorize after you update your keys.      |
     └---------------------------------------------------------------┘
     ┌- DANGER ------------------------------------------------------┐
     | ⚠ Incorrect use will result in `loss of permissions`.         |
@@ -79,12 +81,14 @@ usage: prs-atm <command> [<args>]
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pubkey   Active public key (NOT owner key) [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    | 2. You have to execute this cmd to activate your new account. |
-    | 3. This command only needs to be executed one time.           |
+    | 1. Remember to authorize your ACTIVE KEY ONLY, NOT OWNER KEY. |
+    | 2. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    | 3. You have to execute this cmd to activate your new account. |
+    | 4. Normally, this command only needs to be executed 1 time.   |
+    | 4. Reauthorize after you update your active or owner keys.    |
     └---------------------------------------------------------------┘
 
     > Example:
@@ -414,6 +418,8 @@ usage: prs-atm <command> [<args>]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    | 2. You need `owner key permission` to execute this command.   |
+    | 3. Use `auth` to reauthorize after you update your keys.      |
     └---------------------------------------------------------------┘
     ┌- DANGER ------------------------------------------------------┐
     | ⚠ Incorrect use will result in `loss of permissions`.         |
