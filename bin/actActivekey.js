@@ -21,6 +21,8 @@ module.exports = {
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |',
+        '    | 2. You need `owner key permission` to execute this command.   |',
+        '    | 3. Use `auth` to reauthorize after you update your keys.      |',
         '    └---------------------------------------------------------------┘',
         '    ┌- DANGER ------------------------------------------------------┐',
         '    | ⚠ Incorrect use will result in `loss of permissions`.         |',
