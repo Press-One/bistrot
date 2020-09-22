@@ -49,6 +49,31 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `activekey` > Update Active Key:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --npubkey  New `active` public key           [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    └---------------------------------------------------------------┘
+    ┌- DANGER ------------------------------------------------------┐
+    | ⚠ Incorrect use will result in `loss of permissions`.         |
+    | ⚠ `DO NOT` do this unless you know what you are doing.        |
+    | ⚠ We are not responsible for any loss of permissions due to   |
+    |   the mistake of updating keys.                               |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm activekey \
+              --account=ABCDE \
+              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `auth` > Update Authorization:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -325,6 +350,15 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `keys` > Check Account Keys:
+
+    --name     PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm keys --name=ABCDE
+
+=====================================================================
+
 * `keystore` > Create a new Keystore / Import keys to a new Keystore:
 
     --password Use to encrypt the keystore       [STRING  / OPTIONAL]
@@ -368,6 +402,31 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm openaccount --name=ABCDE --keystore=keystore.json
+
+=====================================================================
+
+* `ownerkey` > Update Owner Key:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --npubkey  New `owner` public key            [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
+    └---------------------------------------------------------------┘
+    ┌- DANGER ------------------------------------------------------┐
+    | ⚠ Incorrect use will result in `loss of permissions`.         |
+    | ⚠ `DO NOT` do this unless you know what you are doing.        |
+    | ⚠ We are not responsible for any loss of permissions due to   |
+    |   the mistake of updating keys.                               |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ownerkey \
+              --account=ABCDE \
+              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --keystore=keystore.json
 
 =====================================================================
 
