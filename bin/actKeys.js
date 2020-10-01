@@ -3,7 +3,7 @@
 const { account } = require('sushitrain');
 
 const func = async (argv) => {
-    const resp = await account.getByName(argv.name);
+    const resp = await account.getByName(argv.account);
     const result = [];
     for (let i of resp && resp.permissions ? resp.permissions : []) {
         for (let j of i.required_auth.keys || []) {
@@ -20,10 +20,10 @@ module.exports = {
     func,
     name: 'Check Account Keys',
     help: [
-        '    --name     PRESS.one account                 [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',
         '    > Example:',
-        '    $ prs-atm keys --name=ABCDE',
+        '    $ prs-atm keys --account=ABCDE',
     ],
     render: {
         table: {
