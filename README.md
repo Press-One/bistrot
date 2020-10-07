@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```
-prs-atm v2.1.3
+prs-atm v2.1.4
 
 usage: prs-atm <command> [<args>]
 
@@ -356,10 +356,10 @@ usage: prs-atm <command> [<args>]
 
 * `keys` > Check Account Keys:
 
-    --name     PRESS.one account                 [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm keys --name=ABCDE
+    $ prs-atm keys --account=ABCDE
 
 =====================================================================
 
