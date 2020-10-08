@@ -3,9 +3,9 @@
 const { utilitas } = require('utilitas');
 const path = require('path');
 
-const func = (argv) => {
+const func = async (argv) => {
     const pkg = path.join(path.dirname(__filename), '..', 'package.json');
-    const data = utilitas.which(pkg);
+    const data = await utilitas.which(pkg);
     return data && {
         package_name: data.name,
         description: data.description,
@@ -16,7 +16,6 @@ const func = (argv) => {
         author: data.author,
         license: data.license,
     };
-    return data;
 };
 
 module.exports = {
