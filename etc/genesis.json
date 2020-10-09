@@ -1,6 +1,6 @@
 {
-  "initial_timestamp": "2020-01-08T12:00:00.000",
-  "initial_key": "EOS8HF7JkMBc9TxvZwGGLxugPX66ACNa71TYpeuG1VQD2UWbHtiHN",
+  "initial_timestamp": "2020-09-26T12:00:00.000",
+  "initial_key": "EOS4z25YT8Bcp9hWZn8x7aG27B2YthAnntCpcnzGG3igqmNbA2AWi",
   "initial_configuration": {
     "base_per_transaction_net_usage": 100,
     "base_per_transaction_cpu_usage": 500,
@@ -26,4 +26,3 @@
 
   "initial_chain_id": "0000000000000000000000000000000000000000000000000000000000000000"
 }
-
