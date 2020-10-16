@@ -2,8 +2,7 @@
 
 global.chainConfig.serviceStateHistoryPlugin = true;
 
-const { sushitrain, pacman } = require('sushitrain');
-const { utilitas } = require('utilitas');
+const { sushitrain, pacman, utilitas } = require('sushitrain');
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };

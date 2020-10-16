@@ -1,6 +1,6 @@
 'use strict';
 
-const { etc } = require('../index');
+const { etc } = require('../');
 
 const func = async (argv) => {
     const content = await etc.buildConfig(

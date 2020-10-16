@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas } = require('utilitas');
+const { utilitas } = require('sushitrain');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');

@@ -1,7 +1,7 @@
 'use strict';
 
-const { statement } = require('../index');
-const { utilitas } = require('utilitas');
+const { statement } = require('../');
+const { utilitas } = require('sushitrain');
 const colors = require('colors/safe');
 
 const func = async (argv) => {

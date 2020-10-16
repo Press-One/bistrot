@@ -1,6 +1,6 @@
 'use strict';
 
-const { chain } = require('../index');
+const { chain } = require('../');
 
 const func = async (argv) => {
     const resp = await chain.accountEvolution(
