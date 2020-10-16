@@ -3,8 +3,9 @@
 const path = require('path');
 const fs = require('fs');
 
-const libPath = path.join(__dirname, 'lib');
+module.exports = require('utilitas');
 
+const libPath = path.join(__dirname, 'lib');
 fs.readdirSync(libPath).filter((file) => {
     return /\.js$/i.test(file)
         && file.indexOf('.') !== 0
