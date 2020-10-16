@@ -1,7 +1,6 @@
 'use strict';
 
 const { finance, producer } = require('sushitrain');
-const { utilitas } = require('utilitas');
 const colors = require('colors/safe');
 const mathjs = require('mathjs');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const { ballot } = require('../index');
+const { ballot } = require('../');
 
 const func = async (argv) => {
     let result = null;

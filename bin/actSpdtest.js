@@ -4,7 +4,7 @@ global.chainConfig.speedTest = true;
 global.chainConfig.debug = true;
 
 const { sushitrain } = require('sushitrain');
-const { helper } = require('../index');
+const { helper } = require('../');
 
 const func = async (argv) => {
     console.log('Evaluate RPC API nodes:');

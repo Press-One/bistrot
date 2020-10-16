@@ -1,6 +1,6 @@
 'use strict';
 
-const { defi } = require('../index');
+const { defi } = require('../');
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 

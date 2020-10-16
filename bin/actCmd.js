@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas } = require('utilitas');
+const { utilitas } = require('sushitrain');
 const path = require('path');
 const fs = require('fs');
 
