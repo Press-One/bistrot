@@ -1,7 +1,6 @@
 'use strict';
 
-const { defi } = require('sushitrain');
-const colors = require('colors/safe');
+const { defi, colors } = require('sushitrain');
 
 const formatPrice = (price, maxAccuracy) => {
     while (price.split('.')[1].length < maxAccuracy) { price += '0'; }
