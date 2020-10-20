@@ -1,7 +1,6 @@
 'use strict';
 
-const { finance, producer } = require('sushitrain');
-const colors = require('colors/safe');
+const { finance, producer, colors } = require('sushitrain');
 const mathjs = require('mathjs');
 
 const func = async (argv) => {
