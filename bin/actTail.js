@@ -1,7 +1,5 @@
 'use strict';
 
-global.chainConfig.serviceStateHistoryPlugin = true;
-
 const { sushitrain, pacman, utilitas } = require('sushitrain');
 
 const rawRender = (content, argv) => {
@@ -21,6 +19,7 @@ const rawRender = (content, argv) => {
 };
 
 const func = async (argv) => {
+    Object.assign(global.chainConfig, { serviceStateHistoryPlugin: true });
     if (!(argv.blocknum = parseInt(argv.blocknum))) {
         const chainInfo = await sushitrain.getInfo();
         utilitas.assert(chainInfo && chainInfo.last_irreversible_block_num,

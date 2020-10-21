@@ -1,10 +1,9 @@
 'use strict';
 
-global.chainConfig.serviceDefiPricesSubmit = true;
-
 const { defi } = require('sushitrain');
 
 const func = async (argv) => {
+    Object.assign(global.chainConfig, { serviceDefiPricesSubmit: true });
     await defi.initSubmit(argv.account, argv.pubkey, argv.pvtkey);
 };
 
