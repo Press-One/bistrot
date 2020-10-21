@@ -1,12 +1,10 @@
 'use strict';
 
-global.chainConfig.speedTest = true;
-global.chainConfig.debug = true;
-
 const { sushitrain } = require('sushitrain');
 const { helper } = require('../');
 
 const func = async (argv) => {
+    Object.assign(global.chainConfig, { speedTest: true, debug: true });
     console.log('Evaluate RPC API nodes:');
     await sushitrain.getRpcUrl();
     console.log('\nEvaluate Chain API nodes:');
