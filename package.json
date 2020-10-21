@@ -30,7 +30,7 @@
         "keythereum-pure-js": "^1.1.9",
         "prs-utility": "^0.1.0",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.7.14",
+        "sushitrain": "^1989.7.17",
         "table": "^5.4.6",
         "yargs": "^15.4.1"
     },
