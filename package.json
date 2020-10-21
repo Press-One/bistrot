@@ -8,6 +8,9 @@
     "bin": {
         "prs-atm": "./bin/prs-atm.js"
     },
+    "engines": {
+        "node": ">=10.x"
+    },
     "scripts": {
         "start": "node index.js",
         "debug": "node --inspect index.js",
