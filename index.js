@@ -1,9 +1,15 @@
 'use strict';
 
+const utilitas = require('utilitas');
 const path = require('path');
 const fs = require('fs');
 
-module.exports = require('utilitas');
+const lib = (options = {}) => {
+    utilitas.mergeAtoB(options, global.chainConfig = global.chainConfig || {});
+    return lib;
+};
+
+Object.assign(lib, utilitas);
 
 const libPath = path.join(__dirname, 'lib');
 fs.readdirSync(libPath).filter((file) => {
@@ -11,6 +17,7 @@ fs.readdirSync(libPath).filter((file) => {
         && file.indexOf('.') !== 0
         && file.toLowerCase() !== 'config.js';
 }).forEach((file) => {
-    module.exports[file.replace(/^(.*)\.js$/, '$1')]
-        = require(path.join(libPath, file));
+    lib[file.replace(/^(.*)\.js$/, '$1')] = require(path.join(libPath, file));
 });
+
+module.exports = lib;
