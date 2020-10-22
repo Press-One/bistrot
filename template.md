@@ -7,8 +7,8 @@ A CLI client for [PRESS.one](https://press.one/) .
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
 ```
-# npm config set unsafe-perm true
-# npm install -g prs-atm
+$ sudo npm config set unsafe-perm true
+$ sudo npm install -g prs-atm
 $ prs-atm help
 ```
 
