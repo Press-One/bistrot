@@ -8,7 +8,10 @@
     "scripts": {
         "start": "node index.js",
         "debug": "node --inspect --trace-warnings debug.js",
-        "prepublishOnly": "npm version patch && npx ncu -u && npm install && ( git commit -am 'update dependencies' || true ) && git pull && git push"
+        "test": "node --inspect --trace-warnings test.js",
+        "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
+        "gitsync": "git pull && git push",
+        "prepublishOnly": "npm version patch && npm run updep && npm run gitsync"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
