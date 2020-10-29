@@ -17,7 +17,7 @@
         "test": "node --inspect --trace-warnings test.js",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
-        "prepublishOnly": "npm version patch && npm run updep && npm run readme && npm run gitsync",
+        "prepublishOnly": "npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-hub": "docker build --no-cache . -t pressone/prs-atm && docker push pressone/prs-atm",
         "docker-build-cn": "docker build --no-cache . -t dockerhub.qingcloud.com/pressone/prs-atm && docker push dockerhub.qingcloud.com/pressone/prs-atm",
