@@ -13,12 +13,15 @@
     },
     "scripts": {
         "start": "node index.js",
-        "debug": "node --inspect index.js",
-        "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md",
+        "debug": "node --inspect --trace-warnings debug.js",
+        "test": "node --inspect --trace-warnings test.js",
+        "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
+        "gitsync": "git pull && git push",
+        "prepublishOnly": "npm version patch && npm run updep && npm run readme && npm run gitsync",
+        "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-hub": "docker build --no-cache . -t pressone/prs-atm && docker push pressone/prs-atm",
         "docker-build-cn": "docker build --no-cache . -t dockerhub.qingcloud.com/pressone/prs-atm && docker push dockerhub.qingcloud.com/pressone/prs-atm",
-        "docker-build": "npm run docker-build-hub && npm run docker-build-cn",
-        "prepublishOnly": "npm version patch && npm update && npm run readme && ( git commit -am 'npm update' || true ) && git pull && git push"
+        "docker-build": "npm run docker-build-hub && npm run docker-build-cn"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
