@@ -6,7 +6,7 @@
     "homepage": "https://github.com/Press-One/prs-atm",
     "main": "index.js",
     "bin": {
-        "prs-atm": "./bin/prs-atm.js"
+        "prs-atm": "bin/prs-atm.js"
     },
     "engines": {
         "node": ">=10.x"
@@ -33,29 +33,29 @@
         "keythereum-pure-js": "^1.1.9",
         "prs-utility": "^0.1.0",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.7.19",
-        "table": "^5.4.6",
-        "yargs": "^15.4.1"
+        "sushitrain": "^1989.7.22",
+        "table": "^6.0.3",
+        "yargs": "^16.1.0"
     },
     "devDependencies": {
         "@nodeutils/defaults-deep": "^1.1.0",
         "aes-js": "^3.1.2",
         "bignumber.js": "^9.0.1",
-        "cids": "^0.8.3",
+        "cids": "^1.0.2",
         "eosjs-ecc": "^4.0.7",
-        "ipfs": "^0.43.0",
-        "ipfs-bitswap": "^0.29.1",
-        "ipfs-repo": "^2.0.1",
-        "libp2p": "^0.27.9",
-        "libp2p-kad-dht": "^0.18.7",
-        "libp2p-mplex": "^0.9.5",
-        "libp2p-secio": "^0.12.6",
-        "libp2p-tcp": "^0.14.6",
-        "mathjs": "^6.6.5",
+        "ipfs": "^0.51.0",
+        "ipfs-bitswap": "^3.0.0",
+        "ipfs-repo": "^6.0.3",
+        "libp2p": "^0.29.2",
+        "libp2p-kad-dht": "^0.20.1",
+        "libp2p-mplex": "^0.10.1",
+        "libp2p-secio": "^0.13.1",
+        "libp2p-tcp": "^0.15.1",
+        "mathjs": "^7.5.1",
         "mime-types": "^2.1.27",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
-        "peer-id": "^0.13.13",
+        "peer-id": "^0.14.2",
         "peer-info": "^0.17.5",
         "promisify-es6": "^1.0.3",
         "rimraf": "^3.0.2"
