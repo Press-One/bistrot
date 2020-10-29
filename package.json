@@ -7,8 +7,8 @@
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
-        "debug": "node --inspect debug.js",
-        "prepublishOnly": "npm version patch && npm update && ( git commit -am 'npm update' || true ) && git pull && git push"
+        "debug": "node --inspect --trace-warnings debug.js",
+        "prepublishOnly": "npm version patch && npx ncu -u && npm install && ( git commit -am 'update dependencies' || true ) && git pull && git push"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
