@@ -21,7 +21,8 @@
         "readme": "cat template.md > README.md && echo '\n```' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-hub": "docker build --no-cache . -t pressone/prs-atm && docker push pressone/prs-atm",
         "docker-build-cn": "docker build --no-cache . -t dockerhub.qingcloud.com/pressone/prs-atm && docker push dockerhub.qingcloud.com/pressone/prs-atm",
-        "docker-build": "npm run docker-build-hub && npm run docker-build-cn"
+        "docker-build": "npm run docker-build-hub && npm run docker-build-cn",
+        "gui": "node_modules/.bin/electron main.js"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
@@ -45,6 +46,7 @@
         "aes-js": "^3.1.2",
         "bignumber.js": "^9.0.1",
         "cids": "^1.0.2",
+        "electron": "^11.0.0-beta.18",
         "eosjs-ecc": "^4.0.7",
         "ipfs": "^0.51.0",
         "ipfs-bitswap": "^3.0.0",
