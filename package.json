@@ -22,12 +22,12 @@
     "dependencies": {
         "eos-name-verify": "^1.0.1",
         "eosjs": "^21.1.0-25-707787d",
-        "eosjs-keos": "^1989.6.6",
+        "eosjs-keos": "^1989.6.7",
         "eosjs-keygen": "^1.3.2",
-        "mathjs": "^7.5.1",
+        "mathjs": "^8.0.0",
         "node-fetch": "^2.6.1",
         "pg": "^8.4.2",
-        "utilitas": "^1989.6.129",
+        "utilitas": "^1989.6.141",
         "ws": "^7.3.1"
     }
 }
