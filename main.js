@@ -4,8 +4,8 @@ var mainWindow = null;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1000,
+        height: 1000,
         'min-width': 500,
         'min-height': 200,
         'accept-first-mouse': true,
@@ -14,8 +14,9 @@ function createWindow() {
             nodeIntegration: true
         },
     })
-    mainWindow.loadFile('electron/index.html')
-    // win.webContents.openDevTools()
+    // mainWindow.loadFile('electron/index.html')
+    mainWindow.loadFile('app/dist/app/index.html')
+    mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -24,9 +25,15 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+
 }
 
-console.log(app);
+// const { ipcMain } = require('electron')
+// ipcMain.handle('doA', (event, a, b, c) => {
+//     // ... do actions on behalf of the Renderer
+//     console.log(event, a, b, c);
+// });
+// console.log(app);
 
 app.whenReady().then(createWindow)
 
@@ -41,3 +48,81 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+
+
+
+
+/*
+Dashboard
+actInfo.js
+actAccount.js me
+actBalance.js
+
+
+Wallet
+actOpenaccount.js
+actStatement.js
+Statement
+actBuyram.js
+actUndelegate.js
+actCancel.js
+actDelegate.js
+actDeposit.js
+actRefund.js
+actWithdraw.js
+
+
+Keys
+actKeys.js
+actActivekey.js
+actKeystore.js
+actOwnerkey.js
+actUnlock.js
+
+
+BP Hosting
+
+
+BP Manage
+actRegproducer.js
+actProducers.js
+actAuth.js
+Rewards
+actReward.js
+
+
+uniswap
+actDefichart.js
+actDefimine.js
+actDefiprice.js
+
+
+Ballot
+actBallot.js
+actVote.js
+
+
+Tools
+actConfig.js
+actGenesis.js
+actRunsrv.js
+actBlock.js
+actEvolve.js
+actSpdtest.js
+actCreateaccount.js
+actTail.js
+actTrx.js
+
+
+Notifications
+
+
+help
+actCmd.js
+actHelp.js
+
+
+About
+actVersion.js
+*/
