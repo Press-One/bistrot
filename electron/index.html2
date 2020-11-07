@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PRS-ATM</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/photon.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Javascript -->
+    <script src="js/main.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div class="window">
+
+        <!-- <header class="toolbar toolbar-header">
+            <h1 class="title">PRS-ATM</h1>
+        </header> -->
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+            <div class="pane-group">
+                <div class="pane pane-sm sidebar">
+                    <nav class="nav-group">
+                        <h5 class="nav-group-title">Features in Beta</h5>
+                        <span class="nav-group-item active">
+                            <span class="icon icon-gauge"></span>
+                            Dashboard
+                        </span>
+                        <h5 class="nav-group-title">Under Development</h5>
+                        <span class="nav-group-item">
+                            <span class="icon icon-lock"></span>
+                            Wallet
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-key"></span>
+                            Keys
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-cloud"></span>
+                            BP Hosting
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-network"></span>
+                            BP Manage
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-thumbs-up"></span>
+                            Ballot
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-trophy"></span>
+                            Rewards
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-doc-text-inv"></span>
+                            Statement
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-bell"></span>
+                            Notifications
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-info-circled"></span>
+                            About
+                        </span>
+                    </nav>
+                </div>
+
+                <div class="pane" id="view">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -14,8 +14,8 @@ function createWindow() {
             nodeIntegration: true
         },
     })
-    // mainWindow.loadFile('electron/index.html')
-    mainWindow.loadFile('app/dist/app/index.html')
+    mainWindow.loadFile('electron/index.html')
+    // mainWindow.loadFile('app/dist/app/index.html')
     mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
