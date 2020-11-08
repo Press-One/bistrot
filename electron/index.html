@@ -3,116 +3,47 @@
 
 <head>
     <title>PRS-ATM</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self';"> -->
     <script>
         // https://www.electronjs.org/docs/faq#i-can-not-use-jqueryrequirejsmeteorangularjs-in-electron
         window.nodeRequire = require;
-        delete window.require;
-        delete window.exports;
-        delete window.module;
+        ['require', 'exports', 'module'].map(x => { delete window[x]; });
     </script>
-    <!-- Stylesheets -->
-    <!-- <link rel="stylesheet" href="css/photon.css"> -->
-    <script src="https://unpkg.com/vue@next"></script>
-    <!-- Javascript -->
-    <script src="js/main.js" charset="utf-8"></script>
-
     <link rel="stylesheet" type="text/css" href="assets/semantic/semantic.min.css">
-    <script src="assets/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="assets/semantic/components/dropdown.css">
-        <script src="assets/semantic/components/dropdown.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
+    <script src="assets/vue/vue.global.prod.js"></script>
+    <script src="assets/vue-router/vue-router.global.prod.js"></script>
+    <script src="assets/jquery/jquery.min.js"></script>
     <script src="assets/semantic/semantic.min.js"></script>
-
+    <script src="assets/main.js"></script>
+    <script src="views/dashboard.js"></script>
+    <script src="views/wallet.js"></script>
+    <script src="views/keys.js"></script>
+    <script src="views/bp-hosting.js"></script>
+    <script src="views/bp-manage.js"></script>
+    <script src="views/uniswap.js"></script>
+    <script src="views/ballot.js"></script>
+    <script src="views/tools.js"></script>
+    <script src="views/notifications.js"></script>
+    <script src="views/help.js"></script>
+    <script src="views/about.js"></script>
 </head>
 
 <body>
-    <div class="ui grid container" style="height: 100%; margin: 0px;">
+    <div class="ui grid container" style="height: 100%; margin: 0px;" id="app">
         <div class="four wide column">
             <div class="ui secondary vertical pointing menu" style="height: 100%;">
-                <a class="item active">Dashboard</a>
-                <a class="item">Wallet</a>
-                <a class="item">Keys</a>
-                <a class="item">BP Hosting</a>
-                <a class="item">BP Manage</a>
-                <a class="item">Uniswap</a>
-                <a class="item">Ballot</a>
-                <a class="item">Tools</a>
-                <a class="item">Notifications</a>
-                <a class="item">Help</a>
-                <a class="item">About</a>
+                <router-link class="item" v-for="item in views" :to="{name: item.name}">
+                    <i :class="[item.icon, 'icon']" style="display: contents;"></i>
+                    &nbsp;&nbsp;&nbsp;{{ item.name }}
+                </router-link>
             </div>
         </div>
         <div class="twelve wide column" style="height: 100%;">
-            <table class="ui celled padded table">
-                <thead>
-                    <tr>
-                        <th class="single line">Evidence Rating</th>
-                        <th>Effect</th>
-                        <th>Efficacy</th>
-                        <th>Consensus</th>
-                        <th>Comments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <h2 class="ui center aligned header">A</h2>
-                        </td>
-                        <td class="single line">
-                            Power Output
-                        </td>
-                        <td>
-                            <div class="ui star rating" data-rating="3" data-max-rating="3"></div>
-                        </td>
-                        <td class="right aligned">
-                            80% <br>
-                            <a href="#">18 studies</a>
-                        </td>
-                        <td>Creatine supplementation is the reference compound for increasing muscular creatine levels;
-                            there is
-                            variability in this increase, however, with some nonresponders.</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h2 class="ui center aligned header">A</h2>
-                        </td>
-                        <td class="single line">
-                            Weight
-                        </td>
-                        <td>
-                            <div class="ui star rating" data-rating="3" data-max-rating="3"></div>
-                        </td>
-                        <td class="right aligned">
-                            100% <br>
-                            <a href="#">65 studies</a>
-                        </td>
-                        <td>Creatine is the reference compound for power improvement, with numbers from one
-                            meta-analysis to assess
-                            potency</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="5">
-                            <div class="ui right floated pagination menu">
-                                <a class="icon item">
-                                    <i class="left chevron icon"></i>
-                                </a>
-                                <a class="item">1</a>
-                                <a class="item">2</a>
-                                <a class="item">3</a>
-                                <a class="item">4</a>
-                                <a class="icon item">
-                                    <i class="right chevron icon"></i>
-                                </a>
-                            </div>
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
+            <h3 class="ui block header">{{getRouteName}}</h3>
+            <router-view></router-view>
         </div>
-
     </div>
-
 </body>
 
 </html>
