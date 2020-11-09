@@ -1,3 +1,4 @@
+'use strict';
 
 prsAtm.views.push({
     name: 'Dashboard',
@@ -5,8 +6,7 @@ prsAtm.views.push({
     path: '/',
     component: {
         template: /*html*/
-            `
-            <table class="table-striped">
+            `<table class="table-striped">
                 <thead>
                     <tr>
                         <th>TIMESTAMP</th>

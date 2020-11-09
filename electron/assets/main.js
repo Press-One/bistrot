@@ -1,6 +1,7 @@
 'use strict';
 
-const prsAtm = {
+const prsAtm = Object.assign(
+    nodeRequire('../'), {
     app: null,
     views: [],
     initVue: () => {
@@ -14,12 +15,19 @@ const prsAtm = {
             },
             computed: {
                 getRouteName() { return this.$route.name; }
+            },
+            watch: {
+                '$route': (to, from) => {
+                    prsAtm.views.map(x => {
+                        x.name === to.name && x.init && x.init();
+                    });
+                }
             }
         });
         prsAtm.app.use(prsAtm.router);
         prsAtm.app.mount('#app');
     },
-};
+});
 
 $(prsAtm.initVue);
 
