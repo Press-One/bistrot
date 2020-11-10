@@ -54,7 +54,6 @@
         "libp2p-mplex": "^0.10.1",
         "libp2p-secio": "^0.13.1",
         "libp2p-tcp": "^0.15.1",
-        "mathjs": "^8.0.1",
         "mime-types": "^2.1.27",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
