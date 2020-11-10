@@ -1,6 +1,6 @@
 'use strict';
 
-const { account, finance, utilitas } = require('sushitrain');
+const { account, finance, utilitas } = require('../');
 
 const func = async (argv) => {
     let r = [account.getBalance(argv.account), account.getByName(argv.account)];

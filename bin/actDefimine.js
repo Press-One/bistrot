@@ -1,6 +1,6 @@
 'use strict';
 
-const { defi } = require('sushitrain');
+const { defi } = require('../');
 
 const func = async (argv) => {
     Object.assign(global.chainConfig, { serviceDefiPricesSubmit: true });

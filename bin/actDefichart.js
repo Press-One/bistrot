@@ -1,6 +1,6 @@
 'use strict';
 
-const { defi } = require('../');
+const { defiExt } = require('../');
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 
@@ -113,10 +113,10 @@ const func = async (argv) => {
     argv.period = argv.period || '24h';
     argv.interval = argv.interval || null;
     if (argv.json) {
-        return await defi.queryPricesHistory(argv.currency, argv.period);
+        return await defiExt.queryPricesHistory(argv.currency, argv.period);
     }
     init(argv.currency);
-    await defi.pricesHistoryDaemon(
+    await defiExt.pricesHistoryDaemon(
         argv.currency, argv.period, argv.interval, (err, res) => {
             if (err) { return logError(err); }
             resp = res;

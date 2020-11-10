@@ -1,7 +1,6 @@
 'use strict';
 
-const { finance } = require('sushitrain');
-const { atm } = require('../');
+const { finance, atm } = require('../');
 
 const func = async (argv) => {
     const resp = await atm.deposit(

@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas } = require('sushitrain');
+const { utilitas, preferences } = require('../');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -39,8 +39,8 @@ const json = ['transaction'];
 
 const toBoolean = (input) => {
     const str = String(input || '').toLowerCase();
-    return !utilitas.isUndefined(input) && !str.length
-        || ['true', 'yes', '1'].includes(str);
+    return utilitas.isUndefined(input) ? undefined
+        : (['true', 'yes', '1', ''].includes(str));
 };
 
 const toArray = (input) => {
@@ -120,15 +120,15 @@ const errNotFound = `Command not found: \`${command}\`.`;
 const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
-global.chainConfig = {
-    debug: argv.debug,
-    secret: argv.secret,
-    rpcApi: argv.rpcapi,
-    chainApi: argv.chainapi,
-    speedTest: argv.spdtest,
-};
 
 (async () => {
+    global.chainConfig = await preferences({
+        debug: argv.debug,
+        secret: argv.secret,
+        rpcApi: argv.rpcapi,
+        chainApi: argv.chainapi,
+        speedTest: argv.spdtest,
+    });
     try {
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);

@@ -1,6 +1,6 @@
 'use strict';
 
-const { sushitrain } = require('sushitrain');
+const { sushitrain } = require('../');
 
 const func = async (argv) => {
     return await sushitrain.getInfo();
