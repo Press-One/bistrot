@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas, preferences } = require('../');
+const { utilitas, config } = require('../');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -122,7 +122,7 @@ const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
 (async () => {
-    global.chainConfig = await preferences({
+    global.chainConfig = await config({
         debug: argv.debug,
         secret: argv.secret,
         rpcApi: argv.rpcapi,
