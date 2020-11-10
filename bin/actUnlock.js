@@ -1,7 +1,6 @@
 'use strict';
 
-const { utilitas } = require('sushitrain');
-const { wallet } = require('../');
+const { utilitas, wallet } = require('../');
 const readline = require('readline-sync');
 const fs = require('fs');
 

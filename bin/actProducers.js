@@ -1,7 +1,6 @@
 'use strict';
 
-const { finance, producer, colors } = require('sushitrain');
-const mathjs = require('mathjs');
+const { finance, producer, colors, math } = require('../');
 
 const func = async (argv) => {
     const resp = await producer.getAll();
@@ -10,13 +9,13 @@ const func = async (argv) => {
             'TOTAL_PRODUCER_VOTE_WEIGHT:', resp.total_producer_vote_weight
         );
     }
-    const total = mathjs.bignumber(resp.total_producer_vote_weight);
+    const total = math.bignumber(resp.total_producer_vote_weight);
     let priority = 0;
     resp.rows.map(x => {
         x.priority = ++priority;
         x.total_votes = x.total_votes.replace(/\.\d*$/, '');
         x.scaled_votes = finance.bigFormat(
-            mathjs.divide(mathjs.bignumber(x.total_votes), total)
+            math.divide(math.bignumber(x.total_votes), total)
         );
         if (!argv.json && x.priority <= 21) {
             for (let i in x) {

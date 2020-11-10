@@ -1,7 +1,6 @@
 'use strict';
 
-const { statement } = require('../');
-const { utilitas, colors } = require('sushitrain');
+const { utilitas, colors, statement } = require('../');
 
 const func = async (argv) => {
     const resp = await statement.query(

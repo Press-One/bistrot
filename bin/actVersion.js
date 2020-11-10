@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas } = require('sushitrain');
+const { utilitas } = require('../');
 const path = require('path');
 
 const func = async (argv) => {

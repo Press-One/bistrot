@@ -1,6 +1,6 @@
 'use strict';
 
-const { producer } = require('sushitrain');
+const { producer } = require('../');
 
 const func = async (argv) => {
     const result = await producer.register(
