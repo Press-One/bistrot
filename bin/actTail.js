@@ -1,6 +1,6 @@
 'use strict';
 
-const { sushitrain, pacman, utilitas } = require('../');
+const { sushitrain, pacman, utilitas } = require('..');
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };

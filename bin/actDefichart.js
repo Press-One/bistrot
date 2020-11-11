@@ -1,6 +1,6 @@
 'use strict';
 
-const { defi } = require('../');
+const { defi } = require('..');
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 

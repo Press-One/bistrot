@@ -1,6 +1,6 @@
 'use strict';
 
-const { helper } = require('../');
+const { helper } = require('..');
 
 const func = async (argv) => {
     let resp = await helper.getTransactionById(argv.id);

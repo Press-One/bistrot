@@ -1,6 +1,6 @@
 'use strict';
 
-const { sushitrain, helper } = require('../');
+const { sushitrain, helper } = require('..');
 
 const func = async (argv) => {
     Object.assign(global.chainConfig, { speedTest: true, debug: true });

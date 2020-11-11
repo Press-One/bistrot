@@ -1,6 +1,6 @@
 'use strict';
 
-const { etc } = require('../');
+const { etc } = require('..');
 
 const func = async (argv) => {
     const filename = 'runservice.sh';

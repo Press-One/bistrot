@@ -1,6 +1,6 @@
 'use strict';
 
-const { producer } = require('../');
+const { producer } = require('..');
 
 const func = async (argv) => {
     const result = await producer.register(
