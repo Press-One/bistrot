@@ -1,6 +1,6 @@
 'use strict';
 
-const { defi, colors } = require('../');
+const { defi, colors } = require('..');
 
 const formatPrice = (price, maxAccuracy) => {
     while (price.split('.')[1].length < maxAccuracy) { price += '0'; }

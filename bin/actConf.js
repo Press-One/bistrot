@@ -1,6 +1,6 @@
 'use strict';
 
-const { config } = require('../');
+const { config } = require('..');
 
 const allowedMap = { speedTest: 'spdtest' };
 
@@ -55,10 +55,4 @@ module.exports = {
         '    > Example:',
         '    $ prs-atm conf --spdtest=true --debug=false --secret=undefined',
     ],
-    render: {
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 23 }, 1: { width: 50 } } },
-        },
-    },
 };

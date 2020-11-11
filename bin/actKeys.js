@@ -1,6 +1,6 @@
 'use strict';
 
-const { account } = require('../');
+const { account } = require('..');
 
 const func = async (argv) => {
     const resp = await account.getByName(argv.account);

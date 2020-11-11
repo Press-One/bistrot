@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas, config } = require('../');
+const { utilitas, config } = require('..');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -112,7 +112,8 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     argv[i] = toArray(argv[i]);
 });
 [
-    'trxonly', 'help', 'detail', 'force', 'json', 'spdtest', 'debug', `secret`
+    'trxonly', 'help', 'detail', 'force', 'json',
+    'spdtest', 'debug', 'secret', 'delete', 'savepswd',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }

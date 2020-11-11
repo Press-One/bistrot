@@ -1,6 +1,6 @@
 'use strict';
 
-const { finance, producer, colors, math } = require('../');
+const { finance, producer, colors, math } = require('..');
 
 const func = async (argv) => {
     const resp = await producer.getAll();

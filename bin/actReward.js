@@ -1,6 +1,6 @@
 'use strict';
 
-const { atm } = require('../');
+const { atm } = require('..');
 
 const func = async (argv) => {
     return await atm.claimRewards(argv.account, argv.pvtkey);

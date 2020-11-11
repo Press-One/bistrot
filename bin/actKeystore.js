@@ -1,6 +1,6 @@
 'use strict';
 
-const { wallet, etc } = require('../');
+const { wallet, etc } = require('..');
 const readline = require('readline-sync');
 
 const func = async (argv) => {

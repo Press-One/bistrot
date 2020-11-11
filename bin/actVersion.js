@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas } = require('../');
+const { utilitas } = require('..');
 const path = require('path');
 
 const func = async (argv) => {
