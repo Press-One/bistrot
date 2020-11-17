@@ -3,9 +3,9 @@
 const { account, finance, utilitas } = require('..');
 
 const func = async (argv) => {
-    let r = [account.getBalance(argv.account), account.getByName(argv.account)];
-    const [bResp, aResp] = await Promise.all(r);
+    const aResp = await account.getByName(argv.account);
     utilitas.assert(aResp, `Account not found: ${argv.account}`, 404);
+    const bResp = await account.getBalance(argv.account);
     const [currency, now] = [Object.keys(bResp)[0], new Date()];
     const result = { 'balance': finance.bigFormat(bResp[currency], currency) };
     if (aResp.refund_request) {
