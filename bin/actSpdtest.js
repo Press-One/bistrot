@@ -1,13 +1,10 @@
 'use strict';
 
-const { sushitrain, helper } = require('..');
+const { sushitrain, sushibar } = require('..');
 
 const func = async (argv) => {
     Object.assign(global.chainConfig, { speedTest: true, debug: true });
-    console.log('Evaluate RPC API nodes:');
     await sushitrain.getRpcUrl();
-    console.log('\nEvaluate Chain API nodes:');
-    await helper.assembleChainApiUrl();
 };
 
 module.exports = {
