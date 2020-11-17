@@ -1,9 +1,9 @@
 'use strict';
 
-const { helper } = require('..');
+const { sushibar } = require('..');
 
 const func = async (argv) => {
-    let resp = await helper.getTransactionById(argv.id);
+    let resp = await sushibar.getTransactionById(argv.id);
     return resp && argv.json ? resp.transaction : resp.data;
 };
 
