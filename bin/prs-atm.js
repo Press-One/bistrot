@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas, config } = require('..');
+const { utilitas, config, keychain } = require('..');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -55,7 +55,19 @@ const unlockKeystore = async (options = {}) => {
         const result = await require('./actUnlock').func(argv, options);
         argv.pubkey = result.publickey;
         argv.pvtkey = result.privatekey;
+        return;
     }
+    try {
+        const { config } = await keychain.get(argv.account, argv.prmsn, {
+            unique: true, unlock: true, password: argv.password
+        });
+        const keystore = Object.values(config && config.keystores || {})[0];
+        if (keystore) {
+            argv.account = argv.account || keystore.account;
+            argv.pubkey = keystore.keystore.publickey;
+            argv.pvtkey = keystore.keystore.privatekey;
+        }
+    } catch (err) { console.log(err); }
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
