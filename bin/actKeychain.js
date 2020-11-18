@@ -13,8 +13,10 @@ const func = async (argv, options = {}) => {
         filename = file;
         config = cnfg;
     } else if (argv.unlock) {
-        const { filename: file, config: cnfg } = await keychain.get(argv.account, argv.prmsn,
-            { unique: true, unlock: true, password: argv.password });
+        const { filename: file, config: cnfg } = await keychain.get(
+            argv.account, argv.prmsn, {
+            unique: true, unlock: true, password: argv.password
+        });
         filename = file;
         config = cnfg;
     } else if (argv.keystore) {
