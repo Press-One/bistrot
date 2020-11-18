@@ -9,7 +9,7 @@ const func = async (argv, options = {}) => {
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
         kObj = JSON.parse(kFile);
-        (argv.pubkey = kObj.publickey).length;
+        argv.pubkey = kObj.publickey;
     } catch (e) {
         utilitas.throwError('Invalid keystore file.', 400);
     }

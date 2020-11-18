@@ -1,30 +1,36 @@
 'use strict';
 
-const { utilitas, config: libConf } = require('..');
+const { utilitas, config: libConf, keychain } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
+const privatekeyLength = 51;
 
 const func = async (argv, options = {}) => {
     let [filename, config, resp] = [null, null, []];
     if (argv.delete) {
         const { filename: file, config: cnfg }
-            = await libConf.deleteKeystore(argv.account, argv.prmsn);
+            = await keychain.del(argv.account, argv.prmsn);
         filename = file;
         config = cnfg;
-    } else if (argv.account || argv.prmsn || argv.keystore || argv.memo) {
+    } else if (argv.unlock) {
+        const { filename: file, config: cnfg } = await keychain.get(argv.account, argv.prmsn,
+            { unique: true, unlock: true, password: argv.password });
+        filename = file;
+        config = cnfg;
+    } else if (argv.keystore) {
         utilitas.assert(
             fs.existsSync(argv.keystore), 'File does not exist.', 400
         );
         let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
         try {
             kObj = JSON.parse(kFile);
-            (argv.pubkey = kObj.publickey).length;
+            argv.pubkey = kObj.publickey;
         } catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
         while (!argv.password) {
             console.log('Input password to decrypt the keystore.');
             argv.password = readline.question('Password: ', argv.readlineConf);
         }
-        const { filename: file, config: cnfg } = await libConf.setKeystore(
+        const { filename: file, config: cnfg } = await keychain.set(
             argv.account, argv.prmsn, kObj, argv.password, argv.memo
         );
         filename = file;
@@ -34,12 +40,15 @@ const func = async (argv, options = {}) => {
         filename = file;
         config = cnfg;
     }
-    if (!argv.json) { console.log('CONFIG_FILENAME:', filename); }
+    if (!argv.json) { console.log('KEYCHAIN_IN_CONFIG_FILE:', filename); }
     for (let key in config.keystores || {}) {
+        const privatekey = config.keystores[key].keystore.privatekey
+            || utilitas.makeStringByLength('*', privatekeyLength);
         resp.push({
             account: config.keystores[key].account,
             permission: config.keystores[key].permission,
             publickey: config.keystores[key].keystore.publickey,
+            privatekey,
             memo: config.keystores[key].memo,
         });
     }
@@ -83,6 +92,7 @@ module.exports = {
                 'account',
                 'permission',
                 'publickey',
+                'privatekey',
                 'memo',
             ],
             config: {
@@ -90,7 +100,8 @@ module.exports = {
                     0: { width: 12 },
                     1: { width: 10 },
                     2: { width: 53 },
-                    3: { width: 10 },
+                    3: { width: 51 },
+                    4: { width: 10 },
                 },
             },
         },
