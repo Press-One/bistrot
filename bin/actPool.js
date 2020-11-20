@@ -16,8 +16,8 @@ const renderToken = (item) => {
 const renderRate = (p) => {
     const [a, b] = [p.tokens[0].symbol, p.tokens[1].symbol];
     return [
-        `1 ${renderSymbol(a)} = ${p[`${a}-${b}`]} ${renderSymbol(b)}`,
-        `1 ${renderSymbol(b)} = ${p[`${b}-${a}`]} ${renderSymbol(a)}`
+        `1 ${renderSymbol(a)} = ${p.rates[`${a}-${b}`]} ${renderSymbol(b)}`,
+        `1 ${renderSymbol(b)} = ${p.rates[`${b}-${a}`]} ${renderSymbol(a)}`
     ];
 };
 
@@ -32,7 +32,7 @@ const func = async (argv) => {
                 }
             }
             x.created_at = new Date(x.created_at).toISOString();
-            x.rate = renderRate(x).join('\n');
+            x.rates = renderRate(x).join('\n');
             x.token = renderToken(x.token);
             x.tokens = [
                 renderToken(x.tokens[0]),
