@@ -2,13 +2,14 @@
 
 global.chainConfig.rpcApi = 'http://51.255.133.170:8888';
 
-const { utilitas, swap, exchange } = require('..');
+const { exchange } = require('..');
 
 const func = async (argv) => {
     const x = await exchange.swapToken(
-        argv.pvtkey, argv.account, argv.receiver,
-        argv['mx-id'], argv['mx-num'], argv.email, argv.from, argv.amount,
-        argv.to, argv.slippage, argv.memo);
+        argv.pvtkey, argv.account, argv.receiver, argv.from, argv.amount,
+        argv.to, argv.slippage, argv.email,
+        argv['mx-id'], argv['mx-num'], argv.memo
+    );
     console.log(x);
 };
 
