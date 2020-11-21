@@ -59,7 +59,7 @@ module.exports = {
                 'invariant',
                 'token',
                 'tokens',
-                'rate',
+                'rates',
                 'created_at',
             ],
             config: {

@@ -1,9 +1,16 @@
 'use strict';
 
-const { utilitas, config: libConf, keychain } = require('..');
+const { utilitas, config: libConf, keychain, wallet } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
 const privatekeyLength = 51;
+
+const ensurePassword = (argv) => {
+    while (!argv.password) {
+        console.log('Input password for the keystore.');
+        argv.password = readline.question('Password: ', argv.readlineConf);
+    }
+};
 
 const func = async (argv, options = {}) => {
     let [filename, config, resp] = [null, null, []];
@@ -13,27 +20,36 @@ const func = async (argv, options = {}) => {
         filename = file;
         config = cnfg;
     } else if (argv.unlock) {
+        argv.savepswd || ensurePassword(argv);
         const { filename: file, config: cnfg } = await keychain.get(
-            argv.account, argv.prmsn, {
-            unique: true, unlock: true, password: argv.password
-        });
+            argv.account, argv.prmsn, { unlock: true, password: argv.password } // unique: true,
+        );
+        filename = file;
+        config = cnfg;
+    } else if (argv.new || argv.pubkey || argv.pvtkey) {
+        ensurePassword(argv);
+        const kObj = await wallet.createKeystore(
+            argv.password, argv.pubkey, argv.pvtkey
+        );
+        const { filename: file, config: cnfg } = await keychain.set(
+            argv.account, argv.prmsn, kObj, argv.password, argv.memo,
+            { savePassword: argv.savepswd }
+        );
         filename = file;
         config = cnfg;
     } else if (argv.keystore) {
+        ensurePassword(argv);
         utilitas.assert(
             fs.existsSync(argv.keystore), 'File does not exist.', 400
         );
-        let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
+        let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8'), null];
         try {
             kObj = JSON.parse(kFile);
             argv.pubkey = kObj.publickey;
         } catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
-        while (!argv.password) {
-            console.log('Input password to decrypt the keystore.');
-            argv.password = readline.question('Password: ', argv.readlineConf);
-        }
         const { filename: file, config: cnfg } = await keychain.set(
-            argv.account, argv.prmsn, kObj, argv.password, argv.memo
+            argv.account, argv.prmsn, kObj, argv.password, argv.memo,
+            { savePassword: argv.savepswd }
         );
         filename = file;
         config = cnfg;
