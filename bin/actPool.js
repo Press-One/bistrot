@@ -22,7 +22,7 @@ const renderRate = (p) => {
 };
 
 const func = async (argv) => {
-    const resp = await swap.getPool();
+    const resp = await swap.getAllPools();
     if (!argv.json) {
         resp.map(x => {
             for (let i in x) {
