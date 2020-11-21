@@ -125,7 +125,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
 });
 [
     'trxonly', 'help', 'detail', 'force', 'json',
-    'spdtest', 'debug', 'secret', 'delete', 'savepswd',
+    'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
