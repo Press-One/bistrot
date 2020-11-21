@@ -67,7 +67,7 @@ const unlockKeystore = async (options = {}) => {
             argv.pubkey = keystore.keystore.publickey;
             argv.pvtkey = keystore.keystore.privatekey;
         }
-    } catch (err) { console.log(err); }
+    } catch (err) { }
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
