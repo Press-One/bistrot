@@ -19,6 +19,8 @@ module.exports = {
     func,
     name: 'Get swap pools',
     help: [
+        'ARGS desc are coming...',
+        '',
         '    > Example:',
         '    $ prs-atm pool',
     ],
