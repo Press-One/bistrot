@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v2.1.21
+prs-atm v2.2.1
 
 usage: prs-atm <command> [<args>]
 
@@ -174,6 +174,22 @@ usage: prs-atm <command> [<args>]
 
     > Example of searching commands:
     $ prs-atm cmd ballot info
+
+=====================================================================
+
+* `conf` > Configuration:
+
+    --spdtest  Test and pick the fastest node     [T / F / UNDEFINED]
+    --debug    Enable or disable debug mode       [T / F / UNDEFINED]
+    --secret   Show sensitive info in debug logs  [T / F / UNDEFINED]
+    ┌---------------------------------------------------------------┐
+    | 1. Leave empty args to view current configuration.            |
+    | 2. `spdtest` feature depends on the system `ping` command.    |
+    | 3. WARNING: `secret` option may cause private key leaks.      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm conf --spdtest=true --debug=false --secret=undefined
 
 =====================================================================
 
@@ -354,6 +370,37 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `keychain` > Manage Keychain:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --prmsn    Permission of the key             [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
+    --password Use to `verify` the keystore      [STRING  / OPTIONAL]
+    --memo     Memo for the keystore             [STRING  / OPTIONAL]
+    --savepswd Save password (DANGEROUS)         [WITH  OR  WITHOUT ]
+    --delete   To `delete` instead of to `save`  [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. Leave empty args to view current keychain.                 |
+    | 2. Save keys to the keychain for simplified use.              |
+    | 3. The password is for keystore verification only.            |
+    | 4. This program will `NOT` save your password by default.     |
+    | 5. `savepswd` is `EXTREMELY DANGEROUS`, use on your own risk. |
+    └---------------------------------------------------------------┘
+
+    > Example of saving a new key:
+    $ prs-atm keychain\
+              --account=ABCDE \
+              --prmsn=owner \
+              --keystore=keystore.json
+
+    > Example of deleting an existing key:
+    $ prs-atm keychain\
+              --account=ABCDE \
+              --prmsn=active \
+              --delete
+
+=====================================================================
+
 * `keys` > Check Account Keys:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -433,6 +480,22 @@ usage: prs-atm <command> [<args>]
               --account=ABCDE \
               --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --keystore=keystore.json
+
+=====================================================================
+
+* `payreq` > Get swap payment request:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm payreq --account=ABCDE
+
+=====================================================================
+
+* `pool` > Get swap pools:
+
+    > Example:
+    $ prs-atm pool
 
 =====================================================================
 
@@ -535,6 +598,15 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm statement --account=ABCDE
+
+=====================================================================
+
+* `swap` > Get swap pools:
+
+ARGS desc are coming...
+
+    > Example:
+    $ prs-atm pool
 
 =====================================================================
 
