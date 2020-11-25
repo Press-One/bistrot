@@ -7,9 +7,7 @@ if (debug) { global.chainConfig.rpcApi = 'http://51.255.133.170:8888'; }
 
 const { utilitas, exchange } = require('..');
 
-const hiddenField = [
-    'mixin_account_id', 'oracle_info', 'oracle_trx_id', 'oracle_timestamp'
-];
+const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
 
 const func = async (argv) => {
     const rs = await exchange.getPaymentRequest(argv.account, { single: true });
@@ -22,10 +20,16 @@ const func = async (argv) => {
         Object.values(rs.payment_request).map(x => {
             // debug with CNB {
             if (debug) {
-                x.payment_url = x.payment_url.replace(
-                    /(^.*asset=)[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}(&.*$)/,
-                    `$1${require('..').mixin.assetIds.CNB.id}$2`
-                );
+                const uuid = '[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
+                const replace = {
+                    recipient: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
+                    asset: require('..').mixin.assetIds.CNB.id,
+                };
+                for (let i in replace) {
+                    x.payment_url = x.payment_url.replace(new RegExp(
+                        `(^.*${i}=)${uuid}(&.*$)`
+                    ), `$1${replace[i]}$2`);
+                }
             }
             // }
             paymentUrls.push(x.payment_url);
