@@ -23,7 +23,7 @@ const func = async (argv) => {
                 const uuid = '[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
                 const replace = {
                     recipient: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
-                    asset: require('..').mixin.assetIds.CNB.id,
+                    // asset: require('..').mixin.assetIds.CNB.id,
                 };
                 for (let i in replace) {
                     x.payment_url = x.payment_url.replace(new RegExp(
