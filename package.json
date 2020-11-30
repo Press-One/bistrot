@@ -36,7 +36,7 @@
         "keythereum-pure-js": "^1.1.9",
         "prs-utility": "^0.1.0",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.7.76",
+        "sushitrain": "^1989.7.81",
         "table": "^6.0.4",
         "yargs": "^16.1.1"
     },
@@ -46,7 +46,7 @@
         "bignumber.js": "^9.0.1",
         "cids": "^1.0.2",
         "eosjs-ecc": "^4.0.7",
-        "ipfs": "^0.52.1",
+        "ipfs": "^0.52.2",
         "ipfs-bitswap": "^4.0.0",
         "ipfs-repo": "^7.0.0",
         "libp2p": "^0.29.3",
