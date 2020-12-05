@@ -1,7 +1,5 @@
 'use strict';
 
-global.chainConfig.rpcApi = 'http://51.255.133.170:8888';
-
 const { swap } = require('..');
 
 const renderSymbol = (symbol) => {

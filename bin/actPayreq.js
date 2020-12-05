@@ -1,10 +1,5 @@
 'use strict';
 
-// debug {
-const debug = true;
-if (debug) { global.chainConfig.rpcApi = 'http://51.255.133.170:8888'; }
-// }
-
 const { utilitas, exchange } = require('..');
 
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
