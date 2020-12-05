@@ -1,5 +1,9 @@
 'use strict';
 
+// debug {
+const debug = true;
+// }
+
 const { utilitas, exchange } = require('..');
 
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
