@@ -28,6 +28,7 @@ CREATE INDEX updated_at ON nodes(updated_at);
 INSERT INTO nodes (name, ip, type, shp_port, rpc_port) VALUES ('pressonebp1', '5.135.106.40',  'FIRSTPARTY', 8080, 8888);
 INSERT INTO nodes (name, ip, type, shp_port, rpc_port) VALUES ('pressonebp2', '149.56.70.124', 'FIRSTPARTY', 8080, 8888);
 INSERT INTO nodes (name, ip, type, shp_port, rpc_port) VALUES ('pressonebp3', '51.38.161.232', 'FIRSTPARTY', 8080, 8888);
+INSERT INTO nodes (name, ip, type, shp_port, rpc_port) VALUES ('prs-bp-cn1',  '139.198.18.74', 'FIRSTPARTY', 8080, 8888);
 
 INSERT INTO nodes (name, ip) VALUES ('iamniuhaocom', '47.103.52.238');
 INSERT INTO nodes (name, ip) VALUES ('exinpool', '52.8.93.33');
