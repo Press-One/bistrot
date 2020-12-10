@@ -1,6 +1,6 @@
 'use strict';
 
-const { swap } = require('..');
+const { swap, utilitas } = require('..');
 
 const renderSymbol = (symbol) => {
     while (symbol.length < 4) { symbol += ' '; }
@@ -29,7 +29,7 @@ const func = async (argv) => {
                     delete x[i];
                 }
             }
-            x.invariant = Number.parseFloat(x.invariant).toExponential(4);
+            x.invariant = utilitas.toExponential(x.invariant, 4);
             x.created_at = new Date(x.created_at).toISOString();
             x.rates = renderRate(x).join('\n');
             x.token = renderToken(x.token);
