@@ -9,7 +9,7 @@ const { utilitas, exchange } = require('..');
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
 
 const func = async (argv) => {
-    const rs = await exchange.getPaymentRequest(argv.account, { single: true });
+    const rs = await exchange.getPaymentRequest(argv.account);
     if (!argv.json && rs) {
         let paymentUrls = [];
         rs.mixin_trace_id = utilitas.uniqueArray(rs.mixin_trace_id).join('\n');

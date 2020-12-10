@@ -1,5 +1,6 @@
 'use strict';
 
+const payreq = require('./actSwappay');
 const { exchange } = require('..');
 
 const func = async (argv) => {
@@ -8,7 +9,8 @@ const func = async (argv) => {
         argv.from, argv.amount, argv.to, argv.slippage, argv.email,
         argv['mx-id'], argv['mx-num'], argv.memo, { dryrun: argv.dryrun }
     );
-    return resp;
+    // console.log(resp); // @keep this line for debug
+    return await payreq.func(argv);
 };
 
 module.exports = {
