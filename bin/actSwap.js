@@ -1,27 +1,61 @@
 'use strict';
 
 const payreq = require('./actSwappay');
-const { exchange } = require('..');
+const { exchange, finance } = require('..');
 
 const func = async (argv) => {
     const resp = await exchange.swapToken(
-        argv.pvtkey, argv.account, null, // argv.receiver
-        argv.from, argv.amount, argv.to, argv.slippage, argv.email,
-        argv['mx-id'], argv['mx-num'], argv.memo, { dryrun: argv.dryrun }
+        argv.pvtkey, argv.account, argv.from, argv.amount, argv.to,
+        argv.slippage, argv.email, argv.memo, { dryrun: argv.dryrun }
     );
     // console.log(resp); // @keep this line for debug
-    return await payreq.func(argv);
+    return argv.dryrun ? resp : await payreq.func(argv);
 };
 
 module.exports = {
     pubkey: true,
     pvtkey: true,
     func,
-    name: 'Get swap pools',
+    name: 'Swap tokens',
     help: [
-        'ARGS desc are coming...',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        '    --from     From token symbol                 [STRING  / REQUIRED]',
+        '    --to       To token symbol                   [STRING  / REQUIRED]',
+        '    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]',
+        '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
+        '    --slippage Percentage of slippage            [NUMBER  / OPTIONAL]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
+        '    --email    Email for notification            [STRING  / OPTIONAL]',
+        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 0. Use `swappool` to get all pools that available to swap.    |',
+        '    | 1. Default `slippage` is `5`, which means a 5% slippage.      |',
+        '    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        '    | 3. After successful execution, you will get a URL.            |',
+        '    | 4. Open this URL in your browser.                             |',
+        '    | 5. Scan the QR code with Mixin to complete the payment.       |',
+        '    | 6. You have to complete the payment within `'
+        + `${finance.transferTimeout / 1000 / 60 / 60 / 24}\` days.          |`,
+        '    | 7. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |',
+        '    | 8. Only `1` swap transaction is allowed at a time.            |',
+        '    | 9. Finish, `swapcancel` or timeout a current trx before swap. |',
+        '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm pool',
+        '    $ prs-atm swap \\',
+        '              --account=ABCDE \\',
+        '              --from=COB \\',
+        '              --to=CNB \\',
+        '              --amount=12.3456 \\',
+        '              --keystore=keystore.json \\',
+        '              --email=abc@def.com',
     ],
+    render: {
+        table: {
+            KeyValue: true,
+            config: { columns: { 0: { width: 19 }, 1: { width: 64 } } },
+        },
+    },
 };
