@@ -1,7 +1,7 @@
 'use strict';
 
 // debug {
-const debug = true;
+const debug = false;
 // }
 
 const { exchange } = require('..');
