@@ -4,19 +4,19 @@
 const debug = true;
 // }
 
-const { utilitas, exchange } = require('..');
+const { exchange } = require('..');
 
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
 
 const func = async (argv) => {
-    const rs = await exchange.getPaymentRequest(argv.account);
-    if (!argv.json && rs) {
+    const resp = await exchange.getPaymentRequest(argv.account);
+    if (!argv.json && resp) {
         let paymentUrls = [];
-        rs.mixin_trace_id = utilitas.uniqueArray(rs.mixin_trace_id).join('\n');
-        rs.timestamp_received = rs.timestamp_received.toISOString();
-        rs.payment_timeout = rs.payment_timeout.toISOString();
-        for (let key of hiddenField) { delete rs[key]; }
-        Object.values(rs.payment_request).map(x => {
+        resp.mixin_trace_id = resp.mixin_trace_id.join('\n');
+        resp.timestamp_received = resp.timestamp_received.toISOString();
+        resp.payment_timeout = resp.payment_timeout.toISOString();
+        for (let key of hiddenField) { delete resp[key]; }
+        Object.values(resp.payment_request).map(x => {
             // debug with CNB {
             if (debug) {
                 const uuid = '[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
@@ -41,12 +41,12 @@ const func = async (argv) => {
                 + `${paymentUrls.join('\n\n')}\n`);
         }
     }
-    return rs;
+    return resp;
 };
 
 module.exports = {
     func,
-    name: 'Get swap payment request',
+    name: 'Get swapping payment request',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',

@@ -44,7 +44,7 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'Get swap pools',
+    name: 'Get all pools that available to swap.',
     help: [
         '    > Example:',
         '    $ prs-atm pool',
