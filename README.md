@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v2.2.1
+prs-atm v3.0.0
 
 usage: prs-atm <command> [<args>]
 
@@ -179,6 +179,7 @@ usage: prs-atm <command> [<args>]
 
 * `conf` > Configuration:
 
+    --email    Notification email address         [EMAIL / UNDEFINED]
     --spdtest  Test and pick the fastest node     [T / F / UNDEFINED]
     --debug    Enable or disable debug mode       [T / F / UNDEFINED]
     --secret   Show sensitive info in debug logs  [T / F / UNDEFINED]
@@ -285,7 +286,7 @@ usage: prs-atm <command> [<args>]
 * `deposit` > Deposit:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
@@ -483,22 +484,6 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `payreq` > Get swap payment request:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-
-    > Example:
-    $ prs-atm payreq --account=ABCDE
-
-=====================================================================
-
-* `pool` > Get swap pools:
-
-    > Example:
-    $ prs-atm pool
-
-=====================================================================
-
 * `producers` > Check Producers Information:
 
     > Example:
@@ -601,9 +586,72 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `swap` > Get swap pools:
+* `swap` > Swap tokens:
 
-ARGS desc are coming...
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --from     From token symbol                 [STRING  / REQUIRED]
+    --to       To token symbol                   [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
+    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
+    --slippage Percentage of slippage            [NUMBER  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 0. Use `swappool` to get all pools that available to swap.    |
+    | 1. Default `slippage` is `5`, which means a 5% slippage.      |
+    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 3. After successful execution, you will get a URL.            |
+    | 4. Open this URL in your browser.                             |
+    | 5. Scan the QR code with Mixin to complete the payment.       |
+    | 6. You have to complete the payment within `7` days.          |
+    | 7. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
+    | 8. Only `1` swap transaction is allowed at a time.            |
+    | 9. Finish, `swapcancel` or timeout a current trx before swap. |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm swap \
+              --account=ABCDE \
+              --from=COB \
+              --to=CNB \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --email=abc@def.com
+
+=====================================================================
+
+* `swapcancel` > Cancel a swapping payment request:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Only `1` swap transaction is allowed at a time.            |
+    | 2. Cancel a current trx by this cmd before issuing a new one. |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm swapcancel
+              --account=ABCDE \
+              --keystore=keystore.json \
+
+=====================================================================
+
+* `swappay` > Get swapping payment request:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm payreq --account=ABCDE
+
+=====================================================================
+
+* `swappool` > Get all pools that available to swap.:
 
     > Example:
     $ prs-atm pool
@@ -714,12 +762,12 @@ ARGS desc are coming...
 * `withdraw` > Withdrawal:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
-    --mx-num   Mixin user number                 [STRING  / OPTIONAL]
+    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
