@@ -1,6 +1,6 @@
 'use strict';
 
-const { config } = require('..');
+const { config, utilitas } = require('..');
 
 const allowedMap = { speedTest: 'spdtest' };
 
@@ -17,6 +17,7 @@ const checkRaw = (key) => {
 
 const func = async (argv) => {
     const [input, conf] = [{
+        email: argv.email,
         debug: argv.debug,
         secret: argv.secret,
         rpcApi: argv.rpcapi,
@@ -30,6 +31,7 @@ const func = async (argv) => {
                 conf[key] = undefined;
                 break;
             case 'SET':
+                switch (key) { case 'email': utilitas.assertEmail(input[key]); }
                 conf[key] = input[key];
         }
     }
@@ -43,6 +45,7 @@ module.exports = {
     func,
     name: 'Configuration',
     help: [
+        '    --email    Notification email address         [EMAIL / UNDEFINED]',
         '    --spdtest  Test and pick the fastest node     [T / F / UNDEFINED]',
         '    --debug    Enable or disable debug mode       [T / F / UNDEFINED]',
         '    --secret   Show sensitive info in debug logs  [T / F / UNDEFINED]',

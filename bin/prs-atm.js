@@ -63,6 +63,7 @@ const unlockKeystore = async (options = {}) => {
         });
         const keystore = Object.values(config && config.keystores || {})[0];
         if (keystore) {
+            argv.email = argv.email || config.email;
             argv.account = argv.account || keystore.account;
             argv.pubkey = keystore.keystore.publickey;
             argv.pvtkey = keystore.keystore.privatekey;
