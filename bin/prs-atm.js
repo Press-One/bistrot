@@ -29,6 +29,7 @@ const verbose = [
     'transactions_trx_transaction_actions_data_oracleservice',
     'transactions_trx_transaction_actions_data_meta',
     'transactions_trx_transaction_actions_data_data',
+    'transactions_trx_transaction_actions_data_data_topic',
     'previous',
     'block',
     'transactions_trx_transaction_actions_data__dp_wd_req__id',
