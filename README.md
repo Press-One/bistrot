@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v3.0.1
+prs-atm v3.0.2
 
 usage: prs-atm <command> [<args>]
 
@@ -804,6 +804,21 @@ usage: prs-atm <command> [<args>]
               --keystore=keystore.json \
               --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --email=abc@def.com
+
+=====================================================================
+
+* `swapstmt` > Check Swap Statement:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --time     Timestamp for paging              [STRING  / OPTIONAL]
+    --count    Page size                         [NUMBER  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `count` is `100`.                                  |
+    | 2. Set `time` as `timestamp` of last item to get next page.   |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm swapstmt --account=ABCDE
 
 =====================================================================
 
