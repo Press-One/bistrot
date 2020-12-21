@@ -5,8 +5,8 @@ const { exchange, finance } = require('..');
 
 const func = async (argv) => {
     const resp = await exchange.addLiquid(
-        argv.pvtkey, argv.account, argv.cura, argv.amount,
-        argv.curb, argv.email, argv.memo, { dryrun: argv.dryrun }
+        argv.pvtkey, argv.account, argv.cura, argv.curb,
+        argv.amounta, argv.email, argv.memo, { dryrun: argv.dryrun }
     );
     // console.log(resp); // @keep this line for debug
     return argv.dryrun ? resp : await payreq.func(argv);
@@ -20,8 +20,8 @@ module.exports = {
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --cura     CURRENCY-A to be added            [STRING  / REQUIRED]',
-        '    --amount   Number like xx.xxxx of CURRENCY-A [NUMBER  / REQUIRED]',
         '    --curb     CURRENCY-B to be added            [STRING  / REQUIRED]',
+        '    --amounta  Number like xx.xxxx of CURRENCY-A [NUMBER  / REQUIRED]',
         '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
@@ -46,7 +46,7 @@ module.exports = {
         '    $ prs-atm swapaddlq \\',
         '              --account=ABCDE \\',
         '              --cura=COB \\',
-        '              --amount=12.3456 \\',
+        '              --amounta=12.3456 \\',
         '              --curb=CNB \\',
         '              --keystore=keystore.json \\',
         '              --email=abc@def.com',
