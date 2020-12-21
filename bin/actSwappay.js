@@ -1,14 +1,13 @@
 'use strict';
 
-// debug {
-const debug = false;
-// }
-
-const { exchange } = require('..');
+const { exchange, utilitas } = require('..');
 
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
 
 const func = async (argv) => {
+    const debug = utilitas.insensitiveCompare(
+        argv.rpcapi, 'http://51.255.133.170:8888'
+    );
     const resp = await exchange.getPaymentRequest(argv.account);
     if (!argv.json && resp) {
         let paymentUrls = [];
@@ -17,7 +16,7 @@ const func = async (argv) => {
         resp.payment_timeout = resp.payment_timeout.toISOString();
         for (let key of hiddenField) { delete resp[key]; }
         Object.values(resp.payment_request).map(x => {
-            // debug with CNB {
+            // debug mode {
             if (debug) {
                 const uuid = '[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
                 const replace = {
@@ -34,7 +33,7 @@ const func = async (argv) => {
             paymentUrls.push(x.payment_url);
         });
         if (paymentUrls.length) {
-            // debug {
+            // debug mode {
             if (debug) { console.log('>>> DEBUG MODE! <<<'); }
             // }
             console.log('\nOpen these URLs in your browser:\n\n'
