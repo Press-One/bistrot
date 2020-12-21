@@ -1,27 +1,24 @@
 'use strict';
 
-const { account, finance, utilitas } = require('..');
+const { account, finance, utilitas, mixin } = require('..');
 
 const func = async (argv) => {
-    const aResp = await account.getByName(argv.account);
-    utilitas.assert(aResp, `Account not found: ${argv.account}`, 404);
-    const bResp = await account.getBalance(argv.account);
-    const [currency, now] = [Object.keys(bResp)[0], new Date()];
-    const result = { 'balance': finance.bigFormat(bResp[currency], currency) };
-    if (aResp.refund_request) {
-        result.unstaking = finance.bigFormat(finance.bignumberSum(
-            finance.parseAmountAndCurrency(aResp.refund_request.net_amount)[0],
-            finance.parseAmountAndCurrency(aResp.refund_request.cpu_amount)[0],
-        ), currency);
-        const reqTime = new Date(`${aResp.refund_request.request_time}Z`);
+    const resp = await account.getByName(argv.account);
+    utilitas.assert(resp, `Account not found: ${argv.account}`, 404);
+    const [result, now] = [await account.getBalance(argv.account), new Date()];
+    for (let i in result) { result[i] = finance.bigFormat(result[i]); }
+    if (resp.refund_request) {
+        result[`unstaking_${mixin.defaultCurrency}`] = finance.bignumberSum(
+            finance.parseAmountAndCurrency(resp.refund_request.net_amount)[0],
+            finance.parseAmountAndCurrency(resp.refund_request.cpu_amount)[0],
+        );
+        const reqTime = new Date(`${resp.refund_request.request_time}Z`);
         const avlIn = (reqTime.getTime(
         ) + 1000 * 60 * 60 * 24 * 3 - now.getTime()) / 1000 / 60 / 60;
         result.unstak_available_in = `${Math.round(avlIn * 100) / 100} HR `;
         result.unstak_request_time = reqTime.toUTCString();
         result.timestamp = now.toUTCString();
-        if (avlIn < 0) {
-            result.refund_available = true;
-        }
+        if (avlIn < 0) { result.refund_available = true; }
     }
     return result;
 };
