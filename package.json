@@ -9,6 +9,7 @@
         "start": "node index.js",
         "debug": "node --inspect --trace-warnings debug.js",
         "test": "node --inspect --trace-warnings test.js",
+        "ncuinit": "npm install -g npm-check-updates",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
         "prepublishOnly": "npm version patch && npm run updep && npm run gitsync"
