@@ -49,7 +49,7 @@ module.exports = {
         '    |   mistake of withdraw accounts.                               |',
         '    └---------------------------------------------------------------┘',
         '',
-        '    > Example of withdrawing to Mixin number (with Mixin user name):',
+        '    > Example of withdrawing to Mixin number:',
         '    $ prs-atm withdraw \\',
         '              --account=ABCDE \\',
         '              --amount=12.3456 \\',
