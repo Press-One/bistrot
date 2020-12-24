@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v3.0.3
+prs-atm v3.0.4
 
 usage: prs-atm <command> [<args>]
 
@@ -590,15 +590,15 @@ usage: prs-atm <command> [<args>]
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --from     From token symbol                 [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx of FROM-TOKEN [NUMBER  / REQUIRED]
     --to       To token symbol                   [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
-    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
     --slippage Percentage of slippage            [NUMBER  / OPTIONAL]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
     | 0. Use `swappool` to get all pools that available to swap.    |
     | 1. Default `slippage` is `5`, which means a 5% slippage.      |
@@ -612,12 +612,68 @@ usage: prs-atm <command> [<args>]
     | 9. Finish, `swapcancel` or timeout a current trx before swap. |
     └---------------------------------------------------------------┘
 
-    > Example:
+    > Example of Estimating a Swap Deal (dryrun):
     $ prs-atm swap \
               --account=ABCDE \
               --from=COB \
-              --to=CNB \
               --amount=12.3456 \
+              --to=CNB \
+              --keystore=keystore.json \
+              --email=abc@def.com \
+              --dryrun
+
+    > Example of Swap:
+    $ prs-atm swap \
+              --account=ABCDE \
+              --from=COB \
+              --amount=12.3456 \
+              --to=CNB \
+              --keystore=keystore.json \
+              --email=abc@def.com
+
+=====================================================================
+
+* `swapaddlq` > Add Liquid to Swap Pools:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --cura     CURRENCY-A to be added            [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx of CURRENCY-A [NUMBER  / REQUIRED]
+    --curb     CURRENCY-B to be added            [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 0. Use `swappool` to get pools that available to add liquid.  |
+    | 1. Amount of CURRENCY-B will be calculated automatically.     |
+    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 3. After successful execution, you will get `2` URLs.         |
+    | 4. Open these URLs in your browser.                           |
+    | 5. Scan the QR codes with Mixin to complete the payment.      |
+    | 6. You have to complete the payment within `7` days.          |
+    | 7. SCANNING AN EXPIRED QR CODES WILL RESULT IN LOST MONEY.    |
+    | 8. Only `1` swap related transaction is allowed at a time.    |
+    | 9. Finish, `swapcancel` or timeout a current trx before exec. |
+    └---------------------------------------------------------------┘
+
+    > Example of Estimating a Liquid Adding Plan (dryrun):
+    $ prs-atm swapaddlq \
+              --account=ABCDE \
+              --cura=COB \
+              --amount=12.3456 \
+              --curb=CNB \
+              --keystore=keystore.json \
+              --email=abc@def.com \
+              --dryrun
+
+    > Example of Adding Liquid:
+    $ prs-atm swapaddlq \
+              --account=ABCDE \
+              --cura=COB \
+              --amount=12.3456 \
+              --curb=CNB \
               --keystore=keystore.json \
               --email=abc@def.com
 
@@ -655,6 +711,55 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm pool
+
+=====================================================================
+
+* `swaprmlq` > Remove Liquid to Swap Pools:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --cura     CURRENCY-A to be removed          [STRING  / REQUIRED]
+    --curb     CURRENCY-B to be removed          [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx of POOL-TOKEN [NUMBER  / REQUIRED]
+    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
+    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Use `swappool` to get pools that available to rm liquid.   |
+    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 3. One of `mx-num` or `mx-id` must be provided.               |
+    | 4. Only `1` swap related transaction is allowed at a time.    |
+    | 5. Finish, `swapcancel` or timeout a current trx before exec. |
+    └---------------------------------------------------------------┘
+    ┌- WARNING -----------------------------------------------------┐
+    | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |
+    |   refund. Wrong accounts will cause property loss.            |
+    | ⚠ We are not responsible for any loss of property due to the  |
+    |   mistake of withdraw accounts.                               |
+    └---------------------------------------------------------------┘
+
+    > Example of remove liquid and refund to Mixin number:
+    $ prs-atm swaprmlq \
+              --account=ABCDE \
+              --cura=COB \
+              --curb=CNB \
+              --amount=12.3456 \
+              --mx-num=12345 \
+              --keystore=keystore.json \
+              --email=abc@def.com
+
+    > Example of remove liquid and refund to Mixin user id:
+    $ prs-atm swaprmlq \
+              --account=ABCDE \
+              --cura=COB \
+              --curb=CNB \
+              --amount=12.3456 \
+              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
+              --keystore=keystore.json \
+              --email=abc@def.com
 
 =====================================================================
 
@@ -804,7 +909,7 @@ usage: prs-atm <command> [<args>]
     |   mistake of withdraw accounts.                               |
     └---------------------------------------------------------------┘
 
-    > Example of withdrawing to Mixin number (with Mixin user name):
+    > Example of withdrawing to Mixin number:
     $ prs-atm withdraw \
               --account=ABCDE \
               --amount=12.3456 \
