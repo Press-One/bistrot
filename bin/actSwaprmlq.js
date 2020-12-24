@@ -4,12 +4,10 @@ const payreq = require('./actSwappay');
 const { exchange } = require('..');
 
 const func = async (argv) => {
-    const resp = await exchange.rmLiquid(
-        argv.pvtkey, argv.account, argv.cura, argv.curb,
-        argv.amount, argv.email, argv.memo, { dryrun: argv.dryrun }
+    return await exchange.rmLiquid(
+        argv.pvtkey, argv.account, argv.cura, argv.curb, argv.amount,
+        argv['mx-id'], argv['mx-num'], argv.email, argv.memo,
     );
-    // console.log(resp); // @keep this line for debug
-    return argv.dryrun ? resp : await payreq.func(argv);
 };
 
 module.exports = {

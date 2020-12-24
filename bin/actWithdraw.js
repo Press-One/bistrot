@@ -4,13 +4,8 @@ const { finance, atm } = require('..');
 
 const func = async (argv) => {
     return await atm.withdraw(
-        argv.pvtkey,
-        argv.account,
-        argv['mx-id'],
-        argv['mx-num'],
-        argv.email,
-        argv.amount,
-        argv.memo
+        argv.pvtkey, argv.account, argv['mx-id'],
+        argv['mx-num'], argv.email, argv.amount, argv.memo
     );
 };
 
