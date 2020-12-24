@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v3.0.4
+prs-atm v3.0.5
 
 usage: prs-atm <command> [<args>]
 
@@ -731,8 +731,9 @@ usage: prs-atm <command> [<args>]
     | 1. Use `swappool` to get pools that available to rm liquid.   |
     | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
     | 3. One of `mx-num` or `mx-id` must be provided.               |
-    | 4. Only `1` swap related transaction is allowed at a time.    |
-    | 5. Finish, `swapcancel` or timeout a current trx before exec. |
+    | 4. Execute the `auth` command before the first `swaprmlq`.    |
+    | 5. Only `1` swap related transaction is allowed at a time.    |
+    | 6. Finish, `swapcancel` or timeout a current trx before exec. |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
     | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |
