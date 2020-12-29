@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas, config, keychain } = require('..');
+const { utilitas, config, keychain, system } = require('..');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -144,6 +144,8 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         chainApi: argv.chainapi,
         speedTest: argv.spdtest,
     });
+    const x = await system.checkVersion();
+    console.log(x);
     try {
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
