@@ -144,9 +144,13 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         chainApi: argv.chainapi,
         speedTest: argv.spdtest,
     });
-    const x = await system.checkVersion();
-    console.log(x);
     try {
+        const chVer = await system.checkVersion();
+        if (chVer && !argv.json) {
+            console.log(`\nNotice: New version ${chVer.newVersion.version} of `
+                + `${chVer.name} is available.`
+                + ` Please update it as soon as possible.\n`);
+        }
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
         utilitas.assert(act && act.func, errNotFound);
