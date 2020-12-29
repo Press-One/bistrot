@@ -1,7 +1,7 @@
 {
     "name": "prs-atm",
     "description": "A CLI client for PRESS.one .",
-    "version": "2.0.6",
+    "version": "3.0.6",
     "private": false,
     "homepage": "https://github.com/Press-One/prs-atm",
     "main": "index.js",
