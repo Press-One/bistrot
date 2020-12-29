@@ -41,7 +41,7 @@
         "keythereum-pure-js": "^1.1.9",
         "prs-utility": "^0.1.0",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.7.107",
+        "sushitrain": "^1989.7.110",
         "table": "^6.0.4",
         "yargs": "^16.2.0"
     },
@@ -58,7 +58,7 @@
         "libp2p-kad-dht": "^0.20.4",
         "libp2p-mplex": "^0.10.1",
         "libp2p-secio": "^0.13.1",
-        "libp2p-tcp": "^0.15.1",
+        "libp2p-tcp": "^0.15.2",
         "mime-types": "^2.1.27",
         "multihashing": "^0.3.3",
         "ncp": "^2.0.0",
