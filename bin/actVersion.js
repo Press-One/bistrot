@@ -5,8 +5,8 @@ const path = require('path');
 
 const func = async (argv) => {
     const pkg = path.join(path.dirname(__filename), '..', 'package.json');
-    const data = await utilitas.which(pkg);
-    return data && {
+    let data = await utilitas.which(pkg);
+    data = data ? {
         package_name: data.name,
         description: data.description,
         package_version: `v${data.version}`,
@@ -15,7 +15,13 @@ const func = async (argv) => {
         repository: data.repository.url,
         author: data.author,
         license: data.license,
-    };
+    } : {};
+    for (let p of ['sushitrain', 'utilitas']) {
+        data[`${p}_version`] = (await utilitas.which(
+            path.join(__filename, `../../node_modules/${p}/package.json`)
+        )).version;
+    }
+    return data;
 };
 
 module.exports = {
