@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas } = require('utilitas');
+const { utilitas } = require('..');
 const path = require('path');
 const fs = require('fs');
 
@@ -52,7 +52,7 @@ const func = async (argv) => {
         acts[actName] = require(path.join(__dirname, file));
     });
     const info = [
-        `${utilitas.which().title}`, '',
+        `${(await utilitas.which()).title}`, '',
         'usage: prs-atm <command> [<args>]'
     ];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });

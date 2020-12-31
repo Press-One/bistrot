@@ -2,11 +2,13 @@
 
 A CLI client for [PRESS.one](https://press.one/) .
 
+![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
+
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
-```
-# npm config set unsafe-perm true
-# npm install -g prs-atm
+```console
+$ sudo npm config set unsafe-perm true
+$ sudo npm install -g prs-atm
 $ prs-atm help
 ```
 
@@ -14,14 +16,14 @@ $ prs-atm help
 
 ### From Docker Hub
 
-```
+```console
 $ docker pull pressone/prs-atm
 $ docker run -it --rm pressone/prs-atm prs-atm help
 ```
 
 ### From a Mirror Server (inside China)
 
-```
+```console
 $ docker login -u prs-os -p pressone dockerhub.qingcloud.com
 $ docker pull dockerhub.qingcloud.com/pressone/prs-atm
 $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help

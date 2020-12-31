@@ -1,9 +1,9 @@
 'use strict';
 
-const { atm } = require('../index');
+const { atm } = require('..');
 
 const func = async (argv) => {
-    return await atm.undelegateBw(
+    return await atm.undelegate(
         argv.account, argv.receiver, argv.cpu, argv.net, argv.pvtkey
     );
 };
@@ -21,7 +21,6 @@ module.exports = {
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         "    | 1. Default `receiver` is current `account` (pvtkey holder).   |",
         '    | 2. One of `cpu` or `net` must be provided.                    |',

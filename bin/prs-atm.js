@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { utilitas } = require('utilitas');
+const { utilitas, config, keychain, system } = require('..');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
 const fs = require('fs');
@@ -29,6 +29,7 @@ const verbose = [
     'transactions_trx_transaction_actions_data_oracleservice',
     'transactions_trx_transaction_actions_data_meta',
     'transactions_trx_transaction_actions_data_data',
+    'transactions_trx_transaction_actions_data_data_topic',
     'previous',
     'block',
     'transactions_trx_transaction_actions_data__dp_wd_req__id',
@@ -39,8 +40,8 @@ const json = ['transaction'];
 
 const toBoolean = (input) => {
     const str = String(input || '').toLowerCase();
-    return !utilitas.isUndefined(input) && !str.length
-        || ['true', 'yes', '1'].includes(str);
+    return utilitas.isUndefined(input) ? undefined
+        : (['true', 'yes', '1', ''].includes(str));
 };
 
 const toArray = (input) => {
@@ -55,7 +56,20 @@ const unlockKeystore = async (options = {}) => {
         const result = await require('./actUnlock').func(argv, options);
         argv.pubkey = result.publickey;
         argv.pvtkey = result.privatekey;
+        return;
     }
+    try {
+        const { config } = await keychain.get(argv.account, argv.prmsn, {
+            unique: true, unlock: true, password: argv.password
+        });
+        const keystore = Object.values(config && config.keystores || {})[0];
+        if (keystore) {
+            argv.email = argv.email || config.email;
+            argv.account = argv.account || keystore.account;
+            argv.pubkey = keystore.keystore.publickey;
+            argv.pvtkey = keystore.keystore.privatekey;
+        }
+    } catch (err) { }
 };
 
 const randerResult = (result, options = { table: { KeyValue: true } }) => {
@@ -112,7 +126,8 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     argv[i] = toArray(argv[i]);
 });
 [
-    'trxonly', 'help', 'detail', 'force', 'json', 'spdtest', 'debug', `secret`
+    'trxonly', 'help', 'detail', 'force', 'json',
+    'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
@@ -120,16 +135,22 @@ const errNotFound = `Command not found: \`${command}\`.`;
 const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
 )}${command.slice(1).toLowerCase()}`;
 argv.readlineConf = { hideEchoBack: true, mask: '' };
-global.chainConfig = {
-    debug: argv.debug,
-    secret: argv.secret,
-    rpcApi: argv.rpcapi,
-    chainApi: argv.chainapi,
-    speedTest: argv.spdtest,
-};
 
 (async () => {
+    global.chainConfig = await config({
+        debug: argv.debug,
+        secret: argv.secret,
+        rpcApi: argv.rpcapi,
+        chainApi: argv.chainapi,
+        speedTest: argv.spdtest,
+    });
     try {
+        const chVer = await system.checkVersion();
+        if (chVer && !argv.json) {
+            console.log(`\nNotice: New version ${chVer.newVersion.version} of `
+                + `${chVer.name} is available.`
+                + ` Please update it as soon as possible.\n`);
+        }
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
         utilitas.assert(act && act.func, errNotFound);

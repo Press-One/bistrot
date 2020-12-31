@@ -1,17 +1,11 @@
 'use strict';
 
-const { finance } = require('sushitrain');
-const { atm } = require('../index');
+const { finance, atm } = require('..');
 
 const func = async (argv) => {
     return await atm.withdraw(
-        argv.pvtkey,
-        argv.account,
-        argv['mx-id'],
-        argv['mx-num'],
-        argv.email,
-        argv.amount,
-        argv.memo
+        argv.pvtkey, argv.account, argv['mx-id'],
+        argv['mx-num'], argv.email, argv.amount, argv.memo
     );
 };
 
@@ -22,12 +16,12 @@ module.exports = {
     name: 'Withdrawal',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --amount   Number like xx.xxxx               [STRING  / REQUIRED]',
+        '    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]',
-        '    --mx-num   Mixin user number                 [STRING  / OPTIONAL]',
+        '    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]',
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
@@ -50,7 +44,7 @@ module.exports = {
         '    |   mistake of withdraw accounts.                               |',
         '    └---------------------------------------------------------------┘',
         '',
-        '    > Example of withdrawing to Mixin number (with Mixin user name):',
+        '    > Example of withdrawing to Mixin number:',
         '    $ prs-atm withdraw \\',
         '              --account=ABCDE \\',
         '              --amount=12.3456 \\',

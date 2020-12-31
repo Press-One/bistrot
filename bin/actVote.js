@@ -1,6 +1,6 @@
 'use strict';
 
-const { ballot } = require('../index');
+const { ballot } = require('..');
 
 const func = async (argv) => {
     return await ballot.vote(argv.account, argv.add, argv.remove, argv.pvtkey);

@@ -1,6 +1,6 @@
 'use strict';
 
-const { sushitrain } = require('sushitrain');
+const { sushitrain } = require('..');
 
 const maxTrxLength = 288;
 

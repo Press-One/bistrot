@@ -1,9 +1,9 @@
 'use strict';
 
-const { helper } = require('../index');
+const { sushibar } = require('..');
 
 const func = async (argv) => {
-    let resp = await helper.getTransactionById(argv.id);
+    let resp = await sushibar.getTransactionById(argv.id);
     return resp && argv.json ? resp.transaction : resp.data;
 };
 
@@ -22,7 +22,7 @@ module.exports = {
     render: {
         table: {
             KeyValue: true,
-            config: { columns: { 0: { width: 12 }, 1: { width: 61 } } },
+            config: { columns: { 0: { width: 13 }, 1: { width: 60 } } },
         },
     },
 };

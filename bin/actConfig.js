@@ -1,6 +1,6 @@
 'use strict';
 
-const { etc } = require('../index');
+const { etc, utilitas } = require('..');
 
 const func = async (argv) => {
     const content = await etc.buildConfig(
@@ -11,7 +11,7 @@ const func = async (argv) => {
             overwrite: argv.force,
         });
     }
-    const result = {};
+    const resp = {};
     content.split(/\r|\n/).map(x => {
         const [key, value] = [
             x.replace(/([^=]*)=(.*)/, '$1').trim(),
@@ -20,10 +20,16 @@ const func = async (argv) => {
         ];
         if ((key || value)
             && key.toLocaleLowerCase() !== 'signature-provider') {
-            result[key] = value;
+            if (utilitas.isSet(resp[key])) {
+                if (!Array.isArray(resp[key])) { resp[key] = [resp[key]]; }
+                resp[key].push(value);
+            } else { resp[key] = value; }
         }
     });
-    return result;
+    for (let i in resp) {
+        if (Array.isArray(resp[i])) { resp[i] = resp[i].join('\n'); }
+    }
+    return resp;
 };
 
 module.exports = {

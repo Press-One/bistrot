@@ -1,6 +1,6 @@
 'use strict';
 
-const { account } = require('sushitrain');
+const { account } = require('..');
 
 const func = async (argv) => {
     return await account.create(

@@ -1,6 +1,6 @@
 'use strict';
 
-const { atm } = require('../index');
+const { atm } = require('..');
 
 const func = async (argv) => {
     return await atm.cancelPaymentRequest(argv.pvtkey, argv.account, argv.memo);
