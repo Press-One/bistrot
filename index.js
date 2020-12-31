@@ -4,6 +4,13 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = require('utilitas');
+module.exports['eos-name-verify'] = require('eos-name-verify');
+module.exports['eosjsKeygen'] = require('eosjs-keygen');
+module.exports['prsUtility'] = require('prs-utility');
+module.exports['eosjsKeos'] = require('eosjs-keos');
+module.exports['eosjs'] = require('eosjs');
+module.exports['pg'] = require('pg');
+module.exports['ws'] = require('ws');
 
 const libPath = path.join(__dirname, 'lib');
 fs.readdirSync(libPath).filter((file) => {
