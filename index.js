@@ -8,6 +8,7 @@ module.exports['eos-name-verify'] = require('eos-name-verify');
 module.exports['eosjsKeygen'] = require('eosjs-keygen');
 module.exports['prsUtility'] = require('prs-utility');
 module.exports['eosjsKeos'] = require('eosjs-keos');
+module.exports['eosjsEcc'] = require('eosjs-ecc');
 module.exports['eosjs'] = require('eosjs');
 module.exports['pg'] = require('pg');
 module.exports['ws'] = require('ws');
