@@ -153,6 +153,8 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
                 + `${chVer.name} is available.`
                 + ` Please update it as soon as possible.\n`);
         }
+    } catch (e) { }
+    try {
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
         utilitas.assert(act && act.func, errNotFound);
