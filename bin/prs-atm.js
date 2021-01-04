@@ -115,6 +115,9 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
                 columns: { 0: { width: 20 }, 1: { width: 53 } }
             }, options.table.config || {});
         }
+        // @todo: this is a tampory fix for table 6.0.6 {
+        options.table.config.singleLine = undefined;
+        // }
         out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
