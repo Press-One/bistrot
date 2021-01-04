@@ -116,7 +116,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
             }, options.table.config || {});
         }
         // @todo: this is a tampory fix for table 6.0.6 {
-        options.table.config.singleLine = undefined;
+        try { delete options.table.config.singleLine; } catch (e) { }
         // }
         out = data && data.length ? table(data, options.table.config) : '';
     }
