@@ -5,6 +5,7 @@
 const { utilitas, config, keychain, system } = require('..');
 const table = require('table').table;
 const argv = require('yargs').help(false).argv;
+const path = require('path');
 const fs = require('fs');
 
 const map = {
@@ -145,12 +146,15 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         speedTest: argv.spdtest,
     });
     try {
-        const chVer = await system.checkVersion();
+        const pkg = path.join(path.dirname(__filename), '..', 'package.json');
+        const chVer = await system.checkVersion(pkg);
         if (chVer && !argv.json) {
             console.log(`\nNotice: New version ${chVer.newVersion.version} of `
                 + `${chVer.name} is available.`
                 + ` Please update it as soon as possible.\n`);
         }
+    } catch (e) { }
+    try {
         utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
         const act = require(actFile);
         utilitas.assert(act && act.func, errNotFound);
