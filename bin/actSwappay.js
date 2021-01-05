@@ -50,7 +50,7 @@ module.exports = {
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '',
         '    > Example:',
-        '    $ prs-atm payreq --account=ABCDE',
+        '    $ prs-atm swappay --account=ABCDE',
     ],
     render: {
         table: {
