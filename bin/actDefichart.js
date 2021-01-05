@@ -126,7 +126,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    hide: true,
     func,
     name: 'Show Price Chart on DeFi (beta)',
     help: [
@@ -142,4 +141,5 @@ module.exports = {
         '    > Example:',
         '    $ prs-atm defichart --currency=BTC --period=24h',
     ],
+    hide: true,
 };

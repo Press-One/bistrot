@@ -3,7 +3,7 @@
 const { atm } = require('..');
 
 const func = async (argv) => {
-    const resp = await atm.openAccount(argv.name, argv.pubkey);
+    const resp = await atm.openAccount(argv.account, argv.pubkey);
     // / debug mode {
     const { utilitas, mixin } = require('..');
     const debug = utilitas.insensitiveCompare(
@@ -33,7 +33,7 @@ module.exports = {
     func,
     name: 'Open an Account',
     help: [
-        '    --name     PRESS.one account                 [STRING  / REQUIRED]',
+        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
@@ -55,6 +55,6 @@ module.exports = {
         '    └---------------------------------------------------------------┘',
         '',
         '    > Example:',
-        '    $ prs-atm openaccount --name=ABCDE --keystore=keystore.json',
+        '    $ prs-atm openaccount --account=ABCDE --keystore=keystore.json',
     ],
 };
