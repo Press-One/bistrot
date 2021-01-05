@@ -1,8 +1,8 @@
 'use strict';
 
 const { defi } = require('..');
-const blessed = require('blessed');
-const contrib = require('blessed-contrib');
+// const blessed = require('blessed');
+// const contrib = require('blessed-contrib');
 
 const logItem = ['time', 'currency', 'base', 'price'];
 const lpTime = (time) => { return time > 9 ? String(time) : `0${time}`; };
