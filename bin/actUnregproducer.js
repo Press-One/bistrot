@@ -3,8 +3,7 @@
 const { producer } = require('..');
 
 const func = async (argv) => {
-    const result = await producer.unregister(argv.account, argv.pvtkey,
-    );
+    const result = await producer.unRegister(argv.account, argv.pvtkey);
     return result;
 };
 
