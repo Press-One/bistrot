@@ -35,8 +35,6 @@
         "url": "https://github.com/Press-One/prs-atm.git"
     },
     "dependencies": {
-        "blessed": "^0.1.81",
-        "blessed-contrib": "^4.8.20",
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
         "sushitrain": "^1989.7.124",
