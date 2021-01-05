@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v3.0.13
+prs-atm v3.0.14
 
 usage: prs-atm <command> [<args>]
 
@@ -228,54 +228,6 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm config --account=ABCD --path=. --keystore=keystore.json
-
-=====================================================================
-
-* `defichart` > Show Price Chart on DeFi (beta):
-
-    --currency Cryptocurrency type               [STRING  / OPTIONAL]
-    --period   Price period                      [STRING  / OPTIONAL]
-    --interval Update interval in seconds        [INTEGER / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Currency available: `BTC`(default), `ETH`, `EOS`, `PRS`.   |
-    | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |
-    | 3. Please use option `--json` to get raw price history.       |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm defichart --currency=BTC --period=24h
-
-=====================================================================
-
-* `defimine` > Launch a DeFi Miner Daemon (beta):
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm defimine --account=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `defiprice` > Check Coin Prices on DeFi (beta):
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm defiprice --account=ABCDE --keystore=keystore.json
 
 =====================================================================
 
@@ -723,7 +675,7 @@ usage: prs-atm <command> [<args>]
     --account  PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm payreq --account=ABCDE
+    $ prs-atm swappay --account=ABCDE
 
 =====================================================================
 
