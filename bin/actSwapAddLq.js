@@ -1,6 +1,6 @@
 'use strict';
 
-const payreq = require('./actSwappay');
+const payreq = require('./actSwapPay');
 const { exchange, finance } = require('..');
 
 const func = async (argv) => {

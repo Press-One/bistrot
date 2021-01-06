@@ -3,6 +3,10 @@
 const { finance, atm } = require('..');
 
 const func = async (argv) => {
+    try {
+        const resp = await atm.updateAuth(argv.account, null, argv.pvtkey);
+        // console.log(resp); // keep this line for debug
+    } catch (e) { }
     return await atm.withdraw(
         argv.pvtkey, argv.account, argv['mx-id'],
         argv['mx-num'], argv.email, argv.amount, argv.memo

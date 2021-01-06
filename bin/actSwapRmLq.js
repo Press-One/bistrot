@@ -1,9 +1,12 @@
 'use strict';
 
-const payreq = require('./actSwappay');
-const { exchange } = require('..');
+const { atm, exchange } = require('..');
 
 const func = async (argv) => {
+    try {
+        const resp = await atm.updateAuth(argv.account, null, argv.pvtkey);
+        // console.log(resp); // keep this line for debug
+    } catch (e) { }
     return await exchange.rmLiquid(
         argv.pvtkey, argv.account, argv.cura, argv.curb, argv.amount,
         argv['mx-id'], argv['mx-num'], argv.email, argv.memo,
