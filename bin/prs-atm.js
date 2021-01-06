@@ -54,7 +54,7 @@ const toArray = (input) => {
 
 const unlockKeystore = async (options = {}) => {
     if (argv.keystore) {
-        const result = await require('./actUnlock').func(argv, options);
+        const result = await require('./actKeystoreUnlock').func(argv, options);
         argv.pubkey = result.publickey;
         argv.pvtkey = result.privatekey;
         return;
