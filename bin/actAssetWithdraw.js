@@ -29,11 +29,11 @@ module.exports = {
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. One of `mx-num` or `mx-id` must be provided.               |',
-        '    | 2. Execute `AccountAuth` command before the first withdrawal. |',
-        '    | 3. Sum greater than ' + finance.maxWithdrawAmount
+        '    | 2. Sum greater than ' + finance.maxWithdrawAmount
         + ' in last 24H requires manual review.| ',
-        '    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
-        '    | 5. Finish, `AssetCancel` or timeout a trx before request.     |',
+        '    | 3. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
+        '    | 4. Finish, `AssetCancel` or timeout a trx before request.     |',
+        '    | 5. If any issue, try to run `AccountAuth` command to fix it.  |',
         '    └---------------------------------------------------------------┘',
         '    ┌- WARNING -----------------------------------------------------┐',
         '    | ⚠ If you withdraw via `mx-num`, for your security, you can    |',
