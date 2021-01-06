@@ -28,10 +28,12 @@ module.exports = {
     name: 'Check Balance',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '',
-        '    > Example:',
-        '    $ prs-atm balance --account=ABCDE',
     ],
+    example: {
+        args: {
+            account: true,
+        }
+    },
     render: {
         table: {
             KeyValue: true,

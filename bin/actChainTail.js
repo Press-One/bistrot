@@ -45,9 +45,22 @@ module.exports = {
         '    | 1. Follow the latest block / trx while `blocknum` is missing. |',
         '    | 2. Follow trxes instead of blocks while `trxonly` is set.     |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm tail --blocknum=999999 --trxonly --json',
-        '    $ prs-atm tail --blocknum=999999 --trxonly --json --grep=PIP:2001',
+    ],
+    example: [
+        {
+            args: {
+                blocknum: true,
+                trxonly: null,
+                json: null,
+            },
+        },
+        {
+            args: {
+                blocknum: true,
+                trxonly: null,
+                json: null,
+                grep: 'PIP:2001',
+            },
+        },
     ],
 };

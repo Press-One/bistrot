@@ -48,10 +48,12 @@ module.exports = {
     name: 'Get swapping payment request',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '',
-        '    > Example:',
-        '    $ prs-atm swappay --account=ABCDE',
     ],
+    example: {
+        args: {
+            account: true,
+        },
+    },
     render: {
         table: {
             KeyValue: true,

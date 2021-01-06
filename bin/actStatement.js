@@ -65,9 +65,11 @@ module.exports = {
         "    | 3. Default `detail` is `false`.                               |",
         "    | 4. Set `time` as `timestamp` of last item to get next page.   |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm statement --account=ABCDE',
     ],
+    example: {
+        args: {
+            account: true,
+        }
+    },
     render,
 };

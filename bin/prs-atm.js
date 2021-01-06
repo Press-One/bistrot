@@ -127,14 +127,13 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     argv[i] = toArray(argv[i]);
 });
 [
-    'trxonly', 'help', 'detail', 'force', 'json',
+    'trxonly', 'help', 'detail', 'force', 'json', 'daemon',
     'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
 const errNotFound = `Command not found: \`${command}\`.`;
-const actFile = `${__dirname}/act${(command[0] || '').toUpperCase(
-)}${command.slice(1).toLowerCase()}`;
+command = command.toLowerCase();
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
 (async () => {
@@ -155,10 +154,17 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         }
     } catch (e) { }
     try {
-        utilitas.assert(fs.existsSync(`${actFile}.js`), errNotFound);
-        const act = require(actFile);
+        const cmds = {};
+        fs.readdirSync(__dirname).filter((file) => {
+            return /\.js$/i.test(file) && file !== 'prs-atm.js';
+        }).forEach((file) => {
+            cmds[file.toLowerCase(
+            ).replace(/^act|\.js$/ig, '')] = path.join(__dirname, file);
+        });
+        utilitas.assert(cmds[command], errNotFound);
+        const act = require(cmds[command]);
         utilitas.assert(act && act.func, errNotFound);
-        if (act.pubkey && act.pvtkey) {
+        if (act.pvtkey) {
             await unlockKeystore(argv);
         } else if (act.pubkey) {
             await unlockKeystore(argv, { pubkeyOnly: true });

@@ -8,7 +8,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Unregister as a Producer',
@@ -17,11 +16,11 @@ module.exports = {
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pubkey` must be provided.       |',
-        '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm unregproducer --account=ABCDE --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            keystore: true,
+        }
+    },
 };

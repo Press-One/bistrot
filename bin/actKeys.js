@@ -21,10 +21,12 @@ module.exports = {
     name: 'Check Account Keys',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '',
-        '    > Example:',
-        '    $ prs-atm keys --account=ABCDE',
     ],
+    example: {
+        args: {
+            account: true,
+        },
+    },
     render: {
         table: {
             KeyValue: true,

@@ -14,7 +14,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Cancel a swapping payment request',
@@ -28,12 +27,13 @@ module.exports = {
         '    | 1. Only `1` swap transaction is allowed at a time.            |',
         '    | 2. Cancel a current trx by this cmd before issuing a new one. |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm swapcancel',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json \\',
     ],
+    example: {
+        args: {
+            account: true,
+            keystore: true,
+        },
+    },
     render: {
         table: {
             KeyValue: true,

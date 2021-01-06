@@ -9,7 +9,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Create an Account',
@@ -21,16 +20,16 @@ module.exports = {
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 0. DO NOT USE THIS FEATURE CURRENTLY.                         | ',
-        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        '    | 1. DO NOT USE THIS FEATURE CURRENTLY.                         | ',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm createaccount \\',
-        '              --account=ABCDE \\',
-        '              --name=FIJKL \\',
-        '              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            name: true,
+            npubkey: true,
+            keystore: true,
+        }
+    },
     hide: true,
 };

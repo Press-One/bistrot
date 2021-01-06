@@ -29,10 +29,6 @@ const func = async (argv) => {
 module.exports = {
     func,
     name: 'Check Producers Information',
-    help: [
-        '    > Example:',
-        '    $ prs-atm producers',
-    ],
     render: {
         table: {
             columns: [

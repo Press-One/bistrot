@@ -21,12 +21,17 @@ module.exports = {
     name: 'Check Voting Information',
     help: [
         '    --account  PRESS.one account                 [STRING  / OPTIONAL]',
-        '',
-        '    > Example of checking global voting information:',
-        '    $ prs-atm ballot',
-        '',
-        "    > Example of checking account's voting information:",
-        '    $ prs-atm ballot --account=ABCDE',
+    ],
+    example: [
+        {
+            title: 'checking global voting information',
+        },
+        {
+            title: "checking account's voting information",
+            args: {
+                account: true,
+            },
+        },
     ],
     render: {
         table: {

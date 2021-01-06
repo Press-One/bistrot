@@ -1,28 +1,34 @@
 'use strict';
 
-const { atm } = require('..');
+const { account } = require('..');
 
 const func = async (argv) => {
-    return await atm.cancelPaymentRequest(argv.pvtkey, argv.account, argv.memo);
+    return await account.buyRam(
+        argv.account, argv.receiver, argv.ram, argv.pvtkey
+    );
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
-    name: 'Cancel a depositing payment request',
+    name: 'Buy RAM',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
+        "    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]",
+        '    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
-        '    | 2. Cancel a current trx by this cmd before issuing a new one. |',
+        "    | 1. Default `receiver` is current `account` (pvtkey holder).   |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm cancel --account=ABCDE --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            receiver: true,
+            ram: true,
+            keystore: true,
+        }
+    },
 };

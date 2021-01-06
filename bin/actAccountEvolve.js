@@ -22,15 +22,13 @@ module.exports = {
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore`(recommend) or `pubkey,pvtkey` must be provided. |',
-        '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm evolve \\',
-        '              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --account=ABCDE \\',
-        '              --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            address: true,
+            prevkey: true,
+            account: true,
+            keystore: true,
+        },
+    },
 };

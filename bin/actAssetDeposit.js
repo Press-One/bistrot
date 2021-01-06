@@ -13,7 +13,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Deposit',
@@ -26,22 +25,22 @@ module.exports = {
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
-        '    | 2. After successful execution, you will get a URL.            |',
-        '    | 3. Open this URL in your browser.                             |',
-        '    | 4. Scan the QR code with Mixin to complete the payment.       |',
-        '    | 5. You have to complete the payment within `'
+        '    | 1. After successful execution, you will get a URL.            |',
+        '    | 2. Open this URL in your browser.                             |',
+        '    | 3. Scan the QR code with Mixin to complete the payment.       |',
+        '    | 4. You have to complete the payment within `'
         + `${finance.transferTimeout / 1000 / 60 / 60 / 24}\` days.          |`,
-        '    | 6. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |',
-        '    | 7. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
-        '    | 8. Finish, `cancel` or timeout a current trx before request.  |',
+        '    | 5. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |',
+        '    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
+        '    | 7. Finish, `AssetCancel` or timeout a trx before request.     |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm deposit \\',
-        '              --account=ABCDE \\',
-        '              --amount=12.3456 \\',
-        '              --keystore=keystore.json \\',
-        '              --email=abc@def.com',
     ],
+    example: {
+        args: {
+            account: true,
+            amount: true,
+            keystore: true,
+            email: true,
+        },
+    },
 };
