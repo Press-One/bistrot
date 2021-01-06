@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v4.0.4
+prs-atm v4.0.5
 
 usage: prs-atm <command> [<args>]
 
@@ -64,7 +64,7 @@ usage: prs-atm <command> [<args>]
     | 4. Reauthorize after you update your active or owner keys.    |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example:
