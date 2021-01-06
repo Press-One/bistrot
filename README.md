@@ -34,49 +34,23 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v3.0.16
+prs-atm v4.0.0
 
 usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `account` > Check an Account:
+* `Account` > Check an Account:
 
     --name     PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm account --name=ABCDE
+    $ prs-atm Account \
+              --name=ABCDE
 
 =====================================================================
 
-* `activekey` > Update Active Key:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --npubkey  New `active` public key           [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    | 2. You need `owner key permission` to execute this command.   |
-    | 3. Use `auth` to reauthorize after you update your keys.      |
-    └---------------------------------------------------------------┘
-    ┌- DANGER ------------------------------------------------------┐
-    | ⚠ Incorrect use will result in `loss of permissions`.         |
-    | ⚠ `DO NOT` do this unless you know what you are doing.        |
-    | ⚠ We are not responsible for any loss of permissions due to   |
-    |   the mistake of updating keys.                               |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm activekey \
-              --account=ABCDE \
-              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `auth` > Update Authorization:
+* `AccountAuth` > Update Authorization:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -85,92 +59,86 @@ usage: prs-atm <command> [<args>]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Remember to authorize your ACTIVE KEY ONLY, NOT OWNER KEY. |
-    | 2. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    | 3. You have to execute this cmd to activate your new account. |
-    | 4. Normally, this command only needs to be executed 1 time.   |
-    | 5. Reauthorize after you update your active or owner keys.    |
+    | 2. You have to execute this cmd to activate your new account. |
+    | 3. Normally, this command only needs to be executed 1 time.   |
+    | 4. Reauthorize after you update your active or owner keys.    |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm auth --account=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `balance` > Check Balance:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-
-    > Example:
-    $ prs-atm balance --account=ABCDE
-
-=====================================================================
-
-* `ballot` > Check Voting Information:
-
-    --account  PRESS.one account                 [STRING  / OPTIONAL]
-
-    > Example of checking global voting information:
-    $ prs-atm ballot
-
-    > Example of checking account's voting information:
-    $ prs-atm ballot --account=ABCDE
-
-=====================================================================
-
-* `bindmixin` > Bind a Mixin account to a PRESS.one account:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. After successful execution, you will get a URL.            |
-    | 3. Open this URL in your browser.                             |
-    | 4. Scan the QR code with Mixin to complete the payment.       |
-    | 5. You will receive further notifications via Mixin.          |
-    | 6. It will cost `0.0001 PRS` for each binding.                |
-    | 7. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm bindmixin --account=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `block` > Get block by block id or block number:
-
-    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
-    ┌---------------------------------------------------------------┐
-    | 1. Please use option `--json` to get complete block data.     |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm block --id=26621512 --json
-
-=====================================================================
-
-* `buyram` > Buy RAM:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
-    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Default `receiver` is current `account` (pvtkey holder).   |
-    └---------------------------------------------------------------┘
-
-    > Example of purchasing RAM:
-    $ prs-atm buyram \
+    $ prs-atm AccountAuth \
               --account=ABCDE \
-              --receiver=FIJKL \
-              --ram=12.3456 \
               --keystore=keystore.json
 
 =====================================================================
 
-* `cancel` > Cancel a depositing payment request:
+* `AccountEvolve` > Evolve legacy PRESS.one accounts and Flying Pub topics:
+
+    --address  Legacy account, topic address     [STRING  / REQUIRED]
+    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AccountEvolve \
+              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AccountOpen` > Open an Account:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You will receive further notifications via Mixin.          |
+    | 5. It will cost 4 PRS (2 for RAM, 1 for NET, 1 for CPU).      |
+    | 6. Registration fee is NON-REFUNDABLE, EVEN IF IT FAILS.      |
+    └---------------------------------------------------------------┘
+    ┌- Standard Account Naming Conventions -------------------------┐
+    | ■ Can only contain the characters                             |
+    |   `.abcdefghijklmnopqrstuvwxyz12345`.                         |
+    |   `a-z` (lowercase), `1-5` and `.` (period)                   |
+    | ■ Must start with a letter                                    |
+    | ■ Must be 12 characters                                       |
+    | ? https://eosio-cpp.readme.io/v1.1.0/docs/naming-conventions  |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AccountOpen \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AssetBalance` > Check Balance:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm AssetBalance \
+              --account=ABCDE
+
+=====================================================================
+
+* `AssetCancel` > Cancel a depositing payment request:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -181,23 +149,308 @@ usage: prs-atm <command> [<args>]
     | 1. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
     | 2. Cancel a current trx by this cmd before issuing a new one. |
     └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm cancel --account=ABCDE --keystore=keystore.json
+    $ prs-atm AssetCancel \
+              --account=ABCDE \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `cmd` > List available commands:
+* `AssetDeposit` > Deposit:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You have to complete the payment within `7` days.          |
+    | 5. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
+    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 7. Finish, `AssetCancel` or timeout a trx before request.     |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AssetDeposit \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --email=abc@def.com
+
+=====================================================================
+
+* `AssetRefund` > Transfer the PRS in the refund to the balance:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Only when REFUND_AVAILABLE shows in AssetBalance output.   |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AssetRefund \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AssetWithdraw` > Withdrawal:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
+    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
+    --email    Email for notification            [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. One of `mx-num` or `mx-id` must be provided.               |
+    | 2. Execute `AccountAuth` command before the first withdrawal. |
+    | 3. Sum greater than 200000 in last 24H requires manual review.| 
+    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 5. Finish, `AssetCancel` or timeout a trx before request.     |
+    └---------------------------------------------------------------┘
+    ┌- WARNING -----------------------------------------------------┐
+    | ⚠ If you withdraw via `mx-num`, for your security, you can    |
+    |   only withdraw to your original Mixin payment accounts.      |
+    | ⚠ If you withdraw via `mx-id`, you can withdraw to whatever   |
+    |   Mixin account you want.                                     |
+    | ⚠ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
+    |   Wrong accounts will cause property loss.                    |
+    | ⚠ We are not responsible for any loss of property due to the  |
+    |   mistake of withdraw accounts.                               |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example of withdrawing to Mixin number:
+    $ prs-atm AssetWithdraw \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --mx-num=12345 \
+              --email=abc@def.com
+
+    > Example of withdrawing to Mixin user id:
+    $ prs-atm AssetWithdraw \
+              --account=ABCDE \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
+              --email=abc@def.com
+
+=====================================================================
+
+* `Bp` > Check Producers Information:
+
+    > Example:
+    $ prs-atm Bp
+
+=====================================================================
+
+* `BpBallot` > Check Voting Information:
+
+    --account  PRESS.one account                 [STRING  / OPTIONAL]
+
+    > Example of checking global voting information:
+    $ prs-atm BpBallot
+
+    > Example of checking account's voting information:
+    $ prs-atm BpBallot \
+              --account=ABCDE
+
+=====================================================================
+
+* `BpReg` > Register as a Producer:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --url      URL where info about producer     [STRING  / OPTIONAL]
+    --location Relative location for scheduling  [INTEGER / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm BpReg \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `BpReward` > Claim Rewards:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --daemon   Automatically reward claiming     [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. You can only claim your reward once a day.                 |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example of Claiming Reward:
+    $ prs-atm BpReward \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+    > Example of Running a Daemon to Claim Reward Automatically:
+    $ prs-atm BpReward \
+              --account=ABCDE \
+              --keystore=keystore.json \
+              --daemon
+
+=====================================================================
+
+* `BpUnreg` > Unregister as a Producer:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm BpUnreg \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `BpVote` > Vote or Revoke Voting for Producers:
+
+    --account  PRESS.one account                 [STRING  / OPTIONAL]
+    --add      Add BP to list of voted producers [STRING  / OPTIONAL]
+    --remove   Del BP to list of voted producers [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. One of `add` or `remove` must be provided.                 |
+    | 2. `add` and `remove` can be a list split by ',' or ';'.      |
+    | 3. Use `BpBallot` cmd to check info brfore and after voting.  |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm BpVote \
+              --account=ABCDE \
+              --add=bp1,bp2 \
+              --remove=bp3,bp4 \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `Chain` > Check PRS-chain Information:
+
+    ┌---------------------------------------------------------------┐
+    | 1. You can use `rpcapi` param to check the specific PRS-node. |
+    └---------------------------------------------------------------┘
+
+    > Example of checking global PRS-chain Information:
+    $ prs-atm Chain
+
+    > Example of checking specific PRS-node Information:
+    $ prs-atm Chain \
+              --rpcapi=http://51.68.201.144:8888
+
+=====================================================================
+
+* `ChainBlock` > Get block by block id or block number:
+
+    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--json` to get complete block data.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ChainBlock \
+              --id=26621512 \
+              --json
+
+=====================================================================
+
+* `ChainTail` > Display the last block / transaction of the chain:
+
+    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
+    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
+    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
+    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. Follow the latest block / trx while `blocknum` is missing. |
+    | 2. Follow trxes instead of blocks while `trxonly` is set.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ChainTail \
+              --blocknum=26621512 \
+              --trxonly \
+              --json
+
+    > Example:
+    $ prs-atm ChainTail \
+              --blocknum=26621512 \
+              --trxonly \
+              --json \
+              --grep=PIP:2001
+
+=====================================================================
+
+* `ChainTrx` > Get transaction by id:
+
+    --id       Transaction id                    [STRING  / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Use option `--json` to get complete transaction data.      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ChainTrx \
+              --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --json
+
+=====================================================================
+
+* `Cmd` > List available commands:
 
     > Example of listing all commands:
-    $ prs-atm cmd
+    $ prs-atm Cmd
 
     > Example of searching commands:
-    $ prs-atm cmd ballot info
+    $ prs-atm Cmd ballot info
 
 =====================================================================
 
-* `conf` > Configuration:
+* `Config` > Configuration:
 
     --email    Notification email address         [EMAIL / UNDEFINED]
     --spdtest  Test and pick the fastest node     [T / F / UNDEFINED]
@@ -210,11 +463,14 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm conf --spdtest=true --debug=false --secret=undefined
+    $ prs-atm Config \
+              --spdtest=true \
+              --debug=false \
+              --secret=undefined
 
 =====================================================================
 
-* `config` > Generate the `config.ini` file:
+* `GenConfig` > Generate the `config.ini` file:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --agent    Agent name for your PRS-node      [STRING  / OPTIONAL]
@@ -225,125 +481,111 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. Default `agent` is current `account` (pvtkey holder).      |
     └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm config --account=ABCD --path=. --keystore=keystore.json
-
-=====================================================================
-
-* `delegate` > Delegate CPU and/or Network Bandwidth:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
-    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --net      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Default `receiver` is current `account` (pvtkey holder).   |
-    | 2. One of `cpu` or `net` must be provided.                    |
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
     └---------------------------------------------------------------┘
 
-    > Example of delegating CPU and NET:
-    $ prs-atm delegate \
+    > Example:
+    $ prs-atm GenConfig \
               --account=ABCDE \
-              --receiver=FIJKL \
-              --cpu=12.3456 \
-              --net=12.3456 \
+              --path=. \
               --keystore=keystore.json
 
 =====================================================================
 
-* `deposit` > Deposit:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --email    Email for notification            [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. After successful execution, you will get a URL.            |
-    | 3. Open this URL in your browser.                             |
-    | 4. Scan the QR code with Mixin to complete the payment.       |
-    | 5. You have to complete the payment within `7` days.          |
-    | 6. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
-    | 7. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 8. Finish, `cancel` or timeout a current trx before request.  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm deposit \
-              --account=ABCDE \
-              --amount=12.3456 \
-              --keystore=keystore.json \
-              --email=abc@def.com
-
-=====================================================================
-
-* `evolve` > Evolve legacy PRESS.one accounts and Flying Pub topics:
-
-    --address  Legacy account, topic address     [STRING  / REQUIRED]
-    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore`(recommend) or `pubkey,pvtkey` must be provided. |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm evolve \
-              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `genesis` > Generate the `genesis.json` file:
+* `GenGenesis` > Generate the `genesis.json` file:
 
     --path     Folder location for saving file   [STRING  / OPTIONAL]
 
     > Example:
-    $ prs-atm genesis --path=.
+    $ prs-atm GenGenesis \
+              --path=.
 
 =====================================================================
 
-* `help` > List help info:
+* `GenRunsrv` > Generate the `runservice.sh` file:
+
+    --path     Folder location for saving file   [STRING  / OPTIONAL]
+
+    > Example:
+    $ prs-atm GenRunsrv \
+              --path=.
+
+=====================================================================
+
+* `Help` > List help info:
 
     > Example of listing all help info:
-    $ prs-atm help
+    $ prs-atm Help
 
     > Example of listing help info for current command:
-    $ prs-atm withdraw --help
+    $ prs-atm withdraw \
+              --help
 
     > Example of searching help info:
-    $ prs-atm help ballot info
+    $ prs-atm Help ballot info
 
 =====================================================================
 
-* `info` > Check PRS-chain Information:
+* `KeyUpdtActive` > Update Active Key:
 
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --npubkey  New `active` public key           [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. You can use `rpcapi` param to check the specific PRS-node. |
+    | 1. You need `owner key permission` to execute this command.   |
+    | 2. Use `AccountAuth` to reauthorize after you update keys.    |
+    └---------------------------------------------------------------┘
+    ┌- DANGER ------------------------------------------------------┐
+    | ⚠ Incorrect use will result in `loss of permissions`.         |
+    | ⚠ `DO NOT` do this unless you know what you are doing.        |
+    | ⚠ We are not responsible for any loss of permissions due to   |
+    |   the mistake of updating keys.                               |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
-    > Example of checking global PRS-chain Information:
-    $ prs-atm --action=info
-
-    > Example of checking specific PRS-node Information:
-    $ prs-atm --action=info \
-              --rpcapi=http://http://127.0.0.1/:8888
+    > Example:
+    $ prs-atm KeyUpdtActive \
+              --account=ABCDE \
+              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `keychain` > Manage Keychain:
+* `KeyUpdtOwner` > Update Owner Key:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --npubkey  New `owner` public key            [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. You need `owner key permission` to execute this command.   |
+    | 2. Use `AccountAuth` to reauthorize after you update keys.    |
+    └---------------------------------------------------------------┘
+    ┌- DANGER ------------------------------------------------------┐
+    | ⚠ Incorrect use will result in `loss of permissions`.         |
+    | ⚠ `DO NOT` do this unless you know what you are doing.        |
+    | ⚠ We are not responsible for any loss of permissions due to   |
+    |   the mistake of updating keys.                               |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm KeyUpdtOwner \
+              --account=ABCDE \
+              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `Keychain` > Manage Keychain:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --prmsn    Permission of the key             [STRING  / REQUIRED]
@@ -361,29 +603,30 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of saving a new key:
-    $ prs-atm keychain\
+    $ prs-atm Keychain \
               --account=ABCDE \
               --prmsn=owner \
               --keystore=keystore.json
 
     > Example of deleting an existing key:
-    $ prs-atm keychain\
+    $ prs-atm Keychain \
               --account=ABCDE \
               --prmsn=active \
               --delete
 
 =====================================================================
 
-* `keys` > Check Account Keys:
+* `Keys` > Check Account Keys:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm keys --account=ABCDE
+    $ prs-atm Keys \
+              --account=ABCDE
 
 =====================================================================
 
-* `keystore` > Create a new Keystore / Import keys to a new Keystore:
+* `KeystoreCreate` > Create a new Keystore / Import keys to a new Keystore:
 
     --password Use to encrypt the keystore       [STRING  / OPTIONAL]
     --pubkey   Import existing public key        [STRING  / OPTIONAL]
@@ -391,154 +634,152 @@ usage: prs-atm <command> [<args>]
     --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]
 
     > Example of creating a new keystore:
-    $ prs-atm keystore --dump=keystore.json
+    $ prs-atm KeystoreCreate \
+              --dump=keystore.json
 
     > Example of creating a keystore with existing keys:
-    $ prs-atm keystore \
+    $ prs-atm KeystoreCreate \
               --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --dump=keystore.json
 
 =====================================================================
 
-* `openaccount` > Open an Account:
+* `KeystoreUnlock` > Unlock a Keystore:
 
-    --name     PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pubkey` must be provided.       |
-    | 2. After successful execution, you will get a URL.            |
-    | 3. Open this URL in your browser.                             |
-    | 4. Scan the QR code with Mixin to complete the payment.       |
-    | 5. You will receive further notifications via Mixin.          |
-    | 6. It will cost 4 PRS (2 for RAM, 1 for NET, 1 for CPU).      |
-    | 7. Registration fee is NON-REFUNDABLE, EVEN IF IT FAILS.      |
-    └---------------------------------------------------------------┘
-    ┌- Standard Account Naming Conventions -------------------------┐
-    | ■ Can only contain the characters                             |
-    |   `.abcdefghijklmnopqrstuvwxyz12345`.                         |
-    |   `a-z` (lowercase), `1-5` and `.` (period)                   |
-    | ■ Must start with a letter                                    |
-    | ■ Must be 12 characters                                       |
-    | ? https://eosio-cpp.readme.io/v1.1.0/docs/naming-conventions  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm openaccount --name=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `ownerkey` > Update Owner Key:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --npubkey  New `owner` public key            [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pub/pvt key` must be provided.  |
-    | 2. You need `owner key permission` to execute this command.   |
-    | 3. Use `auth` to reauthorize after you update your keys.      |
-    └---------------------------------------------------------------┘
-    ┌- DANGER ------------------------------------------------------┐
-    | ⚠ Incorrect use will result in `loss of permissions`.         |
-    | ⚠ `DO NOT` do this unless you know what you are doing.        |
-    | ⚠ We are not responsible for any loss of permissions due to   |
-    |   the mistake of updating keys.                               |
+    | This command will decrypt your keystore and display the       |
+    | public key and private key. It's for advanced users only.     |
+    | You don't have to do this unless you know what you are doing. |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm ownerkey \
-              --account=ABCDE \
-              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+    $ prs-atm KeystoreUnlock \
               --keystore=keystore.json
 
 =====================================================================
 
-* `producers` > Check Producers Information:
+* `MixinBind` > Bind a Mixin account to a PRESS.one account:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You will receive further notifications via Mixin.          |
+    | 5. It will cost `0.0001 PRS` for each binding.                |
+    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm producers
+    $ prs-atm MixinBind \
+              --account=ABCDE \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `refund` > Transfer the PRS in the refund to the balance:
+* `ResDelegate` > Delegate CPU and/or Network Bandwidth:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --net      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. Applicable when REFUND_AVAILABLE shows in balance output.  |
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    | 2. One of `cpu` or `net` must be provided.                    |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm refund --account=ABCDE --keystore=keystore.json
+    $ prs-atm ResDelegate \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --cpu=12.3456 \
+              --net=12.3456 \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `regproducer` > Register as a Producer:
+* `ResRamBuy` > Buy RAM:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
-    --url      URL where info about producer     [STRING  / OPTIONAL]
-    --location Relative location for scheduling  [INTEGER / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pubkey` must be provided.       |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm regproducer --account=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `reward` > Claim Rewards:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. You can only claim your reward once a day.                 |
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm reward --account=ABCDE --keystore=keystore.json
+    $ prs-atm ResRamBuy \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --ram=12.3456 \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `runsrv` > Generate the `runservice.sh` file:
+* `ResUndelegate` > Undelegate CPU and/or Network Bandwidth:
 
-    --path     Folder location for saving file   [STRING  / OPTIONAL]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --net      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    | 2. One of `cpu` or `net` must be provided.                    |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm runsrv --path=.
+    $ prs-atm ResUndelegate \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --cpu=12.3456 \
+              --net=12.3456 \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `spdtest` > Evaluate the connection speed of server nodes:
+* `SpdTest` > Evaluate the connection speed of server nodes:
 
     ┌---------------------------------------------------------------┐
     | 1. `spdtest` feature depends on the system `ping` command.    |
     └---------------------------------------------------------------┘
 
     > Example of evaluating all pre-configured nodes:
-    $ prs-atm spdtest
+    $ prs-atm SpdTest
 
     > Example of evaluating a designated node:
-    $ prs-atm spdtest \
+    $ prs-atm SpdTest \
               --rpcapi=http://51.68.201.144:8888 \
-              --chainapi=https://prs-bp3.press.one
+              --chainapi=https://prs-bp1.press.one
 
 =====================================================================
 
-* `statement` > Check Statement:
+* `Statement` > Check Statement:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --time     Timestamp for paging              [STRING  / OPTIONAL]
@@ -554,11 +795,12 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm statement --account=ABCDE
+    $ prs-atm Statement \
+              --account=ABCDE
 
 =====================================================================
 
-* `swap` > Swap tokens:
+* `Swap` > Swap tokens:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --from     From token symbol                 [STRING  / REQUIRED]
@@ -572,20 +814,22 @@ usage: prs-atm <command> [<args>]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
-    | 0. Use `swappool` to get all pools that available to swap.    |
-    | 1. Default `slippage` is `5`, which means a 5% slippage.      |
-    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 1. Use `SwapPool` to get all pools that available to swap.    |
+    | 2. Default `slippage` is `5`, which means a 5% slippage.      |
     | 3. After successful execution, you will get a URL.            |
     | 4. Open this URL in your browser.                             |
     | 5. Scan the QR code with Mixin to complete the payment.       |
     | 6. You have to complete the payment within `7` days.          |
     | 7. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
     | 8. Only `1` swap transaction is allowed at a time.            |
-    | 9. Finish, `swapcancel` or timeout a current trx before swap. |
+    | 9. Finish, `SwapCancel` or timeout a current trx before swap. |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example of Estimating a Swap Deal (dryrun):
-    $ prs-atm swap \
+    $ prs-atm Swap \
               --account=ABCDE \
               --from=COB \
               --amount=12.3456 \
@@ -595,7 +839,7 @@ usage: prs-atm <command> [<args>]
               --dryrun
 
     > Example of Swap:
-    $ prs-atm swap \
+    $ prs-atm Swap \
               --account=ABCDE \
               --from=COB \
               --amount=12.3456 \
@@ -605,7 +849,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `swapaddlq` > Add Liquid to Swap Pools:
+* `SwapAddLq` > Add Liquid to Swap Pools:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --cura     CURRENCY-A to be added            [STRING  / REQUIRED]
@@ -618,20 +862,22 @@ usage: prs-atm <command> [<args>]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
-    | 0. Use `swappool` to get pools that available to add liquid.  |
-    | 1. Amount of CURRENCY-B will be calculated automatically.     |
-    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
+    | 1. Use `SwapPool` to get pools that available to add liquid.  |
+    | 2. Amount of CURRENCY-B will be calculated automatically.     |
     | 3. After successful execution, you will get `2` URLs.         |
     | 4. Open these URLs in your browser.                           |
     | 5. Scan the QR codes with Mixin to complete the payment.      |
     | 6. You have to complete the payment within `7` days.          |
     | 7. SCANNING AN EXPIRED QR CODES WILL RESULT IN LOST MONEY.    |
     | 8. Only `1` swap related transaction is allowed at a time.    |
-    | 9. Finish, `swapcancel` or timeout a current trx before exec. |
+    | 9. Finish, `SwapCancel` or timeout a current trx before exec. |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example of Estimating a Liquid Adding Plan (dryrun):
-    $ prs-atm swapaddlq \
+    $ prs-atm SwapAddLq \
               --account=ABCDE \
               --cura=COB \
               --amount=12.3456 \
@@ -641,7 +887,7 @@ usage: prs-atm <command> [<args>]
               --dryrun
 
     > Example of Adding Liquid:
-    $ prs-atm swapaddlq \
+    $ prs-atm SwapAddLq \
               --account=ABCDE \
               --cura=COB \
               --amount=12.3456 \
@@ -651,7 +897,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `swapcancel` > Cancel a swapping payment request:
+* `SwapCancel` > Cancel a swapping payment request:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -662,31 +908,35 @@ usage: prs-atm <command> [<args>]
     | 1. Only `1` swap transaction is allowed at a time.            |
     | 2. Cancel a current trx by this cmd before issuing a new one. |
     └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm swapcancel
+    $ prs-atm SwapCancel \
               --account=ABCDE \
-              --keystore=keystore.json \
+              --keystore=keystore.json
 
 =====================================================================
 
-* `swappay` > Get swapping payment request:
+* `SwapPay` > Get swapping payment request:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm swappay --account=ABCDE
+    $ prs-atm SwapPay \
+              --account=ABCDE
 
 =====================================================================
 
-* `swappool` > Get all pools that available to swap.:
+* `SwapPool` > Get all pools that available to swap:
 
     > Example:
-    $ prs-atm pool
+    $ prs-atm SwapPool
 
 =====================================================================
 
-* `swaprmlq` > Remove Liquid to Swap Pools:
+* `SwapRmLq` > Remove Liquid to Swap Pools:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --cura     CURRENCY-A to be removed          [STRING  / REQUIRED]
@@ -700,12 +950,11 @@ usage: prs-atm <command> [<args>]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. Use `swappool` to get pools that available to rm liquid.   |
-    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 3. One of `mx-num` or `mx-id` must be provided.               |
-    | 4. Execute the `auth` command before the first `swaprmlq`.    |
-    | 5. Only `1` swap related transaction is allowed at a time.    |
-    | 6. Finish, `swapcancel` or timeout a current trx before exec. |
+    | 1. Use `SwapPool` to get pools that available to rm liquid.   |
+    | 2. One of `mx-num` or `mx-id` must be provided.               |
+    | 3. Execute `AccountAuth` command before the first `SwapRmLq`. |
+    | 4. Only `1` swap related transaction is allowed at a time.    |
+    | 5. Finish, `SwapCancel` or timeout a current trx before exec. |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
     | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |
@@ -713,9 +962,12 @@ usage: prs-atm <command> [<args>]
     | ⚠ We are not responsible for any loss of property due to the  |
     |   mistake of withdraw accounts.                               |
     └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
 
     > Example of remove liquid and refund to Mixin number:
-    $ prs-atm swaprmlq \
+    $ prs-atm SwapRmLq \
               --account=ABCDE \
               --cura=COB \
               --curb=CNB \
@@ -725,7 +977,7 @@ usage: prs-atm <command> [<args>]
               --email=abc@def.com
 
     > Example of remove liquid and refund to Mixin user id:
-    $ prs-atm swaprmlq \
+    $ prs-atm SwapRmLq \
               --account=ABCDE \
               --cura=COB \
               --curb=CNB \
@@ -736,7 +988,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `swapstmt` > Check Swap Statement:
+* `SwapStmt` > Check Swap Statement:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --time     Timestamp for paging              [STRING  / OPTIONAL]
@@ -747,171 +999,19 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm swapstmt --account=ABCDE
+    $ prs-atm SwapStmt \
+              --account=ABCDE
 
 =====================================================================
 
-* `tail` > Display the last block / transaction of the chain:
-
-    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
-    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
-    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
-    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
-    ┌---------------------------------------------------------------┐
-    | 1. Follow the latest block / trx while `blocknum` is missing. |
-    | 2. Follow trxes instead of blocks while `trxonly` is set.     |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm tail --blocknum=999999 --trxonly --json
-    $ prs-atm tail --blocknum=999999 --trxonly --json --grep=PIP:2001
-
-=====================================================================
-
-* `trx` > Get transaction by id:
-
-    --id       Transaction id                    [STRING  / REQUIRED]
-    ┌---------------------------------------------------------------┐
-    | 1. Use option `--json` to get complete transaction data.      |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm trx --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --json
-
-=====================================================================
-
-* `undelegate` > Undelegate CPU and/or Network Bandwidth:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
-    --cpu      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --net      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Default `receiver` is current `account` (pvtkey holder).   |
-    | 2. One of `cpu` or `net` must be provided.                    |
-    └---------------------------------------------------------------┘
-
-    > Example of undelegating CPU and NET:
-    $ prs-atm undelegate \
-              --account=ABCDE \
-              --receiver=FIJKL \
-              --cpu=12.3456 \
-              --net=12.3456 \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `unlock` > Unlock a Keystore:
-
-    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | This command will decrypt your keystore and display the       |
-    | public key and private key. It's for advanced users only.     |
-    | You don't have to do this unless you know what you are doing. |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm unlock --keystore=keystore.json
-
-=====================================================================
-
-* `unregproducer` > Unregister as a Producer:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pubkey` must be provided.       |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm unregproducer --account=ABCDE --keystore=keystore.json
-
-=====================================================================
-
-* `version` > List version info:
+* `Version` > List version info:
 
     > Example of getting package version:
-    $ prs-atm version
+    $ prs-atm Version
 
     > Example of exporting info as json:
-    $ prs-atm version --json
-
-=====================================================================
-
-* `vote` > Vote or Revoke Voting for Producers:
-
-    --account  PRESS.one account                 [STRING  / OPTIONAL]
-    --add      Add BP to list of voted producers [STRING  / OPTIONAL]
-    --remove   Del BP to list of voted producers [STRING  / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. One of `add` or `remove` must be provided.                 |
-    | 2. `add` and `remove` can be a list split by ',' or ';'.      |
-    | 3. Use `ballot` cmd to check info brfore and after voting.    |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm vote \
-              --account=ABCDE \
-              --add=bp1,bp2 \
-              --remove=bp3,bp4 \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `withdraw` > Withdrawal:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
-    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
-    --email    Email for notification            [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |
-    | 2. One of `mx-num` or `mx-id` must be provided.               |
-    | 3. Execute the `auth` command before the first withdrawal.    |
-    | 4. Sum greater than 200000 in last 24H requires manual review.| 
-    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 6. Finish, `cancel` or timeout a current trx before request.  |
-    └---------------------------------------------------------------┘
-    ┌- WARNING -----------------------------------------------------┐
-    | ⚠ If you withdraw via `mx-num`, for your security, you can    |
-    |   only withdraw to your original Mixin payment accounts.      |
-    | ⚠ If you withdraw via `mx-id`, you can withdraw to whatever   |
-    |   Mixin account you want.                                     |
-    | ⚠ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
-    |   Wrong accounts will cause property loss.                    |
-    | ⚠ We are not responsible for any loss of property due to the  |
-    |   mistake of withdraw accounts.                               |
-    └---------------------------------------------------------------┘
-
-    > Example of withdrawing to Mixin number:
-    $ prs-atm withdraw \
-              --account=ABCDE \
-              --amount=12.3456 \
-              --keystore=keystore.json \
-              --mx-num=12345 \
-              --email=abc@def.com
-
-    > Example of withdrawing to Mixin user id:
-    $ prs-atm withdraw \
-              --account=ABCDE \
-              --amount=12.3456 \
-              --keystore=keystore.json \
-              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
-              --email=abc@def.com
+    $ prs-atm Version \
+              --json
 
 =====================================================================
 
@@ -937,4 +1037,5 @@ usage: prs-atm <command> [<args>]
     be insecure. In most cases you don't need to provide passwords or
     private keys in parameters. The program will request sensitive 
     information in a secure way.
+
 ```
