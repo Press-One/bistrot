@@ -145,15 +145,18 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         speedTest: argv.spdtest,
     });
     try {
-        const pkg = path.join(path.dirname(__filename), '..', 'package.json');
-        const chVer = await system.checkVersion(pkg);
-        if (chVer && !argv.json) {
-            console.log(`\nNotice: New version ${chVer.newVersion.version} of `
-                + `${chVer.name} is available.`
-                + ` Please update it as soon as possible.\n`);
+        try {
+            const p = path.join(path.dirname(__filename), '..', 'package.json');
+            const chVer = await system.checkVersion(p);
+            if (chVer && !argv.json) {
+                console.log(`\nNotice: New version ${chVer.newVersion.version} `
+                    + `of ${chVer.name} is available.`
+                    + ` Please update it as soon as possible.\n`);
+            }
+        } catch (e) {
+            utilitas.assert(!e || !e.message
+                || !/no\ longer\ compatible/i.test(e.message), e.message, 400);
         }
-    } catch (e) { }
-    try {
         const cmds = {};
         fs.readdirSync(__dirname).filter((file) => {
             return /\.js$/i.test(file) && file !== 'prs-atm.js';
