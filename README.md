@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v4.0.5
+prs-atm v4.0.6
 
 usage: prs-atm <command> [<args>]
 
@@ -62,6 +62,7 @@ usage: prs-atm <command> [<args>]
     | 2. You have to execute this cmd to activate your new account. |
     | 3. Normally, this command only needs to be executed 1 time.   |
     | 4. Reauthorize after you update your active or owner keys.    |
+    | 5. Auth will run automatically while withdrawing, swap, etc.  |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
@@ -224,10 +225,10 @@ usage: prs-atm <command> [<args>]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. One of `mx-num` or `mx-id` must be provided.               |
-    | 2. Execute `AccountAuth` command before the first withdrawal. |
-    | 3. Sum greater than 200000 in last 24H requires manual review.| 
-    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 5. Finish, `AssetCancel` or timeout a trx before request.     |
+    | 2. Sum greater than 200000 in last 24H requires manual review.| 
+    | 3. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 4. Finish, `AssetCancel` or timeout a trx before request.     |
+    | 5. If any issue, try to run `AccountAuth` command to fix it.  |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
     | ⚠ If you withdraw via `mx-num`, for your security, you can    |
@@ -952,9 +953,9 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get pools that available to rm liquid.   |
     | 2. One of `mx-num` or `mx-id` must be provided.               |
-    | 3. Execute `AccountAuth` command before the first `SwapRmLq`. |
-    | 4. Only `1` swap related transaction is allowed at a time.    |
-    | 5. Finish, `SwapCancel` or timeout a current trx before exec. |
+    | 3. Only `1` swap related transaction is allowed at a time.    |
+    | 4. Finish, `SwapCancel` or timeout a current trx before exec. |
+    | 5. If any issue, try to run `AccountAuth` command to fix it.  |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
     | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |
