@@ -21,6 +21,7 @@ module.exports = {
         '    | 2. You have to execute this cmd to activate your new account. |',
         '    | 3. Normally, this command only needs to be executed 1 time.   |',
         '    | 4. Reauthorize after you update your active or owner keys.    |',
+        '    | 5. Auth will run automatically while withdrawing, swap, etc.  |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {
