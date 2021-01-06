@@ -91,18 +91,24 @@ module.exports = {
         '    | 4. This program will `NOT` save your password by default.     |',
         '    | 5. `savepswd` is `EXTREMELY DANGEROUS`, use on your own risk. |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of saving a new key:',
-        '    $ prs-atm keychain\\',
-        '              --account=ABCDE \\',
-        '              --prmsn=owner \\',
-        '              --keystore=keystore.json',
-        '',
-        '    > Example of deleting an existing key:',
-        '    $ prs-atm keychain\\',
-        '              --account=ABCDE \\',
-        '              --prmsn=active \\',
-        '              --delete',
+    ],
+    example: [
+        {
+            title: 'saving a new key',
+            args: {
+                account: true,
+                prmsn: 'owner',
+                keystore: true,
+            },
+        },
+        {
+            title: 'deleting an existing key',
+            args: {
+                account: true,
+                prmsn: 'active',
+                delete: null,
+            },
+        },
     ],
     render: {
         table: {

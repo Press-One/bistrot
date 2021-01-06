@@ -17,10 +17,12 @@ module.exports = {
     name: 'Generate the `genesis.json` file',
     help: [
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
-        '',
-        '    > Example:',
-        '    $ prs-atm genesis --path=.',
     ],
+    example: {
+        args: {
+            path: true,
+        },
+    },
     render: {
         table: {
             KeyValue: true,

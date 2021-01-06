@@ -29,7 +29,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Bind a Mixin account to a PRESS.one account',
@@ -38,17 +37,19 @@ module.exports = {
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
-        '    | 2. After successful execution, you will get a URL.            |',
-        '    | 3. Open this URL in your browser.                             |',
-        '    | 4. Scan the QR code with Mixin to complete the payment.       |',
-        '    | 5. You will receive further notifications via Mixin.          |',
-        `    | 6. It will cost \`${account.bindingPrice} PRS\` `
+        '    | 1. After successful execution, you will get a URL.            |',
+        '    | 2. Open this URL in your browser.                             |',
+        '    | 3. Scan the QR code with Mixin to complete the payment.       |',
+        '    | 4. You will receive further notifications via Mixin.          |',
+        `    | 5. It will cost \`${account.bindingPrice} PRS\` `
         + 'for each binding.                |',
-        '    | 7. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |',
+        '    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm bindmixin --account=ABCDE --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            keystore: true,
+        }
+    },
 };

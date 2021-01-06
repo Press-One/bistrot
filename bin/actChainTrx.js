@@ -15,10 +15,13 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         "    | 1. Use option `--json` to get complete transaction data.      |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm trx --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ --json',
     ],
+    example: {
+        args: {
+            id: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            json: null,
+        },
+    },
     render: {
         table: {
             KeyValue: true,

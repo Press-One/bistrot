@@ -10,7 +10,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Withdrawal',
@@ -25,13 +24,12 @@ module.exports = {
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pvtkey` must be provided.       |',
-        '    | 2. One of `mx-num` or `mx-id` must be provided.               |',
-        '    | 3. Execute the `auth` command before the first withdrawal.    |',
-        '    | 4. Sum greater than ' + finance.maxWithdrawAmount
+        '    | 1. One of `mx-num` or `mx-id` must be provided.               |',
+        '    | 2. Execute `AccountAuth` command before the first withdrawal. |',
+        '    | 3. Sum greater than ' + finance.maxWithdrawAmount
         + ' in last 24H requires manual review.| ',
-        '    | 5. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
-        '    | 6. Finish, `cancel` or timeout a current trx before request.  |',
+        '    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |',
+        '    | 5. Finish, `AssetCancel` or timeout a trx before request.     |',
         '    └---------------------------------------------------------------┘',
         '    ┌- WARNING -----------------------------------------------------┐',
         '    | ⚠ If you withdraw via `mx-num`, for your security, you can    |',
@@ -43,21 +41,27 @@ module.exports = {
         '    | ⚠ We are not responsible for any loss of property due to the  |',
         '    |   mistake of withdraw accounts.                               |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of withdrawing to Mixin number:',
-        '    $ prs-atm withdraw \\',
-        '              --account=ABCDE \\',
-        '              --amount=12.3456 \\',
-        '              --keystore=keystore.json \\',
-        '              --mx-num=12345 \\',
-        '              --email=abc@def.com',
-        '',
-        '    > Example of withdrawing to Mixin user id:',
-        '    $ prs-atm withdraw \\',
-        '              --account=ABCDE \\',
-        '              --amount=12.3456 \\',
-        '              --keystore=keystore.json \\',
-        '              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \\',
-        '              --email=abc@def.com',
+    ],
+    example: [
+        {
+            title: 'withdrawing to Mixin number',
+            args: {
+                account: true,
+                amount: true,
+                keystore: true,
+                'mx-num': true,
+                email: true,
+            },
+        },
+        {
+            title: 'withdrawing to Mixin user id',
+            args: {
+                account: true,
+                amount: true,
+                keystore: true,
+                'mx-id': true,
+                email: true,
+            },
+        },
     ],
 };

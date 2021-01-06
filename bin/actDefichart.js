@@ -129,6 +129,7 @@ module.exports = {
     func,
     name: 'Show Price Chart on DeFi (beta)',
     help: [
+        '    =============== THIS COMMAND IS NOT AVAILABLE NOW! ==============',
         '    --currency Cryptocurrency type               [STRING  / OPTIONAL]',
         '    --period   Price period                      [STRING  / OPTIONAL]',
         '    --interval Update interval in seconds        [INTEGER / OPTIONAL]',
@@ -137,9 +138,12 @@ module.exports = {
         '    | 2. Period available: `24h`(default), `1w`, `1m`, `1y`, `max`. |',
         '    | 3. Please use option `--json` to get raw price history.       |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm defichart --currency=BTC --period=24h',
     ],
+    example: {
+        args: {
+            currency: 'BTC',
+            period: '24h',
+        },
+    },
     hide: true,
 };

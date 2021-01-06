@@ -22,10 +22,13 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         "    | 1. Please use option `--json` to get complete block data.     |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm block --id=26621512 --json',
     ],
+    example: {
+        args: {
+            id: true,
+            json: null,
+        }
+    },
     render: {
         table: {
             KeyValue: true,

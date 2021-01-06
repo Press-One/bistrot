@@ -3,18 +3,20 @@
 const { account } = require('..');
 
 const func = async (argv) => {
-    return await account.getByName(argv.account);
+    return await account.getByName(argv.name);
 };
 
 module.exports = {
     func,
     name: 'Check an Account',
     help: [
-        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '',
-        '    > Example:',
-        '    $ prs-atm account --account=ABCDE',
+        '    --name     PRESS.one account                 [STRING  / REQUIRED]',
     ],
+    example: {
+        args: {
+            name: true,
+        }
+    },
     render: {
         table: {
             KeyValue: true,

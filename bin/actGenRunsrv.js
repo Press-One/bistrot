@@ -18,8 +18,10 @@ module.exports = {
     name: 'Generate the `runservice.sh` file',
     help: [
         '    --path     Folder location for saving file   [STRING  / OPTIONAL]',
-        '',
-        '    > Example:',
-        '    $ prs-atm runsrv --path=.',
     ],
+    example: {
+        args: {
+            path: true,
+        },
+    },
 };

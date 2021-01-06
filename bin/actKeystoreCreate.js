@@ -32,14 +32,21 @@ module.exports = {
         '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',
         '    --pvtkey   Import existing private key       [STRING  / OPTIONAL]',
         '    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]',
-        '',
-        '    > Example of creating a new keystore:',
-        '    $ prs-atm keystore --dump=keystore.json',
-        '',
-        '    > Example of creating a keystore with existing keys:',
-        '    $ prs-atm keystore \\',
-        '              --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \\',
-        '              --dump=keystore.json',
+    ],
+    example: [
+        {
+            title: 'creating a new keystore',
+            args: {
+                dump: true,
+            },
+        },
+        {
+            title: 'creating a keystore with existing keys',
+            args: {
+                pubkey: true,
+                pvtkey: true,
+                dump: true,
+            },
+        },
     ],
 };

@@ -22,11 +22,11 @@ module.exports = {
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
-        '    ┌---------------------------------------------------------------┐',
-        '    | 1. `keystore` (recommend) or `pubkey` must be provided.       |',
-        '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm regproducer --account=ABCDE --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            keystore: true,
+        }
+    },
 };

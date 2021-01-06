@@ -27,11 +27,15 @@ const func = async (argv) => {
 module.exports = {
     func,
     name: 'List version info',
-    help: [
-        '    > Example of getting package version:',
-        '    $ prs-atm version',
-        '',
-        '    > Example of exporting info as json:',
-        '    $ prs-atm version --json',
+    example: [
+        {
+            title: 'getting package version',
+        },
+        {
+            title: 'exporting info as json',
+            args: {
+                json: null,
+            }
+        },
     ],
 };

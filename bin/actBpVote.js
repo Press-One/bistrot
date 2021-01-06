@@ -7,7 +7,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Vote or Revoke Voting for Producers',
@@ -21,14 +20,15 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         '    | 1. One of `add` or `remove` must be provided.                 |',
         "    | 2. `add` and `remove` can be a list split by ',' or ';'.      |",
-        "    | 3. Use `ballot` cmd to check info brfore and after voting.    |",
+        "    | 3. Use `BpBallot` cmd to check info brfore and after voting.  |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm vote \\',
-        '              --account=ABCDE \\',
-        '              --add=bp1,bp2 \\',
-        '              --remove=bp3,bp4 \\',
-        '              --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            add: 'bp1,bp2',
+            remove: 'bp3,bp4',
+            keystore: true,
+        },
+    },
 };

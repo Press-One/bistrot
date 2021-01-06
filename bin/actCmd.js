@@ -21,7 +21,7 @@ const func = async (argv) => {
         if (argv._.length) {
             let check = false;
             for (let j of argv._) {
-                if (`${i}${acts[i].name}`.includes(j)) {
+                if (`${i}${acts[i].name.toLowerCase()}`.includes(j)) {
                     check = find[j] = true; break;
                 }
             }
@@ -36,18 +36,20 @@ const func = async (argv) => {
 module.exports = {
     func,
     name: 'List available commands',
-    help: [
-        '    > Example of listing all commands:',
-        '    $ prs-atm cmd',
-        '',
-        '    > Example of searching commands:',
-        '    $ prs-atm cmd ballot info',
+    example: [
+        {
+            title: 'listing all commands',
+        },
+        {
+            title: 'searching commands',
+            args: 'ballot info',
+        },
     ],
     render: {
         renderAll: true,
         table: {
             KeyValue: true,
-            config: { columns: { 0: { width: 13 }, 1: { width: 60 } } },
+            config: { columns: { 0: { width: 14 }, 1: { width: 59 } } },
         },
     },
 };

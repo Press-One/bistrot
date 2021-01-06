@@ -17,10 +17,12 @@ module.exports = {
         "    | 1. Default `count` is `100`.                                  |",
         "    | 2. Set `time` as `timestamp` of last item to get next page.   |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm swapstmt --account=ABCDE',
     ],
+    example: {
+        args: {
+            account: true,
+        }
+    },
     render: {
         table: {
             columns: [

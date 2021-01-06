@@ -19,13 +19,15 @@ module.exports = {
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Remember to authorize your ACTIVE KEY ONLY, NOT OWNER KEY. |',
-        '    | 2. `keystore` (recommend) or `pub/pvt key` must be provided.  |',
-        '    | 3. You have to execute this cmd to activate your new account. |',
-        '    | 4. Normally, this command only needs to be executed 1 time.   |',
-        '    | 5. Reauthorize after you update your active or owner keys.    |',
+        '    | 2. You have to execute this cmd to activate your new account. |',
+        '    | 3. Normally, this command only needs to be executed 1 time.   |',
+        '    | 4. Reauthorize after you update your active or owner keys.    |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm auth --account=ABCDE --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            keystore: true,
+        }
+    },
 };

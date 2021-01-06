@@ -13,7 +13,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Swap tokens',
@@ -30,9 +29,8 @@ module.exports = {
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 0. Use `swappool` to get all pools that available to swap.    |',
-        '    | 1. Default `slippage` is `5`, which means a 5% slippage.      |',
-        '    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        '    | 1. Use `SwapPool` to get all pools that available to swap.    |',
+        '    | 2. Default `slippage` is `5`, which means a 5% slippage.      |',
         '    | 3. After successful execution, you will get a URL.            |',
         '    | 4. Open this URL in your browser.                             |',
         '    | 5. Scan the QR code with Mixin to complete the payment.       |',
@@ -40,27 +38,33 @@ module.exports = {
         + `${finance.transferTimeout / 1000 / 60 / 60 / 24}\` days.          |`,
         '    | 7. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |',
         '    | 8. Only `1` swap transaction is allowed at a time.            |',
-        '    | 9. Finish, `swapcancel` or timeout a current trx before swap. |',
+        '    | 9. Finish, `SwapCancel` or timeout a current trx before swap. |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of Estimating a Swap Deal (dryrun):',
-        '    $ prs-atm swap \\',
-        '              --account=ABCDE \\',
-        '              --from=COB \\',
-        '              --amount=12.3456 \\',
-        '              --to=CNB \\',
-        '              --keystore=keystore.json \\',
-        '              --email=abc@def.com \\',
-        '              --dryrun',
-        '',
-        '    > Example of Swap:',
-        '    $ prs-atm swap \\',
-        '              --account=ABCDE \\',
-        '              --from=COB \\',
-        '              --amount=12.3456 \\',
-        '              --to=CNB \\',
-        '              --keystore=keystore.json \\',
-        '              --email=abc@def.com',
+    ],
+    example: [
+        {
+            title: 'Estimating a Swap Deal (dryrun)',
+            args: {
+                account: true,
+                from: 'COB',
+                amount: true,
+                to: 'CNB',
+                keystore: true,
+                email: true,
+                dryrun: null,
+            },
+        },
+        {
+            title: 'Swap',
+            args: {
+                account: true,
+                from: 'COB',
+                amount: true,
+                to: 'CNB',
+                keystore: true,
+                email: true,
+            },
+        }
     ],
     render: {
         table: {

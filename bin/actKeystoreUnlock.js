@@ -32,8 +32,10 @@ module.exports = {
         "    | public key and private key. It's for advanced users only.     |",
         "    | You don't have to do this unless you know what you are doing. |",
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example:',
-        '    $ prs-atm unlock --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            keystore: true,
+        }
+    },
 };

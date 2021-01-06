@@ -9,7 +9,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Undelegate CPU and/or Network Bandwidth',
@@ -25,13 +24,14 @@ module.exports = {
         "    | 1. Default `receiver` is current `account` (pvtkey holder).   |",
         '    | 2. One of `cpu` or `net` must be provided.                    |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of undelegating CPU and NET:',
-        '    $ prs-atm undelegate \\',
-        '              --account=ABCDE \\',
-        '              --receiver=FIJKL \\',
-        '              --cpu=12.3456 \\',
-        '              --net=12.3456 \\',
-        '              --keystore=keystore.json',
     ],
+    example: {
+        args: {
+            account: true,
+            receiver: true,
+            cpu: true,
+            net: true,
+            keystore: true,
+        }
+    },
 };

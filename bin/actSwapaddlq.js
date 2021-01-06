@@ -13,7 +13,6 @@ const func = async (argv) => {
 };
 
 module.exports = {
-    pubkey: true,
     pvtkey: true,
     func,
     name: 'Add Liquid to Swap Pools',
@@ -29,9 +28,8 @@ module.exports = {
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 0. Use `swappool` to get pools that available to add liquid.  |',
-        '    | 1. Amount of CURRENCY-B will be calculated automatically.     |',
-        '    | 2. `keystore` (recommend) or `pvtkey` must be provided.       |',
+        '    | 1. Use `SwapPool` to get pools that available to add liquid.  |',
+        '    | 2. Amount of CURRENCY-B will be calculated automatically.     |',
         '    | 3. After successful execution, you will get `2` URLs.         |',
         '    | 4. Open these URLs in your browser.                           |',
         '    | 5. Scan the QR codes with Mixin to complete the payment.      |',
@@ -39,27 +37,33 @@ module.exports = {
         + `${finance.transferTimeout / 1000 / 60 / 60 / 24}\` days.          |`,
         '    | 7. SCANNING AN EXPIRED QR CODES WILL RESULT IN LOST MONEY.    |',
         '    | 8. Only `1` swap related transaction is allowed at a time.    |',
-        '    | 9. Finish, `swapcancel` or timeout a current trx before exec. |',
+        '    | 9. Finish, `SwapCancel` or timeout a current trx before exec. |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of Estimating a Liquid Adding Plan (dryrun):',
-        '    $ prs-atm swapaddlq \\',
-        '              --account=ABCDE \\',
-        '              --cura=COB \\',
-        '              --amount=12.3456 \\',
-        '              --curb=CNB \\',
-        '              --keystore=keystore.json \\',
-        '              --email=abc@def.com \\',
-        '              --dryrun',
-        '',
-        '    > Example of Adding Liquid:',
-        '    $ prs-atm swapaddlq \\',
-        '              --account=ABCDE \\',
-        '              --cura=COB \\',
-        '              --amount=12.3456 \\',
-        '              --curb=CNB \\',
-        '              --keystore=keystore.json \\',
-        '              --email=abc@def.com',
+    ],
+    example: [
+        {
+            title: 'Estimating a Liquid Adding Plan (dryrun)',
+            args: {
+                account: true,
+                cura: 'COB',
+                amount: true,
+                curb: 'CNB',
+                keystore: true,
+                email: true,
+                dryrun: null,
+            },
+        },
+        {
+            title: 'Adding Liquid',
+            args: {
+                account: true,
+                cura: 'COB',
+                amount: true,
+                curb: 'CNB',
+                keystore: true,
+                email: true,
+            },
+        }
     ],
     render: {
         table: {

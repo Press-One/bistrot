@@ -13,13 +13,17 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         '    | 1. You can use `rpcapi` param to check the specific PRS-node. |',
         '    └---------------------------------------------------------------┘',
-        '',
-        '    > Example of checking global PRS-chain Information:',
-        '    $ prs-atm --action=info',
-        '',
-        '    > Example of checking specific PRS-node Information:',
-        '    $ prs-atm --action=info \\',
-        '              --rpcapi=http://http://127.0.0.1/:8888',
+    ],
+    example: [
+        {
+            title: 'checking global PRS-chain Information',
+        },
+        {
+            title: 'checking specific PRS-node Information',
+            args: {
+                rpcapi: true,
+            },
+        },
     ],
     render: {
         table: {
