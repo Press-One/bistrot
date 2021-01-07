@@ -1,9 +1,15 @@
 'use strict';
 
-const { account } = require('..');
+const { account, atm, utilitas } = require('..');
 
 const func = async (argv) => {
-    return await account.getByName(argv.name);
+    const [accResp, accBound] = await Promise.all([
+        account.getByName(argv.name), atm.queryMixinBoundByAccount(argv.name)
+    ]);
+    utilitas.assert(accResp, `Account Not Found (${argv.name}).`, 404);
+    return Object.assign(accResp, {
+        bound_mixin_account: accBound && accBound.bound_account || null,
+    });
 };
 
 module.exports = {
