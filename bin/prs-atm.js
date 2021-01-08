@@ -127,7 +127,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     argv[i] = toArray(argv[i]);
 });
 [
-    'trxonly', 'help', 'detail', 'force', 'json', 'daemon',
+    'trxonly', 'help', 'detail', 'force', 'json', 'daemon', 'testnet',
     'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
@@ -137,12 +137,14 @@ command = command.toLowerCase();
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
 (async () => {
+    const testNet = system.testNet(argv);
     global.chainConfig = await config({
         debug: argv.debug,
         secret: argv.secret,
         rpcApi: argv.rpcapi,
         chainApi: argv.chainapi,
         speedTest: argv.spdtest,
+        testNet,
     });
     try {
         try {

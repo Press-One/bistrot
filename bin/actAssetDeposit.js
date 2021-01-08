@@ -1,13 +1,15 @@
 'use strict';
 
-const { finance, atm } = require('..');
+const { finance, atm, system } = require('..');
 
 const func = async (argv) => {
     const resp = await atm.deposit(
         argv.pvtkey, argv.account, argv.email, argv.amount, argv.memo
     );
     if (!argv.json && resp && resp.paymentUrl) {
-        console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
+        console.log(`\nOpen this URL in your browser:\n\n${system.magicPayment(
+            resp.paymentUrl, { cnb: true }
+        )}\n`);
     }
     return resp;
 };
