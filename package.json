@@ -27,7 +27,8 @@
         "docker-publish-us": "npm run docker-build-us && npm run docker-push-us",
         "docker-publish-cn": "npm run docker-build-cn && npm run docker-push-cn",
         "docker-publish": "npm run docker-publish-us && npm run docker-publish-cn",
-        "publish-beta": "npm publish --tag beta"
+        "publish-beta": "npm publish --tag beta",
+        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
@@ -41,5 +42,9 @@
         "sushitrain": "^1989.8.9",
         "table": "^6.0.7",
         "yargs": "^16.2.0"
+    },
+    "devDependencies": {
+        "webpack": "^5.12.1",
+        "webpack-cli": "^4.3.1"
     }
 }
