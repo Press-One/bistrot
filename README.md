@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v4.0.6
+prs-atm v4.0.7
 
 usage: prs-atm <command> [<args>]
 
@@ -70,6 +70,33 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm AccountAuth \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AccountBind` > Bind a Mixin account to a PRESS.one account:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You will receive further notifications via Mixin.          |
+    | 5. It will cost `0.0001 PRS` for each binding.                |
+    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
+    | 7. You need to bind your MX account before withdraw and swap. |
+    | 8. New accounts reg via PRS-ATM v4 or later have been bound.  |
+    | 9. Rebind the accounts if you lost or changed your Mixin acc. |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AccountBind \
               --account=ABCDE \
               --keystore=keystore.json
 
@@ -219,23 +246,18 @@ usage: prs-atm <command> [<args>]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
-    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. One of `mx-num` or `mx-id` must be provided.               |
-    | 2. Sum greater than 200000 in last 24H requires manual review.| 
-    | 3. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 4. Finish, `AssetCancel` or timeout a trx before request.     |
-    | 5. If any issue, try to run `AccountAuth` command to fix it.  |
+    | 1. Bind your Mixin-Account to PRS-Account before withdrawal.  |
+    | 2. You can check your bound Mixin-Account with `account` cmd. |
+    | 3. Sum greater than 200000 in last 24H requires manual review.| 
+    | 4. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 5. Finish, `AssetCancel` or timeout a trx before request.     |
+    | 6. If any issue, try to run `AccountAuth` command to fix it.  |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
-    | ⚠ If you withdraw via `mx-num`, for your security, you can    |
-    |   only withdraw to your original Mixin payment accounts.      |
-    | ⚠ If you withdraw via `mx-id`, you can withdraw to whatever   |
-    |   Mixin account you want.                                     |
-    | ⚠ Ensure to double-check `mx-num` or `mx-id` before withdraw. |
+    | ⚠ Ensure to double-check bound Mixin-Account before withdraw. |
     |   Wrong accounts will cause property loss.                    |
     | ⚠ We are not responsible for any loss of property due to the  |
     |   mistake of withdraw accounts.                               |
@@ -244,20 +266,11 @@ usage: prs-atm <command> [<args>]
     | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
-    > Example of withdrawing to Mixin number:
+    > Example:
     $ prs-atm AssetWithdraw \
               --account=ABCDE \
               --amount=12.3456 \
               --keystore=keystore.json \
-              --mx-num=12345 \
-              --email=abc@def.com
-
-    > Example of withdrawing to Mixin user id:
-    $ prs-atm AssetWithdraw \
-              --account=ABCDE \
-              --amount=12.3456 \
-              --keystore=keystore.json \
-              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --email=abc@def.com
 
 =====================================================================
@@ -662,30 +675,6 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `MixinBind` > Bind a Mixin account to a PRESS.one account:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. After successful execution, you will get a URL.            |
-    | 2. Open this URL in your browser.                             |
-    | 3. Scan the QR code with Mixin to complete the payment.       |
-    | 4. You will receive further notifications via Mixin.          |
-    | 5. It will cost `0.0001 PRS` for each binding.                |
-    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm MixinBind \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
 * `ResDelegate` > Delegate CPU and/or Network Bandwidth:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -943,8 +932,6 @@ usage: prs-atm <command> [<args>]
     --cura     CURRENCY-A to be removed          [STRING  / REQUIRED]
     --curb     CURRENCY-B to be removed          [STRING  / REQUIRED]
     --amount   Number like xx.xxxx of POOL-TOKEN [NUMBER  / REQUIRED]
-    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]
-    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
@@ -952,13 +939,14 @@ usage: prs-atm <command> [<args>]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get pools that available to rm liquid.   |
-    | 2. One of `mx-num` or `mx-id` must be provided.               |
-    | 3. Only `1` swap related transaction is allowed at a time.    |
-    | 4. Finish, `SwapCancel` or timeout a current trx before exec. |
-    | 5. If any issue, try to run `AccountAuth` command to fix it.  |
+    | 2. Bind your Mixin-Account to PRS-Account before rm liquid.   |
+    | 3. You can check your bound Mixin-Account with `account` cmd. |
+    | 4. Only `1` swap related transaction is allowed at a time.    |
+    | 5. Finish, `SwapCancel` or timeout a current trx before exec. |
+    | 6. If any issue, try to run `AccountAuth` command to fix it.  |
     └---------------------------------------------------------------┘
     ┌- WARNING -----------------------------------------------------┐
-    | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |
+    | ⚠ Ensure to double-check bound Mixin-Account before apply for |
     |   refund. Wrong accounts will cause property loss.            |
     | ⚠ We are not responsible for any loss of property due to the  |
     |   mistake of withdraw accounts.                               |
@@ -967,23 +955,12 @@ usage: prs-atm <command> [<args>]
     | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
-    > Example of remove liquid and refund to Mixin number:
+    > Example:
     $ prs-atm SwapRmLq \
               --account=ABCDE \
               --cura=COB \
               --curb=CNB \
               --amount=12.3456 \
-              --mx-num=12345 \
-              --keystore=keystore.json \
-              --email=abc@def.com
-
-    > Example of remove liquid and refund to Mixin user id:
-    $ prs-atm SwapRmLq \
-              --account=ABCDE \
-              --cura=COB \
-              --curb=CNB \
-              --amount=12.3456 \
-              --mx-id=01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV \
               --keystore=keystore.json \
               --email=abc@def.com
 
