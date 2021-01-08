@@ -38,7 +38,7 @@
     "dependencies": {
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.8.7",
+        "sushitrain": "^1989.8.8",
         "table": "^6.0.7",
         "yargs": "^16.2.0"
     }
