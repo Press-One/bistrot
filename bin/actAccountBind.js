@@ -1,29 +1,13 @@
 'use strict';
 
-const { atm, account } = require('..');
+const { atm, account, system } = require('..');
 
 const func = async (argv) => {
     const resp = await atm.bindIdentity(argv.account, argv.pvtkey);
-    // debug mode {
-    const { utilitas, mixin } = require('..');
-    const debug = utilitas.insensitiveCompare(
-        argv.rpcapi, 'http://51.255.133.170:8888'
-    );
-    if (debug) {
-        const uuid = '[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}';
-        const replace = {
-            recipient: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
-            asset: mixin.assetIds.CNB.id,
-        };
-        for (let i in replace) {
-            resp.paymentUrl = resp.paymentUrl.replace(new RegExp(
-                `(^.*${i}=)${uuid}(&.*$)`
-            ), `$1${replace[i]}$2`);
-        }
-    }
-    // }
     if (!argv.json && resp && resp.paymentUrl) {
-        console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
+        console.log(`\nOpen this URL in your browser:\n\n${system.magicPayment(
+            resp.paymentUrl, { cnb: true }
+        )}\n`);
     }
     return resp;
 };
@@ -44,6 +28,9 @@ module.exports = {
         `    | 5. It will cost \`${account.bindingPrice} PRS\` `
         + 'for each binding.                |',
         '    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |',
+        '    | 7. You need to bind your MX account before withdraw and swap. |',
+        '    | 8. New accounts reg via PRS-ATM v4 or later have been bound.  |',
+        '    | 9. Rebind the accounts if you lost or changed your Mixin acc. |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {

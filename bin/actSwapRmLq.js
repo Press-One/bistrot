@@ -5,7 +5,7 @@ const { exchange } = require('..');
 const func = async (argv) => {
     return await exchange.rmLiquid(
         argv.pvtkey, argv.account, argv.cura, argv.curb,
-        argv.amount, argv.email, argv.memo,
+        argv.amount, argv.email, argv.memo, { mixinAccount: argv.mixin }
     );
 };
 
