@@ -1,15 +1,11 @@
 'use strict';
 
-const { atm, exchange } = require('..');
+const { exchange } = require('..');
 
 const func = async (argv) => {
-    try {
-        const resp = await atm.updateAuth(argv.account, null, argv.pvtkey);
-        // console.log(resp); // keep this line for debug
-    } catch (e) { }
     return await exchange.rmLiquid(
-        argv.pvtkey, argv.account, argv.cura, argv.curb, argv.amount,
-        argv['mx-id'], argv['mx-num'], argv.email, argv.memo,
+        argv.pvtkey, argv.account, argv.cura, argv.curb,
+        argv.amount, argv.email, argv.memo,
     );
 };
 
@@ -22,8 +18,6 @@ module.exports = {
         '    --cura     CURRENCY-A to be removed          [STRING  / REQUIRED]',
         '    --curb     CURRENCY-B to be removed          [STRING  / REQUIRED]',
         '    --amount   Number like xx.xxxx of POOL-TOKEN [NUMBER  / REQUIRED]',
-        '    --mx-id    Mixin user id (UUID)              [STRING  / OPTIONAL]',
-        '    --mx-num   Mixin user number                 [NUMBER  / OPTIONAL]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
@@ -31,44 +25,29 @@ module.exports = {
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Use `SwapPool` to get pools that available to rm liquid.   |',
-        '    | 2. One of `mx-num` or `mx-id` must be provided.               |',
-        '    | 3. Only `1` swap related transaction is allowed at a time.    |',
-        '    | 4. Finish, `SwapCancel` or timeout a current trx before exec. |',
-        '    | 5. If any issue, try to run `AccountAuth` command to fix it.  |',
+        '    | 2. Bind your Mixin-Account to PRS-Account before rm liquid.   |',
+        '    | 3. You can check your bound Mixin-Account with `account` cmd. |',
+        '    | 4. Only `1` swap related transaction is allowed at a time.    |',
+        '    | 5. Finish, `SwapCancel` or timeout a current trx before exec. |',
+        '    | 6. If any issue, try to run `AccountAuth` command to fix it.  |',
         '    └---------------------------------------------------------------┘',
         '    ┌- WARNING -----------------------------------------------------┐',
-        '    | ⚠ Ensure to double-check `mx-num` or `mx-id` before apply for |',
+        '    | ⚠ Ensure to double-check bound Mixin-Account before apply for |',
         '    |   refund. Wrong accounts will cause property loss.            |',
         '    | ⚠ We are not responsible for any loss of property due to the  |',
         '    |   mistake of withdraw accounts.                               |',
         '    └---------------------------------------------------------------┘',
     ],
-    example: [
-        {
-            title: 'remove liquid and refund to Mixin number',
-            args: {
-                account: true,
-                cura: 'COB',
-                curb: 'CNB',
-                amount: true,
-                'mx-num': true,
-                keystore: true,
-                email: true,
-            },
+    example: {
+        args: {
+            account: true,
+            cura: 'COB',
+            curb: 'CNB',
+            amount: true,
+            keystore: true,
+            email: true,
         },
-        {
-            title: 'remove liquid and refund to Mixin user id',
-            args: {
-                account: true,
-                cura: 'COB',
-                curb: 'CNB',
-                amount: true,
-                'mx-id': true,
-                keystore: true,
-                email: true,
-            },
-        },
-    ],
+    },
     render: {
         table: {
             KeyValue: true,
