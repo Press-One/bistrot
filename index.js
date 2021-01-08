@@ -1,24 +1,27 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
-
-module.exports = require('utilitas');
-module.exports['eos-name-verify'] = require('eos-name-verify');
-module.exports['eosjsKeygen'] = require('eosjs-keygen');
-module.exports['prsUtility'] = require('prs-utility');
-module.exports['eosjsKeos'] = require('eosjs-keos');
-module.exports['eosjsEcc'] = require('eosjs-ecc');
-module.exports['eosjs'] = require('eosjs');
-module.exports['pg'] = require('pg');
-module.exports['ws'] = require('ws');
-
-const libPath = path.join(__dirname, 'lib');
-fs.readdirSync(libPath).filter((file) => {
-    return /\.js$/i.test(file)
-        && file.indexOf('.') !== 0
-        && file.toLowerCase() !== 'config.js';
-}).forEach((file) => {
-    module.exports[file.replace(/^(.*)\.js$/, '$1')]
-        = require(path.join(libPath, file));
+module.exports = Object.assign(require('utilitas'), {
+    eos: require('eosjs'),
+    eosEcc: require('eosjs-ecc'),
+    eosKeos: require('eosjs-keos'),
+    eosKeygen: require('eosjs-keygen'),
+    eosNameVerify: require('eos-name-verify'),
+    pg: require('pg'),
+    prsUtility: require('prs-utility'),
+    ws: require('ws'),
+}, {
+    account: require('./lib/account'),
+    config: require('./lib/config'),
+    crypto: require('./lib/crypto'),
+    database: require('./lib/database'),
+    finance: require('./lib/finance'),
+    mixin: require('./lib/mixin'),
+    node: require('./lib/node'),
+    pacman: require('./lib/pacman'),
+    producer: require('./lib/producer'),
+    prsc: require('./lib/prsc'),
+    sushibar: require('./lib/sushibar'),
+    sushitrain: require('./lib/sushitrain'),
+    swap: require('./lib/swap'),
+    table: require('./lib/table'),
 });
