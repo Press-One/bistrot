@@ -12,7 +12,7 @@
         "node": ">=14.x"
     },
     "scripts": {
-        "start": "node bin/prs-atm.js",
+        "start": "node --no-deprecation bin/prs-atm.js",
         "debug": "node --inspect --trace-warnings debug.js",
         "test": "node --inspect --trace-warnings test.js",
         "ncuinit": "npm install -g npm-check-updates",
