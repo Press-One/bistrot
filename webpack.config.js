@@ -8,7 +8,7 @@ module.exports = {
 
     target: [
         'node14',
-        'electron12-main',
+        // 'electron12-main',
     ],
 
     entry: './index.js',
@@ -57,7 +57,7 @@ module.exports = {
         // /winston/,
         // {mysql2:'commonjs mysql2' },
         /pg-native/,
-        {got: 'commonjs got' },
+        // {got: 'commonjs got' },
     ],
 
     ignoreWarnings: [
