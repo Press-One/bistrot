@@ -15,10 +15,11 @@
         "start": "node --no-deprecation bin/prs-atm.js",
         "debug": "node --inspect --trace-warnings debug.js",
         "test": "node --inspect --trace-warnings test.js",
-        "ncuinit": "npm install -g npm-check-updates",
+        "devinit": "npm install -g npm-check-updates && npm install -s dev",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
-        "prepublishOnly": "npm run readme && npm version patch && npm run updep && npm run gitsync",
+        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js"
+        "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-us": "docker build --no-cache -t pressone/prs-atm .",
         "docker-build-cn": "docker build --no-cache -t dockerhub.qingcloud.com/pressone/prs-atm .",
@@ -28,7 +29,6 @@
         "docker-publish-cn": "npm run docker-build-cn && npm run docker-push-cn",
         "docker-publish": "npm run docker-publish-us && npm run docker-publish-cn",
         "publish-beta": "npm publish --tag beta",
-        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
