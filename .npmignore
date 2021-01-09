@@ -3,6 +3,7 @@
 debug
 Dockerfile
 gears
+main.js
 package-lock.json
 template.md
 wiki
