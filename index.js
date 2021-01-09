@@ -1,17 +1,14 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
-
-const libPath = path.join(__dirname, 'lib');
-
-module.exports = require('sushitrain');
-
-fs.readdirSync(libPath).filter((file) => {
-    return /\.js$/i.test(file)
-        && file.indexOf('.') !== 0;
-    // && file.toLowerCase() !== 'config.js';
-}).forEach((file) => {
-    module.exports[file.replace(/^(.*)\.js$/, '$1')]
-        = require(path.join(libPath, file));
+module.exports = Object.assign(require('sushitrain'), {
+    atm: require('./lib/atm'),
+    ballot: require('./lib/ballot'),
+    chain: require('./lib/chain'),
+    config: require('./lib/config'),
+    etc: require('./lib/etc'),
+    exchange: require('./lib/exchange'),
+    keychain: require('./lib/keychain'),
+    statement: require('./lib/statement'),
+    system: require('./lib/system'),
+    wallet: require('./lib/wallet'),
 });
