@@ -37,13 +37,14 @@
         "url": "https://github.com/Press-One/prs-atm.git"
     },
     "dependencies": {
+    },
+    "devDependencies": {
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
         "sushitrain": "^1989.9.5",
         "table": "^6.0.7",
-        "yargs": "^16.2.0"
-    },
-    "devDependencies": {
+        "yargs": "^16.2.0",
+        "string-replace-loader": "^3.0.1",
         "webpack": "^5.12.1",
         "webpack-cli": "^4.3.1"
     }
