@@ -28,7 +28,7 @@
         "docker-publish-us": "npm run docker-build-us && npm run docker-push-us",
         "docker-publish-cn": "npm run docker-build-cn && npm run docker-push-cn",
         "docker-publish": "npm run docker-publish-us && npm run docker-publish-cn",
-        "beta": "npm publish --tag beta",
+        "beta": "npm publish --tag beta"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
