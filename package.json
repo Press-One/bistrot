@@ -18,7 +18,7 @@
         "devinit": "npm install -g npm-check-updates && npm install -s dev",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
-        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js"
+        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js",
         "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-us": "docker build --no-cache -t pressone/prs-atm .",
