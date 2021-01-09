@@ -59,19 +59,19 @@ module.exports = {
         },
     ],
 
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /\.js$/,
-    //             loader: 'string-replace-loader',
-    //             options: {
-    //                 search: ' new Buffer',
-    //                 replace: ' Buffer.alloc',
-    //                 flags: 'g'
-    //             }
-    //         }
-    //     ],
-    // },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'string-replace-loader',
+                options: {
+                    search: ' new Buffer',
+                    replace: ' Buffer.from',
+                    flags: 'g'
+                }
+            }
+        ],
+    },
 
     node: {
         __dirname: false,
