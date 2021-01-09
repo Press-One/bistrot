@@ -1,5 +1,5 @@
 
-const prsAtm = require('./dist/prs-atm.output.js');
+const prsAtm = require('./dist');
 
 (async () => {
     const a = await prsAtm.producer.getAll();

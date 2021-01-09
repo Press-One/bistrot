@@ -8,78 +8,70 @@ module.exports = {
 
     target: [
         'node14',
-        // 'electron12-main',
+        'electron12-main',
     ],
 
-    entry: './index.js',
+    entry: './main.js',
 
     output: {
         libraryTarget: 'commonjs',
         path: path.resolve(__dirname, 'dist'),
-        filename: 'prs-atm.output.js',
+        filename: 'index.js',
     },
 
     resolve: {
         extensions: ['.js', '.json', '.node'],
+        alias: {
+            '@sentry/node': false,
+            'fast-geoip': false,
+            'ioredis': false,
+            'mailgun-js': false,
+            'mysql2/promise': false,
+            'node-mailjet': false,
+            'pg': false,
+            'public-ip': false,
+            'telesignsdk': false,
+            'twilio': false,
+            'winston-papertrail-mproved': false,
+            'winston': false,
+        }
     },
 
-    // plugins: [
-    //     new webpack.IgnorePlugin(/pg\-native/),
-    // ],
-    // loaders: [
-    //     { test: /\.json$/, loader: 'json' },
-   // other loaders
-    // ],
-    // module: {
-		// rules: [
-		// 	// all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-		// 	{
-		// 		test: /\.tsx?$/,
-		// 		include: path.resolve(__dirname, 'src'),
-		// 		loader: "ts-loader"
-		// 	}
-		// 		]
-		// },
     externals: [
-        // /base64url/,
-        // /bufferutil/,
-        // /ioredis/,
-        // /jsonwebtoken/,
-        // /mailgun-js/,
-        // /mailjet/,
-        // /memcpy/,
-        // /mysql2/,
-        // /node-mailjet/,
-        // /pg/,
-        // /telesignsdk/,
-        // /twilio/,
-        // /utf-8-validate/,
-        // /winston/,
-        // {mysql2:'commonjs mysql2' },
-        /pg-native/,
-        // {got: 'commonjs got' },
+        /memcpy/, // eosjs-ecc
+        /pg-native/, // qg
+        /cardinal/, // mysql
+        /bufferutil/, // ws
+        /utf-8-validate/, // ws
+        {got: 'commonjs got' }, // public-ip
     ],
 
     ignoreWarnings: [
-        // warning => {
-        //     return warning
-        //      && warning.loc
-        //      && warning.loc.start
-        //      && warning.loc.end && (
-        //         (
-        //             warning.loc.start.line === 84
-        //             && warning.loc.start.column === 20
-        //             && warning.loc.end.line === 84
-        //             && warning.loc.end.column === 52
-        //          ) || (
-        //             warning.loc.start.line === 1
-        //             && warning.loc.start.column === 43
-        //             && warning.loc.end.line === 1
-        //             && warning.loc.end.column === 50
-        //          )
-        //      );
-        // },
+        warning => {
+            return warning
+             && warning.loc
+             && warning.loc.start
+             && warning.loc.end
+             && (( warning.loc.start.line === 84
+             && warning.loc.start.column === 20
+             && warning.loc.end.line === 84
+             && warning.loc.end.column === 52));
+        },
     ],
+
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'string-replace-loader',
+                options: {
+                    search: ' new Buffer',
+                    replace: ' Buffer.alloc',
+                    flags: 'g'
+                }
+            }
+        ],
+    },
 
     node: {
         __dirname: false,
