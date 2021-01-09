@@ -1,7 +1,12 @@
 
+// global.node = {
+//     TEXT_NODE: 3
+// };
+
 const prsAtm = require('./dist/prs-atm.output.js');
 
 (async () => {
-    const a = await prsAtm.producer.getAll();
-    console.log(a);
+    console.log(await prsAtm.network.getCurrentPosition());
+    // const a = await prsAtm.producer.getAll();
+    // console.log(a);
 })();
