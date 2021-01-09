@@ -26,10 +26,10 @@ module.exports = {
     // plugins: [
     //     new webpack.IgnorePlugin(/pg\-native/),
     // ],
-    loaders: [
-        { test: /\.json$/, loader: 'json' },
+    // loaders: [
+    //     { test: /\.json$/, loader: 'json' },
    // other loaders
-    ],
+    // ],
     // module: {
 		// rules: [
 		// 	// all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
