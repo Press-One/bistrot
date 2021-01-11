@@ -5,7 +5,10 @@ const { exchange } = require('..');
 const func = async (argv) => {
     return await exchange.rmLiquid(
         argv.pvtkey, argv.account, argv.cura, argv.curb,
-        argv.amount, argv.email, argv.memo, { mixinAccount: argv.mixin }
+        argv.amount, argv.email, argv.memo, {
+            mixinAccount: argv.mixin,
+            dryrun: argv.dryrun,
+        }
     );
 };
 
@@ -23,6 +26,7 @@ module.exports = {
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
+        '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Use `SwapPool` to get pools that available to rm liquid.   |',
         '    | 2. Bind your Mixin-Account to PRS-Account before rm liquid.   |',
@@ -38,16 +42,31 @@ module.exports = {
         '    |   mistake of withdraw accounts.                               |',
         '    └---------------------------------------------------------------┘',
     ],
-    example: {
-        args: {
-            account: true,
-            cura: 'COB',
-            curb: 'CNB',
-            amount: true,
-            keystore: true,
-            email: true,
+    example: [
+        {
+            title: 'Estimating a Liquid Removing Plan (dryrun)',
+            args: {
+                account: true,
+                cura: 'COB',
+                curb: 'CNB',
+                amount: true,
+                keystore: true,
+                email: true,
+                dryrun: null,
+            },
         },
-    },
+        {
+            title: 'Removing Liquid',
+            args: {
+                account: true,
+                cura: 'COB',
+                curb: 'CNB',
+                amount: true,
+                keystore: true,
+                email: true,
+            },
+        }
+    ],
     render: {
         table: {
             KeyValue: true,
