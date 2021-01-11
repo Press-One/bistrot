@@ -3,7 +3,9 @@
 debug
 Dockerfile
 gears
+lib
 main.js
 package-lock.json
 template.md
 wiki
+webpack.config.js
