@@ -34,10 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-
-Notice: New version 4.3.21 of prs-atm is available. Please update it as soon as possible.
-
-prs-atm v4.0.13
+prs-atm v4.4.14
 
 usage: prs-atm <command> [<args>]
 
