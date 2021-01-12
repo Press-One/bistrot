@@ -26,10 +26,13 @@ const func = async (argv) => {
             path.join(__filename, `../../node_modules/${p}/package.json`)
         )).version;
     }
-    try {
-        const ssConfig = await sushitrain.config();
-        exportSsConfig.map(x => { data[x] = ssConfig[x]; });
-    } catch (e) { }
+    // try {
+    const ssConfig = await sushitrain.config();
+    exportSsConfig.map(x => {
+        data[x] = Array.isArray(ssConfig[x]) && !argv.json
+            ? ssConfig[x].join('\n') : ssConfig[x];
+    });
+    // } catch (e) { }
     return data;
 };
 
