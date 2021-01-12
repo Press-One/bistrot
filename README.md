@@ -34,7 +34,8 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-prs-atm v4.4.14
+>>> Running in source mode.
+prs-atm v4.4.15
 
 usage: prs-atm <command> [<args>]
 
@@ -937,6 +938,7 @@ usage: prs-atm <command> [<args>]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get pools that available to rm liquid.   |
     | 2. Bind your Mixin-Account to PRS-Account before rm liquid.   |
@@ -955,7 +957,17 @@ usage: prs-atm <command> [<args>]
     | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
-    > Example:
+    > Example of Estimating a Liquid Removing Plan (dryrun):
+    $ prs-atm SwapRmLq \
+              --account=ABCDE \
+              --cura=COB \
+              --curb=CNB \
+              --amount=12.3456 \
+              --keystore=keystore.json \
+              --email=abc@def.com \
+              --dryrun
+
+    > Example of Removing Liquid:
     $ prs-atm SwapRmLq \
               --account=ABCDE \
               --cura=COB \
