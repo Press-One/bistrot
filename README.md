@@ -1,6 +1,6 @@
 # PRS-ATM
 
-A CLI client for [PRESS.one](https://press.one/) .
+A CLI client and also an API library for [PRESS.one](https://press.one/) .
 
 ![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
 
@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> Running in source mode.
-prs-atm v4.4.15
+prs-atm v4.4.16
 
 usage: prs-atm <command> [<args>]
 
