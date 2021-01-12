@@ -26,7 +26,7 @@ const func = async (argv) => {
             data[`${p}_version`] = (await utilitas.which(
                 path.join(__filename, `../../node_modules/${p}/package.json`)
             )).version;
-        } catch (e) { }
+        } catch (e) { data[`${p}_version`] = 'PACKED'; }
     }
     try {
         const ssConfig = await sushitrain.config();
