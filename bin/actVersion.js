@@ -1,7 +1,12 @@
 'use strict';
 
-const { utilitas } = require('..');
+const { utilitas, sushitrain } = require('..');
 const path = require('path');
+
+const exportSsConfig = [
+    'debug', 'secret', 'speedTest', 'keosApi',
+    'rpcApi', 'shpApi', 'chainApi', 'ipfsApi',
+];
 
 const func = async (argv) => {
     const pkg = path.join(path.dirname(__filename), '..', 'package.json');
@@ -21,7 +26,10 @@ const func = async (argv) => {
             path.join(__filename, `../../node_modules/${p}/package.json`)
         )).version;
     }
-    
+    try {
+        const ssConfig = await sushitrain.config();
+        exportSsConfig.map(x => { data[x] = ssConfig[x]; });
+    } catch (e) { }
     return data;
 };
 
