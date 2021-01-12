@@ -9,8 +9,6 @@ const path = require('path');
 const fs = require('fs');
 
 const map = {
-    mixinAccount: 'mixinId',
-    mixinId: 'mixinNumber',
     transactions_trx_id: 'transaction_id',
     transactions_trx_transaction_actions_account: 'counter',
     transactions_trx_transaction_actions_data_type: 'description',
@@ -82,6 +80,9 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
     for (let i in result) {
         out[i] = {};
         for (let j in result[i]) {
+            if (j === 'transaction' && result[i][j]) {
+                out[i].transaction_id = result[i][j].transaction_id;
+            }
             // if (!global.chainConfig.debug && verbose.includes(i)) {
             if (!options.renderAll && verbose.includes(j)) {
                 continue;
