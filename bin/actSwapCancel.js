@@ -34,10 +34,5 @@ module.exports = {
             keystore: true,
         },
     },
-    render: {
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 19 }, 1: { width: 64 } } },
-        },
-    },
+    render: { table: { KeyValue: true } },
 };

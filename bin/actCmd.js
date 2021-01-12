@@ -45,11 +45,5 @@ module.exports = {
             args: 'ballot info',
         },
     ],
-    render: {
-        renderAll: true,
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 14 }, 1: { width: 59 } } },
-        },
-    },
+    render: { renderAll: true, table: { KeyValue: true } },
 };

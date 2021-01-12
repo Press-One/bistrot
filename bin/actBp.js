@@ -17,9 +17,13 @@ const func = async (argv) => {
         x.scaled_votes = finance.bigFormat(
             math.divide(math.bignumber(x.total_votes), total)
         );
-        if (!argv.json && x.priority <= 21) {
-            for (let i in x) {
-                try { x[i] = colors.green(x[i]); } catch (err) { }
+        x.is_active = !!x.is_active;
+        if (!argv.json) {
+            x.producer_key = x.producer_key.slice(0, 10) + '...';
+            if (x.priority <= 21) {
+                for (let i in x) {
+                    try { x[i] = colors.green(x[i]); } catch (err) { }
+                }
             }
         }
     });

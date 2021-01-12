@@ -113,7 +113,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
                 ].includes(typeof out[i]) ? out[i] : JSON.stringify(out[i])]);
             }
             options.table.config = Object.assign({
-                columns: { 0: { width: 20 }, 1: { width: 53 } }
+                columns: { 0: { width: 30 }, 1: { width: 80 } }
             }, options.table.config || {});
         }
         out = data && data.length ? table(data, options.table.config) : '';
