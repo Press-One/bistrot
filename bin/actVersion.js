@@ -21,6 +21,7 @@ const func = async (argv) => {
             path.join(__filename, `../../node_modules/${p}/package.json`)
         )).version;
     }
+    
     return data;
 };
 
