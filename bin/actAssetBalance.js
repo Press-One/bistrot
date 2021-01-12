@@ -1,12 +1,28 @@
 'use strict';
 
-const { account, finance, utilitas, mixin } = require('..');
+const { account, finance, utilitas, mixin, swap, math } = require('..');
 
 const func = async (argv) => {
     const resp = await account.getByName(argv.account);
     utilitas.assert(resp, `Account not found: ${argv.account}`, 404);
     const [result, now] = [await account.getBalance(argv.account), new Date()];
-    for (let i in result) { result[i] = finance.bigFormat(result[i]); }
+    let pools = null;
+    for (let j in result) {
+        if (j !== 'PRS') {
+            pools = pools || await swap.getAllPools();
+            pools.map(x => {
+                if (x.pool_token.symbol === j) {
+                    const rate = math.divide(result[j], x.pool_token.volume);
+                    x.tokens.map(y => {
+                        result[`${j} (${y.symbol})`] = math.multiply(y.volume, rate);
+                    });
+                }
+            });
+        }
+    }
+    for (let i in result) {
+        result[i] = finance.bigFormat(result[i]);
+    }
     if (resp.refund_request) {
         result[`unstaking_${mixin.defaultCurrency}`] = finance.bignumberSum(
             finance.parseAmountAndCurrency(resp.refund_request.net_amount)[0],
