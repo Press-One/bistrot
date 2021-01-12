@@ -55,7 +55,7 @@ module.exports = {
             KeyValue: true,
             config: {
                 columns: {
-                    0: { width: 20 }, 1: { width: 53, alignment: 'right' },
+                    0: { width: 30 }, 1: { width: 80, alignment: 'right' },
                 },
             },
         },

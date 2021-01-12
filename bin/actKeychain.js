@@ -60,8 +60,11 @@ const func = async (argv, options = {}) => {
     }
     if (!argv.json) { console.log('KEYCHAIN_IN_CONFIG_FILE:', filename); }
     for (let key in config.keystores || {}) {
-        const privatekey = config.keystores[key].keystore.privatekey
+        let privatekey = config.keystores[key].keystore.privatekey
             || utilitas.makeStringByLength('*', privatekeyLength);
+        if (!argv.json) {
+            privatekey = privatekey.slice(0, 27) + '...';
+        }
         resp.push({
             account: config.keystores[key].account,
             permission: config.keystores[key].permission,
@@ -124,7 +127,7 @@ module.exports = {
                     0: { width: 12 },
                     1: { width: 10 },
                     2: { width: 53 },
-                    3: { width: 51 },
+                    3: { width: 30 },
                     4: { width: 10 },
                 },
             },

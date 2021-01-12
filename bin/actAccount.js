@@ -17,10 +17,5 @@ module.exports = {
             name: true,
         }
     },
-    render: {
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 24 }, 1: { width: 49 } } },
-        },
-    },
+    render: { table: { KeyValue: true } },
 };

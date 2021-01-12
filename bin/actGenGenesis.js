@@ -23,10 +23,5 @@ module.exports = {
             path: true,
         },
     },
-    render: {
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 21 }, 1: { width: 64 } } },
-        },
-    },
+    render: { table: { KeyValue: true } },
 };

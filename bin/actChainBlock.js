@@ -29,10 +29,5 @@ module.exports = {
             json: null,
         }
     },
-    render: {
-        table: {
-            KeyValue: true,
-            config: { columns: { 0: { width: 18 }, 1: { width: 55 } } },
-        },
-    },
+    render: { table: { KeyValue: true } },
 };
