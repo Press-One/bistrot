@@ -13,7 +13,7 @@ module.exports = {
     name: 'Get authoritative chain nodes',
     help: [
         '    ┌---------------------------------------------------------------┐',
-        "    | 1. Please use option `--json` to get structured data.         |",
+        '    | 1. Please use option `--json` to get structured data.         |',
         '    └---------------------------------------------------------------┘',
     ],
     render: {
