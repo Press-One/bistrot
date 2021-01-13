@@ -119,7 +119,9 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
         out = data && data.length ? table(data, options.table.config) : '';
     }
     if (!options.returnOnly) {
-        console.log(argv.json ? utilitas.prettyJson(out) : out);
+        console.log(argv.json ? (
+            argv.compact ? JSON.stringify(out) : utilitas.prettyJson(out)
+        ) : out);
     };
     return out;
 };
@@ -127,7 +129,7 @@ const randerResult = (result, options = { table: { KeyValue: true } }) => {
 ['add', 'remove'].map(i => { argv[i] = toArray(argv[i]); });
 [
     'trxonly', 'help', 'detail', 'force', 'json', 'daemon', 'testnet',
-    'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun',
+    'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun', 'compact',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
