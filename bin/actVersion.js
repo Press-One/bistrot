@@ -9,7 +9,7 @@ const exportSsConfig = [
 ];
 
 const func = async (argv) => {
-    const pkg = path.join(path.dirname(__filename), '..', 'package.json');
+    const pkg = path.join(__dirname, '..', 'package.json');
     let data = await utilitas.which(pkg);
     data = data ? {
         package_name: data.name,
@@ -25,7 +25,7 @@ const func = async (argv) => {
     for (let p of ['sushitrain', 'utilitas']) {
         try {
             data[`${p}_version`] = (await utilitas.which(
-                path.join(__filename, `../../node_modules/${p}/package.json`)
+                path.join(__dirname, `../node_modules/${p}/package.json`)
             )).version || 'PACKED';
         } catch (e) { data[`${p}_version`] = 'PACKED'; }
     }

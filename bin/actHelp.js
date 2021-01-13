@@ -77,10 +77,9 @@ const func = async (argv) => {
         let actName = file.replace(/^(.*)\.js$/, '$1').replace(/^act/i, '');
         acts[actName] = require(path.join(__dirname, file));
     });
-    const info = [
-        `${(await utilitas.which()).title}`, '',
-        'usage: prs-atm <command> [<args>]'
-    ];
+    const info = [`${(await utilitas.which(
+        path.join(__dirname, '..', 'package.json')
+    )).title}`, '', 'usage: prs-atm <command> [<args>]'];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     let find = {};
     for (let i in acts) {
