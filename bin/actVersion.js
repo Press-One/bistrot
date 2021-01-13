@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, sushitrain, shot } = require('..');
+const { utilitas, sushitrain, shot, system } = require('..');
 const path = require('path');
 
 const exportSsConfig = [
@@ -39,7 +39,10 @@ const func = async (argv) => {
     } catch (e) { data['sushitrain_inited'] = false; }
     try {
         data['geolocation'] = await shot.getCurrentPosition();
-    } catch (e) { data['geolocation'] = null }
+    } catch (e) { data['geolocation'] = null; }
+    try {
+        data['sushibar'] = await system.chkCpVer();
+    } catch (e) { data['sushibar'] = null; }
     return data;
 };
 
