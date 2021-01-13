@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> Running in source mode.
-prs-atm v4.4.22
+prs-atm v4.4.23
 
 usage: prs-atm <command> [<args>]
 
@@ -1006,6 +1006,11 @@ usage: prs-atm <command> [<args>]
 =====================================================================
 
 * `Version` > List version info:
+
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--debug` to get verbose information.    |
+    | 2. Please use option `--json` to get structured data.         |
+    └---------------------------------------------------------------┘
 
     > Example of getting package version:
     $ prs-atm Version
