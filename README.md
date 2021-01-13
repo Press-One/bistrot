@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> Running in source mode.
-prs-atm v4.4.24
+prs-atm v4.4.25
 
 usage: prs-atm <command> [<args>]
 
@@ -139,12 +139,10 @@ usage: prs-atm <command> [<args>]
     | 6. Registration fee is NON-REFUNDABLE, EVEN IF IT FAILS.      |
     └---------------------------------------------------------------┘
     ┌- Standard Account Naming Conventions -------------------------┐
-    | ■ Can only contain the characters                             |
-    |   `.abcdefghijklmnopqrstuvwxyz12345`.                         |
-    |   `a-z` (lowercase), `1-5` and `.` (period)                   |
-    | ■ Must start with a letter                                    |
-    | ■ Must be 12 characters                                       |
-    | ? https://eosio-cpp.readme.io/v1.1.0/docs/naming-conventions  |
+    | ■ Must be 2-13 characters                                     |
+    | ■ First 12 characters can be `a-z` (lowercase) or `1-5` or `.`|
+    | ■ The 13th character can only be `a-j` or `1-5`               |
+    | ? https://github.com/EOSIO/eos/issues/955                     |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
@@ -198,14 +196,20 @@ usage: prs-atm <command> [<args>]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
+    ┌- Pay via QR code ---------------------------------------------┐
     | 1. After successful execution, you will get a URL.            |
     | 2. Open this URL in your browser.                             |
     | 3. Scan the QR code with Mixin to complete the payment.       |
-    | 4. You have to complete the payment within `7` days.          |
-    | 5. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
-    | 6. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
-    | 7. Finish, `AssetCancel` or timeout a trx before request.     |
+    └---------------------------------------------------------------┘
+    ┌- Pay via Message ---------------------------------------------┐
+    | 1. System will also send the URL to your bound Mixin-Account. |
+    | 2. Simply click on the URL in Mixin to complete the payment.  |
+    └---------------------------------------------------------------┘
+    ┌---------------------------------------------------------------┐
+    | 1. You have to complete the payment within `7` days.          |
+    | 2. PAYING AN EXPIRED TRANSACTION WILL RESULT IN LOST MONEY.   |
+    | 3. Only `1` trx (deposit / withdrawal) is allowed at a time.  |
+    | 4. Finish, `AssetCancel` or timeout a trx before request.     |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
@@ -818,13 +822,19 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get all pools that available to swap.    |
     | 2. Default `slippage` is `5`, which means a 5% slippage.      |
-    | 3. After successful execution, you will get a URL.            |
-    | 4. Open this URL in your browser.                             |
-    | 5. Scan the QR code with Mixin to complete the payment.       |
-    | 6. You have to complete the payment within `7` days.          |
-    | 7. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
-    | 8. Only `1` swap transaction is allowed at a time.            |
-    | 9. Finish, `SwapCancel` or timeout a current trx before swap. |
+    | 3. You have to complete the payment within `7` days.          |
+    | 4. SCANNING AN EXPIRED QR CODE WILL RESULT IN LOST MONEY.     |
+    | 5. Only `1` swap transaction is allowed at a time.            |
+    | 6. Finish, `SwapCancel` or timeout a current trx before swap. |
+    └---------------------------------------------------------------┘
+    ┌- Pay via QR code ---------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    └---------------------------------------------------------------┘
+    ┌- Pay via Message ---------------------------------------------┐
+    | 1. System will also send the URL to your bound Mixin-Account. |
+    | 2. Simply click on the URL in Mixin to complete the payment.  |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
@@ -866,13 +876,19 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get pools that available to add liquid.  |
     | 2. Amount of CURRENCY-B will be calculated automatically.     |
-    | 3. After successful execution, you will get `2` URLs.         |
-    | 4. Open these URLs in your browser.                           |
-    | 5. Scan the QR codes with Mixin to complete the payment.      |
-    | 6. You have to complete the payment within `7` days.          |
-    | 7. SCANNING AN EXPIRED QR CODES WILL RESULT IN LOST MONEY.    |
-    | 8. Only `1` swap related transaction is allowed at a time.    |
-    | 9. Finish, `SwapCancel` or timeout a current trx before exec. |
+    | 3. You have to complete the payment within `7` days.          |
+    | 4. SCANNING AN EXPIRED QR CODES WILL RESULT IN LOST MONEY.    |
+    | 5. Only `1` swap related transaction is allowed at a time.    |
+    | 6. Finish, `SwapCancel` or timeout a current trx before exec. |
+    └---------------------------------------------------------------┘
+    ┌- Pay via QR code ---------------------------------------------┐
+    | 1. After successful execution, you will get `2` URLs.         |
+    | 2. Open these URLs in your browser.                           |
+    | 3. Scan the QR codes with Mixin to complete the payment.      |
+    └---------------------------------------------------------------┘
+    ┌- Pay via Message ---------------------------------------------┐
+    | 1. System will also send the URLs to your bound Mixin-Account.|
+    | 2. Simply click on the URLs in Mixin to complete the payment. |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
