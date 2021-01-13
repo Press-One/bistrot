@@ -26,7 +26,7 @@ const func = async (argv) => {
         try {
             data[`${p}_version`] = (await utilitas.which(
                 path.join(__filename, `../../node_modules/${p}/package.json`)
-            )).version;
+            )).version || 'PACKED';
         } catch (e) { data[`${p}_version`] = 'PACKED'; }
     }
     try {
