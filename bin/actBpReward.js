@@ -15,7 +15,7 @@ const func = async (argv) => {
                 console.log(err && err.message ? err.message : err);
             }
         }
-    }, 60 * 60 * 1, 10, 0, 'Reward Daemon');
+    }, 60 * 10, 10, 0, 'Reward Daemon');
 };
 
 module.exports = {
