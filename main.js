@@ -1,5 +1,7 @@
 'use strict';
 
+global._prsAtm = require('./package.json');
+
 module.exports = Object.assign(require('sushitrain'), {
     keythereum: require('keythereum-pure-js'),
     atm: require('./lib/atm'),
