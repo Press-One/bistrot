@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> Running in source mode.
-prs-atm v4.4.20
+prs-atm v4.4.21
 
 usage: prs-atm <command> [<args>]
 
@@ -412,6 +412,17 @@ usage: prs-atm <command> [<args>]
     $ prs-atm ChainBlock \
               --id=26621512 \
               --json
+
+=====================================================================
+
+* `ChainNode` > Get chain nodes:
+
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--json` to get structured data.         |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ChainNode
 
 =====================================================================
 
