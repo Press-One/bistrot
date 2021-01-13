@@ -20,6 +20,7 @@ const func = async (argv) => {
         repository: data.repository ? data.repository.url : null,
         author: data.author,
         license: data.license,
+        time: new Date().toISOString(),
     } : {};
     for (let p of ['sushitrain', 'utilitas']) {
         try {
