@@ -13,7 +13,7 @@ let skippedTest = 0;
 
 const tests = {
     'Account': { args: { name: testUser } },
-    'AccountAuth': {},
+    'AccountAuth': { args: { account: testUser } },
     'AccountBind': {},
     'AccountEvolve': {},
     'AccountOpen': {},
