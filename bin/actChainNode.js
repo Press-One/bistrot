@@ -10,7 +10,7 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'Get chain nodes',
+    name: 'Get authoritative chain nodes',
     help: [
         '    ┌---------------------------------------------------------------┐',
         "    | 1. Please use option `--json` to get structured data.         |",
