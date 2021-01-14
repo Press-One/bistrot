@@ -7,5 +7,6 @@ lib
 main.js
 package-lock.json
 template.md
-wiki
+test.js
 webpack.config.js
+wiki
