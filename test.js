@@ -1,71 +1,79 @@
 'use strict';
 
-const { utilitas, storage, shell } = require('sushitrain');
+const { utilitas, encryption, storage, shell } = require('sushitrain');
 const path = require('path');
 const fs = require('fs');
 const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
-const [testUser, prevAddress, prevKey, results, errors] = [
-    'testuser1', 'e5ad638ed1a4ec75c77488f6b3d4011fdc7782dc', '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d', {}, []
-];
+const [results, errors] = [{}, []];
+const account = 'testuser1';
+const pubkey = 'EOS8XgbSbQsr1wuX5UFDbZTTV76yQWz2BEXV5whTUnHM2w8du2F6S';
+const address = 'e5ad638ed1a4ec75c77488f6b3d4011fdc7782dc';
+const prvK = '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d';
+const mixin = '36029b33-838f-4dbe-ae9b-f0e86226d53d';
+const txId = 'EBA5538D00A0958957F4FDE0B8149FF563A129C53A0FD6FDB16559C498523933';
+const cura = 'cob';
+const curb = 'cnb';
+const password = encryption.randomString(32);
+const keystore = '/tmp/prsatm-test-keystore.json';
+const ignoreResult = true;
+const args = { account };
 
 let successTest = 0;
 let failedTest = 0;
 let skippedTest = 0;
 
 const tests = {
-    'AccountOpen': {},
-
-    'Account': { args: { name: testUser } },
-    'AccountAuth': { args: { account: testUser } },
-    'AccountBind': { args: { account: testUser } },
-    'AccountEvolve': { args: { account: testUser, address: prevAddress, prevkey: prevKey, } },
-
-
-
-
-
-    'AssetBalance': {},
-    'AssetCancel': {},
-    'AssetDeposit': {},
-    'AssetRefund': {},
-    'AssetWithdraw': {},
+    'Account': { args: { name: account } },
+    'AccountAuth': { args },
+    'AccountBind': { args },
+    'AccountEvolve': { args: { account, address, prevkey: prvK, } },
+    'AccountOpen': { args: { account: 'testuser555', pubkey } },
+    'AssetBalance': { args },
+    'AssetCancelPreparation': { alias: 'AssetCancel', args, ignoreResult },
+    'AssetDeposit': { args: { account, amount: 0.001 } },
+    'AssetCancel': { args },
+    'AssetWithdraw': { args: { account, amount: 0.001, mixin } },
+    'AssetRefund': { skip: true },
     'Bp': {},
     'BpBallot': {},
-    'BpReg': {},
-    'BpReward': {},
-    'BpUnreg': {},
-    'BpVote': {},
+    'BpUnregPreparation': { alias: 'BpUnreg', args },
+    'BpReg': { args },
+    'BpVote': { args: { account, add: account } },
+    'BpReward': { skip: true },
+    'BpUnreg': { args },
     'Chain': {},
-    'ChainBlock': {},
+    'ChainBlock': { args: { id: 1 } },
     'ChainNode': {},
-    'ChainTail': {},
-    'ChainTrx': {},
+    'ChainTail': { skip: true },
+    'ChainTrx': { args: { id: txId }, prod: true },
     'Cmd': {},
-    'Config': {},
-    'DefiChart': {},
-    'GenConfig': {},
+    'Config': { args: { debug: true } },
+    'DefiChart': { skip: true },
+    'GenConfig': { args },
     'GenGenesis': {},
     'GenRunsrv': {},
-    'Help': {},
+    'Help': { hideResult: true },
     'Keychain': {},
-    'Keys': {},
-    'KeystoreCreate': {},
-    'KeystoreUnlock': {},
-    'KeyUpdtActive': {},
-    'KeyUpdtOwner': {},
-    'ResDelegate': {},
-    'ResRamBuy': {},
-    'ResUndelegate': {},
-    'SpdTest': {},
-    'Statement': {},
-    'Swap': {},
-    'SwapAddLq': {},
-    'SwapCancel': {},
-    'SwapPay': {},
+    'Keys': { args },
+    'KeystoreCreate': { args: { password, dump: keystore, force: true } },
+    'KeystoreUnlock': { args: { keystore, password } },
+    'KeyUpdtActive': { skip: true },
+    'KeyUpdtOwner': { skip: true },
+    'ResDelegate': { args: { account, net: 1 } },
+    'ResRamBuy': { args: { account, ram: 1 } },
+    'ResUndelegate': { args: { account, net: 1 }, skip: true },
+    'SpdTest': { compactResult: true },
+    'Statement': { args: { account: 'test.bp2' }, prod: true },
+    'SwapCancelPreparation': { alias: 'SwapCancel', args, ignoreResult },
+    'Swap': { args: { account, from: cura, amount: 1, to: curb } },
+    'SwapCancel': { args },
+    'SwapAddLq': { args: { account, cura, amount: 1, curb } },
+    'SwapPay': { args },
+    'SwapCancelAddLq': { alias: 'SwapCancel', args },
     'SwapPool': {},
-    'SwapRmLq': {},
-    'SwapStmt': {},
+    'SwapRmLq': { args: { account, cura, curb, amount: 0.0001, mixin } },
+    'SwapStmt': { args: { account: 'test.bp2' }, prod: true },
     'Version': {},
 };
 
@@ -73,14 +81,14 @@ const checkKeystore = async () => {
     log('Checking keystore...');
     let ks;
     try {
-        ks = (await storage.getConfig()).config.keystores[`${testUser}-owner`];
+        ks = (await storage.getConfig()).config.keystores[`${account}-owner`];
     } catch (e) {
         utilitas.throwError(
-            `Error loading keystore for test user (${testUser}): ${e.message}.`,
+            `Error loading keystore for test user (${account}): ${e.message}.`,
             400
         );
     }
-    utilitas.assert(ks, `Keystore not found for test user (${testUser}).`, 400);
+    utilitas.assert(ks, `Keystore not found for test user (${account}).`, 400);
     log('OK');
 };
 
@@ -96,13 +104,14 @@ const getAllCommands = async () => {
         );
         resp.push(cmd);
     });
+    log('OK');
     return resp;
 };
 
-const formatArgs = (args) => {
-    args = Object.assign({
-        testnet: null, json: null, compact: null,
-    }, args || {});
+const formatArgs = (config) => {
+    const base = { testnet: null, json: null, compact: null };
+    if (config.prod) { delete base.testnet; }
+    const args = Object.assign(base, config.args || {});
     const resp = [];
     for (let i in args) {
         resp.push(args[i] === null ? `--${i}` : `--${i}='${args[i]}'`);
@@ -118,18 +127,29 @@ const test = async (func) => {
             || tests[func].args || {};
     } catch (err) { log(err); }
     try {
-        const argTxt = formatArgs(args);
+        const cmd = tests[func].alias || func;
+        const argTxt = formatArgs(tests[func]);
         split();
         log(`>>> CASE ${successTest + failedTest + 1} `
-            + `>>> \`$ prs-atm ${func} ${argTxt}\``);
+            + `>>> \`$ prs-atm ${cmd} ${argTxt}\``);
         results[func] = await (tests[func].overload ?
             tests[func].overload(args)
-            : shell.exec(`./bin/prs-atm.js ${func} ${argTxt}`));
-        results[func] = results[func]
-        // log(`Success: ${JSON.stringify(results[func], null, 2)}`);
+            : shell.exec(`./bin/prs-atm.js ${cmd} ${argTxt}`));
+        if (tests[func].hideResult) {
+            results[func] = '[...]';
+        } else if (tests[func].prettyResule) {
+            results[func] = JSON.stringify(JSON.parsr(results[func]), null, 2);
+        } else if (tests[func].compactResult) {
+            results[func] = JSON.stringify(results[func]);
+        } else {
+            results[func] = results[func].trim();
+        }
         log(`Success: ${results[func]}`);
         successTest++;
     } catch (err) {
+        if (tests[func].ignoreResult) {
+            log('Completed'); successTest++; return;
+        }
         errors.push(err.message);
         log(errors[errors.length - 1]);
         failedTest++;
@@ -144,33 +164,12 @@ const test = async (func) => {
     } catch (e) { log(e.message); process.exit(1); }
     for (let func in tests) { await test(func); }
     const duration = Math.round(process.hrtime(start)[1] / 1000000 / 10) / 100;
-    split(); log(`Success: ${successTest}, Failed: ${failedTest}, `
-        + `Skipped: ${skippedTest}, Time consuming: ${duration} seconds.`)
+    split();
+    log(`Success: ${successTest}, Failed: ${failedTest}, `
+        + `Skipped: ${skippedTest}, Time consuming: ${duration} seconds.`);
     split();
     if (errors.length) {
         throw Object.assign(new Error(`${failedTest} test failed.`),
             { details: errors });
     }
 })()
-
-// const tests = {
-//     getRpcUrl: {},
-//     getSupportedApis: {},
-//     createWallet: {},
-//     listWallet: {},
-//     openWallet: { args: [options.wallet] },
-//     lock: {},
-//     lockAll: {},
-//     unlock: { pre: () => { return [getPasswordOptions()] } },
-//     createKey: { pre: () => { return [getPasswordOptions()] } },
-//     getPublicKeys: { pre: () => { return [getPasswordOptions()] } },
-//     importKey: { pre: () => { return [testPrivateKey, getPasswordOptions()] } },
-//     isWalletReady: {},
-//     listKeys: { pre: () => { return [getPasswordOptions()] } },
-//     removeKey: { pre: () => { return [results['createKey'].publicKey, getPasswordOptions()] } },
-//     setTimeout: { args: [120] },
-//     rpcRequest: { args: ['POST', 'sign_digest', [testDigest, testPublicKey]] },
-//     signDigest: { pre: () => { return [testDigest, testPublicKey, getPasswordOptions()] } },
-//     signTransaction: { skip: !prodPrivateKey, overload: signTransaction },
-//     stop: { skip: true },
-// };
