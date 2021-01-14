@@ -61,7 +61,7 @@ const tests = {
     'KeyUpdtActive': { skip: true },
     'KeyUpdtOwner': { skip: true },
     'ResDelegate': { args: { account, net: 1 } },
-    'ResRamBuy': { args: { account, ram: 1 } },
+    'ResBuyRam': { args: { account, ram: 1 } },
     'ResUndelegate': { args: { account, net: 1 }, skip: true },
     'SpdTest': { compactResult: true },
     'Statement': { args: { account: 'test.bp2' }, prod: true },
