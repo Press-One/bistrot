@@ -130,19 +130,21 @@ const test = async (func) => {
         const cmd = tests[func].alias || func;
         const argTxt = formatArgs(tests[func]);
         split();
-        log(`>>> CASE ${successTest + failedTest + 1} `
+        log(`CASE ${successTest + failedTest + 1} `
             + `>>> \`$ prs-atm ${cmd} ${argTxt}\``);
         results[func] = await (tests[func].overload ?
             tests[func].overload(args)
             : shell.exec(`./bin/prs-atm.js ${cmd} ${argTxt}`));
         if (tests[func].hideResult) {
-            results[func] = '[...]';
+            results[func] = '...';
         } else if (tests[func].prettyResule) {
             results[func] = JSON.stringify(JSON.parsr(results[func]), null, 2);
         } else if (tests[func].compactResult) {
             results[func] = JSON.stringify(results[func]);
-        } else {
+        } else if (tests[func].rawResult) {
             results[func] = results[func].trim();
+        } else {
+            results[func] = results[func].trim().slice(0, 100) + '...';
         }
         log(`Success: ${results[func]}`);
         successTest++;
@@ -157,13 +159,14 @@ const test = async (func) => {
 };
 
 (async () => {
-    const start = process.hrtime();
+    const start = process.hrtime.bigint();
     try {
         await checkKeystore();
         await getAllCommands();
     } catch (e) { log(e.message); process.exit(1); }
     for (let func in tests) { await test(func); }
-    const duration = Math.round(process.hrtime(start)[1] / 1000000 / 10) / 100;
+    const end = process.hrtime.bigint();
+    const duration = Math.round(parseInt((end - start) / 10000000n)) / 100;
     split();
     log(`Success: ${successTest}, Failed: ${failedTest}, `
         + `Skipped: ${skippedTest}, Time consuming: ${duration} seconds.`);

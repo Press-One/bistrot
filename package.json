@@ -5,6 +5,7 @@
     "private": false,
     "homepage": "https://github.com/Press-One/prs-atm",
     "main": "index.js",
+    "test": "test.js",
     "bin": {
         "prs-atm": "bin/prs-atm.js"
     },
