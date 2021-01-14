@@ -34,8 +34,8 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
->>> Running in source mode.
-prs-atm v4.4.26
+>>> 🚧 Running in source mode.
+prs-atm v4.4.27
 
 usage: prs-atm <command> [<args>]
 
@@ -1041,6 +1041,7 @@ usage: prs-atm <command> [<args>]
 
     --help     List help info for current cmd    [WITH  OR  WITHOUT ]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
+    --compact  Printing JSON in compact style    [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
     --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
