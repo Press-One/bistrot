@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v4.4.27
+prs-atm v4.4.28
 
 usage: prs-atm <command> [<args>]
 
@@ -691,6 +691,30 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `ResBuyRam` > Buy RAM:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
+    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Default `receiver` is current `account` (pvtkey holder).   |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm ResBuyRam \
+              --account=ABCDE \
+              --receiver=FIJKL \
+              --ram=12.3456 \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `ResDelegate` > Delegate CPU and/or Network Bandwidth:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -714,30 +738,6 @@ usage: prs-atm <command> [<args>]
               --receiver=FIJKL \
               --cpu=12.3456 \
               --net=12.3456 \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `ResRamBuy` > Buy RAM:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --receiver Receiver's PRESS.one account      [STRING  / OPTIONAL]
-    --ram      PRS amount like xx.xxxx           [STRING  / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Default `receiver` is current `account` (pvtkey holder).   |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm ResRamBuy \
-              --account=ABCDE \
-              --receiver=FIJKL \
-              --ram=12.3456 \
               --keystore=keystore.json
 
 =====================================================================
