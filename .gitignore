@@ -113,4 +113,5 @@ typings/
 
 # Leask
 package-lock.json
+debug.js
 debug

@@ -1,6 +1,7 @@
 .github
 .history
 debug
+debug.js
 Dockerfile
 gears
 lib
