@@ -19,6 +19,7 @@ const keystore = '/tmp/prsatm-test-keystore.json';
 const ignoreResult = true;
 const args = { account };
 
+let toTest = {};
 let successTest = 0;
 let failedTest = 0;
 let skippedTest = 0;
@@ -119,6 +120,14 @@ const formatArgs = (config) => {
     return resp.join(' ');
 };
 
+const success = (message) => {
+    log(message); successTest++;
+};
+
+const failure = (message) => {
+    errors.push(message); log(errors[errors.length - 1]); failedTest++;
+};
+
 const test = async (func) => {
     if (tests[func].skip) { skippedTest++; return; };
     let args = {};
@@ -146,25 +155,30 @@ const test = async (func) => {
         } else {
             results[func] = results[func].trim().slice(0, 100) + '...';
         }
-        log(`Success: ${results[func]}`);
-        successTest++;
+        success(`Success: ${results[func]}`);
     } catch (err) {
-        if (tests[func].ignoreResult) {
-            log('Completed'); successTest++; return;
-        }
-        errors.push(err.message);
-        log(errors[errors.length - 1]);
-        failedTest++;
+        if (tests[func].ignoreResult) { return success('Completed'); }
+        failure(err.message);
     }
 };
 
 (async () => {
+    (process.argv || []).map(c => {
+        /case[=:]/i.test(c) && c.split(/=|:/)[1].split(/,|;/).map(
+            d => { d && (toTest[d.toLowerCase()] = true); }
+        );
+    });
+    toTest = Object.keys(toTest).length ? toTest : null;
     const start = process.hrtime.bigint();
     try {
         await checkKeystore();
         await getAllCommands();
     } catch (e) { log(e.message); process.exit(1); }
-    for (let func in tests) { await test(func); }
+    for (let func in tests) {
+        (!toTest || toTest[func.toLowerCase()]) && await test(func);
+        try { delete toTest[func.toLowerCase()]; } catch (e) { }
+    }
+    for (let i in toTest) { failure(`Test case not found: \`${i}\`.`); }
     const end = process.hrtime.bigint();
     const duration = Math.round(parseInt((end - start) / 10000000n)) / 100;
     split();
