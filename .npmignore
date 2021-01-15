@@ -3,6 +3,7 @@
 debug
 debug.js
 Dockerfile
+etc
 gears
 lib
 main.js
