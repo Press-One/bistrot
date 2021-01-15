@@ -1,13 +1,11 @@
 'use strict';
 
-const { atm, account, system } = require('..');
+const { atm, account } = require('..');
 
 const func = async (argv) => {
     const resp = await atm.bindIdentity(argv.account, argv.pvtkey);
     if (!argv.json && resp && resp.paymentUrl) {
-        console.log(`\nOpen this URL in your browser:\n\n${system.magicPayment(
-            resp.paymentUrl, { cnb: true }
-        )}\n`);
+        console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
     }
     return resp;
 };

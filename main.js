@@ -1,6 +1,10 @@
 'use strict';
 
-global._prsAtm = require('./package.json');
+global._prsAtm = Object.assign(require('./package.json'), {
+    testNetRpcApi: 'http://51.255.133.170:8888',
+    testNetChainApi: 'https://elm-sushibar.ngrok.io',
+    authorityChainApi: 'https://prs-bp1.press.one',
+});
 
 module.exports = Object.assign(require('sushitrain'), {
     keythereum: require('keythereum-pure-js'),
