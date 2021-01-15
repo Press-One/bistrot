@@ -25,57 +25,58 @@ let failedTest = 0;
 let skippedTest = 0;
 
 const tests = {
-    'Account': { args: { name: account } },
-    'AccountAuth': { args },
-    'AccountBind': { args },
-    'AccountEvolve': { args: { account, address, prevkey: prvK, } },
-    'AccountOpen': { args: { account: 'testuser555', pubkey } },
-    'AssetBalance': { args },
-    'AssetCancelPreparation': { alias: 'AssetCancel', args, ignoreResult },
-    'AssetDeposit': { args: { account, amount: 0.001 } },
-    'AssetCancel': { args },
-    'AssetWithdraw': { args: { account, amount: 0.001, mixin } },
-    'AssetRefund': { skip: true },
-    'Bp': {},
-    'BpBallot': {},
-    'BpUnregPreparation': { alias: 'BpUnreg', args },
-    'BpReg': { args },
-    'BpVote': { args: { account, add: account } },
-    'BpReward': { skip: true },
-    'BpUnreg': { args },
-    'Chain': {},
-    'ChainBlock': { args: { id: 1 } },
-    'ChainNode': {},
-    'ChainTail': { skip: true },
-    'ChainTrx': { args: { id: txId }, prod: true },
-    'Cmd': {},
-    'Config': { args: { debug: true } },
-    'DefiChart': { skip: true },
-    'GenConfig': { args },
-    'GenGenesis': {},
-    'GenRunsrv': {},
-    'Help': { hideResult: true },
-    'Keychain': {},
-    'Keys': { args },
-    'KeystoreCreate': { args: { password, dump: keystore, force: true } },
-    'KeystoreUnlock': { args: { keystore, password } },
-    'KeyUpdtActive': { skip: true },
-    'KeyUpdtOwner': { skip: true },
-    'ResDelegate': { args: { account, net: 1 } },
-    'ResBuyRam': { args: { account, ram: 1 } },
-    'ResUndelegate': { args: { account, net: 1 }, skip: true },
-    'SpdTest': { compactResult: true },
-    'Statement': { args: { account: 'test.bp2' }, prod: true },
-    'SwapCancelPreparation': { alias: 'SwapCancel', args, ignoreResult },
-    'Swap': { args: { account, from: cura, amount: 1, to: curb } },
-    'SwapCancel': { args },
-    'SwapAddLq': { args: { account, cura, amount: 1, curb } },
-    'SwapPay': { args },
-    'SwapCancelAddLq': { alias: 'SwapCancel', args },
-    'SwapPool': {},
-    'SwapRmLq': { args: { account, cura, curb, amount: 0.0001, mixin } },
-    'SwapStmt': { args: { account: 'test.bp2' }, prod: true },
-    'Version': {},
+    Account: { args: { name: account } },
+    AccountAuth: { args },
+    AccountBind: { args },
+    AccountEvolve: { args: { account, address, prevkey: prvK, } },
+    AccountOpen: { args: { account: 'testuser555', pubkey } },
+    AssetBalance: { args },
+    AssetCancelPreparation: { alias: 'AssetCancel', args, ignoreResult },
+    AssetDeposit: { args: { account, amount: 0.001 } },
+    AssetCancel: { args },
+    AssetWithdraw: { args: { account, amount: 0.001, mixin } },
+    AssetRefund: { skip: true },
+    Bp: {},
+    BpBallot: {},
+    BpUnregPreparation: { alias: 'BpUnreg', args },
+    BpReg: { args },
+    BpVote: { args: { account, add: account } },
+    BpReward: { skip: true },
+    BpRewardAuth: {},
+    BpUnreg: { args },
+    Chain: {},
+    ChainBlock: { args: { id: 1 } },
+    ChainNode: {},
+    ChainTail: { skip: true },
+    ChainTrx: { args: { id: txId }, prod: true },
+    Cmd: {},
+    Config: { args: { debug: true } },
+    DefiChart: { skip: true },
+    GenConfig: { args },
+    GenGenesis: {},
+    GenRunsrv: {},
+    Help: { hideResult: true },
+    Keychain: {},
+    Keys: { args },
+    KeystoreCreate: { args: { password, dump: keystore, force: true } },
+    KeystoreUnlock: { args: { keystore, password } },
+    KeyUpdtActive: { skip: true },
+    KeyUpdtOwner: { skip: true },
+    ResDelegate: { args: { account, net: 1 } },
+    ResBuyRam: { args: { account, ram: 1 } },
+    ResUndelegate: { args: { account, net: 1 }, skip: true },
+    SpdTest: { compactResult: true },
+    Statement: { args: { account: 'test.bp2' }, prod: true },
+    SwapCancelPreparation: { alias: 'SwapCancel', args, ignoreResult },
+    Swap: { args: { account, from: cura, amount: 1, to: curb } },
+    SwapCancel: { args },
+    SwapAddLq: { args: { account, cura, amount: 1, curb } },
+    SwapPay: { args },
+    SwapCancelAddLq: { alias: 'SwapCancel', args },
+    SwapPool: {},
+    SwapRmLq: { args: { account, cura, curb, amount: 0.0001, mixin } },
+    SwapStmt: { args: { account: 'test.bp2' }, prod: true },
+    Version: {},
 };
 
 const checkKeystore = async () => {
@@ -101,7 +102,7 @@ const getAllCommands = async () => {
     }).forEach((file) => {
         const cmd = file.replace(/^act|\.js$/ig, '');
         utilitas.assert(
-            tests[cmd], `Test case not found for command (cmd).`, 400
+            tests[cmd], `Test case not found for command (${cmd}).`, 400
         );
         resp.push(cmd);
     });
@@ -146,12 +147,12 @@ const test = async (func) => {
             : shell.exec(`./bin/prs-atm.js ${cmd} ${argTxt}`));
         if (tests[func].hideResult) {
             results[func] = '...';
-        } else if (tests[func].prettyResule) {
-            results[func] = JSON.stringify(JSON.parsr(results[func]), null, 2);
-        } else if (tests[func].compactResult) {
-            results[func] = JSON.stringify(results[func]);
         } else if (tests[func].rawResult) {
             results[func] = results[func].trim();
+        } else if (tests[func].prettyResule) {
+            results[func] = JSON.stringify(JSON.parse(results[func]), null, 2);
+        } else if (tests[func].compactResult) {
+            results[func] = JSON.stringify(results[func]);
         } else {
             results[func] = results[func].trim().slice(0, 100) + '...';
         }
@@ -175,8 +176,13 @@ const test = async (func) => {
         await getAllCommands();
     } catch (e) { log(e.message); process.exit(1); }
     for (let func in tests) {
-        (!toTest || toTest[func.toLowerCase()]) && await test(func);
-        try { delete toTest[func.toLowerCase()]; } catch (e) { }
+        const tt = func.toLowerCase();
+        if (toTest && !toTest[tt]) { continue; }
+        if (toTest && toTest[tt]) {
+            tests[func].prettyResule = true;
+            delete toTest[tt];
+        }
+        await test(func);
     }
     for (let i in toTest) { failure(`Test case not found: \`${i}\`.`); }
     const end = process.hrtime.bigint();

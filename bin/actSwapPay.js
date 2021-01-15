@@ -1,6 +1,6 @@
 'use strict';
 
-const { exchange, system } = require('..');
+const { exchange } = require('..');
 
 const hiddenField = ['oracle_info', 'oracle_trx_id', 'oracle_timestamp'];
 
@@ -13,7 +13,7 @@ const func = async (argv) => {
         resp.payment_timeout = resp.payment_timeout.toISOString();
         for (let key of hiddenField) { delete resp[key]; }
         Object.values(resp.payment_request).map(x => {
-            paymentUrls.push(system.magicPayment(x.payment_url));
+            paymentUrls.push(x.payment_url);
         });
         if (paymentUrls.length) {
             console.log('\nOpen these URLs in your browser:\n\n'

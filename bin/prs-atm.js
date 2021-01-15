@@ -138,14 +138,13 @@ command = command.toLowerCase();
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
 (async () => {
-    const testNet = system.testNet(argv);
+    system.testNet(argv);
     global.chainConfig = await config({
         debug: argv.debug,
         secret: argv.secret,
         rpcApi: argv.rpcapi,
         chainApi: argv.chainapi,
         speedTest: argv.spdtest,
-        testNet,
     });
     try {
         const cmds = {};
