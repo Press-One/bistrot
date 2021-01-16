@@ -42,7 +42,7 @@ const tests = {
     BpReg: { args },
     BpVote: { args: { account, add: account } },
     BpReward: { skip: true },
-    BpRewardAuth: {},
+    BpRewardAuth: { args },
     BpUnreg: { args },
     Chain: {},
     ChainBlock: { args: { id: 1 } },
@@ -70,11 +70,11 @@ const tests = {
     SwapCancelPreparation: { alias: 'SwapCancel', args, ignoreResult },
     Swap: { args: { account, from: cura, amount: 1, to: curb } },
     SwapCancel: { args },
-    SwapAddLq: { args: { account, cura, amount: 1, curb } },
+    SwapLqAdd: { args: { account, cura, amount: 1, curb } },
     SwapPay: { args },
-    SwapCancelAddLq: { alias: 'SwapCancel', args },
+    SwapCancelLqAdd: { alias: 'SwapCancel', args },
+    SwapLqRm: { args: { account, cura, curb, amount: 0.0001, mixin } },
     SwapPool: {},
-    SwapRmLq: { args: { account, cura, curb, amount: 0.0001, mixin } },
     SwapStmt: { args: { account: 'test.bp2' }, prod: true },
     Version: {},
 };
@@ -112,6 +112,7 @@ const getAllCommands = async () => {
 
 const formatArgs = (config) => {
     const base = { testnet: null, json: null, compact: null };
+    if (config.rawResult) { delete base.json; delete base.compact; }
     if (config.prod) { delete base.testnet; }
     const args = Object.assign(base, config.args || {});
     const resp = [];
@@ -179,8 +180,7 @@ const test = async (func) => {
         const tt = func.toLowerCase();
         if (toTest && !toTest[tt]) { continue; }
         if (toTest && toTest[tt]) {
-            tests[func].prettyResule = true;
-            delete toTest[tt];
+            tests[func].rawResult = true; delete toTest[tt];
         }
         await test(func);
     }
