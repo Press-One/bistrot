@@ -16,7 +16,7 @@ module.exports = {
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. TODO TODO TODO TODO TODO                                   |',
+        '    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {
