@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v4.4.29
+prs-atm v4.4.30
 
 usage: prs-atm <command> [<args>]
 
@@ -317,33 +317,6 @@ usage: prs-atm <command> [<args>]
     $ prs-atm BpReg \
               --account=ABCDE \
               --keystore=keystore.json
-
-=====================================================================
-
-* `BpReward` > Claim Rewards:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --daemon   Automatically reward claiming     [WITH  OR  WITHOUT ]
-    ┌---------------------------------------------------------------┐
-    | 1. You can only claim your reward once a day.                 |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example of Claiming Reward:
-    $ prs-atm BpReward \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-    > Example of Running a Daemon to Claim Reward Automatically:
-    $ prs-atm BpReward \
-              --account=ABCDE \
-              --keystore=keystore.json \
-              --daemon
 
 =====================================================================
 
@@ -769,6 +742,73 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
+* `Reward` > Claim Rewards:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --daemon   Automatically reward claiming     [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. You can only claim your reward once a day.                 |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example of Claiming Reward:
+    $ prs-atm Reward \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+    > Example of Running a Daemon to Claim Reward Automatically:
+    $ prs-atm Reward \
+              --account=ABCDE \
+              --keystore=keystore.json \
+              --daemon
+
+=====================================================================
+
+* `RewardAuth` > Auth PRESS.one official node to claim rewards daily automatically:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm RewardAuth \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `RewardUnauth` > Unauth PRESS.one official node of claiming rewards:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm RewardUnauth \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
 * `SpdTest` > Evaluate the connection speed of server nodes:
 
     ┌---------------------------------------------------------------┐
@@ -861,7 +901,29 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `SwapAddLq` > Add Liquid to Swap Pools:
+* `SwapCancel` > Cancel a swapping payment request:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Only `1` swap transaction is allowed at a time.            |
+    | 2. Cancel a current trx by this cmd before issuing a new one. |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm SwapCancel \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `SwapLqAdd` > Add Liquid to Swap Pools:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --cura     CURRENCY-A to be added            [STRING  / REQUIRED]
@@ -895,7 +957,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of Estimating a Liquid Adding Plan (dryrun):
-    $ prs-atm SwapAddLq \
+    $ prs-atm SwapLqAdd \
               --account=ABCDE \
               --cura=COB \
               --amount=12.3456 \
@@ -905,7 +967,7 @@ usage: prs-atm <command> [<args>]
               --dryrun
 
     > Example of Adding Liquid:
-    $ prs-atm SwapAddLq \
+    $ prs-atm SwapLqAdd \
               --account=ABCDE \
               --cura=COB \
               --amount=12.3456 \
@@ -915,46 +977,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `SwapCancel` > Cancel a swapping payment request:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    --memo     Comment to this transaction       [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Only `1` swap transaction is allowed at a time.            |
-    | 2. Cancel a current trx by this cmd before issuing a new one. |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm SwapCancel \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `SwapPay` > Get swapping payment request:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-
-    > Example:
-    $ prs-atm SwapPay \
-              --account=ABCDE
-
-=====================================================================
-
-* `SwapPool` > Get all pools that available to swap:
-
-    > Example:
-    $ prs-atm SwapPool
-
-=====================================================================
-
-* `SwapRmLq` > Remove Liquid to Swap Pools:
+* `SwapLqRm` > Remove Liquid to Swap Pools:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --cura     CURRENCY-A to be removed          [STRING  / REQUIRED]
@@ -985,7 +1008,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of Estimating a Liquid Removing Plan (dryrun):
-    $ prs-atm SwapRmLq \
+    $ prs-atm SwapLqRm \
               --account=ABCDE \
               --cura=COB \
               --curb=CNB \
@@ -995,13 +1018,30 @@ usage: prs-atm <command> [<args>]
               --dryrun
 
     > Example of Removing Liquid:
-    $ prs-atm SwapRmLq \
+    $ prs-atm SwapLqRm \
               --account=ABCDE \
               --cura=COB \
               --curb=CNB \
               --amount=12.3456 \
               --keystore=keystore.json \
               --email=abc@def.com
+
+=====================================================================
+
+* `SwapPay` > Get swapping payment request:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+
+    > Example:
+    $ prs-atm SwapPay \
+              --account=ABCDE
+
+=====================================================================
+
+* `SwapPool` > Get all pools that available to swap:
+
+    > Example:
+    $ prs-atm SwapPool
 
 =====================================================================
 
