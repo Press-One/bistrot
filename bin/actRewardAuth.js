@@ -9,14 +9,17 @@ const func = async (argv) => {
 module.exports = {
     pvtkey: true,
     func,
-    name: 'Auth PRESS.one official node to claim rewards daily automatically',
+    name: 'Auth official node to claim rewards automatically',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |',
+        '    | 1. This cmd creates NEW KEYS that can ONLY be used to claim.  |',
+        '    | 2. The new keys HAVE NO OTHER PERMISSIONS except claiming.    |',
+        '    | 3. The new keys will be SENT to PRESS.one official nodes.     |',
+        '    | 4. You can use `RewardUnauth` to revoke the keys.             |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {

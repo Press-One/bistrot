@@ -13,7 +13,7 @@ module.exports = {
     pubkey: true,
     pvtkey: true,
     func,
-    name: 'Evolve legacy PRESS.one accounts and Flying Pub topics',
+    name: 'Evolve legacy PRESS.one / Flying Pub accounts',
     help: [
         '    --address  Legacy account, topic address     [STRING  / REQUIRED]',
         '    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]',

@@ -9,14 +9,16 @@ const func = async (argv) => {
 module.exports = {
     pvtkey: true,
     func,
-    name: 'Unauth PRESS.one official node of claiming rewards',
+    name: 'Unauth official node of claiming rewards',
     help: [
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
         '    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |',
+        '    | 1. This cmd REVOKES the claiming keys on official nodes.      |',
+        '    | 2. This cmd RESETS claiming permission to `active` as well.   |',
+        '    | 3. After revoked, you will need to claim rewards by your self.|',
         '    └---------------------------------------------------------------┘',
     ],
     example: {
