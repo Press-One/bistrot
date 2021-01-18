@@ -1,10 +1,10 @@
 'use strict';
 
-const { atm, event } = require('..');
+const { producer, event } = require('..');
 
 const func = async (argv) => {
     const claim = async () => {
-        return await atm.claimRewards(argv.account, argv.pvtkey);
+        return await producer.claimRewards(argv.account, argv.pvtkey);
     };
     if (!argv.daemon) { return await claim(); }
     await event.loop(async () => {
