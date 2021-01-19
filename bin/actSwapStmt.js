@@ -22,8 +22,8 @@ module.exports = {
         '    --time     Timestamp for paging              [STRING  / OPTIONAL]',
         '    --count    Page size                         [NUMBER  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
-        "    | 1. Default `count` is `100`.                                  |",
-        "    | 2. Set `time` as `timestamp` of last item to get next page.   |",
+        '    | 1. Default `count` is `100`.                                  |',
+        '    | 2. Set `time` as `timestamp` of last item to get next page.   |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {
