@@ -55,7 +55,7 @@ module.exports = {
                 'token',
                 'tokens',
                 'rates',
-                'created_at',
+                // 'created_at',
             ],
             config: {
                 columns: {
