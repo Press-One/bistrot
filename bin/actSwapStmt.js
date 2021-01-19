@@ -3,7 +3,15 @@
 const { exchange } = require('..');
 
 const func = async (argv) => {
-    return await exchange.queryStatement(argv.account, argv.time, argv.count);
+    let rs = await exchange.queryStatement(argv.account, argv.time, argv.count);
+    if (!argv.json) {
+        rs.map(x => {
+            for (let i of ['from', 'to']) {
+                if (Array.isArray(x[i])) { x[i] = x[i].join(', '); }
+            }
+        });
+    }
+    return rs;
 };
 
 module.exports = {
@@ -30,8 +38,6 @@ module.exports = {
                 'block_num',
                 'counter',
                 'type',
-                'from_user',
-                'to_user',
                 'from',
                 'to',
                 'fee',
@@ -39,9 +45,9 @@ module.exports = {
             config: {
                 singleLine: true,
                 columns: {
+                    4: { alignment: 'right' },
+                    5: { alignment: 'right' },
                     6: { alignment: 'right' },
-                    7: { alignment: 'right' },
-                    8: { alignment: 'right' },
                 },
             },
         },
