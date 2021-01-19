@@ -36,7 +36,6 @@ module.exports = {
             columns: [
                 'timestamp',
                 'block_num',
-                'counter',
                 'type',
                 'from',
                 'to',
@@ -45,9 +44,11 @@ module.exports = {
             config: {
                 singleLine: true,
                 columns: {
+                    1: { alignment: 'right' },
+                    2: { alignment: 'right' },
+                    3: { alignment: 'right' },
                     4: { alignment: 'right' },
                     5: { alignment: 'right' },
-                    6: { alignment: 'right' },
                 },
             },
         },
