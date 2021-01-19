@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v4.4.30
+prs-atm v4.4.31
 
 usage: prs-atm <command> [<args>]
 
@@ -103,7 +103,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `AccountEvolve` > Evolve legacy PRESS.one accounts and Flying Pub topics:
+* `AccountEvolve` > Evolve legacy PRESS.one / Flying Pub accounts:
 
     --address  Legacy account, topic address     [STRING  / REQUIRED]
     --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
@@ -629,7 +629,7 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `KeystoreCreate` > Create a new Keystore / Import keys to a new Keystore:
+* `KeystoreCreate` > Create a new Keystore (can also import keys):
 
     --password Use to encrypt the keystore       [STRING  / OPTIONAL]
     --pubkey   Import existing public key        [STRING  / OPTIONAL]
@@ -769,14 +769,17 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `RewardAuth` > Auth PRESS.one official node to claim rewards daily automatically:
+* `RewardAuth` > Auth official node to claim rewards automatically:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |
+    | 1. This cmd creates NEW KEYS that can ONLY be used to claim.  |
+    | 2. The new keys HAVE NO OTHER PERMISSIONS except claiming.    |
+    | 3. The new keys will be SENT to PRESS.one official nodes.     |
+    | 4. You can use `RewardUnauth` to revoke the keys.             |
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
@@ -789,14 +792,16 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `RewardUnauth` > Unauth PRESS.one official node of claiming rewards:
+* `RewardUnauth` > Unauth official node of claiming rewards:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
-    | 1. TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO     |
+    | 1. This cmd REVOKES the claiming keys on official nodes.      |
+    | 2. This cmd RESETS claiming permission to `active` as well.   |
+    | 3. After revoked, you will need to claim rewards by your self.|
     └---------------------------------------------------------------┘
     ┌- NOTICE ------------------------------------------------------┐
     | `keystore` (recommend) or `pvtkey` must be provided.          |
