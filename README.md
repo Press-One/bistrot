@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v4.4.36
+prs-atm v4.4.37
 
 usage: prs-atm <command> [<args>]
 
@@ -1030,16 +1030,6 @@ usage: prs-atm <command> [<args>]
               --amount=12.3456 \
               --keystore=keystore.json \
               --email=abc@def.com
-
-=====================================================================
-
-* `SwapPay` > Get swapping payment request:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-
-    > Example:
-    $ prs-atm SwapPay \
-              --account=ABCDE
 
 =====================================================================
 
