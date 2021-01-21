@@ -72,7 +72,6 @@ const tests = {
     Swap: { args: { account, from: cura, amount: 1, to: curb } },
     SwapCancel: { args },
     SwapLqAdd: { args: { account, cura, amount: 1, curb } },
-    SwapPay: { args },
     SwapCancelLqAdd: { alias: 'SwapCancel', args },
     SwapLqRm: { args: { account, cura, curb, amount: 0.0001, mixin } },
     SwapPool: {},
