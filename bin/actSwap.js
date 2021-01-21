@@ -1,6 +1,5 @@
 'use strict';
 
-const payreq = require('./actSwapPay');
 const { exchange, finance } = require('..');
 
 const func = async (argv) => {
@@ -8,8 +7,23 @@ const func = async (argv) => {
         argv.pvtkey, argv.account, argv.from, argv.amount, argv.to,
         argv.slippage, argv.email, argv.memo, { dryrun: argv.dryrun }
     );
-    // console.log(resp); // @keep this line for debug
-    return argv.dryrun ? resp : await payreq.func(argv);
+    if (!argv.json && resp && resp.payment_request) {
+        let paymentUrls = [];
+        resp.payment_request.mixin_trace_id
+            = resp.payment_request.mixin_trace_id.join('\n');
+        resp.payment_request.timestamp_received
+            = resp.payment_request.timestamp_received.toISOString();
+        resp.payment_request.payment_timeout
+            = resp.payment_request.payment_timeout.toISOString();
+        Object.values(resp.payment_request.payment_request).map(x => {
+            paymentUrls.push(x.payment_url);
+        });
+        if (paymentUrls.length) {
+            console.log('\nOpen these URLs in your browser:\n\n'
+                + `${paymentUrls.join('\n\n')}\n`);
+        }
+    }
+    return resp;
 };
 
 module.exports = {
