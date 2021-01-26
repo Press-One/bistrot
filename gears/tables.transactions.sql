@@ -18,6 +18,9 @@ create table transactions (
     transactions_trx_transaction_actions_data_meta JSONB,
     transactions_trx_transaction_actions_data_data JSONB,
     transactions_trx_transaction_actions_data_data_topic VARCHAR,
+    transactions_trx_transaction_actions_data_data_profile_provider VARCHAR,
+    transactions_trx_transaction_actions_data_meta_uris JSONB,
+    transactions_trx_transaction_actions_data_meta_mime VARCHAR,
     block_num BIGINT,
     block_id VARCHAR,
     timestamp TIMESTAMPTZ,
@@ -39,7 +42,10 @@ CREATE INDEX transactions_trx_transaction_actions_data__amount_quantity__cur ON 
 CREATE INDEX transactions_trx_transaction_actions_data__dp_wd_req__id        ON transactions(transactions_trx_transaction_actions_data__dp_wd_req__id);
 CREATE INDEX transactions_trx_transaction_actions_data__sync_auth__result    ON transactions(transactions_trx_transaction_actions_data__sync_auth__result);
 CREATE INDEX transactions_trx_transaction_actions_data_mixin_trace_id        ON transactions(transactions_trx_transaction_actions_data_mixin_trace_id);
-CREATE INDEX transactions_trx_transaction_actions_data_data_topic        ON transactions(transactions_trx_transaction_actions_data_data_topic);
+CREATE INDEX transactions_trx_transaction_actions_data_data_topic            ON transactions(transactions_trx_transaction_actions_data_data_topic);
+CREATE INDEX transactions_trx_transaction_actions_data_data_profile_provider ON transactions(transactions_trx_transaction_actions_data_data_profile_provider);
+CREATE INDEX transactions_trx_transaction_actions_data_meta_uris             ON transactions(transactions_trx_transaction_actions_data_meta_uris);
+CREATE INDEX transactions_trx_transaction_actions_data_meta_mime             ON transactions(transactions_trx_transaction_actions_data_meta_mime);
 CREATE INDEX block_num                                                       ON transactions(block_num);
 CREATE INDEX block_id                                                        ON transactions(block_id);
 CREATE INDEX timestamp                                                       ON transactions(timestamp);
