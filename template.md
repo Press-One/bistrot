@@ -1,6 +1,6 @@
 # PRS-ATM
 
-A CLI client and also an API library for [PRESS.one](https://press.one/) .
+A CLI client and also an API library for [PRESS.one](https://press.one/).
 
 ![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
 
