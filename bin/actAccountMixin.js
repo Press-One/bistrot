@@ -3,7 +3,7 @@
 const { atm, account } = require('..');
 
 const func = async (argv) => {
-    const resp = await atm.bindIdentity(argv.account, argv.pvtkey);
+    const resp = await atm.bindMixinIdentity(argv.account, argv.pvtkey);
     if (!argv.json && resp && resp.paymentUrl) {
         console.log(`\nOpen this URL in your browser:\n\n${resp.paymentUrl}\n`);
     }
