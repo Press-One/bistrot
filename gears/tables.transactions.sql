@@ -19,7 +19,7 @@ create table transactions (
     transactions_trx_transaction_actions_data_data JSONB,
     transactions_trx_transaction_actions_data_data_topic VARCHAR,
     transactions_trx_transaction_actions_data_data_profile_provider VARCHAR,
-    transactions_trx_transaction_actions_data_meta_uris JSONB,
+    transactions_trx_transaction_actions_data_meta_uris VARCHAR,
     transactions_trx_transaction_actions_data_meta_mime VARCHAR,
     block_num BIGINT,
     block_id VARCHAR,
