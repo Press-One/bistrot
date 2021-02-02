@@ -7,7 +7,8 @@ const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
 const account = 'testuser1';
-const pubkey = 'EOS8XgbSbQsr1wuX5UFDbZTTV76yQWz2BEXV5whTUnHM2w8du2F6S';
+const pubkey = 'EOS5cZsk6NmN2GwLAbw6o79FcWe8QgtZpUoL7Kac5dvEB9A7ocASQ';
+const pvtkey = '5KhrVDXB4jE5kzqcZ7tm5LnWSs51rW1HounSD3SK5TPxu5NMir9';
 const address = 'e5ad638ed1a4ec75c77488f6b3d4011fdc7782dc';
 const prvK = '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d';
 const mixin = '36029b33-838f-4dbe-ae9b-f0e86226d53d';
@@ -27,8 +28,9 @@ let skippedTest = 0;
 const tests = {
     Account: { args: { name: account } },
     AccountAuth: { args },
-    AccountBind: { args },
     AccountEvolve: { args: { account, address, prevkey: prvK, } },
+    AccountFree: { args: { pubkey, pvtkey } },
+    AccountMixin: { args },
     AccountOpen: { args: { account: 'testuser555', pubkey } },
     AssetBalance: { args },
     AssetCancelPreparation: { alias: 'AssetCancel', args, ignoreResult },
