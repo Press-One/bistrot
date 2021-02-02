@@ -1,6 +1,6 @@
 # PRS-ATM
 
-A CLI client and also an API library for [PRESS.one](https://press.one/) .
+A CLI client and also an API library for [PRESS.one](https://press.one/).
 
 ![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
 
@@ -35,7 +35,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v4.4.38
+prs-atm v5.0.0
 
 usage: prs-atm <command> [<args>]
 
@@ -121,6 +121,24 @@ usage: prs-atm <command> [<args>]
               --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AccountFree` > Open a Free Account:
+
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a new account.    |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AccountFree \
               --keystore=keystore.json
 
 =====================================================================
