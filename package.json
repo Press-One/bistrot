@@ -45,7 +45,7 @@
     "devDependencies": {
         "keythereum-pure-js": "^1.1.9",
         "string-replace-loader": "^3.0.1",
-        "sushitrain": "^1990.1.18",
+        "sushitrain": "^1990.1.19",
         "webpack": "^5.20.1",
         "webpack-cli": "^4.5.0"
     }
