@@ -6,10 +6,10 @@ const fs = require('fs');
 
 const func = async (argv, options = {}) => {
     utilitas.assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
-    let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
+    let [kFile, ko] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
-        kObj = JSON.parse(kFile);
-        argv.pubkey = kObj.publickey;
+        ko = JSON.parse(kFile);
+        argv.pubkey = ko.publickey;
     } catch (e) {
         utilitas.throwError('Invalid keystore file.', 400);
     }
@@ -18,7 +18,7 @@ const func = async (argv, options = {}) => {
         console.log('Input password to decrypt the keystore.');
         argv.password = readline.question('Password: ', argv.readlineConf);
     }
-    return wallet.recoverPrivateKey(argv.password, kObj);
+    return wallet.recoverPrivateKey(argv.password, ko, { legacy: argv.legacy });
 };
 
 module.exports = {
@@ -27,6 +27,10 @@ module.exports = {
     help: [
         '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
         '    --password Use to decrypt the keystore       [STRING  / OPTIONAL]',
+        '    --legacy   For legacy PRESS.one keystores    [WITH  OR  WITHOUT ]',
+        '    ┌---------------------------------------------------------------┐',
+        '    | 1. You can use `legacy` to decrypt legacy PRESS.one keystores.|',
+        '    └---------------------------------------------------------------┘',
         '    ┌---------------------------------------------------------------┐',
         '    | This command will decrypt your keystore and display the       |',
         "    | public key and private key. It's for advanced users only.     |",
