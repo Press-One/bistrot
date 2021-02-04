@@ -4,7 +4,7 @@ const { atm } = require('..');
 
 const func = async (argv) => {
     const resp = await atm.accountEvolution(
-        argv.address, argv.prevkey, argv.account, argv.pubkey, argv.pvtkey
+        argv.prevkey, argv.account, argv.pubkey, argv.pvtkey
     );
     return resp;
 };
@@ -15,7 +15,6 @@ module.exports = {
     func,
     name: 'Evolve legacy PRESS.one / Flying Pub accounts',
     help: [
-        '    --address  Legacy account, topic address     [STRING  / REQUIRED]',
         '    --prevkey  Legacy account, topic private key [STRING  / REQUIRED]',
         '    --account  PRESS.one account                 [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
@@ -25,7 +24,6 @@ module.exports = {
     ],
     example: {
         args: {
-            address: true,
             prevkey: true,
             account: true,
             keystore: true,

@@ -9,7 +9,6 @@ const [results, errors] = [{}, []];
 const account = 'testuser1';
 const pubkey = 'EOS5cZsk6NmN2GwLAbw6o79FcWe8QgtZpUoL7Kac5dvEB9A7ocASQ';
 const pvtkey = '5KhrVDXB4jE5kzqcZ7tm5LnWSs51rW1HounSD3SK5TPxu5NMir9';
-const address = 'e5ad638ed1a4ec75c77488f6b3d4011fdc7782dc';
 const prvK = '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d';
 const mixin = '36029b33-838f-4dbe-ae9b-f0e86226d53d';
 const txId = 'EBA5538D00A0958957F4FDE0B8149FF563A129C53A0FD6FDB16559C498523933';
@@ -28,7 +27,7 @@ let skippedTest = 0;
 const tests = {
     Account: { args: { name: account } },
     AccountAuth: { args },
-    AccountEvolve: { args: { account, address, prevkey: prvK, } },
+    AccountEvolve: { args: { account, prevkey: prvK, } },
     AccountFree: { args: { pubkey, pvtkey } },
     AccountMixin: { args },
     AccountOpen: { args: { account: 'testuser555', pubkey } },
