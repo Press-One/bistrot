@@ -1,9 +1,9 @@
 'use strict';
 
-const { chain } = require('..');
+const { atm } = require('..');
 
 const func = async (argv) => {
-    const resp = await chain.accountEvolution(
+    const resp = await atm.accountEvolution(
         argv.address, argv.prevkey, argv.account, argv.pubkey, argv.pvtkey
     );
     return resp;
