@@ -1,3 +1,9 @@
+
+// https://github.com/evanw/esbuild/issues/380
+// https://esbuild.github.io/api/#pure
+
+// https://webpack.js.org/configuration/resolve/
+// https://www.npmjs.com/package/esbuild-plugin-ignore/v/1.1.0
 const ignorePlugin = require('esbuild-plugin-ignore');
 require('esbuild').build({
     entryPoints: ['main.js'],
