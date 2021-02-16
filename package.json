@@ -38,6 +38,8 @@
         "url": "https://github.com/Press-One/prs-atm.git"
     },
     "dependencies": {
+        "esbuild": "^0.8.46",
+        "esbuild-plugin-ignore": "^1.1.0",
         "readline-sync": "^1.4.10",
         "table": "^6.0.7",
         "yargs": "^16.2.0"
