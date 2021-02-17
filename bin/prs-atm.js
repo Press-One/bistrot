@@ -71,10 +71,11 @@ const unlockKeystore = async (options = {}) => {
     } catch (err) { }
 };
 
-const randerResult = (result, options = { table: { KeyValue: true } }) => {
+const randerResult = (result, options) => {
     if (utilitas.isUndefined(result)) { return; }
     const deep = Array.isArray(result);
     options = utilitas.isFunction(options) ? options(argv) : options;
+    options = options || { table: { KeyValue: true } };
     let out = [];
     result = deep ? result : [result];
     for (let i in result) {
