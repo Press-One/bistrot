@@ -3,17 +3,18 @@
 const { finance, producer, colors, math } = require('..');
 
 const func = async (argv) => {
-    const resp = await producer.queryByRange(argv.bound, argv.count || 50);
+    const resp = await producer.queryByRange(argv.bound, argv.count);
     if (!argv.json) {
         console.log(
-            `MORE: ${resp.more}\n`,
-            `TOTAL_PRODUCER_VOTE_WEIGHT: ${resp.total_producer_vote_weight}`,
+            `BOUND: ${resp.more}\n`
+            + `TOTAL_PRODUCER_VOTE_WEIGHT: ${resp.total_producer_vote_weight}`,
         );
     }
     const total = math.bignumber(resp.total_producer_vote_weight);
     let priority = 0;
     resp.rows.map(x => {
-        x.priority = ++priority;
+        x.priority = (argv.bound ? `... ` : '')
+            + (++priority > 9 ? priority : `0${priority}`);
         x.total_votes = x.total_votes.replace(/\.\d*$/, '');
         x.scaled_votes = finance.bigFormat(
             math.divide(math.bignumber(x.total_votes), total)
