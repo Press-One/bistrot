@@ -3,10 +3,11 @@
 const { finance, producer, colors, math } = require('..');
 
 const func = async (argv) => {
-    const resp = await producer.getAll();
+    const resp = await producer.queryByRange(argv.bound, argv.count || 50);
     if (!argv.json) {
         console.log(
-            'TOTAL_PRODUCER_VOTE_WEIGHT:', resp.total_producer_vote_weight
+            `MORE: ${resp.more}\n`,
+            `TOTAL_PRODUCER_VOTE_WEIGHT: ${resp.total_producer_vote_weight}`,
         );
     }
     const total = math.bignumber(resp.total_producer_vote_weight);
