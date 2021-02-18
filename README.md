@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.0
+prs-atm v5.0.1
 
 usage: prs-atm <command> [<args>]
 
@@ -78,36 +78,8 @@ usage: prs-atm <command> [<args>]
 
 =====================================================================
 
-* `AccountBind` > Bind a Mixin account to a PRESS.one account:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. After successful execution, you will get a URL.            |
-    | 2. Open this URL in your browser.                             |
-    | 3. Scan the QR code with Mixin to complete the payment.       |
-    | 4. You will receive further notifications via Mixin.          |
-    | 5. It will cost `0.0001 PRS` for each binding.                |
-    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
-    | 7. You need to bind your MX account before withdraw and swap. |
-    | 8. New accounts reg via PRS-ATM v4 or later have been bound.  |
-    | 9. Rebind the accounts if you lost or changed your Mixin acc. |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ prs-atm AccountBind \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
 * `AccountEvolve` > Evolve legacy PRESS.one / Flying Pub accounts:
 
-    --address  Legacy account, topic address     [STRING  / REQUIRED]
     --prevkey  Legacy account, topic private key [STRING  / REQUIRED]
     --account  PRESS.one account                 [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
@@ -120,7 +92,6 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm AccountEvolve \
-              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --account=ABCDE \
               --keystore=keystore.json
@@ -141,6 +112,33 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm AccountFree \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AccountMixin` > Bind a Mixin account to a PRESS.one account:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. After successful execution, you will get a URL.            |
+    | 2. Open this URL in your browser.                             |
+    | 3. Scan the QR code with Mixin to complete the payment.       |
+    | 4. You will receive further notifications via Mixin.          |
+    | 5. It will cost `0.0001 PRS` for each binding.                |
+    | 6. Binding fee is NON-REFUNDABLE, EVEN IF IT FAILS.           |
+    | 7. You need to bind your MX account before withdraw and swap. |
+    | 8. New accounts reg via PRS-ATM v4 or later have been bound.  |
+    | 9. Rebind the accounts if you lost or changed your Mixin acc. |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AccountMixin \
+              --account=ABCDE \
               --keystore=keystore.json
 
 =====================================================================
@@ -302,8 +300,22 @@ usage: prs-atm <command> [<args>]
 
 * `Bp` > Check Producers Information:
 
-    > Example:
+    --account  PRESS.one producer name           [STRING  / OPTIONAL]
+    --bound    Paging bound                      [STRING  / OPTIONAL]
+    --count    Page size                         [INTEGER / OPTIONAL]
+    ┌---------------------------------------------------------------┐
+    | 1. Run with `account` to get info of one producer.            |
+    | 2. Run without `account` to get a producer list.              |
+    | 3. Specify `bound` to get a producer list start from `bound`. |
+    | 4. Default `count` is `50`.                                   |
+    └---------------------------------------------------------------┘
+
+    > Example of getting a producer list:
     $ prs-atm Bp
+
+    > Example of getting info of one producer:
+    $ prs-atm Bp \
+              --account=ABCDE
 
 =====================================================================
 
@@ -672,6 +684,10 @@ usage: prs-atm <command> [<args>]
 
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --legacy   For legacy PRESS.one keystores    [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. You can use `legacy` to decrypt legacy PRESS.one keystores.|
+    └---------------------------------------------------------------┘
     ┌---------------------------------------------------------------┐
     | This command will decrypt your keystore and display the       |
     | public key and private key. It's for advanced users only.     |
@@ -860,7 +876,7 @@ usage: prs-atm <command> [<args>]
     ┌---------------------------------------------------------------┐
     | 1. All available transaction `type`s:                         | 
     |    INCOME, EXPENSE, TRANSFER, DEPOSIT, WITHDRAW, REWARD, ALL. | 
-    | 2. Default `count` is `100`.                                  |
+    | 2. Default `count` is `50`.                                   |
     | 3. Default `detail` is `false`.                               |
     | 4. Set `time` as `timestamp` of last item to get next page.   |
     └---------------------------------------------------------------┘
