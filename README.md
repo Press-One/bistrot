@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.1
+prs-atm v5.0.2
 
 usage: prs-atm <command> [<args>]
 
@@ -303,11 +303,13 @@ usage: prs-atm <command> [<args>]
     --account  PRESS.one producer name           [STRING  / OPTIONAL]
     --bound    Paging bound                      [STRING  / OPTIONAL]
     --count    Page size                         [INTEGER / OPTIONAL]
+    --regexp   RegExp for matching producer name [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Run with `account` to get info of one producer.            |
     | 2. Run without `account` to get a producer list.              |
     | 3. Specify `bound` to get a producer list start from `bound`. |
     | 4. Default `count` is `50`.                                   |
+    | 5. `regexp` can be keyword or regular expression.             |
     └---------------------------------------------------------------┘
 
     > Example of getting a producer list:
@@ -316,6 +318,10 @@ usage: prs-atm <command> [<args>]
     > Example of getting info of one producer:
     $ prs-atm Bp \
               --account=ABCDE
+
+    > Example of querying producers:
+    $ prs-atm Bp \
+              --regexp=^pressone
 
 =====================================================================
 
