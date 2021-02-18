@@ -64,7 +64,13 @@ const func = async (argv) => {
             }
         }
     });
-    if (!argv.account) { return resp.rows; }
+    if (!argv.account) {
+        return argv.json ? {
+            rows: resp.rows,
+            total_producer_vote_weight: resp.total_producer_vote_weight,
+            more: resp.more,
+        } : resp.rows;
+    }
     utilitas.assert(resp.rows[0], `Producer Not Found (${argv.account}).`, 400);
     return resp.rows[0];
 };
