@@ -45,7 +45,7 @@ const func = async (argv) => {
     let priority = 0;
     resp = resp && resp.rows ? resp : { rows: resp ? [resp] : [] };
     resp.rows.map(x => {
-        x.priority = ++priority;
+        x.priority = x.priority || ++priority;
         x.total_votes = x.total_votes.replace(/\.\d*$/, '');
         x.scaled_votes = finance.bigFormat(
             math.divide(math.bignumber(x.total_votes), total)
