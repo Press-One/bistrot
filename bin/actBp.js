@@ -1,6 +1,6 @@
 'use strict';
 
-const { finance, producer, colors, math, utilitas } = require('..');
+const { ballot, finance, producer, colors, math, utilitas } = require('..');
 
 const render = (argv) => {
     return argv.account ? null : {
@@ -30,14 +30,16 @@ const render = (argv) => {
 };
 
 const func = async (argv) => {
-    let resp = argv.account
-        ? await producer.queryByName(argv.account)
-        : await producer.queryByRange(argv.bound, argv.count);
+    let resp = (argv.account ? await producer.queryByName(argv.account) : null)
+        || (argv.regexp ? await ballot.queryProducer(argv.regexp) : null)
+        || await producer.queryByRange(argv.bound, argv.count);
     if (!argv.json && !argv.account) {
-        console.log(
-            `BOUND: ${resp.more}\n`
-            + `TOTAL_PRODUCER_VOTE_WEIGHT: ${resp.total_producer_vote_weight}`,
+        const logs = [];
+        utilitas.isSet(resp.more) && logs.push(`BOUND: ${resp.more}`);
+        utilitas.isSet(resp.total_producer_vote_weight) && logs.push(
+            `TOTAL_PRODUCER_VOTE_WEIGHT: ${resp.total_producer_vote_weight}`
         );
+        logs.length && console.log(logs.join('\n'));
     }
     const total = math.bignumber(resp && resp.total_producer_vote_weight);
     let priority = 0;
@@ -74,12 +76,14 @@ module.exports = {
         '    --account  PRESS.one producer name           [STRING  / OPTIONAL]',
         '    --bound    Paging bound                      [STRING  / OPTIONAL]',
         '    --count    Page size                         [INTEGER / OPTIONAL]',
+        '    --regexp   RegExp for matching producer name [STRING  / OPTIONAL]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Run with `account` to get info of one producer.            |',
         '    | 2. Run without `account` to get a producer list.              |',
         '    | 3. Specify `bound` to get a producer list start from `bound`. |',
         '    | 4. Default `count` is `' + producer.defaultQueryRows
         + '`.                                   |',
+        '    | 5. `regexp` can be keyword or regular expression.             |',
         '    └---------------------------------------------------------------┘',
     ],
     example: [
@@ -90,6 +94,12 @@ module.exports = {
             title: 'getting info of one producer',
             args: {
                 account: true,
+            },
+        },
+        {
+            title: 'querying producers',
+            args: {
+                regexp: '^pressone',
             },
         },
     ],
