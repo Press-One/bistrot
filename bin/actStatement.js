@@ -61,9 +61,9 @@ module.exports = {
         '    ┌---------------------------------------------------------------┐',
         "    | 1. All available transaction `type`s:                         | ",
         '    |    ' + statement.transactionTypes.join(', ') + '. | ',
-        "    | 2. Default `count` is `100`.                                  |",
-        "    | 3. Default `detail` is `false`.                               |",
-        "    | 4. Set `time` as `timestamp` of last item to get next page.   |",
+        '    | 2. Default `count` is `50`.                                   |',
+        '    | 3. Default `detail` is `false`.                               |',
+        '    | 4. Set `time` as `timestamp` of last item to get next page.   |',
         '    └---------------------------------------------------------------┘',
     ],
     example: {
