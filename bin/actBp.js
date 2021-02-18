@@ -78,7 +78,7 @@ module.exports = {
         '    | 1. Run with `account` to get info of one producer.            |',
         '    | 2. Run without `account` to get a producer list.              |',
         '    | 3. Specify `bound` to get a producer list start from `bound`. |',
-        '    | 4. Default `count` is `100`.                                  |',
+        '    | 4. Default `count` is `50`.                                   |',
         '    └---------------------------------------------------------------┘',
     ],
     example: [
