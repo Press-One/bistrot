@@ -1,9 +1,9 @@
 'use strict';
 
-const { atm } = require('..');
+const { account } = require('..');
 
 const func = async (argv) => {
-    return await atm.updateAuth(argv.account, argv.pubkey, argv.pvtkey);
+    return await account.ensureAuth(argv.account, argv.pubkey, argv.pvtkey);
 };
 
 module.exports = {
