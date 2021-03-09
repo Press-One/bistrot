@@ -7,7 +7,6 @@ global._prsAtm = Object.assign(require('./package.json'), {
 });
 
 module.exports = Object.assign(require('sushitrain'), {
-    keythereum: require('keythereum-pure-js'),
     atm: require('./lib/atm'),
     ballot: require('./lib/ballot'),
     config: require('./lib/config'),
