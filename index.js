@@ -1,13 +1,14 @@
 'use strict';
 
 module.exports = Object.assign(require('utilitas'), {
+    elliptic: require('elliptic'),
     eos: require('eosjs'),
     eosEcc: require('eosjs-ecc'),
     eosKeos: require('eosjs-keos'),
     eosKeygen: require('eosjs-keygen'),
     eosNameVerify: require('eos-name-verify'),
     pg: require('pg'),
-    prsUtility: require('prs-utility'),
+    secp256k1: require('secp256k1'),
     ws: require('ws'),
 }, {
     account: require('./lib/account'),
