@@ -7,6 +7,7 @@ module.exports = Object.assign(require('utilitas'), {
     eosKeos: require('eosjs-keos'),
     eosKeygen: require('eosjs-keygen'),
     eosNameVerify: require('eos-name-verify'),
+    ethereumUtil: require('ethereumjs-util'),
     pg: require('pg'),
     secp256k1: require('secp256k1'),
     ws: require('ws'),
