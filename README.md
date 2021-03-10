@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.9
+prs-atm v5.0.10
 
 usage: prs-atm <command> [<args>]
 
@@ -284,6 +284,7 @@ usage: prs-atm <command> [<args>]
     > Example:
     $ prs-atm AssetTransfer \
               --payee=FIJKL \
+              --amount=12.3456 \
               --account=ABCDE \
               --keystore=keystore.json
 
