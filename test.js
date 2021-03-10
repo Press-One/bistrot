@@ -32,6 +32,7 @@ const tests = {
     AccountMixin: { args },
     AccountOpen: { args: { account: 'testuser555', pubkey } },
     AssetBalance: { args },
+    AssetTransfer: { args: { payee: 'eosio', amount: 0.001, account } },
     AssetCancelPreparation: { alias: 'AssetCancel', args, ignoreResult },
     AssetDeposit: { args: { account, amount: 0.001 } },
     AssetCancel: { args },
