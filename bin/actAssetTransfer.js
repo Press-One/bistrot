@@ -30,6 +30,7 @@ module.exports = {
     example: {
         args: {
             payee: true,
+            amount: true,
             account: true,
             keystore: true,
         }
