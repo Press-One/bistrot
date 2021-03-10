@@ -3,30 +3,32 @@
 const { utilitas } = require('..');
 const path = require('path');
 const fs = require('fs');
-const [defaultName, defaultAmount, defaultBlockId, defaultHash, defaultFile] = [
-    'ABCDE', '12.3456', '26621512',
+
+const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
+    'ABCDE', 'FIJKL', '12.3456', '26621512',
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'keystore.json'
 ];
+
 const defaultArgs = {
-    blocknum: defaultBlockId,
-    id: defaultBlockId,
-    account: defaultName,
-    name: defaultName,
-    keystore: defaultFile,
-    dump: defaultFile,
-    pubkey: defaultHash,
-    pvtkey: defaultHash,
-    npubkey: defaultHash,
-    address: defaultHash,
-    prevkey: defaultHash,
-    amount: defaultAmount,
-    cpu: defaultAmount,
-    ram: defaultAmount,
-    net: defaultAmount,
+    blocknum: defBlockId,
+    id: defBlockId,
+    account: defName,
+    name: defName,
+    payee: receiver,
+    dump: defFile,
+    keystore: defFile,
+    address: defHash,
+    npubkey: defHash,
+    prevkey: defHash,
+    pubkey: defHash,
+    pvtkey: defHash,
+    amount: defAmount,
+    cpu: defAmount,
+    net: defAmount,
+    ram: defAmount,
     email: 'abc@def.com',
     chainapi: 'https://prs-bp1.press.one',
     rpcapi: 'http://51.68.201.144:8888',
-    receiver: 'FIJKL',
     path: '.',
     'mx-num': '12345',
     'mx-id': '01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV',
