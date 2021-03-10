@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.8
+prs-atm v5.0.9
 
 usage: prs-atm <command> [<args>]
 
@@ -257,6 +257,33 @@ usage: prs-atm <command> [<args>]
 
     > Example:
     $ prs-atm AssetRefund \
+              --account=ABCDE \
+              --keystore=keystore.json
+
+=====================================================================
+
+* `AssetTransfer` > Transfer PRS to another account:
+
+    --payee    PRESS.one account of the Receiver [NUMBER  / REQUIRED]
+    --amount   Number like xx.xxxx               [NUMBER  / REQUIRED]
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
+    --memo     Comment to this transaction       [STRING  / OPTIONAL]
+    ┌- WARNING -----------------------------------------------------┐
+    | ⚠ For the safety of your asset, please check `payee` accounts |
+    |   carefully before making any transfer.                       |
+    | ⚠ We are not responsible for any loss of property due to the  |
+    |   mistake of `payee` accounts.                                |
+    └---------------------------------------------------------------┘
+    ┌- NOTICE ------------------------------------------------------┐
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm AssetTransfer \
+              --payee=FIJKL \
               --account=ABCDE \
               --keystore=keystore.json
 
@@ -724,7 +751,7 @@ usage: prs-atm <command> [<args>]
     > Example:
     $ prs-atm ResBuyRam \
               --account=ABCDE \
-              --receiver=FIJKL \
+              --receiver=undefined \
               --ram=12.3456 \
               --keystore=keystore.json
 
@@ -750,7 +777,7 @@ usage: prs-atm <command> [<args>]
     > Example:
     $ prs-atm ResDelegate \
               --account=ABCDE \
-              --receiver=FIJKL \
+              --receiver=undefined \
               --cpu=12.3456 \
               --net=12.3456 \
               --keystore=keystore.json
@@ -777,7 +804,7 @@ usage: prs-atm <command> [<args>]
     > Example:
     $ prs-atm ResUndelegate \
               --account=ABCDE \
-              --receiver=FIJKL \
+              --receiver=undefined \
               --cpu=12.3456 \
               --net=12.3456 \
               --keystore=keystore.json
