@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.10
+prs-atm v5.0.11
 
 usage: prs-atm <command> [<args>]
 
@@ -934,6 +934,7 @@ usage: prs-atm <command> [<args>]
     --email    Email for notification            [STRING  / OPTIONAL]
     --memo     Comment to this transaction       [STRING  / OPTIONAL]
     --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]
+    --reverse  Reverse calculation               [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
     | 1. Use `SwapPool` to get all pools that available to swap.    |
     | 2. Default `slippage` is `5`, which means a 5% slippage.      |
