@@ -129,8 +129,8 @@ const randerResult = (result, options) => {
 
 ['add', 'remove'].map(i => { argv[i] = toArray(argv[i]); });
 [
-    'trxonly', 'help', 'detail', 'force', 'json', 'daemon', 'testnet',
-    'spdtest', 'debug', 'secret', 'delete', 'savepswd', 'dryrun', 'compact',
+    'compact', 'daemon', 'debug', 'delete', 'detail', 'dryrun', 'force', 'help',
+    'json', 'reverse', 'savepswd', 'secret', 'spdtest', 'testnet', 'trxonly',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }

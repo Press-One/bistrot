@@ -5,7 +5,8 @@ const { exchange, finance } = require('..');
 const func = async (argv) => {
     const resp = await exchange.swapToken(
         argv.pvtkey, argv.account, argv.from, argv.amount, argv.to,
-        argv.slippage, argv.email, argv.memo, { dryrun: argv.dryrun }
+        argv.slippage, argv.email, argv.memo,
+        { dryrun: argv.dryrun, reverse: argv.reverse }
     );
     if (!argv.json && resp && resp.payment_request) {
         let paymentUrls = [];
@@ -42,6 +43,7 @@ module.exports = {
         '    --email    Email for notification            [STRING  / OPTIONAL]',
         '    --memo     Comment to this transaction       [STRING  / OPTIONAL]',
         '    --dryrun   Evaluate a swap without executing [WITH  OR  WITHOUT ]',
+        '    --reverse  Reverse calculation               [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
         '    | 1. Use `SwapPool` to get all pools that available to swap.    |',
         '    | 2. Default `slippage` is `5`, which means a 5% slippage.      |',
