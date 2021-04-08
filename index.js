@@ -11,7 +11,6 @@ module.exports = Object.assign(require('utilitas'), {
     keythereum: require('keythereum-pure-js'),
     pg: require('pg'),
     secp256k1: require('secp256k1'),
-    ws: require('ws'),
 }, {
     account: require('./lib/account'),
     config: require('./lib/config'),
