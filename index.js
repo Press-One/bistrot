@@ -13,6 +13,7 @@ module.exports = Object.assign(require('utilitas'), {
     secp256k1: require('secp256k1'),
 }, {
     account: require('./lib/account'),
+    chaindex: require('./lib/chaindex'),
     config: require('./lib/config'),
     crypto: require('./lib/crypto'),
     finance: require('./lib/finance'),
