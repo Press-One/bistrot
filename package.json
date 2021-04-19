@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "readline-sync": "^1.4.10",
-        "table": "^6.0.7",
+        "table": "^6.2.0",
         "yargs": "^16.2.0"
     },
     "devDependencies": {
