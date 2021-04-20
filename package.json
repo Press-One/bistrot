@@ -44,7 +44,7 @@
     },
     "devDependencies": {
         "string-replace-loader": "^3.0.1",
-        "sushitrain": "^1990.1.58",
+        "sushitrain": "^1990.1.59",
         "webpack": "^5.34.0",
         "webpack-cli": "^4.6.0"
     }
