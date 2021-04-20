@@ -117,8 +117,6 @@ const randerResult = (result, options) => {
                 columns: { 0: { width: 30 }, 1: { width: 80 } }
             }, options.table.config || {});
         }
-        console.log(JSON.parse(utilitas.purgeEmoji(JSON.stringify(data), '[EMOJI]')));
-        return;
         out = data && data.length ? table(
             JSON.parse(utilitas.purgeEmoji(JSON.stringify(data), '[EMOJI]')),
             options.table.config
