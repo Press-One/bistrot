@@ -1,6 +1,6 @@
 'use strict';
 
-const { atm, exchange, utilitas } = require('..');
+const { atm, utilitas } = require('..');
 
 const func = async (argv) => {
     utilitas.prettyJson(
