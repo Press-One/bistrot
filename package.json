@@ -39,12 +39,12 @@
     },
     "dependencies": {
         "readline-sync": "^1.4.10",
+        "sushitrain": "^1990.1.62",
         "table": "^6.6.0",
         "yargs": "^16.2.0"
     },
     "devDependencies": {
         "string-replace-loader": "^3.0.1",
-        "sushitrain": "^1992.1.42",
         "webpack": "^5.36.1",
         "webpack-cli": "^4.6.0"
     }
