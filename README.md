@@ -37,7 +37,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 
 ```markdown
 >>> 🚧 Running in source mode.
-prs-atm v5.0.16
+prs-atm v5.0.17
 
 usage: prs-atm <command> [<args>]
 
@@ -731,6 +731,20 @@ usage: prs-atm <command> [<args>]
     > Example:
     $ prs-atm KeystoreUnlock \
               --keystore=keystore.json
+
+=====================================================================
+
+* `Pay` > Check payment requests:
+
+    --account  PRESS.one account                 [STRING  / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Including deposit requests and swap requests.              |
+    | 2. Support JSON output only.                                  |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ prs-atm Pay \
+              --account=ABCDE
 
 =====================================================================
 
