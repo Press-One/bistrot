@@ -30,6 +30,6 @@
         "ethereumjs-util": "^7.0.10",
         "keythereum-pure-js": "^1.1.9",
         "secp256k1": "^4.0.2",
-        "utilitas": "^1989.8.41"
+        "utilitas": "^1989.8.42"
     }
 }
