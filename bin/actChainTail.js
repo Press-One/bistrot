@@ -1,6 +1,6 @@
 'use strict';
 
-const { sushitrain, pacman, utilitas } = require('..');
+const { pacman, utilitas } = require('..');
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };
@@ -19,18 +19,17 @@ const rawRender = (content, argv) => {
 };
 
 const func = async (argv) => {
-    Object.assign(global.chainConfig, { serviceStateHistoryPlugin: true });
-    if (!(argv.blocknum = parseInt(argv.blocknum))) {
-        const chainInfo = await sushitrain.getInfo();
-        utilitas.assert(chainInfo && chainInfo.last_irreversible_block_num,
-            'Error connecting to chain API.', 500);
-        argv.blocknum = chainInfo.last_irreversible_block_num;
-    }
+    argv.blocknum = utilitas.ensureInt(argv.blocknum, { min: 0 });
     const render = (content) => { return rawRender(content, argv); };
-    const [blkCallback, trxCallback] = argv.trxonly ? [null, render] : [render];
-    await pacman.init(() => {
-        return argv.blocknum;
-    }, blkCallback, trxCallback, { silent: !argv.detail });
+    const [newBlock, newTransaction] = argv.trxonly ? [null, render] : [render];
+    await pacman.init({
+        callbacks: {
+            newBlock,
+            newTransaction,
+            initIdGet: argv.blocknum && (async () => { return argv.blocknum; }),
+        },
+        silent: !argv.detail,
+    });
 };
 
 module.exports = {
