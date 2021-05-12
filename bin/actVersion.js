@@ -1,11 +1,10 @@
 'use strict';
 
-const { utilitas, sushitrain, shot, system } = require('..');
+const { utilitas, sushitrain, system } = require('..');
 const path = require('path');
 
 const [exportSsConfig, packed, failed, merged] = [[
-    'debug', 'secret', 'speedTest', 'keosApi',
-    'rpcApi', 'shpApi', 'chainApi', 'ipfsApi',
+    'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
 ], 'PACKED', 'FAILED', '[MERGED]'];
 
 const verboseCheck = {
@@ -17,7 +16,6 @@ const verboseCheck = {
         });
         return merged;
     },
-    geolocation: shot.getCurrentPosition,
     sushibar: system.chkCpVer,
     latest_released_version: async () => {
         return (await system.chkNwVer()).version;
