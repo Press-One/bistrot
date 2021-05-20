@@ -39,13 +39,13 @@
     },
     "dependencies": {
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1992.1.65",
-        "table": "^6.7.0",
+        "sushitrain": "^1992.1.66",
+        "table": "^6.7.1",
         "yargs": "^17.0.1"
     },
     "devDependencies": {
         "string-replace-loader": "^3.0.1",
-        "webpack": "^5.37.0",
+        "webpack": "^5.37.1",
         "webpack-cli": "^4.7.0"
     }
 }
