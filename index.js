@@ -21,6 +21,5 @@ module.exports = Object.assign(require('utilitas'), {
     prsc: require('./lib/prsc'),
     sushibar: require('./lib/sushibar'),
     sushitrain: require('./lib/sushitrain'),
-    swap: require('./lib/swap'),
     table: require('./lib/table'),
 });
