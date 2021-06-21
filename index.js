@@ -17,6 +17,7 @@ module.exports = Object.assign(require('utilitas'), {
     finance: require('./lib/finance'),
     mixin: require('./lib/mixin'),
     pacman: require('./lib/pacman'),
+    producer: require('./lib/producer'),
     prsc: require('./lib/prsc'),
     sushibar: require('./lib/sushibar'),
     sushitrain: require('./lib/sushitrain'),
