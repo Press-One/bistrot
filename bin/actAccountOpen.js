@@ -11,6 +11,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pubkey: true,
     func,
     name: 'Open an Account',

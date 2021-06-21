@@ -50,6 +50,7 @@ const render = (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Check Statement',
     help: [

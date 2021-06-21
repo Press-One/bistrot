@@ -17,6 +17,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Check Voting Information',
     help: [

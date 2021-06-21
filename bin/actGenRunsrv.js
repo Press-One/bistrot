@@ -14,6 +14,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Generate the `runservice.sh` file',
     help: [

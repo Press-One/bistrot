@@ -15,6 +15,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Check Swap Statement',
     help: [

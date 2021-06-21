@@ -13,6 +13,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Generate the `genesis.json` file',
     help: [

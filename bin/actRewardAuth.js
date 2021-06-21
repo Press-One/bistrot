@@ -7,6 +7,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pvtkey: true,
     func,
     name: 'Auth official node to claim rewards automatically',

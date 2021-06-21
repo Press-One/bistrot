@@ -11,6 +11,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pvtkey: true,
     func,
     name: 'Bind a Mixin account to a PRESS.one account',
