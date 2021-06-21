@@ -10,6 +10,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pubkey: true,
     pvtkey: true,
     func,

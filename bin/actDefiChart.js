@@ -126,6 +126,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Show Price Chart on DeFi (beta)',
     help: [
@@ -145,5 +146,4 @@ module.exports = {
             period: '24h',
         },
     },
-    hide: true,
 };

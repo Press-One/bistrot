@@ -19,6 +19,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pvtkey: true,
     func,
     name: 'Claim Rewards',

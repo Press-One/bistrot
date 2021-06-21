@@ -43,6 +43,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     func,
     name: 'Get all pools that available to swap',
     render: {

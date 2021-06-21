@@ -7,6 +7,7 @@ const func = async (argv) => {
 };
 
 module.exports = {
+    hide: true,
     pvtkey: true,
     func,
     name: 'Vote or Revoke Voting for Producers',

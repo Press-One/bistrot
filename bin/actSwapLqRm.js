@@ -6,13 +6,14 @@ const func = async (argv) => {
     return await exchange.rmLiquid(
         argv.pvtkey, argv.account, argv.cura, argv.curb,
         argv.amount, argv.email, argv.memo, {
-            mixinAccount: argv.mixin,
-            dryrun: argv.dryrun,
-        }
+        mixinAccount: argv.mixin,
+        dryrun: argv.dryrun,
+    }
     );
 };
 
 module.exports = {
+    hide: true,
     pvtkey: true,
     func,
     name: 'Remove Liquid to Swap Pools',
