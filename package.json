@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1994.0.6",
+        "sushitrain": "^1994.0.7",
         "table": "^6.7.1",
         "yargs": "^17.0.1"
     },
