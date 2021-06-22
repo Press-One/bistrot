@@ -28,7 +28,6 @@ module.exports = {
             'mailgun-js': false,
             'mysql2/promise': false,
             'node-mailjet': false,
-            'pg': false,
             'public-ip': false,
             'telesignsdk': false,
             'twilio': false,
@@ -39,23 +38,16 @@ module.exports = {
 
     externals: [
         /memcpy/, // eosjs-ecc
-        /pg-native/, // pg
         /cardinal/, // mysql
-        /bufferutil/, // ws
-        /utf-8-validate/, // ws
         { got: 'commonjs got' }, // public-ip
     ],
 
     ignoreWarnings: [
         warning => {
-            return warning
-                && warning.loc
-                && warning.loc.start
-                && warning.loc.end
-                && ((warning.loc.start.line === 84
-                    && warning.loc.start.column === 20
-                    && warning.loc.end.line === 84
-                    && warning.loc.end.column === 52));
+            return ((warning?.loc?.start?.line === 84
+                && warning?.loc?.start?.column === 20
+                && warning?.loc?.end?.line === 84
+                && warning?.loc?.end?.column === 52));
         },
     ],
 
