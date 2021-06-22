@@ -11,7 +11,6 @@ module.exports = Object.assign(require('sushitrain'), {
     ballot: require('./lib/ballot'),
     config: require('./lib/config'),
     etc: require('./lib/etc'),
-    exchange: require('./lib/exchange'),
     keychain: require('./lib/keychain'),
     node: require('./lib/node'),
     statement: require('./lib/statement'),
