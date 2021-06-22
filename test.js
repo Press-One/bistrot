@@ -6,17 +6,13 @@ const fs = require('fs');
 const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
-const account = 'testuser1';
+const account = 'test.bp2';
 const pubkey = 'EOS5cZsk6NmN2GwLAbw6o79FcWe8QgtZpUoL7Kac5dvEB9A7ocASQ';
 const pvtkey = '5KhrVDXB4jE5kzqcZ7tm5LnWSs51rW1HounSD3SK5TPxu5NMir9';
 const prvK = '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d';
-const mixin = '36029b33-838f-4dbe-ae9b-f0e86226d53d';
-const txId = 'EBA5538D00A0958957F4FDE0B8149FF563A129C53A0FD6FDB16559C498523933';
-const cura = 'cob';
-const curb = 'cnb';
+const txId = 'dc5a0a05cb4b080f40045944de8d251f057fdf6e8633288bd445820e56dd16e3';
 const password = encryption.randomString(32);
 const keystore = '/tmp/prsatm-test-keystore.json';
-const ignoreResult = true;
 const args = { account };
 
 let toTest = {};
@@ -26,7 +22,7 @@ let skippedTest = 0;
 
 const tests = {
     Account: { args: { name: account } },
-    AccountEvolve: { args: { account, prevkey: prvK, } },
+    AccountEvolve: { args: { account, prevkey: prvK } },
     AccountFree: { args: { pubkey, pvtkey } },
     Bp: {},
     BpUnregPreparation: { alias: 'BpUnreg', args },
