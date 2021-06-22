@@ -8,7 +8,6 @@ global._prsAtm = Object.assign(require('./package.json'), {
 
 module.exports = Object.assign(require('sushitrain'), {
     atm: require('./lib/atm'),
-    ballot: require('./lib/ballot'),
     config: require('./lib/config'),
     etc: require('./lib/etc'),
     keychain: require('./lib/keychain'),

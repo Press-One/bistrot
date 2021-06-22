@@ -1,6 +1,6 @@
 'use strict';
 
-const { ballot, finance, producer, colors, math, utilitas } = require('..');
+const { finance, producer, colors, math, utilitas } = require('..');
 
 const render = (argv) => {
     return argv.account ? null : {
@@ -31,7 +31,7 @@ const render = (argv) => {
 
 const func = async (argv) => {
     let resp = (argv.account ? await producer.queryByName(argv.account) : null)
-        || (argv.regexp ? await ballot.queryProducer(argv.regexp) : null)
+        || (argv.regexp ? await producer.queryByRegExp(argv.regexp) : null)
         || await producer.queryByRange(argv.bound, argv.count);
     if (!argv.json && !argv.account) {
         const logs = [];

@@ -160,14 +160,14 @@ module.exports = {
         },
         {
             title: 'listing help info for current command',
-            cmd: 'withdraw',
+            cmd: 'account',
             args: {
                 help: null,
             }
         },
         {
             title: 'searching help info',
-            args: 'ballot info',
+            args: 'account',
         },
     ],
 };

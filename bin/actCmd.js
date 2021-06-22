@@ -42,7 +42,7 @@ module.exports = {
         },
         {
             title: 'searching commands',
-            args: 'ballot info',
+            args: 'account',
         },
     ],
     render: { renderAll: true, table: { KeyValue: true } },
