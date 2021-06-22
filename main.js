@@ -12,8 +12,6 @@ module.exports = Object.assign(require('sushitrain'), {
     config: require('./lib/config'),
     etc: require('./lib/etc'),
     keychain: require('./lib/keychain'),
-    node: require('./lib/node'),
-    statement: require('./lib/statement'),
     system: require('./lib/system'),
     wallet: require('./lib/wallet'),
 });
