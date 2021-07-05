@@ -21,7 +21,7 @@
         "gitsync": "git pull && git push",
         "ncuinit": "npm install -g npm-check-updates",
         "pack": "node ./etc/build.js && ./node_modules/.bin/webpack-cli --config webpack.config.js",
-        "prepublishOnly": "npm run readme && npm version patch && npm run updep && npm run gitsync",
+        "prepublishOnlyx": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-us": "docker build --no-cache -t pressone/bistrot .",
         "docker-build-cn": "docker build --no-cache -t dockerhub.qingcloud.com/pressone/bistrot .",
