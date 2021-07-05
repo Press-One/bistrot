@@ -1,4 +1,4 @@
-# PRS-ATM
+# Bistrot
 
 A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
