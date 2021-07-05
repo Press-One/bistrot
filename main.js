@@ -10,7 +10,6 @@ module.exports = Object.assign(require('utilitas'), {
     elliptic: require('elliptic'),
     eos: require('eosjs'),
     eosEcc: require('eosjs-ecc'),
-    eosKeos: require('eosjs-keos'),
     eosKeygen: require('eosjs-keygen'),
     eosNameVerify: require('eos-name-verify'),
     ethereumUtil: require('ethereumjs-util'),

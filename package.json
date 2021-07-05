@@ -22,7 +22,7 @@
         "ncuinit": "npm install -g npm-check-updates",
         "pack": "node ./etc/build.js && ./node_modules/.bin/webpack-cli --config webpack.config.js",
         "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
-        "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
+        "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.js --json >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-us": "docker build --no-cache -t pressone/bistrot .",
         "docker-build-cn": "docker build --no-cache -t dockerhub.qingcloud.com/pressone/bistrot .",
         "docker-push-us": "docker push pressone/bistrot",
@@ -39,19 +39,18 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
-        "readline-sync": "^1.4.10",
-        "table": "^6.7.1",
-        "yargs": "^17.0.1",
         "elliptic": "^6.5.4",
         "eos-name-verify": "^1.0.1",
         "eosjs": "^22.0.0",
         "eosjs-ecc": "^4.0.7",
-        "eosjs-keos": "^1989.6.7",
         "eosjs-keygen": "^1.3.2",
         "ethereumjs-util": "^7.0.10",
         "keythereum-pure-js": "^1.1.9",
+        "readline-sync": "^1.4.10",
         "secp256k1": "^4.0.2",
-        "utilitas": "^1989.8.47"
+        "table": "^6.7.1",
+        "utilitas": "^1989.8.47",
+        "yargs": "^17.0.1"
     },
     "devDependencies": {
         "string-replace-loader": "^3.0.3",

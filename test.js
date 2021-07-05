@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, encryption, storage, shell } = require('sushitrain');
+const { utilitas, encryption, storage, shell } = require('utilitas');
 const path = require('path');
 const fs = require('fs');
 const log = (content) => { return utilitas.modLog(content, __filename); };
