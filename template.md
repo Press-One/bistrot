@@ -2,9 +2,7 @@
 
 A CLI client and also an API library for [PRESS.one](https://press.one/).
 
-![logo](https://github.com/Press-One/prs-atm/blob/master/wiki/logo_with_text.png?raw=true "logo")
-
-![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
+![banner](https://github.com/Press-One/prs-atm/blob/master/wiki/logo_with_text.png?raw=true "banner")
 
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
