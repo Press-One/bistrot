@@ -2,9 +2,7 @@
 
 A CLI client and also an API library for [PRESS.one](https://press.one/).
 
-![logo](https://github.com/Press-One/prs-atm/blob/master/wiki/logo_with_text.png?raw=true "logo")
-
-![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
+![banner](https://github.com/Press-One/bistrot/blob/master/wiki/banner.jpg?raw=true "banner")
 
 ## Install with [npm](https://www.npmjs.com/package/prs-atm)
 
@@ -460,7 +458,7 @@ usage: prs-atm <command> [<args>]
 
     Using passwords or private keys on the command line interface can
     be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive 
+    private keys in parameters. The program will request sensitive
     information in a secure way.
 
 ```
