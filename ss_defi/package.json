@@ -1,0 +1,34 @@
+{
+    "name": "sushitrain",
+    "description": "EOS/PRS data access library for Node.js.",
+    "version": "1989.7.123",
+    "private": false,
+    "homepage": "https://github.com/Leask/sushitrain",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "debug": "node --inspect --trace-warnings debug.js",
+        "test": "node --inspect --trace-warnings test.js",
+        "ncuinit": "npm install -g npm-check-updates",
+        "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
+        "gitsync": "git pull && git push",
+        "prepublishOnly": "npm version patch && npm run updep && npm run gitsync"
+    },
+    "author": "Leask Wong <i@leaskh.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Leask/sushitrain"
+    },
+    "dependencies": {
+        "eos-name-verify": "^1.0.1",
+        "eosjs": "^21.1.0-25-707787d",
+        "eosjs-ecc": "^4.0.7",
+        "eosjs-keos": "^1989.6.7",
+        "eosjs-keygen": "^1.3.2",
+        "pg": "^8.5.1",
+        "prs-utility": "^0.1.0",
+        "utilitas": "^1989.7.46",
+        "ws": "^7.4.2"
+    }
+}
