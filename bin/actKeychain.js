@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, config: libConf, keychain, wallet } = require('..');
+const { utilitas, preference, keychain, wallet } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
 const privatekeyLength = 51;
@@ -54,7 +54,9 @@ const func = async (argv, options = {}) => {
         filename = file;
         config = cnfg;
     } else {
-        const { filename: file, config: cnfg } = await libConf.getUserConfig();
+        const {
+            filename: file, config: cnfg
+        } = await preference.getUserConfig();
         filename = file;
         config = cnfg;
     }

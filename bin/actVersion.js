@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, sushitrain, system } = require('..');
+const { utilitas, config, system } = require('..');
 const path = require('path');
 
 const [exportSsConfig, packed, failed, merged] = [[
@@ -9,7 +9,7 @@ const [exportSsConfig, packed, failed, merged] = [[
 
 const verboseCheck = {
     sushitrain_inited: async (argv, data) => {
-        const ssConfig = await sushitrain.config();
+        const ssConfig = await config();
         exportSsConfig.map(x => {
             data[x] = Array.isArray(ssConfig[x]) && !argv.json
                 ? ssConfig[x].join('\n') : ssConfig[x];

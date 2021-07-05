@@ -1,6 +1,6 @@
 'use strict';
 
-const { config, utilitas } = require('..');
+const { preference, utilitas } = require('..');
 
 const allowedMap = { speedTest: 'spdtest' };
 
@@ -25,7 +25,7 @@ const func = async (argv) => {
         speedTest: argv.spdtest,
     }, {}];
     for (let key in input) {
-        if (!config.allowed.includes(key)) { continue; }
+        if (!preference.allowed.includes(key)) { continue; }
         switch (checkRaw(key)) {
             case 'UNDEFINED':
                 conf[key] = undefined;
@@ -35,10 +35,10 @@ const func = async (argv) => {
                 conf[key] = input[key];
         }
     }
-    const { filename, config: resp } = await (Object.keys(conf).length
-        ? config.set(conf) : config.getUserConfig());
+    const { filename, config } = await (Object.keys(conf).length
+        ? preference.set(conf) : preference.getUserConfig());
     if (!argv.json) { console.log('CONFIG_FILENAME:', filename); }
-    return resp;
+    return config;
 };
 
 module.exports = {
