@@ -1,6 +1,6 @@
-# PRS-ATM
+# Bistrot
 
-A CLI client and also an API library for [PRESS.one](https://press.one/).
+A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
 ![banner](https://github.com/Press-One/bistrot/blob/master/wiki/banner.jpg?raw=true "banner")
 
