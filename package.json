@@ -1,24 +1,25 @@
 {
-    "name": "prs-atm",
-    "description": "A CLI client and also an API library for PRESS.one.",
+    "name": "bistrot",
+    "description": "A CLI client and also an API library for RumSystem.net.",
     "version": "7.0.2",
     "private": false,
-    "homepage": "https://github.com/Press-One/prs-atm",
+    "homepage": "https://github.com/Press-One/bistrot",
     "main": "index.js",
     "test": "test.js",
     "bin": {
-        "prs-atm": "bin/prs-atm.js"
+        "bistrot": "bin/bistrot.js"
     },
     "engines": {
         "node": ">=14.x"
     },
     "scripts": {
-        "start": "node --no-deprecation bin/prs-atm.js",
+        "start": "node --no-deprecation bin/bistrot.js",
         "debug": "node --inspect --trace-warnings debug.js",
         "test": "node --inspect --trace-warnings test.js",
         "devinit": "npm install -g npm-check-updates && npm install -s dev",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
+        "ncuinit": "npm install -g npm-check-updates",
         "pack": "node ./etc/build.js && ./node_modules/.bin/webpack-cli --config webpack.config.js",
         "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
@@ -35,13 +36,22 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Press-One/prs-atm.git"
+        "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1994.0.8",
         "table": "^6.7.1",
-        "yargs": "^17.0.1"
+        "yargs": "^17.0.1",
+        "elliptic": "^6.5.4",
+        "eos-name-verify": "^1.0.1",
+        "eosjs": "^22.0.0",
+        "eosjs-ecc": "^4.0.7",
+        "eosjs-keos": "^1989.6.7",
+        "eosjs-keygen": "^1.3.2",
+        "ethereumjs-util": "^7.0.10",
+        "keythereum-pure-js": "^1.1.9",
+        "secp256k1": "^4.0.2",
+        "utilitas": "^1989.8.47"
     },
     "devDependencies": {
         "string-replace-loader": "^3.0.3",
