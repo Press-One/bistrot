@@ -33,6 +33,7 @@ module.exports = {
             'twilio': false,
             'winston-papertrail-mproved': false,
             'winston': false,
+            'yargs': false,
         }
     },
 
