@@ -7,7 +7,7 @@ const fs = require('fs');
 const func = async (argv) => {
     const acts = {};
     fs.readdirSync(__dirname).filter((file) => {
-        return /\.js$/i.test(file) && file.toLowerCase() !== 'prs-atm.js';
+        return /\.js$/i.test(file) && file.toLowerCase() !== 'bistrot.js';
     }).forEach((file) => {
         let actName = file.replace(
             /^(.*)\.js$/, '$1'

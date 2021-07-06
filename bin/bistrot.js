@@ -153,7 +153,7 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
     try {
         const cmds = {};
         fs.readdirSync(__dirname).filter((file) => {
-            return /\.js$/i.test(file) && file !== 'prs-atm.js';
+            return /\.js$/i.test(file) && file !== 'bistrot.js';
         }).forEach((file) => {
             cmds[file.toLowerCase(
             ).replace(/^act|\.js$/ig, '')] = path.join(__dirname, file);
