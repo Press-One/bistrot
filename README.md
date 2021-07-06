@@ -4,29 +4,29 @@ A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
 ![banner](https://github.com/Press-One/bistrot/blob/master/wiki/banner.jpg?raw=true "banner")
 
-## Install with [npm](https://www.npmjs.com/package/prs-atm)
+## Install with [npm](https://www.npmjs.com/package/bistrot)
 
 ```console
 $ sudo npm config set unsafe-perm true
-$ sudo npm install -g prs-atm
-$ prs-atm help
+$ sudo npm install -g bistrot
+$ bistrot help
 ```
 
-## Run a [prs-atm container](https://hub.docker.com/repository/docker/pressone/prs-atm)
+## Run a [bistrot container](https://hub.docker.com/repository/docker/pressone/bistrot)
 
 ### From Docker Hub
 
 ```console
-$ docker pull pressone/prs-atm
-$ docker run -it --rm pressone/prs-atm prs-atm help
+$ docker pull pressone/bistrot
+$ docker run -it --rm pressone/bistrot bistrot help
 ```
 
 ### From a Mirror Server (inside China)
 
 ```console
 $ docker login -u prs-os -p pressone dockerhub.qingcloud.com
-$ docker pull dockerhub.qingcloud.com/pressone/prs-atm
-$ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
+$ docker pull dockerhub.qingcloud.com/pressone/bistrot
+$ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ```
 
 *Important: If you want to use a keystore file with the docker version, be sure to mount the path to the keystore file.*
@@ -34,9 +34,9 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-bistrot v7.1.3
+bistrot v7.1.4
 
-usage: prs-atm <command> [<args>]
+usage: bistrot <command> [<args>]
 
 =====================================================================
 
@@ -45,7 +45,7 @@ usage: prs-atm <command> [<args>]
     --name     PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm Account \
+    $ bistrot Account \
               --name=ABCDE
 
 =====================================================================
@@ -63,7 +63,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm AccountEvolve \
+    $ bistrot AccountEvolve \
               --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --account=ABCDE \
               --keystore=keystore.json
@@ -83,7 +83,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm AccountFree \
+    $ bistrot AccountFree \
               --keystore=keystore.json
 
 =====================================================================
@@ -103,14 +103,14 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of getting a producer list:
-    $ prs-atm Bp
+    $ bistrot Bp
 
     > Example of getting info of one producer:
-    $ prs-atm Bp \
+    $ bistrot Bp \
               --account=ABCDE
 
     > Example of querying producers:
-    $ prs-atm Bp \
+    $ bistrot Bp \
               --regexp=^pressone
 
 =====================================================================
@@ -129,7 +129,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm BpReg \
+    $ bistrot BpReg \
               --account=ABCDE \
               --keystore=keystore.json
 
@@ -146,7 +146,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm BpUnreg \
+    $ bistrot BpUnreg \
               --account=ABCDE \
               --keystore=keystore.json
 
@@ -159,10 +159,10 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of checking global PRS-chain Information:
-    $ prs-atm Chain
+    $ bistrot Chain
 
     > Example of checking specific PRS-node Information:
-    $ prs-atm Chain \
+    $ bistrot Chain \
               --rpcapi=http://51.68.201.144:8888
 
 =====================================================================
@@ -175,7 +175,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm ChainBlock \
+    $ bistrot ChainBlock \
               --id=26621512 \
               --json
 
@@ -193,13 +193,13 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm ChainTail \
+    $ bistrot ChainTail \
               --blocknum=26621512 \
               --trxonly \
               --json
 
     > Example:
-    $ prs-atm ChainTail \
+    $ bistrot ChainTail \
               --blocknum=26621512 \
               --trxonly \
               --json \
@@ -215,7 +215,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm ChainTrx \
+    $ bistrot ChainTrx \
               --id=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --json
 
@@ -224,10 +224,10 @@ usage: prs-atm <command> [<args>]
 * `Cmd` > List available commands:
 
     > Example of listing all commands:
-    $ prs-atm Cmd
+    $ bistrot Cmd
 
     > Example of searching commands:
-    $ prs-atm Cmd account
+    $ bistrot Cmd account
 
 =====================================================================
 
@@ -244,7 +244,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm Config \
+    $ bistrot Config \
               --spdtest=true \
               --debug=false \
               --secret=undefined
@@ -254,14 +254,14 @@ usage: prs-atm <command> [<args>]
 * `Help` > List help info:
 
     > Example of listing all help info:
-    $ prs-atm Help
+    $ bistrot Help
 
     > Example of listing help info for current command:
-    $ prs-atm account \
+    $ bistrot account \
               --help
 
     > Example of searching help info:
-    $ prs-atm Help account
+    $ bistrot Help account
 
 =====================================================================
 
@@ -287,7 +287,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm KeyUpdtActive \
+    $ bistrot KeyUpdtActive \
               --account=ABCDE \
               --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --keystore=keystore.json
@@ -316,7 +316,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm KeyUpdtOwner \
+    $ bistrot KeyUpdtOwner \
               --account=ABCDE \
               --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --keystore=keystore.json
@@ -341,13 +341,13 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of saving a new key:
-    $ prs-atm Keychain \
+    $ bistrot Keychain \
               --account=ABCDE \
               --prmsn=owner \
               --keystore=keystore.json
 
     > Example of deleting an existing key:
-    $ prs-atm Keychain \
+    $ bistrot Keychain \
               --account=ABCDE \
               --prmsn=active \
               --delete
@@ -359,7 +359,7 @@ usage: prs-atm <command> [<args>]
     --account  PRESS.one account                 [STRING  / REQUIRED]
 
     > Example:
-    $ prs-atm Keys \
+    $ bistrot Keys \
               --account=ABCDE
 
 =====================================================================
@@ -372,11 +372,11 @@ usage: prs-atm <command> [<args>]
     --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]
 
     > Example of creating a new keystore:
-    $ prs-atm KeystoreCreate \
+    $ bistrot KeystoreCreate \
               --dump=keystore.json
 
     > Example of creating a keystore with existing keys:
-    $ prs-atm KeystoreCreate \
+    $ bistrot KeystoreCreate \
               --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --dump=keystore.json
@@ -398,7 +398,7 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example:
-    $ prs-atm KeystoreUnlock \
+    $ bistrot KeystoreUnlock \
               --keystore=keystore.json
 
 =====================================================================
@@ -410,10 +410,10 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of evaluating all pre-configured nodes:
-    $ prs-atm SpdTest
+    $ bistrot SpdTest
 
     > Example of evaluating a designated node:
-    $ prs-atm SpdTest \
+    $ bistrot SpdTest \
               --rpcapi=http://51.68.201.144:8888 \
               --chainapi=https://prs-bp1.press.one
 
@@ -427,18 +427,11 @@ usage: prs-atm <command> [<args>]
     └---------------------------------------------------------------┘
 
     > Example of getting package version:
-    $ prs-atm Version
+    $ bistrot Version
 
     > Example of exporting info as json:
-    $ prs-atm Version \
+    $ bistrot Version \
               --json
-
-=====================================================================
-
-* `bistrot` > bistrot:
-
-    > Example:
-    $ prs-atm bistrot
 
 =====================================================================
 
