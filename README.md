@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
 ## Instruction
 
 ```markdown
-bistrot v7.1.2
+bistrot v7.1.3
 
 usage: prs-atm <command> [<args>]
 
