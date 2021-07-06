@@ -14,10 +14,7 @@ module.exports = Object.assign(require('utilitas'), {
     eosNameVerify: require('eos-name-verify'),
     ethereumUtil: require('ethereumjs-util'),
     keythereum: require('keythereum-pure-js'),
-    readline: require('readline-sync'),
     secp256k1: require('secp256k1'),
-    table: require('table'),
-    yargs: require('yargs'),
 }, {
     account: require('./lib/account'),
     atm: require('./lib/atm'),
