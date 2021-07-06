@@ -12,7 +12,7 @@ const pvtkey = '5KhrVDXB4jE5kzqcZ7tm5LnWSs51rW1HounSD3SK5TPxu5NMir9';
 const prvK = '6c241da9a33408fb72464860e246ce40a1b05c0bbed8018f554aeeb4cb969d4d';
 const txId = 'dc5a0a05cb4b080f40045944de8d251f057fdf6e8633288bd445820e56dd16e3';
 const password = encryption.randomString(32);
-const keystore = '/tmp/prsatm-test-keystore.json';
+const keystore = '/tmp/bistrot-test-keystore.json';
 const args = { account };
 
 let toTest = {};
@@ -64,7 +64,7 @@ const getAllCommands = async () => {
     log('Initializing test case...');
     const resp = [];
     fs.readdirSync(path.join(__dirname, 'bin')).filter((file) => {
-        return /\.js$/i.test(file) && file !== 'prs-atm.js';
+        return /\.js$/i.test(file) && file !== 'bistrot.js';
     }).forEach((file) => {
         const cmd = file.replace(/^act|\.js$/ig, '');
         utilitas.assert(
@@ -108,10 +108,10 @@ const test = async (func) => {
         const argTxt = formatArgs(tests[func]);
         split();
         log(`CASE ${successTest + failedTest + 1} `
-            + `>>> \`$ prs-atm ${cmd} ${argTxt}\``);
+            + `>>> \`$ bistrot ${cmd} ${argTxt}\``);
         results[func] = await (tests[func].overload ?
             tests[func].overload(args)
-            : shell.exec(`./bin/prs-atm.js ${cmd} ${argTxt}`));
+            : shell.exec(`./bin/bistrot.js ${cmd} ${argTxt}`));
         if (tests[func].hideResult) {
             results[func] = '...';
         } else if (tests[func].rawResult) {

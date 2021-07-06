@@ -75,14 +75,14 @@ const func = async (argv) => {
     fs.readdirSync(__dirname).filter((file) => {
         return argv.command
             ? (`act${argv.command}.js` === file.toLowerCase())
-            : (/\.js$/i.test(file) && file !== 'prs-atm.js');
+            : (/\.js$/i.test(file) && file !== 'bistrot.js');
     }).forEach((file) => {
         let actName = file.replace(/^(.*)\.js$/, '$1').replace(/^act/i, '');
         acts[actName] = require(path.join(__dirname, file));
     });
     const info = [`${(await utilitas.which(
         path.join(__dirname, '..', 'package.json')
-    )).title}`, '', 'usage: prs-atm <command> [<args>]'];
+    )).title}`, '', 'usage: bistrot <command> [<args>]'];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     let find = {};
     for (let i in acts) {
@@ -109,7 +109,7 @@ const func = async (argv) => {
             acts[i].help.push('    └---------------------------------------------------------------┘');
         }
         utilitas.ensureArray(acts[i].example || {}).map((e) => {
-            const strArgs = [`    $ prs-atm ${e.cmd || i}`];
+            const strArgs = [`    $ bistrot ${e.cmd || i}`];
             if (utilitas.isString(e.args)) {
                 strArgs[0] += ` ${e.args}`;
             } else {
