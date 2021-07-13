@@ -39,6 +39,7 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
+        "abi-decoder": "^2.4.0",
         "elliptic": "^6.5.4",
         "eos-name-verify": "^1.0.1",
         "eosjs": "^22.0.0",
@@ -50,6 +51,7 @@
         "secp256k1": "^4.0.2",
         "table": "^6.7.1",
         "utilitas": "^1989.8.47",
+        "web3": "^1.4.0",
         "yargs": "^17.0.1"
     },
     "devDependencies": {

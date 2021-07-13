@@ -27,6 +27,7 @@ module.exports = Object.assign(require('utilitas'), {
     pacman: require('./lib/pacman'),
     producer: require('./lib/producer'),
     prsc: require('./lib/prsc'),
+    quorum: require('./lib/quorum'),
     sushibar: require('./lib/sushibar'),
     sushitrain: require('./lib/sushitrain'),
     system: require('./lib/system'),
