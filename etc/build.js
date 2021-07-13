@@ -14,7 +14,14 @@ modLog('Loading files...');
         && !new Set([path.basename(__filename), targetFile]).has(file);
 }).forEach(file => {
     modLog(`> ${file}`);
-    fileContent[file] = fs.readFileSync(path.join(__dirname, file), 'utf8');
+    let content = fs.readFileSync(path.join(__dirname, file), 'utf8');
+    if (/\.json$/.test(file)) {
+        const lines = content.split('\n');
+        content = [];
+        lines.map(x => { (x = x.trim()) && content.push(x); });
+        content = content.join('');
+    }
+    fileContent[file] = content;
 });
 
 modLog('Updating bundle...');
