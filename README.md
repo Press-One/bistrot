@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.1.4
+bistrot v7.1.5
 
 usage: bistrot <command> [<args>]
 
@@ -67,51 +67,6 @@ usage: bistrot <command> [<args>]
               --prevkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --account=ABCDE \
               --keystore=keystore.json
-
-=====================================================================
-
-* `AccountFree` > Open a Free Account:
-
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. After successful execution, you will get a new account.    |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot AccountFree \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `Bp` > Check Producers Information:
-
-    --account  PRESS.one producer name           [STRING  / OPTIONAL]
-    --bound    Paging bound                      [STRING  / OPTIONAL]
-    --count    Page size                         [INTEGER / OPTIONAL]
-    --regexp   RegExp for matching producer name [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. Run with `account` to get info of one producer.            |
-    | 2. Run without `account` to get a producer list.              |
-    | 3. Specify `bound` to get a producer list start from `bound`. |
-    | 4. Default `count` is `50`.                                   |
-    | 5. `regexp` can be keyword or regular expression.             |
-    └---------------------------------------------------------------┘
-
-    > Example of getting a producer list:
-    $ bistrot Bp
-
-    > Example of getting info of one producer:
-    $ bistrot Bp \
-              --account=ABCDE
-
-    > Example of querying producers:
-    $ bistrot Bp \
-              --regexp=^pressone
 
 =====================================================================
 
@@ -228,64 +183,6 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `KeyUpdtActive` > Update Active Key:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --npubkey  New `active` public key           [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. You need `owner key permission` to execute this command.   |
-    | 2. Use `AccountAuth` to reauthorize after you update keys.    |
-    └---------------------------------------------------------------┘
-    ┌- DANGER ------------------------------------------------------┐
-    | ⚠ Incorrect use will result in `loss of permissions`.         |
-    | ⚠ `DO NOT` do this unless you know what you are doing.        |
-    | ⚠ We are not responsible for any loss of permissions due to   |
-    |   the mistake of updating keys.                               |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot KeyUpdtActive \
-              --account=ABCDE \
-              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `KeyUpdtOwner` > Update Owner Key:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --npubkey  New `owner` public key            [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌---------------------------------------------------------------┐
-    | 1. You need `owner key permission` to execute this command.   |
-    | 2. Use `AccountAuth` to reauthorize after you update keys.    |
-    └---------------------------------------------------------------┘
-    ┌- DANGER ------------------------------------------------------┐
-    | ⚠ Incorrect use will result in `loss of permissions`.         |
-    | ⚠ `DO NOT` do this unless you know what you are doing.        |
-    | ⚠ We are not responsible for any loss of permissions due to   |
-    |   the mistake of updating keys.                               |
-    └---------------------------------------------------------------┘
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot KeyUpdtOwner \
-              --account=ABCDE \
-              --npubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --keystore=keystore.json
-
-=====================================================================
-
 * `Keychain` > Manage Keychain:
 
     --account  PRESS.one account                 [STRING  / REQUIRED]
@@ -314,16 +211,6 @@ usage: bistrot <command> [<args>]
               --account=ABCDE \
               --prmsn=active \
               --delete
-
-=====================================================================
-
-* `Keys` > Check Account Keys:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-
-    > Example:
-    $ bistrot Keys \
-              --account=ABCDE
 
 =====================================================================
 
@@ -419,7 +306,7 @@ usage: bistrot <command> [<args>]
 
     Using passwords or private keys on the command line interface can
     be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive
+    private keys in parameters. The program will request sensitive 
     information in a secure way.
 
 ```
