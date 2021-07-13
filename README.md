@@ -115,43 +115,6 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `BpReg` > Register as a Producer:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --url      URL where info about producer     [STRING  / OPTIONAL]
-    --location Relative location for scheduling  [INTEGER / OPTIONAL]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot BpReg \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
-* `BpUnreg` > Unregister as a Producer:
-
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
-    ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pvtkey` must be provided.          |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot BpUnreg \
-              --account=ABCDE \
-              --keystore=keystore.json
-
-=====================================================================
-
 * `Chain` > Check PRS-chain Information:
 
     ┌---------------------------------------------------------------┐
@@ -456,7 +419,7 @@ usage: bistrot <command> [<args>]
 
     Using passwords or private keys on the command line interface can
     be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive 
+    private keys in parameters. The program will request sensitive
     information in a secure way.
 
 ```
