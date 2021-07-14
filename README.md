@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.1.5
+bistrot v7.1.6
 
 usage: bistrot <command> [<args>]
 
@@ -42,7 +42,7 @@ usage: bistrot <command> [<args>]
 
 * `Account` > Check an Account:
 
-    --name     PRESS.one account                 [STRING  / REQUIRED]
+    --name     Quorum account                    [STRING  / REQUIRED]
 
     > Example:
     $ bistrot Account \
@@ -59,7 +59,7 @@ usage: bistrot <command> [<args>]
     --pubkey   PRESS.one public key              [STRING  / OPTIONAL]
     --pvtkey   PRESS.one private key             [STRING  / OPTIONAL]
     ┌- NOTICE ------------------------------------------------------┐
-    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |
+    | `keystore` (recommend) or `pvtkey` must be provided.          |
     └---------------------------------------------------------------┘
 
     > Example:
@@ -185,8 +185,7 @@ usage: bistrot <command> [<args>]
 
 * `Keychain` > Manage Keychain:
 
-    --account  PRESS.one account                 [STRING  / REQUIRED]
-    --prmsn    Permission of the key             [STRING  / REQUIRED]
+    --address  Quorum address                    [STRING  / REQUIRED]
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to `verify` the keystore      [STRING  / OPTIONAL]
     --memo     Memo for the keystore             [STRING  / OPTIONAL]
@@ -202,14 +201,12 @@ usage: bistrot <command> [<args>]
 
     > Example of saving a new key:
     $ bistrot Keychain \
-              --account=ABCDE \
-              --prmsn=owner \
+              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --keystore=keystore.json
 
     > Example of deleting an existing key:
     $ bistrot Keychain \
-              --account=ABCDE \
-              --prmsn=active \
+              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --delete
 
 =====================================================================
@@ -217,7 +214,6 @@ usage: bistrot <command> [<args>]
 * `KeystoreCreate` > Create a new Keystore (can also import keys):
 
     --password Use to encrypt the keystore       [STRING  / OPTIONAL]
-    --pubkey   Import existing public key        [STRING  / OPTIONAL]
     --pvtkey   Import existing private key       [STRING  / OPTIONAL]
     --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]
 
@@ -227,7 +223,6 @@ usage: bistrot <command> [<args>]
 
     > Example of creating a keystore with existing keys:
     $ bistrot KeystoreCreate \
-              --pubkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --pvtkey=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
               --dump=keystore.json
 
@@ -237,13 +232,9 @@ usage: bistrot <command> [<args>]
 
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
     --password Use to decrypt the keystore       [STRING  / OPTIONAL]
-    --legacy   For legacy PRESS.one keystores    [WITH  OR  WITHOUT ]
-    ┌---------------------------------------------------------------┐
-    | 1. You can use `legacy` to decrypt legacy PRESS.one keystores.|
-    └---------------------------------------------------------------┘
     ┌---------------------------------------------------------------┐
     | This command will decrypt your keystore and display the       |
-    | public key and private key. It's for advanced users only.     |
+    | address and private key. It's for advanced users only.        |
     | You don't have to do this unless you know what you are doing. |
     └---------------------------------------------------------------┘
 
