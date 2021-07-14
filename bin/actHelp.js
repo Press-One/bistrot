@@ -18,14 +18,10 @@ const defaultArgs = {
     dump: defFile,
     keystore: defFile,
     address: defHash,
-    npubkey: defHash,
     prevkey: defHash,
     pubkey: defHash,
     pvtkey: defHash,
     amount: defAmount,
-    cpu: defAmount,
-    net: defAmount,
-    ram: defAmount,
     email: 'abc@def.com',
     chainapi: 'https://prs-bp1.press.one',
     rpcapi: 'http://51.68.201.144:8888',
@@ -95,17 +91,17 @@ const func = async (argv) => {
             if (!check) { continue; }
         } else if (acts[i].hide) { continue; }
         acts[i].help = acts[i].help || [];
-        if (acts[i].pubkey || acts[i].pvtkey) {
+        if (acts[i].address || acts[i].pvtkey) {
             acts[i].help.push('    ┌- NOTICE ------------------------------------------------------┐');
         }
-        if (acts[i].pubkey && acts[i].pvtkey) {
-            acts[i].help.push('    | `keystore` (recommend) or `pubkey, pvtkey` must be provided.  |')
-        } else if (acts[i].pubkey) {
-            acts[i].help.push('    | `keystore` (recommend) or `pvtkey` must be provided.          |')
+        if (acts[i].address && acts[i].pvtkey) {
+            acts[i].help.push('    | `keystore` (recommend) or `address, pvtkey` must be provided. |')
+        } else if (acts[i].address) {
+            acts[i].help.push('    | `keystore` (recommend) or `address` must be provided.         |')
         } else if (acts[i].pvtkey) {
             acts[i].help.push('    | `keystore` (recommend) or `pvtkey` must be provided.          |')
         }
-        if (acts[i].pubkey || acts[i].pvtkey) {
+        if (acts[i].address || acts[i].pvtkey) {
             acts[i].help.push('    └---------------------------------------------------------------┘');
         }
         utilitas.ensureArray(acts[i].example || {}).map((e) => {
