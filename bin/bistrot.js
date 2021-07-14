@@ -53,8 +53,8 @@ const toArray = (input) => {
 const unlockKeystore = async (options = {}) => {
     if (argv.keystore) {
         const result = await require('./actKeystoreUnlock').func(argv, options);
-        argv.pubkey = result.publickey;
-        argv.pvtkey = result.privatekey;
+        argv.address = result.address;
+        argv.pvtkey = result.privateKey;
         return;
     }
     try {
@@ -64,9 +64,8 @@ const unlockKeystore = async (options = {}) => {
         const keystore = Object.values(config && config.keystores || {})[0];
         if (keystore) {
             argv.email = argv.email || config.email;
-            argv.account = argv.account || keystore.account;
-            argv.pubkey = keystore.keystore.publickey;
-            argv.pvtkey = keystore.keystore.privatekey;
+            argv.address = argv.address || keystore.keystore.address;
+            argv.pvtkey = keystore.keystore.privateKey;
         }
     } catch (err) { }
 };
@@ -163,8 +162,8 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         utilitas.assert(act && act.func, errNotFound);
         if (act.pvtkey) {
             await unlockKeystore(argv);
-        } else if (act.pubkey) {
-            await unlockKeystore(argv, { pubkeyOnly: true });
+        } else if (act.address) {
+            await unlockKeystore(argv, { addressOnly: true });
         }
         const result = await act.func(argv);
         randerResult(result, act.render);
