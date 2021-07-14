@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, preference, keychain, wallet } = require('..');
+const { utilitas, preference, keychain, crypto } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
 const privatekeyLength = 51;
@@ -28,9 +28,7 @@ const func = async (argv, options = {}) => {
         config = cnfg;
     } else if (argv.new || argv.pubkey || argv.pvtkey) {
         ensurePassword(argv);
-        const kObj = await wallet.createKeystore(
-            argv.password, argv.pubkey, argv.pvtkey
-        );
+        const kObj = await crypto.createKeystore(argv.password, argv.pvtkey);
         const { filename: file, config: cnfg } = await keychain.set(
             argv.account, argv.prmsn, kObj, argv.password, argv.memo,
             { savePassword: argv.savepswd }

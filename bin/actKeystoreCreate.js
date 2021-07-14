@@ -1,6 +1,6 @@
 'use strict';
 
-const { wallet, etc } = require('..');
+const { crypto, etc } = require('..');
 const readline = require('readline-sync');
 
 const func = async (argv) => {
@@ -13,8 +13,8 @@ const func = async (argv) => {
             console.log('Passwords do not match.');
         }
     }
-    const result = await wallet.createKeystore(
-        String(argv.password || ''), argv.pubkey, argv.pvtkey,
+    const result = await crypto.createKeystore(
+        String(argv.password || ''), argv.pvtkey,
     );
     if (argv.dump) {
         await etc.dumpFile(argv.dump, JSON.stringify(result), {
@@ -29,7 +29,6 @@ module.exports = {
     name: 'Create a new Keystore (can also import keys)',
     help: [
         '    --password Use to encrypt the keystore       [STRING  / OPTIONAL]',
-        '    --pubkey   Import existing public key        [STRING  / OPTIONAL]',
         '    --pvtkey   Import existing private key       [STRING  / OPTIONAL]',
         '    --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]',
     ],
@@ -43,7 +42,6 @@ module.exports = {
         {
             title: 'creating a keystore with existing keys',
             args: {
-                pubkey: true,
                 pvtkey: true,
                 dump: true,
             },

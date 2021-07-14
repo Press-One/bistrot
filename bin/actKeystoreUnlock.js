@@ -1,24 +1,24 @@
 'use strict';
 
-const { utilitas, wallet } = require('..');
+const { utilitas, crypto } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
 
 const func = async (argv, options = {}) => {
     utilitas.assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
-    let [kFile, ko] = [fs.readFileSync(argv.keystore, 'utf8')];
+    let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
-        ko = JSON.parse(kFile);
-        argv.pubkey = ko.publickey;
+        kObj = JSON.parse(kFile);
+        argv.address = kObj.address;
     } catch (e) {
         utilitas.throwError('Invalid keystore file.', 400);
     }
-    if (options.pubkeyOnly) { return; }
+    if (options.addressOnly) { return; }
     while (!argv.password) {
         console.log('Input password to decrypt the keystore.');
         argv.password = readline.question('Password: ', argv.readlineConf);
     }
-    return wallet.recoverPrivateKey(argv.password, ko, { legacy: argv.legacy });
+    return crypto.recoverPrivateKey(argv.password, kObj);
 };
 
 module.exports = {

@@ -9,7 +9,6 @@ global._bistrot = Object.assign(require('./package.json'), {
 module.exports = Object.assign(require('utilitas'), {
     elliptic: require('elliptic'),
     eos: require('eosjs'),
-    eosEcc: require('eosjs-ecc'),
     eosKeygen: require('eosjs-keygen'),
     eosNameVerify: require('eos-name-verify'),
     ethereumUtil: require('ethereumjs-util'),
@@ -25,10 +24,9 @@ module.exports = Object.assign(require('utilitas'), {
     keychain: require('./lib/keychain'),
     mixin: require('./lib/mixin'),
     pacman: require('./lib/pacman'),
-    prsc: require('./lib/prsc'),
+    prsc: require('./lib/rumc'),
     quorum: require('./lib/quorum'),
     sushibar: require('./lib/sushibar'),
     sushitrain: require('./lib/sushitrain'),
     system: require('./lib/system'),
-    wallet: require('./lib/wallet'),
 });

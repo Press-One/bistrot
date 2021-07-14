@@ -37,14 +37,13 @@ module.exports = {
     },
 
     externals: [
-        /memcpy/, // eosjs-ecc
         /cardinal/, // mysql
         { got: 'commonjs got' }, // public-ip
     ],
 
     ignoreWarnings: [
         warning => {
-            return ((warning?.loc?.start?.line === 84
+            return ((warning?.loc?.start?.line === 84 // utilitas.event
                 && warning?.loc?.start?.column === 20
                 && warning?.loc?.end?.line === 84
                 && warning?.loc?.end?.column === 52));
