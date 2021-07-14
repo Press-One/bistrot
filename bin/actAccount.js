@@ -10,7 +10,7 @@ module.exports = {
     func,
     name: 'Check an Account',
     help: [
-        '    --name     PRESS.one account                 [STRING  / REQUIRED]',
+        '    --name     Quorum account                    [STRING  / REQUIRED]',
     ],
     example: {
         args: {

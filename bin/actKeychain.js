@@ -15,22 +15,24 @@ const ensurePassword = (argv) => {
 const func = async (argv, options = {}) => {
     let [filename, config, resp] = [null, null, []];
     if (argv.delete) {
-        const { filename: file, config: cnfg }
-            = await keychain.del(argv.account, argv.prmsn);
+        const {
+            filename: file, config: cnfg
+        } = await keychain.del(argv.address);
         filename = file;
         config = cnfg;
     } else if (argv.unlock) {
         argv.savepswd || ensurePassword(argv);
         const { filename: file, config: cnfg } = await keychain.get(
-            argv.account, argv.prmsn, { unlock: true, password: argv.password } // unique: true,
+            argv.address,
+            { unlock: true, password: argv.password, unique: true }
         );
         filename = file;
         config = cnfg;
-    } else if (argv.new || argv.pubkey || argv.pvtkey) {
+    } else if (argv.new || argv.address || argv.pvtkey) {
         ensurePassword(argv);
         const kObj = await crypto.createKeystore(argv.password, argv.pvtkey);
         const { filename: file, config: cnfg } = await keychain.set(
-            argv.account, argv.prmsn, kObj, argv.password, argv.memo,
+            argv.address, kObj, argv.password, argv.memo,
             { savePassword: argv.savepswd }
         );
         filename = file;
@@ -43,10 +45,10 @@ const func = async (argv, options = {}) => {
         let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8'), null];
         try {
             kObj = JSON.parse(kFile);
-            argv.pubkey = kObj.publickey;
+            argv.address = kObj.address;
         } catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
         const { filename: file, config: cnfg } = await keychain.set(
-            argv.account, argv.prmsn, kObj, argv.password, argv.memo,
+            argv.address, kObj, argv.password, argv.memo,
             { savePassword: argv.savepswd }
         );
         filename = file;
@@ -59,18 +61,15 @@ const func = async (argv, options = {}) => {
         config = cnfg;
     }
     if (!argv.json) { console.log('KEYCHAIN_IN_CONFIG_FILE:', filename); }
-    for (let key in config.keystores || {}) {
-        let privatekey = config.keystores[key].keystore.privatekey
+    for (let address in config.keystores || {}) {
+        let privateKey = config.keystores[address].keystore.privateKey
             || utilitas.makeStringByLength('*', privatekeyLength);
         if (!argv.json) {
-            privatekey = privatekey.slice(0, 27) + '...';
+            privateKey = privateKey.slice(0, 27) + '...';
         }
         resp.push({
-            account: config.keystores[key].account,
-            permission: config.keystores[key].permission,
-            publickey: config.keystores[key].keystore.publickey,
-            privatekey,
-            memo: config.keystores[key].memo,
+            address, privateKey,
+            memo: config.keystores[address].memo,
         });
     }
     return resp;
@@ -80,8 +79,7 @@ module.exports = {
     func,
     name: 'Manage Keychain',
     help: [
-        '    --account  PRESS.one account                 [STRING  / REQUIRED]',
-        '    --prmsn    Permission of the key             [STRING  / REQUIRED]',
+        '    --address  Quorum address                    [STRING  / REQUIRED]',
         '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
         '    --password Use to `verify` the keystore      [STRING  / OPTIONAL]',
         '    --memo     Memo for the keystore             [STRING  / OPTIONAL]',
@@ -99,16 +97,14 @@ module.exports = {
         {
             title: 'saving a new key',
             args: {
-                account: true,
-                prmsn: 'owner',
+                address: true,
                 keystore: true,
             },
         },
         {
             title: 'deleting an existing key',
             args: {
-                account: true,
-                prmsn: 'active',
+                address: true,
                 delete: null,
             },
         },
@@ -116,16 +112,12 @@ module.exports = {
     render: {
         table: {
             columns: [
-                'account',
-                'permission',
-                'publickey',
+                'address',
                 'privatekey',
                 'memo',
             ],
             config: {
                 columns: {
-                    0: { width: 12 },
-                    1: { width: 10 },
                     2: { width: 53 },
                     3: { width: 30 },
                     4: { width: 10 },
