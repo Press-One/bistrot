@@ -71,19 +71,6 @@ object-assign
  **/
 
 /**
- * @license bytebuffer.js (c) 2015 Daniel Wirtz <dcode@dcode.io>
- * Backing buffer / Accessor: node Buffer
- * Released under the Apache License, Version 2.0
- * see: https://github.com/dcodeIO/bytebuffer.js for details
- */
-
-/**
- * @license long.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
- * Released under the Apache License, Version 2.0
- * see: https://github.com/dcodeIO/long.js for details
- */
-
-/**
  * [js-sha3]{@link https://github.com/emn178/js-sha3}
  *
  * @version 0.5.7
