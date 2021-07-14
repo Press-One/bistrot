@@ -24,7 +24,7 @@ module.exports = Object.assign(require('utilitas'), {
     keychain: require('./lib/keychain'),
     mixin: require('./lib/mixin'),
     pacman: require('./lib/pacman'),
-    prsc: require('./lib/rumc'),
+    rumsc: require('./lib/rumsc'),
     quorum: require('./lib/quorum'),
     sushibar: require('./lib/sushibar'),
     sushitrain: require('./lib/sushitrain'),
