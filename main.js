@@ -9,8 +9,6 @@ global._bistrot = Object.assign(require('./package.json'), {
 module.exports = Object.assign(require('utilitas'), {
     elliptic: require('elliptic'),
     eos: require('eosjs'),
-    eosKeygen: require('eosjs-keygen'),
-    eosNameVerify: require('eos-name-verify'),
     ethereumUtil: require('ethereumjs-util'),
     keythereum: require('keythereum-pure-js'),
     secp256k1: require('secp256k1'),
