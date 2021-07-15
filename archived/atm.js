@@ -89,3 +89,18 @@ const withdraw = async (privateKey, acc, email, amount, memo, options) => {
     utilitas.assert(result, 'Error requesting withdraw.', 500);
     return result;
 };
+
+const transfer = async (payee, amount, acc, privateKey, memo, options = {}) => {
+    amount = finance.parseAndFormat(amount);
+    utilitas.assert(amount, 'Invalid amount.', 400);
+    account.assertName(payee, 'Invalid payee.');
+    return await sushitrain.transact(
+        acc, privateKey, 'eosio.token', 'transfer',
+        {
+            from: acc,
+            to: payee,
+            quantity: finance.formatAmount(amount),
+            memo: utilitas.ensureString(memo) || 'Transfer on Quorum',
+        }, options
+    );
+};
