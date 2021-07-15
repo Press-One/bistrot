@@ -14,7 +14,6 @@ module.exports = Object.assign(require('utilitas'), {
     secp256k1: require('secp256k1'),
 }, {
     account: require('./lib/account'),
-    atm: require('./lib/atm'),
     config: require('./lib/config'),
     crypto: require('./lib/crypto'),
     etc: require('./lib/etc'),
