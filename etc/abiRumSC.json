@@ -1,5 +1,5 @@
 {
-  "address": "0xaeab303fc1a4c364a16c8d86ad2563e44089e3a0",
+  "address": "0xaeab303FC1A4c364a16C8D86ad2563E44089E3a0",
   "abi": [
     {
       "anonymous": false,
@@ -17,7 +17,7 @@
           "type": "string"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "string",
           "name": "protocol",
           "type": "string"
