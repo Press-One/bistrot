@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.1.12
+bistrot v7.1.13
 
 usage: bistrot <command> [<args>]
 
@@ -99,27 +99,23 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `ChainTail` > Display the last block / transaction of the chain:
+* `ChainTail` > Trace the lastest block of the chain:
 
     --blocknum Initial block num                 [NUMBER  / OPTIONAL]
     --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
-    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]
     --detail   Show socket channel status        [WITH  OR  WITHOUT ]
     ┌---------------------------------------------------------------┐
-    | 1. Follow the latest block / trx while `blocknum` is missing. |
-    | 2. Follow trxes instead of blocks while `trxonly` is set.     |
+    | 1. Start from the latest block while `blocknum` is missing.   |
     └---------------------------------------------------------------┘
 
     > Example:
     $ bistrot ChainTail \
               --blocknum=26621512 \
-              --trxonly \
               --json
 
     > Example:
     $ bistrot ChainTail \
               --blocknum=26621512 \
-              --trxonly \
               --json \
               --grep=PIP:2001
 
