@@ -20,12 +20,9 @@ const rawRender = (content, argv) => {
 
 const func = async (argv) => {
     argv.blocknum = utilitas.ensureInt(argv.blocknum, { min: 0 });
-    const render = (content) => { return rawRender(content, argv); };
-    const [newBlock, newTransaction] = argv.trxonly ? [null, render] : [render];
     await pacman.init({
         callbacks: {
-            newBlock,
-            newTransaction,
+            newBlock: (content) => { return rawRender(content, argv); },
             initIdGet: argv.blocknum && (async () => { return argv.blocknum; }),
         },
         silent: !argv.detail,
@@ -34,29 +31,25 @@ const func = async (argv) => {
 
 module.exports = {
     func,
-    name: 'Display the last block / transaction of the chain',
+    name: 'Trace the lastest block of the chain',
     help: [
         '    --blocknum Initial block num                 [NUMBER  / OPTIONAL]',
         '    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]',
-        '    --trxonly  Follow transaction instead        [WITH  OR  WITHOUT ]',
         '    --detail   Show socket channel status        [WITH  OR  WITHOUT ]',
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. Follow the latest block / trx while `blocknum` is missing. |',
-        '    | 2. Follow trxes instead of blocks while `trxonly` is set.     |',
+        '    | 1. Start from the latest block while `blocknum` is missing.   |',
         '    └---------------------------------------------------------------┘',
     ],
     example: [
         {
             args: {
                 blocknum: true,
-                trxonly: null,
                 json: null,
             },
         },
         {
             args: {
                 blocknum: true,
-                trxonly: null,
                 json: null,
                 grep: 'PIP:2001',
             },
