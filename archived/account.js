@@ -70,21 +70,6 @@ const mixin = require('./mixin');
 //     return await sushibar.requestApi('GET', `chain/bounds/${acc}`, args);
 // };
 
-// const queryMixinBoundByAccount = async (acc, options) => {
-//     options = Object.assign(options || {}, { provider: 'MIXIN' });
-//     const transaction = await queryBoundByAccount(acc, options);
-//     const bound_account = utilitas.extract(
-//         transaction, 'transactions_trx_transaction_actions_data_data',
-//         'payment_account'
-//     );
-//     const bound_profile = utilitas.extract(transaction, 'bound_mixin_profile');
-//     utilitas.assert(
-//         !options.assert || bound_account,
-//         `Bound Mixin-Account Not Found for Account (${acc}).`
-//     );
-//     return { transaction, bound_account, bound_profile };
-// };
-
 // const accountEvolution = async (prevKey, account, publicKey, privateKey) => {
 //     prsc.assertString(account, 'Invalid evolved user account.');
 //     prsc.assertString(publicKey, 'Invalid evolved public key.');
