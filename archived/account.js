@@ -1,20 +1,3 @@
-const bindingPrice = '0.0001';
-
-const assertName = (name, error = 'Invalid account name.', status = 400) => {
-    return utilitas.assert(name, error, status);
-};
-
-const getByName = async (name) => {
-    assertName(name);
-    const client = await sushitrain.getClient();
-    let result = null;
-    try { result = await client.api.rpc.get_account(name); } catch (err) {
-        utilitas.assert(err.message.includes(
-            'unknown key'
-        ), 'Error querying EOS account.', 500);
-    }
-    return result;
-};
 
 const getBalance = async (account, currency) => {
     assertName(account);
@@ -37,35 +20,14 @@ const getBalance = async (account, currency) => {
     return result;
 };
 
-const bind = async (
-    user, payment_provider, payment_account, meta, memo, options = {}
-) => {
-    utilitas.assert(payment_provider, 'Invalid identity provider.', 400);
-    utilitas.assert(payment_account, 'Invalid identity id.', 400);
-    meta = Object.assign({ request: { type: payment_provider } }, meta || {});
-    meta.request.type = utilitas.ensureString(
-        meta.request.type, { case: 'UP' }
-    );
-    const ctName = 'prs.account';
-    return await sushitrain.preparedTransact(ctName, ctName, 'bind', {
-        user, payment_provider, payment_account,
-        meta: JSON.stringify(meta), memo: utilitas.ensureString(memo),
-    }, options);
-};
-
 module.exports = {
-    bindingPrice,
-    assertName,
-    bind,
     getBalance,
-    getByName,
 };
 
 const { utilitas } = require('utilitas');
 const sushitrain = require('./sushitrain');
 const finance = require('../lib/finance');
 const mixin = require('./mixin');
-
 
 // const getAccount = async (acc) => {
 //     const [accResp, accBound] = await Promise.all([

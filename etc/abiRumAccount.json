@@ -1,11 +1,48 @@
 {
-    "address": "0xa0c8C984971bF9237A077c99870d68a87CE0483f",
+    "address": "0xD9D009B8056a376D42F931a3a45cAc52a545BCDf",
     "abi": [
         {
             "inputs": [],
             "payable": false,
             "stateMutability": "nonpayable",
             "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "payment_account",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "memo",
+                    "type": "string"
+                }
+            ],
+            "name": "Bind",
+            "type": "event"
         },
         {
             "constant": true,
@@ -21,7 +58,7 @@
                     "type": "string"
                 }
             ],
-            "name": "accounts",
+            "name": "account",
             "outputs": [
                 {
                     "internalType": "address",
@@ -167,6 +204,80 @@
             "outputs": [],
             "payable": false,
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                }
+            ],
+            "name": "accounts",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "user",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "payment_provider",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "payment_account",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "meta",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "memo",
+                            "type": "string"
+                        }
+                    ],
+                    "internalType": "struct RumAccount.Account[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "payment_account",
+                    "type": "string"
+                }
+            ],
+            "name": "addresses",
+            "outputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "",
+                    "type": "address[]"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
             "type": "function"
         }
     ]
