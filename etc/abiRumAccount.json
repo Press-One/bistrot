@@ -127,6 +127,32 @@
             "type": "function"
         },
         {
+            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "name": "userAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
             "constant": false,
             "inputs": [
                 {
@@ -261,19 +287,14 @@
                     "internalType": "string",
                     "name": "payment_provider",
                     "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "payment_account",
-                    "type": "string"
                 }
             ],
-            "name": "addresses",
+            "name": "providerUsersCount",
             "outputs": [
                 {
-                    "internalType": "address[]",
+                    "internalType": "uint256",
                     "name": "",
-                    "type": "address[]"
+                    "type": "uint256"
                 }
             ],
             "payable": false,
