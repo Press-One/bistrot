@@ -2,11 +2,15 @@
 
 'use strict';
 
-const { utilitas, config, keychain, system } = require('..');
+const { utilitas, config, crypto, keychain, system } = require('..');
 const table = require('table').table;
-const argv = require('yargs').option('address', { string: 1 }).help(false).argv;
 const path = require('path');
 const fs = require('fs');
+const argv = require('yargs')
+    .option('address', { string: true })
+    .option('id', { string: true })
+    .option('hash', { string: true })
+    .help(false).argv;
 
 const map = { /** transactions_trx_id: 'transaction_id' **/ };
 const verbose = [/** 'transaction', 'options' **/];
@@ -133,10 +137,11 @@ argv.readlineConf = { hideEchoBack: true, mask: '' };
         utilitas.assert(cmds[command], errNotFound);
         const act = require(cmds[command]);
         utilitas.assert(act && act.func, errNotFound);
-        if (act.pvtkey) {
-            await unlockKeystore(argv);
-        } else if (act.address) {
-            await unlockKeystore(argv, { addressOnly: true });
+        if (act.pvtkey || act.address) {
+            await unlockKeystore(argv, { addressOnly: !act.pvtkey });
+        }
+        if (act.address && !argv.address && argv.pvtkey) {
+            argv.address = crypto.privateKeyToAddress(argv.pvtkey);
         }
         const result = await act.func(argv);
         randerResult(result, act.render);

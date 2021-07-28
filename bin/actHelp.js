@@ -94,12 +94,10 @@ const func = async (argv) => {
         if (acts[i].address || acts[i].pvtkey) {
             acts[i].help.push('    ┌- NOTICE ------------------------------------------------------┐');
         }
-        if (acts[i].address && acts[i].pvtkey) {
-            acts[i].help.push('    | `keystore` (recommend) or `address, pvtkey` must be provided. |')
+        if (acts[i].pvtkey) {
+            acts[i].help.push('    | `keystore` (recommend) or `pvtkey` must be provided.          |')
         } else if (acts[i].address) {
             acts[i].help.push('    | `keystore` (recommend) or `address` must be provided.         |')
-        } else if (acts[i].pvtkey) {
-            acts[i].help.push('    | `keystore` (recommend) or `pvtkey` must be provided.          |')
         }
         if (acts[i].address || acts[i].pvtkey) {
             acts[i].help.push('    └---------------------------------------------------------------┘');
