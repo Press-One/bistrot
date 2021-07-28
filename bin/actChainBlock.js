@@ -1,11 +1,11 @@
 'use strict';
 
-const { sushitrain } = require('..');
+const { quorum } = require('..');
 
 const maxTrxLength = 288;
 
 const func = async (argv) => {
-    let resp = await sushitrain.getBlockByNumOrId(argv.id);
+    let resp = await quorum.getBlockByNumOrId(argv.id);
     if (!argv.json) {
         const trx = JSON.stringify(resp.transactions);
         resp.transactions = trx.substr(0, maxTrxLength)

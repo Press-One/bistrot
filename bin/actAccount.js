@@ -1,20 +1,20 @@
 'use strict';
 
-const { atm } = require('..');
+const { account } = require('..');
 
 const func = async (argv) => {
-    return await atm.getAccount(argv.name);
+    return await account.getByAddress(argv.address);
 };
 
 module.exports = {
     func,
     name: 'Check an Account',
     help: [
-        '    --name     Quorum account                    [STRING  / REQUIRED]',
+        '    --address  Quorum account address            [STRING  / REQUIRED]',
     ],
     example: {
         args: {
-            name: true,
+            address: true,
         }
     },
     render: { table: { KeyValue: true } },

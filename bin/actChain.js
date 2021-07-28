@@ -1,25 +1,25 @@
 'use strict';
 
-const { sushitrain } = require('..');
+const { quorum } = require('..');
 
 const func = async (argv) => {
-    return await sushitrain.getInfo();
+    return await quorum.getInfo();
 };
 
 module.exports = {
     func,
-    name: 'Check PRS-chain Information',
+    name: 'Check QUORUM-chain Information',
     help: [
         '    ┌---------------------------------------------------------------┐',
-        '    | 1. You can use `rpcapi` param to check the specific PRS-node. |',
+        '    | 1. Use the `rpcapi` param to check the specific QUORUM-node.  |',
         '    └---------------------------------------------------------------┘',
     ],
     example: [
         {
-            title: 'checking global PRS-chain Information',
+            title: 'checking global QUORUM-chain Information',
         },
         {
-            title: 'checking specific PRS-node Information',
+            title: 'checking specific QUORUM-node Information',
             args: {
                 rpcapi: true,
             },

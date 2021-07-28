@@ -4,38 +4,13 @@
 
 const { utilitas, config, keychain, system } = require('..');
 const table = require('table').table;
-const argv = require('yargs').help(false).argv;
+const argv = require('yargs').option('address', { string: 1 }).help(false).argv;
 const path = require('path');
 const fs = require('fs');
 
-const map = {
-    transactions_trx_id: 'transaction_id',
-    transactions_trx_transaction_actions_account: 'counter',
-    transactions_trx_transaction_actions_data_type: 'description',
-    transactions_trx_transaction_actions_data__from_user: 'from',
-    transactions_trx_transaction_actions_data__to_user: 'to',
-    transactions_trx_transaction_actions_data__amount_quantity__amt: 'amount',
-    transactions_trx_transaction_actions_data__amount_quantity__cur: 'currency',
-    transactions_trx_transaction_actions_data_mixin_trace_id: 'mixin_trace_id',
-};
-
-const verbose = [
-    'transaction',
-    'options',
-    'transactions_trx_transaction_actions_name',
-    'transactions_trx_transaction_actions_data_id',
-    'transactions_trx_transaction_actions_data_user_address',
-    'transactions_trx_transaction_actions_data_oracleservice',
-    'transactions_trx_transaction_actions_data_meta',
-    'transactions_trx_transaction_actions_data_data',
-    'transactions_trx_transaction_actions_data_data_topic',
-    'previous',
-    'block',
-    'transactions_trx_transaction_actions_data__dp_wd_req__id',
-    'transactions_trx_transaction_actions_data__sync_auth__result',
-];
-
-const json = ['transaction'];
+const map = { /** transactions_trx_id: 'transaction_id' **/ };
+const verbose = [/** 'transaction', 'options' **/];
+const json = [/** 'transaction' **/];
 
 const toBoolean = (input) => {
     const str = String(input || '').toLowerCase();
@@ -96,9 +71,7 @@ const randerResult = (result, options) => {
     if (!argv.json && options.table) {
         const data = [];
         if (deep && options.table.columns) {
-            data.push(options.table.columns.map(x => {
-                return x.toUpperCase();
-            }));
+            data.push(options.table.columns);
             out.map(x => {
                 const row = [];
                 for (let i of options.table.columns) {
@@ -108,9 +81,9 @@ const randerResult = (result, options) => {
             });
         } else if (!deep && options.table.KeyValue) {
             for (let i in out) {
-                data.push([i.toUpperCase(), [
-                    'number', 'string', 'boolean'
-                ].includes(typeof out[i]) ? out[i] : JSON.stringify(out[i])]);
+                data.push([i, ['number', 'string', 'boolean'].includes(
+                    typeof out[i]) ? out[i] : JSON.stringify(out[i])]
+                );
             }
             options.table.config = Object.assign({
                 columns: { 0: { width: 30 }, 1: { width: 80 } }
