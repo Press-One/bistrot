@@ -7,7 +7,7 @@ const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
 const address = '0x2AeF3da35e9A2EC29aE25A04d9C9e92110910A51';
-const txId = 'dc5a0a05cb4b080f40045944de8d251f057fdf6e8633288bd445820e56dd16e3';
+const tx = '0x2be163c84f1be56780067431f1d97272bd92fcc15e9c006f0fac6c7a7df0b820';
 const password = encryption.randomString(32);
 const keystore = '/tmp/bistrot-test-keystore.json';
 
@@ -21,7 +21,7 @@ const tests = {
     Chain: {},
     ChainBlock: { args: { id: 1 } },
     ChainTail: { skip: true },
-    ChainTrx: { args: { id: txId } },
+    ChainTrx: { args: { hash: tx } },
     Cmd: {},
     Config: { args: { debug: true } },
     Help: { hideResult: true },

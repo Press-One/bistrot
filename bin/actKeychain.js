@@ -3,7 +3,7 @@
 const { utilitas, preference, keychain, crypto } = require('..');
 const readline = require('readline-sync');
 const fs = require('fs');
-const privatekeyLength = 51;
+const privatekeyLength = 64;
 
 const ensurePassword = (argv) => {
     while (!argv.password) {
@@ -28,11 +28,11 @@ const func = async (argv, options = {}) => {
         );
         filename = file;
         config = cnfg;
-    } else if (argv.new || argv.address || argv.pvtkey) {
+    } else if (argv.new || argv.pvtkey) {
         ensurePassword(argv);
         const kObj = await crypto.createKeystore(argv.password, argv.pvtkey);
         const { filename: file, config: cnfg } = await keychain.set(
-            argv.address, kObj, argv.password, argv.memo,
+            kObj.address, kObj, argv.password, argv.memo,
             { savePassword: argv.savepswd }
         );
         filename = file;
@@ -45,10 +45,9 @@ const func = async (argv, options = {}) => {
         let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8'), null];
         try {
             kObj = JSON.parse(kFile);
-            argv.address = kObj.address;
         } catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
         const { filename: file, config: cnfg } = await keychain.set(
-            argv.address, kObj, argv.password, argv.memo,
+            kObj.address, kObj, argv.password, argv.memo,
             { savePassword: argv.savepswd }
         );
         filename = file;
@@ -113,7 +112,7 @@ module.exports = {
         table: {
             columns: [
                 'address',
-                'privatekey',
+                'privateKey',
                 'memo',
             ],
             config: {

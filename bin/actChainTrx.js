@@ -3,8 +3,7 @@
 const { quorum } = require('..');
 
 const func = async (argv) => {
-    let resp = await quorum.getTransactionByHash(argv.hash);
-    return resp && argv.json ? resp.transaction : resp.data;
+    return await quorum.getTransactionByHash(argv.hash);
 };
 
 module.exports = {
