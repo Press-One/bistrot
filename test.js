@@ -36,14 +36,13 @@ const checkKeystore = async () => {
     log('Checking keystore...');
     let ks;
     try {
-        ks = (await storage.getConfig()).config.keystores[`${account}-owner`];
+        const add = address.replace(/^0x/i, '').toUpperCase();
+        ks = (await storage.getConfig()).config.keystores[add];
+        console.log(ks);
     } catch (e) {
-        utilitas.throwError(
-            `Error loading keystore for test user (${account}): ${e.message}.`,
-            400
-        );
+        utilitas.throwError(`Error loading keystore: ${address}.`, 400);
     }
-    utilitas.assert(ks, `Keystore not found for test user (${account}).`, 400);
+    utilitas.assert(ks, `Keystore not found: ${address}.`, 400);
     log('OK');
 };
 

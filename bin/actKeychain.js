@@ -79,7 +79,8 @@ module.exports = {
     name: 'Manage Keychain',
     help: [
         '    --address  Quorum address                    [STRING  / REQUIRED]',
-        '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',
+        '    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]',
+        '    --pvtkey   Private key of Quorum account     [STRING  / OPTIONAL]',
         '    --password Use to `verify` the keystore      [STRING  / OPTIONAL]',
         '    --memo     Memo for the keystore             [STRING  / OPTIONAL]',
         '    --savepswd Save password (DANGEROUS)         [WITH  OR  WITHOUT ]',
@@ -96,7 +97,6 @@ module.exports = {
         {
             title: 'saving a new key',
             args: {
-                address: true,
                 keystore: true,
             },
         },
