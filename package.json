@@ -42,7 +42,6 @@
         "@truffle/hdwallet-provider": "^1.4.2",
         "abi-decoder": "^2.4.0",
         "elliptic": "^6.5.4",
-        "eosjs": "^22.1.0",
         "ethereumjs-util": "^7.1.0",
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
