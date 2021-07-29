@@ -25,6 +25,5 @@ module.exports = Object.assign(require('utilitas'), {
     quorum: require('./lib/quorum'),
     rumsc: require('./lib/rumsc'),
     sushibar: require('./lib/sushibar'),
-    sushitrain: require('./lib/sushitrain'),
     system: require('./lib/system'),
 });
