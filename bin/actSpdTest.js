@@ -1,10 +1,10 @@
 'use strict';
 
-const { sushitrain } = require('..');
+const { quorum } = require('..');
 
 const func = async (argv) => {
     Object.assign(global.chainConfig, { speedTest: true, debug: true });
-    await sushitrain.getRpcUrl();
+    await quorum.getRpcUrl();
 };
 
 module.exports = {
