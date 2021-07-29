@@ -38,7 +38,6 @@ const checkKeystore = async () => {
     try {
         const add = address.replace(/^0x/i, '').toUpperCase();
         ks = (await storage.getConfig()).config.keystores[add];
-        console.log(ks);
     } catch (e) {
         utilitas.throwError(`Error loading keystore: ${address}.`, 400);
     }
