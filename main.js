@@ -15,6 +15,7 @@ module.exports = Object.assign(require('utilitas'), {
     account: require('./lib/account'),
     config: require('./lib/config'),
     crypto: require('./lib/crypto'),
+    erc20: require('./lib/erc20'),
     etc: require('./lib/etc'),
     finance: require('./lib/finance'),
     keychain: require('./lib/keychain'),
