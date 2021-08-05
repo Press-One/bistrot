@@ -25,8 +25,13 @@ modLog('Loading files...');
     let content = fs.readFileSync(path.join(__dirname, file), 'utf8');
     if (/\.json$/.test(file)) { content = trimCode(content); }
     if (/\.sol$/.test(file)) {
-        const deps = quorum.compile(content, { depOnly: true });
-        for (let i in deps) { fileContent[i] = trimCode(deps[i], '\n'); }
+        const resp = quorum.compile(content, { refresh: true });
+        for (let i in resp) {
+            fileContent[`abi${i}.json`] = JSON.stringify({ abi: resp[i].abi });
+            for (let j in resp[i].dependencies) {
+                fileContent[j] = trimCode(resp[i].dependencies[j], '\n');
+            }
+        }
     }
     fileContent[file] = content;
 });
