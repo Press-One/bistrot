@@ -39,7 +39,7 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
-        "@truffle/hdwallet-provider": "^1.4.2",
+        "@truffle/hdwallet-provider": "^1.4.3",
         "abi-decoder": "^2.4.0",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.0",
@@ -49,13 +49,13 @@
         "solc": "^0.8.6",
         "table": "^6.7.1",
         "utilitas": "^1989.8.50",
-        "web3": "^1.5.0",
-        "yargs": "^17.0.1"
+        "web3": "^1.5.1",
+        "yargs": "^17.1.0"
     },
     "devDependencies": {
         "@openzeppelin/contracts": "^4.2.0",
         "string-replace-loader": "^3.0.3",
-        "webpack": "^5.47.0",
+        "webpack": "^5.49.0",
         "webpack-cli": "^4.7.2"
     }
 }
