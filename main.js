@@ -23,6 +23,7 @@ module.exports = Object.assign(require('utilitas'), {
     pacman: require('./lib/pacman'),
     preference: require('./lib/preference'),
     quorum: require('./lib/quorum'),
+    rump2p: require('./lib/rump2p'),
     rumsc: require('./lib/rumsc'),
     sushibar: require('./lib/sushibar'),
     system: require('./lib/system'),
