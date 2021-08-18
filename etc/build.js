@@ -1,13 +1,20 @@
 'use strict';
 
-const { utilitas } = require('utilitas');
+const { utilitas, shot } = require('utilitas');
 const quorum = require('../lib/quorum');
 const path = require('path');
 const fs = require('fs');
 
 const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
 const targetFile = 'index.json';
-const fileContent = {};
+const fileCont = {};
+const goRumPrjRoot = 'https://raw.githubusercontent.com/huo-ju/quorum/master/';
+const goPbPath = `${goRumPrjRoot}internal/pkg/pb/`;
+
+const externalSource = {
+    'protoChain.proto': `${goPbPath}chain.proto?token=AABY4PUUPIWRT45VU5YJ7VLBE2NSO`,
+    'protoActivityStream.proto': `${goPbPath}activity_stream.proto?token=AABY4PRIP5JLJ2WXC5WQZT3BE2PD4`,
+};
 
 const trimCode = (content, separator) => {
     const lines = content.split('\n');
@@ -16,32 +23,44 @@ const trimCode = (content, separator) => {
     return content.join(separator || '');
 };
 
-modLog('Loading files...');
-(fs.readdirSync(__dirname) || []).filter(file => {
-    return file.indexOf('.') !== 0
-        && !new Set([path.basename(__filename), targetFile]).has(file);
-}).forEach(file => {
-    modLog(`> ${file}`);
-    let content = fs.readFileSync(path.join(__dirname, file), 'utf8');
-    if (/\.json$/.test(file)) { content = trimCode(content); }
-    if (/\.sol$/.test(file)) {
-        const resp = quorum.compile(content, { refresh: true });
-        for (let i in resp) {
-            fileContent[`abi${i}.json`] = JSON.stringify({ abi: resp[i].abi });
-            for (let j in resp[i].dependencies) {
-                fileContent[j] = trimCode(resp[i].dependencies[j], '\n');
+(async () => {
+
+    modLog('Fetching files online...');
+    for (let i in externalSource) {
+        modLog(`> ${externalSource[i]}`);
+        const content = (await shot.get(externalSource[i])).content;
+        utilitas.assert(content, `Failed to fetch file: ${i}.`);
+        fs.writeFileSync(path.join(__dirname, i), content, 'utf8');
+    }
+
+    modLog('Loading files...');
+    (fs.readdirSync(__dirname) || []).filter(file => {
+        return file.indexOf('.') !== 0
+            && !new Set([path.basename(__filename), targetFile]).has(file);
+    }).forEach(file => {
+        modLog(`> ${file}`);
+        let content = fs.readFileSync(path.join(__dirname, file), 'utf8');
+        if (/\.json$/.test(file)) { content = trimCode(content); }
+        if (/\.sol$/.test(file)) {
+            const resp = quorum.compile(content, { refresh: true });
+            for (let i in resp) {
+                fileCont[`abi${i}.json`] = JSON.stringify({ abi: resp[i].abi });
+                for (let j in resp[i].dependencies) {
+                    fileCont[j] = trimCode(resp[i].dependencies[j], '\n');
+                }
             }
         }
-    }
-    fileContent[file] = content;
-});
+        fileCont[file] = content;
+    });
 
-modLog('Updating bundle...');
-modLog(`> ${targetFile}`);
-fs.writeFileSync(
-    path.join(__dirname, targetFile),
-    JSON.stringify(fileContent),
-    { encoding: 'utf8', flag: 'w' }
-);
+    modLog('Updating bundle...');
+    modLog(`> ${targetFile}`);
+    fs.writeFileSync(
+        path.join(__dirname, targetFile),
+        JSON.stringify(fileCont),
+        { encoding: 'utf8', flag: 'w' }
+    );
 
-modLog('Done!');
+    modLog('Done!');
+
+})();
