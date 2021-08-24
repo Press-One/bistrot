@@ -29,11 +29,14 @@
                             "values": {
                                 "POST": 0,
                                 "AUTH": 1,
-                                "REQ_BLOCK": 2,
-                                "REQ_BLOCK_RESP": 3,
-                                "CHALLENGE": 4,
-                                "CHALLENGE_RESP": 5,
-                                "NEW_BLOCK_RESP": 6
+                                "SCHEMA": 2,
+                                "REQ_BLOCK": 3,
+                                "REQ_BLOCK_RESP": 4,
+                                "CHALLENGE": 5,
+                                "CHALLENGE_RESP": 6,
+                                "NEW_BLOCK_RESP": 7,
+                                "PRODUCER": 8,
+                                "ANNOUNCE": 9
                             }
                         },
                         "Trx": {
@@ -50,33 +53,29 @@
                                     "type": "string",
                                     "id": 3
                                 },
-                                "Sender": {
-                                    "type": "string",
-                                    "id": 4
-                                },
-                                "Pubkey": {
-                                    "type": "string",
-                                    "id": 5
-                                },
                                 "Data": {
                                     "type": "bytes",
-                                    "id": 6
+                                    "id": 4
                                 },
                                 "TimeStamp": {
                                     "type": "int64",
-                                    "id": 7
+                                    "id": 5
                                 },
                                 "Version": {
                                     "type": "string",
-                                    "id": 8
+                                    "id": 6
                                 },
                                 "Expired": {
                                     "type": "int64",
-                                    "id": 9
+                                    "id": 7
+                                },
+                                "SenderPubkey": {
+                                    "type": "string",
+                                    "id": 8
                                 },
                                 "Signature": {
                                     "type": "bytes",
-                                    "id": 10
+                                    "id": 9
                                 }
                             }
                         },
@@ -106,27 +105,29 @@
                                     "type": "bytes",
                                     "id": 6
                                 },
-                                "ProducerId": {
-                                    "type": "string",
-                                    "id": 7
-                                },
                                 "ProducerPubKey": {
                                     "type": "string",
-                                    "id": 8
+                                    "id": 7
                                 },
                                 "Trxs": {
                                     "rule": "repeated",
                                     "type": "Trx",
-                                    "id": 9
+                                    "id": 8
                                 },
                                 "Hash": {
                                     "type": "bytes",
-                                    "id": 10
+                                    "id": 9
                                 },
                                 "Signature": {
                                     "type": "bytes",
-                                    "id": 11
+                                    "id": 10
                                 }
+                            }
+                        },
+                        "NewBlockRespResult": {
+                            "values": {
+                                "BLOCK_ACCEPTED": 0,
+                                "BLOCK_REJECTED": 1
                             }
                         },
                         "NewBLockResp": {
@@ -139,24 +140,18 @@
                                     "type": "string",
                                     "id": 2
                                 },
-                                "ProducerId": {
+                                "ProducerPubkey": {
                                     "type": "string",
                                     "id": 3
                                 },
-                                "Receiver": {
+                                "ReceiverPubkey": {
                                     "type": "string",
                                     "id": 4
                                 },
                                 "Result": {
                                     "type": "NewBlockRespResult",
-                                    "id": 7
+                                    "id": 5
                                 }
-                            }
-                        },
-                        "NewBlockRespResult": {
-                            "values": {
-                                "BLOCK_ACCEPTED": 0,
-                                "BLOCK_REJECTED": 1
                             }
                         },
                         "ReqBlock": {
@@ -187,11 +182,11 @@
                                     "type": "ReqBlkResult",
                                     "id": 1
                                 },
-                                "Provider": {
+                                "ProviderPubkey": {
                                     "type": "string",
                                     "id": 2
                                 },
-                                "Requester": {
+                                "RequesterPubkey": {
                                     "type": "string",
                                     "id": 3
                                 },
@@ -215,7 +210,7 @@
                                     "type": "string",
                                     "id": 1
                                 },
-                                "Publisher": {
+                                "PublisherPubkey": {
                                     "type": "string",
                                     "id": 2
                                 },
@@ -231,30 +226,128 @@
                         },
                         "BlockListItem": {
                             "fields": {
-                                "UserId": {
+                                "GroupId": {
                                     "type": "string",
                                     "id": 1
                                 },
-                                "GroupId": {
+                                "BlockedPubkey": {
                                     "type": "string",
                                     "id": 2
                                 },
-                                "OwnerPubkey": {
+                                "GroupOwnerPubkey": {
                                     "type": "string",
                                     "id": 3
                                 },
-                                "OwnerSign": {
+                                "GroupOwnerSign": {
                                     "type": "string",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Memo": {
+                                    "type": "string",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "ProducerListItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "ProducerPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "GroupOwnerPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupOwnerSign": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Memo": {
+                                    "type": "string",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "AnnounceItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "AnnouncedPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "AnnouncerSignature": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
                                     "id": 4
                                 },
                                 "Memo": {
                                     "type": "string",
                                     "id": 5
+                                }
+                            }
+                        },
+                        "SchemaItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "SchemaJson": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "GroupOwnerPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupOwnerSign": {
+                                    "type": "string",
+                                    "id": 4
                                 },
                                 "TimeStamp": {
                                     "type": "int64",
+                                    "id": 5
+                                },
+                                "Memo": {
+                                    "type": "string",
                                     "id": 6
                                 }
+                            }
+                        },
+                        "GroupEncryptType": {
+                            "values": {
+                                "PUBLIC": 0,
+                                "PRIVATE": 1
+                            }
+                        },
+                        "GroupConsenseType": {
+                            "values": {
+                                "POA": 0,
+                                "POS": 1
+                            }
+                        },
+                        "Role": {
+                            "values": {
+                                "GROUP_PRODUCER": 0,
+                                "GROUP_USER": 1
                             }
                         },
                         "GroupItem": {
@@ -271,33 +364,45 @@
                                     "type": "string",
                                     "id": 3
                                 },
+                                "UserSignPubkey": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "UserEnryptPubkey": {
+                                    "type": "string",
+                                    "id": 5
+                                },
+                                "UserRole": {
+                                    "type": "Role",
+                                    "id": 6
+                                },
                                 "LastUpdate": {
                                     "type": "int64",
-                                    "id": 4
+                                    "id": 7
                                 },
                                 "LatestBlockNum": {
                                     "type": "int64",
-                                    "id": 5
+                                    "id": 8
                                 },
                                 "LatestBlockId": {
                                     "type": "string",
-                                    "id": 6
+                                    "id": 9
                                 },
                                 "GenesisBlock": {
                                     "type": "Block",
-                                    "id": 7
-                                }
-                            }
-                        },
-                        "ChallengeItem": {
-                            "fields": {
-                                "Challenger": {
-                                    "type": "string",
-                                    "id": 1
+                                    "id": 10
                                 },
-                                "ChallengeSeed": {
-                                    "type": "int64",
-                                    "id": 2
+                                "EncryptType": {
+                                    "type": "GroupEncryptType",
+                                    "id": 11
+                                },
+                                "ConsenseType": {
+                                    "type": "GroupConsenseType",
+                                    "id": 12
+                                },
+                                "CipherKey": {
+                                    "type": "string",
+                                    "id": 13
                                 }
                             }
                         }

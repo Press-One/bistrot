@@ -9,12 +9,18 @@ const fs = require('fs');
 const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
 const targetFile = 'index.json';
 const fileCont = {};
-const goRumPrjRoot = 'https://raw.githubusercontent.com/huo-ju/quorum/master/';
-const goPbPath = `${goRumPrjRoot}internal/pkg/pb/`;
+// const branch = 'master';
+const branch = 'chain_dev';
+const goRumRoot = `https://raw.githubusercontent.com/huo-ju/quorum/${branch}/`;
+const goPbPath = `${goRumRoot}internal/pkg/pb/`;
 
 const externalSource = {
-    'protoChain.proto': `${goPbPath}chain.proto?token=AABY4PUUPIWRT45VU5YJ7VLBE2NSO`,
-    'protoActivityStream.proto': `${goPbPath}activity_stream.proto?token=AABY4PRIP5JLJ2WXC5WQZT3BE2PD4`,
+    'protoChain.proto': `${goPbPath}chain.proto?token=`
+        + `AABY4PUOCNGJAP2EXWPT7ODBF2BCU`, // chain_dev
+    //  + `AABY4PUUPIWRT45VU5YJ7VLBE2NSO`, // master
+    'protoActivityStream.proto': `${goPbPath}activity_stream.proto?token=`
+        + `AABY4PRYWRVCFKT4WOTYAELBF2BF2`, // chain_dev
+    //  + `AABY4PRIP5JLJ2WXC5WQZT3BE2PD4`, // master
 };
 
 const trimCode = (content, separator) => {

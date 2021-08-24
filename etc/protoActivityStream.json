@@ -69,8 +69,8 @@
                                     "type": "Image",
                                     "id": 12
                                 },
-                                "inreplyto": {
-                                    "type": "Reply",
+                                "inReplyTo": {
+                                    "type": "Object",
                                     "id": 13
                                 },
                                 "location": {
@@ -178,18 +178,6 @@
                                 }
                             }
                         },
-                        "Reply": {
-                            "fields": {
-                                "trxid": {
-                                    "type": "string",
-                                    "id": 1
-                                },
-                                "groupid": {
-                                    "type": "string",
-                                    "id": 2
-                                }
-                            }
-                        },
                         "Image": {
                             "fields": {
                                 "id": {
@@ -226,27 +214,6 @@
                                 },
                                 "image": {
                                     "type": "Image",
-                                    "id": 3
-                                },
-                                "wallet": {
-                                    "rule": "repeated",
-                                    "type": "Payment",
-                                    "id": 11
-                                }
-                            }
-                        },
-                        "Payment": {
-                            "fields": {
-                                "id": {
-                                    "type": "string",
-                                    "id": 1
-                                },
-                                "type": {
-                                    "type": "string",
-                                    "id": 2
-                                },
-                                "name": {
-                                    "type": "string",
                                     "id": 3
                                 }
                             }
