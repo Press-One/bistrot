@@ -39,33 +39,37 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
-        "@truffle/hdwallet-provider": "^1.4.3",
+        "@truffle/hdwallet-provider": "^1.5.0",
         "abi-decoder": "^2.4.0",
+        "datastore-level": "^6.0.2",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.0",
         "keythereum-pure-js": "^1.1.9",
-        "libp2p": "^0.32.3",
+        "level": "^7.0.0",
+        "level-js": "^6.0.0",
+        "level-mem": "^5.0.1",
+        "libp2p": "^0.32.4",
         "libp2p-bootstrap": "^0.13.0",
         "libp2p-kad-dht": "^0.23.2",
         "libp2p-mdns": "^0.17.0",
         "libp2p-mplex": "^0.10.4",
         "libp2p-noise": "^4.0.0",
         "libp2p-tcp": "^0.17.1",
-        "multiaddr": "^10.0.0",
+        "multiaddr": "^10.0.1",
         "protobufjs": "^6.11.2",
         "quorum-gossipsub": "^0.11.2",
         "readline-sync": "^1.4.10",
         "secp256k1": "^4.0.2",
         "solc": "^0.8.6",
         "table": "^6.7.1",
-        "utilitas": "^1989.8.50",
-        "web3": "^1.5.1",
-        "yargs": "^17.1.0"
+        "utilitas": "^1989.8.51",
+        "web3": "^1.5.2",
+        "yargs": "^17.1.1"
     },
     "devDependencies": {
-        "@openzeppelin/contracts": "^4.2.0",
+        "@openzeppelin/contracts": "^4.3.0",
         "string-replace-loader": "^3.0.3",
-        "webpack": "^5.49.0",
-        "webpack-cli": "^4.7.2"
+        "webpack": "^5.51.1",
+        "webpack-cli": "^4.8.0"
     }
 }
