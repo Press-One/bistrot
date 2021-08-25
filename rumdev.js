@@ -17,6 +17,32 @@ const lib = require('.');
     const node = await lib.rump2p.getNode();
     await lib.rump2p.subscribeToTopic(topic, console.log);
 
+    // const Libp2p = require('libp2p')
+    // const TCP = require('libp2p-tcp')
+    // const MPLEX = require('libp2p-mplex')
+    // const { NOISE } = require('libp2p-noise')
+    // const LevelStore = require('datastore-level')
+
+    // const leveljs = require('level-js')
+
+    // const node = await Libp2p.create({
+    //     modules: {
+    //         transport: [TCP],
+    //         streamMuxer: [MPLEX],
+    //         connEncryption: [NOISE]
+    //     },
+    //     datastore: new LevelStore('my/db/name', {
+    //         db: (path) => leveljs(path, {
+    //             prefix: 'IDBWrapper-'
+    //         })
+    //     }),
+    //     peerStore: {
+    //         persistence: true,
+    //         threshold: 5
+    //     }
+    // })
+    // await node.start();
+
     // const connection = await lib.rump2p.dial(global.chainConfig.rumBootstrap[1]);
     // console.log(connection);
     // const latency = await lib.rump2p.ping(global.chainConfig.rumBootstrap[2]);
