@@ -79,11 +79,13 @@ const lib = require('.');
     await lib.rump2p.subscribeToTopic(topic, console.log);
 
     // do {
-    //     // if (global.chainConfig.nid === 0) {
-    //     //     const connection = await lib.rump2p.dial('/ip4/127.0.0.1/tcp/7030/http/p2p-webrtc-direct/p2p/Qmf3xgvfDBAcQY7jN5wS1cQuEyyU6gE5ezcDFUz1DD2BoT');
-    //     //     console.log(connection);
-    //     // }
-    //     console.log('xxx');
+    //     console.log('try to connect...');
+    //     try {
+    //         const connection = await lib.rump2p.dial(
+    //             '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+    //         );
+    //         console.log(connection);
+    //     } catch (e) { console.log(e); }
     //     await utilitas.timeout(1000 * 10);
     // } while (true);
 
