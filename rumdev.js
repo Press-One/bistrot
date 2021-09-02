@@ -78,6 +78,9 @@ const lib = require('.');
     const node = await lib.rump2p.getNode();
     await lib.rump2p.subscribeToTopic(topic, console.log);
 
+
+
+    // enable this session if you want to test direct dial
     // do {
     //     console.log('try to connect...');
     //     try {
@@ -88,6 +91,14 @@ const lib = require('.');
     //     } catch (e) { console.log(e); }
     //     await utilitas.timeout(1000 * 10);
     // } while (true);
+
+
+
+
+
+
+
+
 
 
     // export DEBUG=libp2p:peer-store:*
