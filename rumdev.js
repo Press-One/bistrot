@@ -56,9 +56,9 @@ const lib = require('.');
             pubKey: 'CAESIMK2YwjZ9I8/d7EpfNXD+kesf4PolWJkeVsZp+GbcyRZ'
         };
         global.chainConfig.rumBootstrap = [
-            '/ip4/127.0.0.1/tcp/7030/http/p2p-webrtc-direct/p2p/12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9'
+            '/ip4/127.0.0.1/tcp/7030/ws/p2p/12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9'
         ];
-        global.chainConfig.rumWrtPort = 7020;
+        global.chainConfig.rumWssPort = 7020;
     } else if (nid === 2) {
         global.chainConfig.rumPeerId = {
             id: '12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9',
@@ -66,9 +66,9 @@ const lib = require('.');
             pubKey: 'CAESIJ595reKGSNLesF0xzryANBkhVq2JHSqdd9/KBSGpm3S'
         };
         global.chainConfig.rumBootstrap = [
-            '/ip4/127.0.0.1/tcp/7020/http/p2p-webrtc-direct/p2p/12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p'
+            '/ip4/127.0.0.1/tcp/7020/ws/p2p/12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p'
         ];
-        global.chainConfig.rumWrtPort = 7030;
+        global.chainConfig.rumWssPort = 7030;
     } else {
         console.log('Error node id.');
         process.exit(1);
