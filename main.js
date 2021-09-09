@@ -2,7 +2,7 @@
 
 global._bistrot = Object.assign(require('./package.json'), {
     // testNetRpcApi: 'http://51.255.133.170:8888',
-    testNetChainApi: 'https://elm-sushibar.ngrok.io',
+    // testNetChainApi: 'https://elm-sushibar.ngrok.io',
     testNetOfficialMixin: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
 });
 
