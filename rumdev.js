@@ -84,10 +84,14 @@ const lib = require('.');
     do {
         console.log('try to connect...');
         try {
-            const connection = await lib.rump2p.dial(
-                '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
-            );
-            console.log(connection);
+            // const time = await lib.rump2p.ping(
+            //     '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+            // );
+            // console.log(`Ping success within ${time} ms.`);
+            // const connection = await lib.rump2p.dial(
+            //     '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+            // );
+            // console.log(connection);
         } catch (e) { console.log(e); }
         await utilitas.timeout(1000 * 10);
     } while (true);
