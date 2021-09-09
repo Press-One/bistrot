@@ -7,7 +7,7 @@ const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
 const address = '0x2AeF3da35e9A2EC29aE25A04d9C9e92110910A51';
-const tx = '0x2be163c84f1be56780067431f1d97272bd92fcc15e9c006f0fac6c7a7df0b820';
+const tx = '0xd60018cb09cd1fcf4647c16ea13dcb7e3bea72c17a8ba1293aaa6e7177ed190c';
 const password = encryption.randomString(32);
 const keystore = '/tmp/bistrot-test-keystore.json';
 
