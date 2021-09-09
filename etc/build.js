@@ -16,10 +16,10 @@ const goPbPath = `${goRumRoot}internal/pkg/pb/`;
 
 const externalSource = {
     'protoChain.proto': `${goPbPath}chain.proto?token=`
-        + `AABY4PUOCNGJAP2EXWPT7ODBF2BCU`, // chain_dev
+        + `AABY4PUWOQSICQCIZ7XZSATBIOPS6`, // chain_dev
     //  + `AABY4PUUPIWRT45VU5YJ7VLBE2NSO`, // master
     'protoActivityStream.proto': `${goPbPath}activity_stream.proto?token=`
-        + `AABY4PRYWRVCFKT4WOTYAELBF2BF2`, // chain_dev
+        + `AABY4PRYXSLUT54OORIHJ7TBIOPZQ`, // chain_dev
     //  + `AABY4PRIP5JLJ2WXC5WQZT3BE2PD4`, // master
 };
 

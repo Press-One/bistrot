@@ -368,7 +368,7 @@
                                     "type": "string",
                                     "id": 4
                                 },
-                                "UserEnryptPubkey": {
+                                "UserEncryptPubkey": {
                                     "type": "string",
                                     "id": 5
                                 },
