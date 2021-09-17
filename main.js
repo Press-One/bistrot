@@ -1,12 +1,18 @@
 'use strict';
 
+let runningInBrowser = false;
+try { runningInBrowser = !!window; } catch (e) { }
+if (runningInBrowser) { global = window; }
+
 global._bistrot = Object.assign(require('./package.json'), {
     // testNetRpcApi: 'http://51.255.133.170:8888',
     // testNetChainApi: 'https://elm-sushibar.ngrok.io',
     testNetOfficialMixin: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
+    runningInBrowser,
 });
 
-module.exports = Object.assign(require('utilitas'), {
+const modExp = Object.assign(require('utilitas'), {
+    // need to updated @LeaskH
     elliptic: require('elliptic'),
     ethereumUtil: require('ethereumjs-util'),
     keythereum: require('keythereum-pure-js'),
@@ -28,3 +34,8 @@ module.exports = Object.assign(require('utilitas'), {
     sushibar: require('./lib/sushibar'),
     system: require('./lib/system'),
 });
+
+if (runningInBrowser) {
+    global.bistrot = modExp;
+    console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
+} else { module.exports = modExp; }
