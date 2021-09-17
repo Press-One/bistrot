@@ -78,7 +78,8 @@ const lib = require('.');
     const node = await lib.rump2p.getNode();
     await lib.rump2p.subscribeToTopic(topic, console.log);
 
-
+    const ping = require('libp2p/src/ping');
+    console.log(ping);
 
     // enable this session if you want to test direct dial
     // do {
