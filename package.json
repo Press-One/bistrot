@@ -48,7 +48,7 @@
         "keythereum-pure-js": "^1.1.9",
         "libp2p": "^0.32.4",
         "libp2p-bootstrap": "^0.13.0",
-        "libp2p-kad-dht": "^0.24.1",
+        "libp2p-kad-dht": "^0.24.2",
         "libp2p-mdns": "^0.17.0",
         "libp2p-mplex": "^0.10.4",
         "libp2p-tcp": "^0.17.2",
@@ -60,14 +60,21 @@
         "secp256k1": "^4.0.2",
         "solc": "^0.8.6",
         "table": "^6.7.1",
-        "utilitas": "^1989.8.51",
+        "utilitas": "^1989.8.54",
         "web3": "^1.5.2",
         "yargs": "^17.1.1"
     },
     "devDependencies": {
-        "@openzeppelin/contracts": "^4.3.1",
-        "string-replace-loader": "^3.0.3",
-        "webpack": "^5.52.0",
+        "@openzeppelin/contracts": "^4.3.2",
+        "assert": "^2.0.0",
+        "browserify-fs": "^1.0.0",
+        "browserify-zlib": "^0.2.0",
+        "https-browserify": "^1.0.0",
+        "path-browserify": "^1.0.1",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
+        "url": "^0.11.0",
+        "webpack": "^5.52.1",
         "webpack-cli": "^4.8.0"
     }
 }
