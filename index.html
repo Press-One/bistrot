@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title>RumP2P Debug</title>
         <script src="dist/index.web.js"></script>
+        <script src="wasm_exec.js"></script>
         <script>
 
 (async () => {
@@ -47,83 +48,10 @@
     // } while (true);
 
 
-
-
-
-
-
-
-
-
-    // export DEBUG=libp2p:peer-store:*
-
-    // const leveljs = require('level-js')
-    // const levelup = require('levelup');
-    // const leveldown = require('leveldown');
-
-    // const Libp2p = require('libp2p')
-    // const TCP = require('libp2p-tcp')
-    // const MPLEX = require('libp2p-mplex')
-    // const { NOISE } = require('libp2p-noise')
-    // const LevelStore = require('datastore-level')
-
-    // const node = await Libp2p.create({
-    //     modules: {
-    //         transport: [TCP],
-    //         streamMuxer: [MPLEX],
-    //         connEncryption: [NOISE]
-    //     },
-    //     datastore: await (new LevelStore('/tmp/ds1')).open(),
-    //     peerStore: {
-    //         persistence: true,
-    //         threshold: 5
-    //     }
-    // })
-    // await node.start();
-
-    // const connection = await lib.rump2p.dial(global.chainConfig.rumBootstrap[1]);
-    // console.log(connection);
-    // const latency = await lib.rump2p.ping(global.chainConfig.rumBootstrap[2]);
-    // console.log(latency);
-
-    // const uint8ArrayFromString = require('uint8arrays/from-string')
-    // const uint8ArrayToString = require('uint8arrays/to-string')
-    // uint8ArrayFromString(content);
-    // uint8ArrayToString(msg.data);
-
-
-
-
-
-
-
-
-    // for (let item of list) {
-    //     console.log(item);
-    //     const connection = await node.dialer.connectToPeer(item);
-    //     // node.peerRouting.findPeer(item)
-    //     // console.log(connection);
-    // }
-    // console.log(node.peerStore);
-    // node.peerStore.protoBook.add(PeerId.createFromB58String('16Uiu2HAmF9qfkmQwv9wv3m1E3hNqNHVjw4798dEVNy8Fk6814se8'), [
-    //     '/libp2p/circuit/relay/0.1.0',
-    //     '/quorum/id/1.0.0',
-    //     '/quorum/id/push/1.0.0',
-    //     '/quorum/ping/1.0.0'
-    // ]);
-    // console.log(node.peerStore.protoBook);
-    // db.put('nameaaa', 'LevelUPsdfasdfasdfsafsafasdfas', function(err) {
-    //     if (err) return console.log('Ooops!', err) // some kind of I/O error
-
-    //     // 3) fetch by key
-    //     db.get('nameaaa', function(err, value) {
-    //         if (err) return console.log('Ooops!', err) // likely the key was not found
-
-    //         // ta da!
-    //         console.log('nameaaa=' + value)
-    //     })
-    // })
-
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch("gotest/main.wasm"), go.importObject).then((result) => {
+        go.run(result.instance);
+    })
 
 
 })();
