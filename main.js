@@ -38,4 +38,7 @@ const modExp = Object.assign(require('utilitas'), {
 if (runningInBrowser) {
     global.bistrot = modExp;
     console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
-} else { module.exports = modExp; }
+} else {
+    require('fake-indexeddb/auto'); // for debug stage only
+    module.exports = modExp;
+}

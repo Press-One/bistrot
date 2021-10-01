@@ -47,58 +47,116 @@ const lib = require('.');
 
 (async () => {
 
-    const nid = ~~process.argv.pop();
 
-    if (nid === 1) {
-        global.chainConfig.rumPeerId = {
-            id: '12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p',
-            privKey: 'CAESYHyCgD+3HtEHm6kzPO6fuwP+BAr/PxfJKlvAOWhc/IqAwrZjCNn0jz93sSl81cP6R6x/g+iVYmR5Wxmn4ZtzJFnCtmMI2fSPP3exKXzVw/pHrH+D6JViZHlbGafhm3MkWQ==',
-            pubKey: 'CAESIMK2YwjZ9I8/d7EpfNXD+kesf4PolWJkeVsZp+GbcyRZ'
-        };
-        global.chainConfig.rumBootstrap = [
-            '/ip4/127.0.0.1/tcp/7030/ws/p2p/12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9'
-        ];
-        global.chainConfig.rumWssPort = 7020;
-    } else if (nid === 2) {
-        global.chainConfig.rumPeerId = {
-            id: '12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9',
-            privKey: 'CAESYI44p8HiCHtCBhuUcetU9XdIEtWvon15a5ZLsfyssSj9nn3mt4oZI0t6wXTHOvIA0GSFWrYkdKp1338oFIambdKefea3ihkjS3rBdMc68gDQZIVatiR0qnXffygUhqZt0g==',
-            pubKey: 'CAESIJ595reKGSNLesF0xzryANBkhVq2JHSqdd9/KBSGpm3S'
-        };
-        global.chainConfig.rumBootstrap = [
-            '/ip4/127.0.0.1/tcp/7020/ws/p2p/12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p'
-        ];
-        global.chainConfig.rumWssPort = 7030;
-    } else {
-        console.log('Error node id.');
-        process.exit(1);
-    }
 
-    const topic = 'dad4a07a-80ce-4b32-8b9c-3f69642ca5c0';
-    const node = await lib.rump2p.getNode();
-    await lib.rump2p.subscribeToTopic(topic, console.log);
 
+
+
+    // const nid = ~~process.argv.pop();
+
+    // if (nid === 1) {
+    //     global.chainConfig.rumPeerId = {
+    //         id: '12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p',
+    //         privKey: 'CAESYHyCgD+3HtEHm6kzPO6fuwP+BAr/PxfJKlvAOWhc/IqAwrZjCNn0jz93sSl81cP6R6x/g+iVYmR5Wxmn4ZtzJFnCtmMI2fSPP3exKXzVw/pHrH+D6JViZHlbGafhm3MkWQ==',
+    //         pubKey: 'CAESIMK2YwjZ9I8/d7EpfNXD+kesf4PolWJkeVsZp+GbcyRZ'
+    //     };
+    //     global.chainConfig.rumBootstrap = [
+    //         '/ip4/127.0.0.1/tcp/7030/ws/p2p/12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9'
+    //     ];
+    //     global.chainConfig.rumWssPort = 7020;
+    // } else if (nid === 2) {
+    //     global.chainConfig.rumPeerId = {
+    //         id: '12D3KooWLV3w42LqUb9MWE7oTzG7vwaFjPw9GvDqmsuDif5chTn9',
+    //         privKey: 'CAESYI44p8HiCHtCBhuUcetU9XdIEtWvon15a5ZLsfyssSj9nn3mt4oZI0t6wXTHOvIA0GSFWrYkdKp1338oFIambdKefea3ihkjS3rBdMc68gDQZIVatiR0qnXffygUhqZt0g==',
+    //         pubKey: 'CAESIJ595reKGSNLesF0xzryANBkhVq2JHSqdd9/KBSGpm3S'
+    //     };
+    //     global.chainConfig.rumBootstrap = [
+    //         '/ip4/127.0.0.1/tcp/7020/ws/p2p/12D3KooWNvSZnPi3RrhrTwEY4LuuBeB6K6facKUCJcyWG1aoDd2p'
+    //     ];
+    //     global.chainConfig.rumWssPort = 7030;
+    // } else {
+    //     console.log('Error node id.');
+    //     process.exit(1);
+    // }
+
+    // const topic = 'dad4a07a-80ce-4b32-8b9c-3f69642ca5c0';
+    // const node = await lib.rump2p.getNode();
+    // await lib.rump2p.subscribeToTopic(topic, console.log);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     // enable this session if you want to test direct dial
-    do {
-        console.log('try to connect...');
-        try {
-            const time = await lib.rump2p.ping(
-                '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
-            );
-            console.log(`Ping success within ${time} ms.`);
-            // const connection = await lib.rump2p.dial(
-            //     '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
-            // );
-            // console.log(connection);
-        } catch (e) { console.log(e); }
-        await utilitas.timeout(1000 * 10);
-    } while (true);
+    // do {
+    //     console.log('try to connect...');
+    //     try {
+    //         const time = await lib.rump2p.ping(
+    //             '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+    //         );
+    //         console.log(`Ping success within ${time} ms.`);
+    //         // const connection = await lib.rump2p.dial(
+    //         //     '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+    //         // );
+    //         // console.log(connection);
+    //     } catch (e) { console.log(e); }
+    //     await utilitas.timeout(1000 * 10);
+    // } while (true);
+
+    global.aaa = 134;
+    global.jsAdd = (a, b) => {
+        return a + b;
+    };
+    global.jsAsync = async (a, b) => {
+        return 1 + 5;
+        // return a + b;
+    };
+
+    require('./wasm_exec');
+    const fs = require('fs');
+    const go = new Go();
+    const wasm = fs.readFileSync('./gotest/main.wasm');
+
+
+    WebAssembly.instantiate(wasm, go.importObject).then((result) => {
+        go.run(result.instance);
+        // console.log(returnMap());
+        // console.log(add(300, 14));
+        // console.log(callJs());
+        // (async () => {
+        //     const a = await asyncTest();
+        //     console.log(a);
+        // })()
+    })
 
 
 
+    // var importObject = { imports: { imported_func: arg => console.log(arg) } };
+    // WebAssembly.instantiate(wasm, we).then(wasmModule => {
+    //     console.log(wasmModule);
+    //     // const add = wasmModule.instance.exports.add;
+    //     // const sum = add(5, 6);
+    //     // console.log(sum); // Outputs: 11
 
+    // });
+
+    // const example = await import();
+
+    // console.log(example);
+
+
+
+    // const { instance, module } = await WebAssembly.instantiate(require('fs').readFileSync("main.wasm"));
+
+    // console.log(instance);
+
+    // // const wasm = require('./wasm_exec');
+    // // // console.log(wasm);
+    // // // console.log(global.Go);
+    // // const GO = new Go();
+    // // const x = GO.importObject(require('fs').readFileSync("main.wasm"));
+    // // // WebAssembly.instantiateStreaming(require('fs').readFileSync("main.wasm"),).then((result) => {
+    // // //     go.run(result.instance);
+    // // // });
 
 
 

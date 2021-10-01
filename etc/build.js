@@ -50,6 +50,9 @@ const trimCode = (content, separator) => {
         fs.writeFileSync(filename, file.join('\n'), utf8);
     }
 
+    modLog('Fetching GO wasm_exec runtime...');
+    await shell.exec('cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" lib/');
+
     modLog('Fetching files online...');
     for (let i in externalSource) {
         modLog(`> ${externalSource[i]}`);

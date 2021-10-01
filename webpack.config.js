@@ -74,6 +74,7 @@ module.exports = [{
             alias: {
                 ...base.resolve.alias,
                 './generated-prefix-list.json': false,
+                'fake-indexeddb': false,
                 'libp2p-kad-dht': false,
                 'libp2p-mdns': false,
                 'libp2p-tcp': false,
