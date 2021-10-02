@@ -3,10 +3,11 @@
 package main
 
 import (
-	// "fmt";
-	"time";
-	"math/rand";
-	"errors";
+	// "fmt"
+	// "github.com/hack-pad/go-indexeddb/idb"
+	"time"
+	"math/rand"
+	"errors"
 	"syscall/js"
 )
 
@@ -18,10 +19,10 @@ func main() {
 	js.Global().Set("add", js.FuncOf(add))
 	js.Global().Set("asyncTest", js.FuncOf(asyncTest))
 	js.Global().Set("callJs", js.FuncOf(callJs))
-	// keep wasm module running...
-	c1,c2 := await( js.Global().Call("jsAsync", 1, 3))
+	c1,c2 := await(js.Global().Call("jsAsync", 1, 3))
 	println(c1[0].Int());
 	println(c2);
+	// keep wasm module running...
 	select {}
 }
 
@@ -59,13 +60,13 @@ func asyncTest(this js.Value, args []js.Value) interface{} {
 		reject := args[1]
 		go func() {
 			time.Sleep(3 * time.Second)
-			println(rand.Int())
+			// println(rand.Int() % 2)
 			if rand.Int() % 2 == 0 {
-				// resolve.Invoke("OK")
-				resolve.Invoke(map[string]interface{}{
-					"message": "OK",
-					"error":   nil,
-				})
+				resolve.Invoke("OK")
+				// resolve.Invoke(map[string]interface{}{
+				// 	"message": "OK",
+				// 	"error":   nil,
+				// })
 			} else {
 				err := errors.New("Failed!")
 				errorConstructor := js.Global().Get("Error")
@@ -79,8 +80,6 @@ func asyncTest(this js.Value, args []js.Value) interface{} {
 	return promiseConstructor.New(handler)
 }
 
-
-
 func await(awaitable js.Value) ([]js.Value, []js.Value) {
     then := make(chan []js.Value)
     defer close(then)
@@ -89,7 +88,6 @@ func await(awaitable js.Value) ([]js.Value, []js.Value) {
         return nil
     })
     defer thenFunc.Release()
-
     catch := make(chan []js.Value)
     defer close(catch)
     catchFunc := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
@@ -97,9 +95,7 @@ func await(awaitable js.Value) ([]js.Value, []js.Value) {
         return nil
     })
     defer catchFunc.Release()
-
     awaitable.Call("then", thenFunc).Call("catch", catchFunc)
-
     select {
     case result := <-then:
         return result, nil
@@ -107,23 +103,3 @@ func await(awaitable js.Value) ([]js.Value, []js.Value) {
         return nil, err
     }
 }
-
-
-// func main() {
-//     wait := make(chan interface{})
-//     js.Global().Call("sayHello", 5000).Call("then", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-//         fmt.Println(args[0])
-//         wait <- nil
-//         return nil
-//     }))
-//     <-wait
-//     fmt.Println("we're done here")
-// }
-
-
-
-
-
-
-
-//

@@ -47,11 +47,6 @@ const lib = require('.');
 
 (async () => {
 
-
-
-
-
-
     // const nid = ~~process.argv.pop();
 
     // if (nid === 1) {
@@ -102,136 +97,17 @@ const lib = require('.');
     //     await utilitas.timeout(1000 * 10);
     // } while (true);
 
-    global.aaa = 134;
-    global.jsAdd = (a, b) => {
-        return a + b;
-    };
-    global.jsAsync = async (a, b) => {
-        return 1 + 5;
-        // return a + b;
-    };
+    // webassambly debug
+    global.jsAdd = (a, b) => { return a + b; };
+    global.jsAsync = async (a, b) => { return a + b; };
 
-    require('./wasm_exec');
-    const fs = require('fs');
     const go = new Go();
-    const wasm = fs.readFileSync('./gotest/main.wasm');
-
-
-    WebAssembly.instantiate(wasm, go.importObject).then((result) => {
-        go.run(result.instance);
-        // console.log(returnMap());
-        // console.log(add(300, 14));
-        // console.log(callJs());
-        // (async () => {
-        //     const a = await asyncTest();
-        //     console.log(a);
-        // })()
-    })
-
-
-
-    // var importObject = { imports: { imported_func: arg => console.log(arg) } };
-    // WebAssembly.instantiate(wasm, we).then(wasmModule => {
-    //     console.log(wasmModule);
-    //     // const add = wasmModule.instance.exports.add;
-    //     // const sum = add(5, 6);
-    //     // console.log(sum); // Outputs: 11
-
-    // });
-
-    // const example = await import();
-
-    // console.log(example);
-
-
-
-    // const { instance, module } = await WebAssembly.instantiate(require('fs').readFileSync("main.wasm"));
-
-    // console.log(instance);
-
-    // // const wasm = require('./wasm_exec');
-    // // // console.log(wasm);
-    // // // console.log(global.Go);
-    // // const GO = new Go();
-    // // const x = GO.importObject(require('fs').readFileSync("main.wasm"));
-    // // // WebAssembly.instantiateStreaming(require('fs').readFileSync("main.wasm"),).then((result) => {
-    // // //     go.run(result.instance);
-    // // // });
-
-
-
-
-
-
-    // export DEBUG=libp2p:peer-store:*
-
-    // const leveljs = require('level-js')
-    // const levelup = require('levelup');
-    // const leveldown = require('leveldown');
-
-    // const Libp2p = require('libp2p')
-    // const TCP = require('libp2p-tcp')
-    // const MPLEX = require('libp2p-mplex')
-    // const { NOISE } = require('libp2p-noise')
-    // const LevelStore = require('datastore-level')
-
-    // const node = await Libp2p.create({
-    //     modules: {
-    //         transport: [TCP],
-    //         streamMuxer: [MPLEX],
-    //         connEncryption: [NOISE]
-    //     },
-    //     datastore: await (new LevelStore('/tmp/ds1')).open(),
-    //     peerStore: {
-    //         persistence: true,
-    //         threshold: 5
-    //     }
-    // })
-    // await node.start();
-
-    // const connection = await lib.rump2p.dial(global.chainConfig.rumBootstrap[1]);
-    // console.log(connection);
-    // const latency = await lib.rump2p.ping(global.chainConfig.rumBootstrap[2]);
-    // console.log(latency);
-
-    // const uint8ArrayFromString = require('uint8arrays/from-string')
-    // const uint8ArrayToString = require('uint8arrays/to-string')
-    // uint8ArrayFromString(content);
-    // uint8ArrayToString(msg.data);
-
-
-
-
-
-
-
-
-    // for (let item of list) {
-    //     console.log(item);
-    //     const connection = await node.dialer.connectToPeer(item);
-    //     // node.peerRouting.findPeer(item)
-    //     // console.log(connection);
-    // }
-    // console.log(node.peerStore);
-    // node.peerStore.protoBook.add(PeerId.createFromB58String('16Uiu2HAmF9qfkmQwv9wv3m1E3hNqNHVjw4798dEVNy8Fk6814se8'), [
-    //     '/libp2p/circuit/relay/0.1.0',
-    //     '/quorum/id/1.0.0',
-    //     '/quorum/id/push/1.0.0',
-    //     '/quorum/ping/1.0.0'
-    // ]);
-    // console.log(node.peerStore.protoBook);
-    // db.put('nameaaa', 'LevelUPsdfasdfasdfsafsafasdfas', function(err) {
-    //     if (err) return console.log('Ooops!', err) // some kind of I/O error
-
-    //     // 3) fetch by key
-    //     db.get('nameaaa', function(err, value) {
-    //         if (err) return console.log('Ooops!', err) // likely the key was not found
-
-    //         // ta da!
-    //         console.log('nameaaa=' + value)
-    //     })
-    // })
-
-
+    const wasm = require('fs').readFileSync('./wasm/main.wasm');
+    const result = await WebAssembly.instantiate(wasm, go.importObject);
+    go.run(result.instance);
+    console.log(returnMap());
+    console.log(add(300, 14));
+    console.log(callJs());
+    console.log(await asyncTest());
 
 })();

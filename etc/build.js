@@ -53,21 +53,21 @@ const trimCode = (content, separator) => {
     modLog('Fetching GO wasm_exec runtime...');
     await shell.exec('cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" lib/');
 
-    modLog('Fetching files online...');
-    for (let i in externalSource) {
-        modLog(`> ${externalSource[i]}`);
-        let content = (await shot.get(externalSource[i])).content;
-        utilitas.assert(content, `Failed to fetch file: ${i}.`);
-        switch (path.extname(i).toLocaleLowerCase()) {
-            case '.proto':
-                i = i.replace(/\.proto$/ig, '.json');
-                fs.writeFileSync(path.join(__dirname, i), content, utf8);
-                const pbuf = await protobuf.load(path.join(__dirname, i));
-                content = JSON.stringify(pbuf.toJSON(), null, 4);
-                break;
-        }
-        fs.writeFileSync(path.join(__dirname, i), content, utf8);
-    }
+    // modLog('Fetching files online...');
+    // for (let i in externalSource) {
+    //     modLog(`> ${externalSource[i]}`);
+    //     let content = (await shot.get(externalSource[i])).content;
+    //     utilitas.assert(content, `Failed to fetch file: ${i}.`);
+    //     switch (path.extname(i).toLocaleLowerCase()) {
+    //         case '.proto':
+    //             i = i.replace(/\.proto$/ig, '.json');
+    //             fs.writeFileSync(path.join(__dirname, i), content, utf8);
+    //             const pbuf = await protobuf.load(path.join(__dirname, i));
+    //             content = JSON.stringify(pbuf.toJSON(), null, 4);
+    //             break;
+    //     }
+    //     fs.writeFileSync(path.join(__dirname, i), content, utf8);
+    // }
 
     modLog('Loading files...');
     (fs.readdirSync(__dirname) || []).filter(file => {

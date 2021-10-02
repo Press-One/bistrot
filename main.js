@@ -33,6 +33,7 @@ const modExp = Object.assign(require('utilitas'), {
     rumsc: require('./lib/rumsc'),
     sushibar: require('./lib/sushibar'),
     system: require('./lib/system'),
+    wasm_exec: require('./lib/wasm_exec'),
 });
 
 if (runningInBrowser) {
