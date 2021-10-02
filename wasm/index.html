@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>RumP2P Debug</title>
         <script src="dist/index.web.js"></script>
-        <script src="wasm_exec.js"></script>
+        <script src="lib/wasm_exec.js"></script>
         <script>
 
 (async () => {
@@ -47,12 +47,10 @@
     //     await bistrot.utilitas.timeout(1000 * 10);
     // } while (true);
 
-
     const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("gotest/main.wasm"), go.importObject).then((result) => {
+    WebAssembly.instantiateStreaming(fetch("wasm/main.wasm"), go.importObject).then((result) => {
         go.run(result.instance);
     })
-
 
 })();
 
