@@ -1,1 +1,446 @@
-404: Not Found
+{
+    "nested": {
+        "quorum": {
+            "nested": {
+                "pb": {
+                    "options": {
+                        "go_package": "github.com/huo-ju/quorum/internal/pkg/pb"
+                    },
+                    "nested": {
+                        "PackageType": {
+                            "values": {
+                                "TRX": 0,
+                                "BLOCK": 1
+                            }
+                        },
+                        "Package": {
+                            "fields": {
+                                "type": {
+                                    "type": "PackageType",
+                                    "id": 1
+                                },
+                                "Data": {
+                                    "type": "bytes",
+                                    "id": 2
+                                }
+                            }
+                        },
+                        "TrxType": {
+                            "values": {
+                                "POST": 0,
+                                "AUTH": 1,
+                                "SCHEMA": 2,
+                                "PRODUCER": 3,
+                                "ANNOUNCE": 4,
+                                "REQ_BLOCK_FORWARD": 5,
+                                "REQ_BLOCK_BACKWARD": 6,
+                                "REQ_BLOCK_RESP": 7,
+                                "BLOCK_SYNCED": 8,
+                                "BLOCK_PRODUCED": 9
+                            }
+                        },
+                        "Trx": {
+                            "fields": {
+                                "TrxId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "Type": {
+                                    "type": "TrxType",
+                                    "id": 2
+                                },
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "Data": {
+                                    "type": "bytes",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Version": {
+                                    "type": "string",
+                                    "id": 6
+                                },
+                                "Expired": {
+                                    "type": "int64",
+                                    "id": 7
+                                },
+                                "ResendCount": {
+                                    "type": "int64",
+                                    "id": 8
+                                },
+                                "Nonce": {
+                                    "type": "int64",
+                                    "id": 9
+                                },
+                                "SenderPubkey": {
+                                    "type": "string",
+                                    "id": 10
+                                },
+                                "SenderSign": {
+                                    "type": "bytes",
+                                    "id": 11
+                                }
+                            }
+                        },
+                        "Block": {
+                            "fields": {
+                                "BlockId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "PrevBlockId": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "PreviousHash": {
+                                    "type": "bytes",
+                                    "id": 4
+                                },
+                                "Trxs": {
+                                    "rule": "repeated",
+                                    "type": "Trx",
+                                    "id": 5
+                                },
+                                "ProducerPubKey": {
+                                    "type": "string",
+                                    "id": 6
+                                },
+                                "Hash": {
+                                    "type": "bytes",
+                                    "id": 7
+                                },
+                                "Signature": {
+                                    "type": "bytes",
+                                    "id": 8
+                                },
+                                "Timestamp": {
+                                    "type": "int64",
+                                    "id": 9
+                                }
+                            }
+                        },
+                        "BlockDbChunk": {
+                            "fields": {
+                                "BlockId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "BlockItem": {
+                                    "type": "Block",
+                                    "id": 2
+                                },
+                                "ParentBlockId": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "SubBlockId": {
+                                    "rule": "repeated",
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "Height": {
+                                    "type": "int64",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "ReqBlock": {
+                            "fields": {
+                                "BlockId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "UserId": {
+                                    "type": "string",
+                                    "id": 3
+                                }
+                            }
+                        },
+                        "BlockSynced": {
+                            "fields": {
+                                "BlockItem": {
+                                    "type": "Block",
+                                    "id": 1
+                                }
+                            }
+                        },
+                        "BlockProduced": {
+                            "fields": {
+                                "BlockItem": {
+                                    "type": "Block",
+                                    "id": 1
+                                }
+                            }
+                        },
+                        "ReqBlkResult": {
+                            "values": {
+                                "BLOCK_IN_TRX": 0,
+                                "BLOCK_NOT_FOUND": 1
+                            }
+                        },
+                        "ReqBlockResp": {
+                            "fields": {
+                                "Result": {
+                                    "type": "ReqBlkResult",
+                                    "id": 1
+                                },
+                                "ProviderPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "RequesterPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "BlockId": {
+                                    "type": "string",
+                                    "id": 5
+                                },
+                                "Block": {
+                                    "type": "bytes",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "PostItem": {
+                            "fields": {
+                                "TrxId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "PublisherPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "Content": {
+                                    "type": "bytes",
+                                    "id": 3
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 4
+                                }
+                            }
+                        },
+                        "DenyUserItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "PeerId": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "GroupOwnerPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupOwnerSign": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Action": {
+                                    "type": "string",
+                                    "id": 6
+                                },
+                                "Memo": {
+                                    "type": "string",
+                                    "id": 7
+                                }
+                            }
+                        },
+                        "ProducerItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "ProducerPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "GroupOwnerPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupOwnerSign": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Action": {
+                                    "type": "string",
+                                    "id": 6
+                                },
+                                "Memo": {
+                                    "type": "string",
+                                    "id": 7
+                                }
+                            }
+                        },
+                        "AnnounceItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "AnnouncedPubkey": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "AnnouncerSignature": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 4
+                                },
+                                "Type": {
+                                    "type": "string",
+                                    "id": 5
+                                },
+                                "Action": {
+                                    "type": "string",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "SchemaItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "SchemaJson": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "GroupOwnerPubkey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "GroupOwnerSign": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 5
+                                },
+                                "Memo": {
+                                    "type": "string",
+                                    "id": 6
+                                }
+                            }
+                        },
+                        "GroupEncryptType": {
+                            "values": {
+                                "PUBLIC": 0,
+                                "PRIVATE": 1
+                            }
+                        },
+                        "GroupConsenseType": {
+                            "values": {
+                                "POA": 0,
+                                "POS": 1
+                            }
+                        },
+                        "Role": {
+                            "values": {
+                                "GROUP_PRODUCER": 0,
+                                "GROUP_USER": 1
+                            }
+                        },
+                        "GroupItem": {
+                            "fields": {
+                                "GroupId": {
+                                    "type": "string",
+                                    "id": 1
+                                },
+                                "GroupName": {
+                                    "type": "string",
+                                    "id": 2
+                                },
+                                "OwnerPubKey": {
+                                    "type": "string",
+                                    "id": 3
+                                },
+                                "UserSignPubkey": {
+                                    "type": "string",
+                                    "id": 4
+                                },
+                                "UserEncryptPubkey": {
+                                    "type": "string",
+                                    "id": 5
+                                },
+                                "UserRole": {
+                                    "type": "Role",
+                                    "id": 6
+                                },
+                                "LastUpdate": {
+                                    "type": "int64",
+                                    "id": 7
+                                },
+                                "HighestHeight": {
+                                    "type": "int64",
+                                    "id": 8
+                                },
+                                "HighestBlockId": {
+                                    "rule": "repeated",
+                                    "type": "string",
+                                    "id": 9
+                                },
+                                "GenesisBlock": {
+                                    "type": "Block",
+                                    "id": 10
+                                },
+                                "EncryptType": {
+                                    "type": "GroupEncryptType",
+                                    "id": 11
+                                },
+                                "ConsenseType": {
+                                    "type": "GroupConsenseType",
+                                    "id": 12
+                                },
+                                "CipherKey": {
+                                    "type": "string",
+                                    "id": 13
+                                },
+                                "AppKey": {
+                                    "type": "string",
+                                    "id": 14
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

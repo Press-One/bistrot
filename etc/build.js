@@ -11,8 +11,8 @@ const targetFile = 'index.json';
 const fileCont = {};
 const utf8 = 'utf8';
 // const branch = 'master';
-const branch = 'chain_dev';
-const goRumRoot = `https://raw.githubusercontent.com/huo-ju/quorum/${branch}/`;
+const branch = 'master';
+const goRumRoot = `https://raw.githubusercontent.com/rumsystem/quorum/${branch}/`;
 const goPbPath = `${goRumRoot}internal/pkg/pb/`;
 
 const patches = {
@@ -22,12 +22,8 @@ const patches = {
 };
 
 const externalSource = {
-    'protoChain.proto': `${goPbPath}chain.proto?token=`
-        + `AABY4PSP4S6UH4WY6E5VEJTBJUBWU`, // chain_dev
-    //  + `AABY4PUUPIWRT45VU5YJ7VLBE2NSO`, // master
-    'protoActivityStream.proto': `${goPbPath}activity_stream.proto?token=`
-        + `AABY4PXQY4626SX7CRD2BGLBJUBZG`, // chain_dev
-    //  + `AABY4PRIP5JLJ2WXC5WQZT3BE2PD4`, // master
+    'protoChain.proto': `${goPbPath}chain.proto`,
+    'protoActivityStream.proto': `${goPbPath}activity_stream.proto`,
 };
 
 const trimCode = (content, separator) => {
@@ -53,21 +49,21 @@ const trimCode = (content, separator) => {
     modLog('Fetching GO wasm_exec runtime...');
     await shell.exec('cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" lib/');
 
-    // modLog('Fetching files online...');
-    // for (let i in externalSource) {
-    //     modLog(`> ${externalSource[i]}`);
-    //     let content = (await shot.get(externalSource[i])).content;
-    //     utilitas.assert(content, `Failed to fetch file: ${i}.`);
-    //     switch (path.extname(i).toLocaleLowerCase()) {
-    //         case '.proto':
-    //             i = i.replace(/\.proto$/ig, '.json');
-    //             fs.writeFileSync(path.join(__dirname, i), content, utf8);
-    //             const pbuf = await protobuf.load(path.join(__dirname, i));
-    //             content = JSON.stringify(pbuf.toJSON(), null, 4);
-    //             break;
-    //     }
-    //     fs.writeFileSync(path.join(__dirname, i), content, utf8);
-    // }
+    modLog('Fetching files online...');
+    for (let i in externalSource) {
+        modLog(`> ${externalSource[i]}`);
+        let content = (await shot.get(externalSource[i])).content;
+        utilitas.assert(content, `Failed to fetch file: ${i}.`);
+        switch (path.extname(i).toLocaleLowerCase()) {
+            case '.proto':
+                i = i.replace(/\.proto$/ig, '.json');
+                fs.writeFileSync(path.join(__dirname, i), content, utf8);
+                const pbuf = await protobuf.load(path.join(__dirname, i));
+                content = JSON.stringify(pbuf.toJSON(), null, 4);
+                break;
+        }
+        fs.writeFileSync(path.join(__dirname, i), content, utf8);
+    }
 
     modLog('Loading files...');
     (fs.readdirSync(__dirname) || []).filter(file => {
