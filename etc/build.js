@@ -10,8 +10,7 @@ const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
 const targetFile = 'index.json';
 const fileCont = {};
 const utf8 = 'utf8';
-// const branch = 'master';
-const branch = 'master';
+const branch = 'main';
 const goRumRoot = `https://raw.githubusercontent.com/rumsystem/quorum/${branch}/`;
 const goPbPath = `${goRumRoot}internal/pkg/pb/`;
 

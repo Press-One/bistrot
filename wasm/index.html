@@ -28,24 +28,19 @@
         console.log('[RUMP2P] Received pubsub msg:', data);
     });
 
-    // enable this session if you want to test direct dial
-    // do {
-    //     console.log('try to connect...');
-        try {
-            console.log(`[RUMP2P] Testing ping:`);
-            const time = await bistrot.rump2p.ping(
-                '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
-            );
-            console.log(`[RUMP2P] Ping success within ${time} μs.`);
+    try {
+        console.log(`[RUMP2P] Testing ping:`);
+        const time = await bistrot.rump2p.ping(
+            '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+        );
+        console.log(`[RUMP2P] Ping success within ${time} μs.`);
 
-            console.log(`[RUMP2P] Testing dial:`);
-            const connection = await bistrot.rump2p.dial(
-                '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
-            );
-            console.log(`[RUMP2P] Dial success:`, connection);
-        } catch (e) { console.log(e); }
-    //     await bistrot.utilitas.timeout(1000 * 10);
-    // } while (true);
+        console.log(`[RUMP2P] Testing dial:`);
+        const connection = await bistrot.rump2p.dial(
+            '/ip4/127.0.0.1/tcp/7002/ws/p2p/16Uiu2HAmP5DUiQihxuCtUsC6Li3WLFX3nsnq9jV38aLJHUqei6bA',
+        );
+        console.log(`[RUMP2P] Dial success:`, connection);
+    } catch (e) { console.log(e); }
 
     const go = new Go();
     WebAssembly.instantiateStreaming(fetch("wasm/main.wasm"), go.importObject).then((result) => {
