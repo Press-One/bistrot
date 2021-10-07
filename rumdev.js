@@ -64,6 +64,12 @@ const lib = require('.');
     const node = await lib.rump2p.getNode();
     await lib.rump2p.subscribeToGroup(topic, console.log);
 
+    await utilitas.timeout(1000 * 10);
+
+    await lib.rump2p.unsubscribeFromGroup(topic);
+
+    await lib.rump2p.subscribeToGroup(topic, console.log);
+
     try {
         console.log(`[RUMP2P] Testing ping:`);
         const time = await lib.rump2p.ping(
