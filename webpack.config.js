@@ -9,7 +9,8 @@ const base = {
 
     entry: './main.js',
 
-    optimization: { minimize: true },
+    // optimization: { minimize: true },
+    optimization: { minimize: false },
 
     resolve: {
         extensions: ['.js', '.json', '.node'],
