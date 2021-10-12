@@ -26,6 +26,7 @@ const base = {
             'twilio': false,
             'winston-papertrail-mproved': false,
             'winston': false,
+            'LevelDatastore': false, // @todo by @LeaskH: Disabled for now
         },
     },
 
