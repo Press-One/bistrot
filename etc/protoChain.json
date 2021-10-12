@@ -4,7 +4,7 @@
             "nested": {
                 "pb": {
                     "options": {
-                        "go_package": "github.com/huo-ju/quorum/internal/pkg/pb"
+                        "go_package": "github.com/rumsystem/quorum/internal/pkg/pb"
                     },
                     "nested": {
                         "PackageType": {
@@ -122,7 +122,7 @@
                                     "type": "bytes",
                                     "id": 8
                                 },
-                                "Timestamp": {
+                                "TimeStamp": {
                                     "type": "int64",
                                     "id": 9
                                 }

@@ -4,7 +4,7 @@
             "nested": {
                 "pb": {
                     "options": {
-                        "go_package": "github.com/huo-ju/quorum/internal/pkg/pb"
+                        "go_package": "github.com/rumsystem/quorum/internal/pkg/pb"
                     },
                     "nested": {
                         "AnyObj": {
