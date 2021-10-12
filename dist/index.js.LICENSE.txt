@@ -5,13 +5,6 @@ object-assign
 */
 
 /*!
-  * prr
-  * (c) 2013 Rod Vagg <rod@vagg.org>
-  * https://github.com/rvagg/prr
-  * License: MIT
-  */
-
-/*!
  *
  * Copyright 2009-2017 Kris Kowal under the terms of the MIT
  * license found at https://github.com/kriskowal/q/blob/v1/LICENSE
