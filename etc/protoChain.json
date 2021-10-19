@@ -412,7 +412,6 @@
                                     "id": 8
                                 },
                                 "HighestBlockId": {
-                                    "rule": "repeated",
                                     "type": "string",
                                     "id": 9
                                 },
