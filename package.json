@@ -61,7 +61,7 @@
         "secp256k1": "^4.0.2",
         "solc": "^0.8.9",
         "table": "^6.7.2",
-        "utilitas": "^1989.8.57",
+        "utilitas": "^1989.8.58",
         "web3": "^1.6.0",
         "yargs": "^17.2.1"
     },
@@ -70,13 +70,13 @@
         "assert": "^2.0.0",
         "browserify-fs": "^1.0.0",
         "browserify-zlib": "^0.2.0",
-        "fake-indexeddb": "^3.1.4",
+        "fake-indexeddb": "^3.1.7",
         "https-browserify": "^1.0.0",
         "path-browserify": "^1.0.1",
         "stream-browserify": "^3.0.0",
         "stream-http": "^3.2.0",
         "url": "^0.11.0",
-        "webpack": "^5.58.2",
+        "webpack": "^5.59.0",
         "webpack-cli": "^4.9.1"
     }
 }
