@@ -436,6 +436,26 @@
                                     "id": 14
                                 }
                             }
+                        },
+                        "PSPing": {
+                            "fields": {
+                                "Seqnum": {
+                                    "type": "int32",
+                                    "id": 1
+                                },
+                                "IsResp": {
+                                    "type": "bool",
+                                    "id": 2
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 3
+                                },
+                                "Payload": {
+                                    "type": "bytes",
+                                    "id": 4
+                                }
+                            }
                         }
                     }
                 }
