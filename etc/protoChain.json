@@ -39,6 +39,25 @@
                                 "BLOCK_PRODUCED": 9
                             }
                         },
+                        "AnnounceType": {
+                            "values": {
+                                "AS_USER": 0,
+                                "AS_PRODUCER": 1
+                            }
+                        },
+                        "ApproveType": {
+                            "values": {
+                                "ANNOUCNED": 0,
+                                "APPROVED": 1,
+                                "REJECTED": 2
+                            }
+                        },
+                        "ActionType": {
+                            "values": {
+                                "ADD": 0,
+                                "REMOVE": 1
+                            }
+                        },
                         "Trx": {
                             "fields": {
                                 "TrxId": {
@@ -294,12 +313,16 @@
                                     "id": 5
                                 },
                                 "Action": {
-                                    "type": "string",
+                                    "type": "ActionType",
                                     "id": 6
+                                },
+                                "BlockProduced": {
+                                    "type": "int64",
+                                    "id": 7
                                 },
                                 "Memo": {
                                     "type": "string",
-                                    "id": 7
+                                    "id": 8
                                 }
                             }
                         },
@@ -309,25 +332,41 @@
                                     "type": "string",
                                     "id": 1
                                 },
-                                "AnnouncedPubkey": {
+                                "SignPubkey": {
                                     "type": "string",
                                     "id": 2
                                 },
-                                "AnnouncerSignature": {
+                                "EncryptPubkey": {
                                     "type": "string",
                                     "id": 3
                                 },
-                                "TimeStamp": {
-                                    "type": "int64",
+                                "AnnouncerSignature": {
+                                    "type": "string",
                                     "id": 4
                                 },
                                 "Type": {
-                                    "type": "string",
+                                    "type": "AnnounceType",
                                     "id": 5
                                 },
-                                "Action": {
+                                "OwnerPubkey": {
                                     "type": "string",
                                     "id": 6
+                                },
+                                "OwnerSignature": {
+                                    "type": "string",
+                                    "id": 7
+                                },
+                                "Result": {
+                                    "type": "ApproveType",
+                                    "id": 8
+                                },
+                                "TimeStamp": {
+                                    "type": "int64",
+                                    "id": 9
+                                },
+                                "Action": {
+                                    "type": "ActionType",
+                                    "id": 10
                                 }
                             }
                         },
@@ -371,12 +410,6 @@
                                 "POS": 1
                             }
                         },
-                        "Role": {
-                            "values": {
-                                "GROUP_PRODUCER": 0,
-                                "GROUP_USER": 1
-                            }
-                        },
                         "GroupItem": {
                             "fields": {
                                 "GroupId": {
@@ -399,41 +432,37 @@
                                     "type": "string",
                                     "id": 5
                                 },
-                                "UserRole": {
-                                    "type": "Role",
-                                    "id": 6
-                                },
                                 "LastUpdate": {
                                     "type": "int64",
-                                    "id": 7
+                                    "id": 6
                                 },
                                 "HighestHeight": {
                                     "type": "int64",
-                                    "id": 8
+                                    "id": 7
                                 },
                                 "HighestBlockId": {
                                     "type": "string",
-                                    "id": 9
+                                    "id": 8
                                 },
                                 "GenesisBlock": {
                                     "type": "Block",
-                                    "id": 10
+                                    "id": 9
                                 },
                                 "EncryptType": {
                                     "type": "GroupEncryptType",
-                                    "id": 11
+                                    "id": 10
                                 },
                                 "ConsenseType": {
                                     "type": "GroupConsenseType",
-                                    "id": 12
+                                    "id": 11
                                 },
                                 "CipherKey": {
                                     "type": "string",
-                                    "id": 13
+                                    "id": 12
                                 },
                                 "AppKey": {
                                     "type": "string",
-                                    "id": 14
+                                    "id": 13
                                 }
                             }
                         },
