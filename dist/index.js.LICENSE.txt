@@ -110,13 +110,6 @@ object-assign
  */
 
 /*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-/*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
  * MIT Licensed
@@ -135,8 +128,6 @@ object-assign
  */
 
 /*! MIT License. Copyright 2015-2018 Richard Moore <me@ricmoo.com>. See LICENSE.txt. */
-
-/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 

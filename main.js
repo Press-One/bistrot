@@ -29,7 +29,6 @@ const modExp = Object.assign(require('utilitas'), {
     pacman: require('./lib/pacman'),
     preference: require('./lib/preference'),
     quorum: require('./lib/quorum'),
-    rump2p: require('./lib/rump2p'),
     rumsc: require('./lib/rumsc'),
     sushibar: require('./lib/sushibar'),
     system: require('./lib/system'),
@@ -39,7 +38,4 @@ const modExp = Object.assign(require('utilitas'), {
 if (runningInBrowser) {
     global.bistrot = modExp;
     console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
-} else {
-    require('fake-indexeddb/auto'); // for debug stage only
-    module.exports = modExp;
-}
+} else { module.exports = modExp; }

@@ -1,29 +1,15 @@
 'use strict';
 
 const { utilitas, shot, shell } = require('utilitas');
-const protobuf = require('protobufjs');
-const quorum = require('../lib/quorum');
-const path = require('path');
-const fs = require('fs');
-
-const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
-const targetFile = 'index.json';
+const externalSource = {};
 const fileCont = {};
+const fs = require('fs');
+const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
+const patches = { /* 'file': [['x', 'y']], */ };
+const path = require('path');
+const quorum = require('../lib/quorum');
+const targetFile = 'index.json';
 const utf8 = 'utf8';
-const branch = 'main';
-const goRumRoot = `https://raw.githubusercontent.com/rumsystem/quorum/${branch}/`;
-const goPbPath = `${goRumRoot}internal/pkg/pb/`;
-
-const patches = {
-    'node_modules/libp2p/src/ping/index.js': [
-        ['${node._config.protocolPrefix}', 'quorum']
-    ],
-};
-
-const externalSource = {
-    'protoChain.proto': `${goPbPath}chain.proto`,
-    'protoActivityStream.proto': `${goPbPath}activity_stream.proto`,
-};
 
 const trimCode = (content, separator) => {
     const lines = content.split('\n');
@@ -53,14 +39,7 @@ const trimCode = (content, separator) => {
         modLog(`> ${externalSource[i]}`);
         let content = (await shot.get(externalSource[i])).content;
         utilitas.assert(content, `Failed to fetch file: ${i}.`);
-        switch (path.extname(i).toLocaleLowerCase()) {
-            case '.proto':
-                i = i.replace(/\.proto$/ig, '.json');
-                fs.writeFileSync(path.join(__dirname, i), content, utf8);
-                const pbuf = await protobuf.load(path.join(__dirname, i));
-                content = JSON.stringify(pbuf.toJSON(), null, 4);
-                break;
-        }
+        // switch (path.extname(i).toLocaleLowerCase()) { }
         fs.writeFileSync(path.join(__dirname, i), content, utf8);
     }
 
