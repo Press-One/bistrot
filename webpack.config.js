@@ -1,17 +1,13 @@
 'use strict';
 
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
 
 const base = {
-
     mode: 'production',
-
     entry: './main.js',
-
     optimization: { minimize: true },
     // optimization: { minimize: false },
-
     resolve: {
         extensions: ['.js', '.json', '.node'],
         alias: {
@@ -26,27 +22,20 @@ const base = {
             'twilio': false,
             'winston-papertrail-mproved': false,
             'winston': false,
-            'LevelDatastore': false, // @todo by @LeaskH: Disabled for now
         },
     },
-
-    externals: [
-        /cardinal/, // mysql
-        { got: 'commonjs got' }, // public-ip
-    ],
-
+    externals: [/cardinal/, /*mysql*/ { got: 'commonjs got' }, /*public-ip*/],
     ignoreWarnings: [warning => {
         return ((warning?.loc?.start?.line === 84 // utilitas.event
             && warning?.loc?.start?.column === 20
             && warning?.loc?.end?.line === 84
-            && warning?.loc?.end?.column === 52));
+            && warning?.loc?.end?.column === 52
+        ) || (warning?.loc?.start?.line === 27 // wasm_exec.js
+            && warning?.loc?.start?.column === 19
+            && warning?.loc?.end?.line === 27
+            && warning?.loc?.end?.column === 26));
     }],
-
-    node: {
-        __dirname: false,
-        __filename: false,
-    },
-
+    node: { __dirname: false, __filename: false, },
 };
 
 module.exports = [{
@@ -65,29 +54,19 @@ module.exports = [{
             path: path.resolve(__dirname, 'dist'),
             filename: 'index.web.js',
         },
-        plugins: [
-            new webpack.ProvidePlugin({
-                process: 'process/browser.js',
-                Buffer: ['buffer', 'Buffer'],
-            }),
-        ],
+        plugins: [new webpack.ProvidePlugin({ process: 'process/browser.js' })],
         resolve: {
             ...base.resolve,
             alias: {
                 ...base.resolve.alias,
-                './generated-prefix-list.json': false,
-                'fake-indexeddb': false,
-                'libp2p-kad-dht': false,
-                'libp2p-mdns': false,
-                'libp2p-tcp': false,
                 child_process: false,
-                dgram: false,
                 module: false,
                 ping: false,
                 solc: false,
             },
             fallback: {
                 assert: require.resolve('assert/'),
+                buffer: require.resolve('buffer/'),
                 crypto: require.resolve('crypto-browserify'),
                 fs: require.resolve('browserify-fs'),
                 http: require.resolve('stream-http'),
@@ -96,14 +75,7 @@ module.exports = [{
                 stream: require.resolve('stream-browserify'),
                 url: require.resolve('url/'),
                 web3: require.resolve('web3/dist/web3.min.js'),
-                zlib: require.resolve('browserify-zlib'),
             },
         },
-        ignoreWarnings: [...base.ignoreWarnings, warning => {
-            return ((warning?.loc?.start?.line === 7 // multiaddr / fetch-blob
-                && warning?.loc?.start?.column === 30
-                && warning?.loc?.end?.line === 7
-                && warning?.loc?.end?.column === 51));
-        }],
     },
 }];
