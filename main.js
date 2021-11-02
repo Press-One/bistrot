@@ -12,11 +12,17 @@ global._bistrot = Object.assign(require('./package.json'), {
 });
 
 const modExp = Object.assign(require('utilitas'), {
-    // need to updated @LeaskH
+    abiDecoder: require('abi-decoder'),
     elliptic: require('elliptic'),
     ethereumUtil: require('ethereumjs-util'),
+    hdwalletProvider: require('@truffle/hdwallet-provider'),
     keythereum: require('keythereum-pure-js'),
+    readlineSync: require('readline-sync'),
     secp256k1: require('secp256k1'),
+    solc: require('solc'),
+    table: require('table'),
+    web3: require('web3'),
+    yargs: require('yargs'),
 }, {
     account: require('./lib/account'),
     config: require('./lib/config'),
