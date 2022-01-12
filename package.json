@@ -49,13 +49,13 @@
         "secp256k1": "^4.0.3",
         "solc": "^0.8.11",
         "table": "^6.8.0",
-        "utilitas": "^1989.8.81",
+        "utilitas": "^1989.8.82",
         "web3": "^1.6.1",
         "yargs": "^17.3.1"
     },
     "devDependencies": {
         "assert": "^2.0.0",
-        "@openzeppelin/contracts": "^4.4.1",
+        "@openzeppelin/contracts": "^4.4.2",
         "browserify-fs": "^1.0.0",
         "buffer": "^6.0.3",
         "https-browserify": "^1.0.0",
