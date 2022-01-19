@@ -1,7 +1,7 @@
 'use strict';
 
 try {
-    module.exports = require('./main');
+    module.exports = require('./main.mjs');
     (process.argv || []).includes('--json')
         || console.log('>>> 🚧 Running in source mode.');
 } catch (e) {

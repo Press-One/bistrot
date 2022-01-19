@@ -2,14 +2,14 @@
 .history
 archived
 debug
-debug.js
+debug.mjs
 Dockerfile
 etc
 gears
 lib
-main.js
+main.mjs
 package-lock.json
 template.md
-test.js
+test.mjs
 webpack.config.js
 wiki
