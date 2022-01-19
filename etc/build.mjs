@@ -1,6 +1,6 @@
 'use strict';
 
-const { utilitas, shot, shell } = require('utilitas');
+const { utilitas, shot } = require('utilitas');
 const externalSource = {};
 const fileCont = {};
 const fs = require('fs');
@@ -30,9 +30,6 @@ const trimCode = (content, separator) => {
         }
         fs.writeFileSync(filename, file.join('\n'), utf8);
     }
-
-    modLog('Fetching GO wasm_exec runtime...');
-    await shell.exec('cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" lib/');
 
     modLog('Fetching files online...');
     for (let i in externalSource) {
