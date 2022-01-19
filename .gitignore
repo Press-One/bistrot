@@ -113,6 +113,6 @@ typings/
 
 # Leask
 package-lock.json
-debug.js
+debug.mjs
 debug
 *.wasm
