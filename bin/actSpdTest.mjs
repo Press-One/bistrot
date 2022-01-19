@@ -1,12 +1,12 @@
 import { quorum } from '../index.mjs';
 
-const func = async (argv) => {
+const action = async (argv) => {
     Object.assign(global.chainConfig, { speedTest: true, debug: true });
     await quorum.getRpcUrl();
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Evaluate the connection speed of server nodes',
     help: [
         '    ┌---------------------------------------------------------------┐',

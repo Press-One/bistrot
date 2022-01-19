@@ -8,7 +8,6 @@ import * as readlineSync from 'readline-sync';
 import * as secp256k1 from 'secp256k1';
 import * as solc from 'solc';
 import * as table from 'table';
-import * as utilitas from 'utilitas';
 import * as web3 from 'web3';
 import * as yargs from 'yargs';
 // features
@@ -47,6 +46,7 @@ global._bistrot = {
 };
 
 // if (runningInBrowser) {
+// export * from 'utilitas';
 //     global.bistrot = {
 //         abiDecoder,
 //         account,
@@ -77,6 +77,7 @@ global._bistrot = {
 //     };
 //     console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
 // } else {
+export * from 'utilitas';
 export {
     abiDecoder,
     account,
@@ -101,7 +102,6 @@ export {
     sushibar,
     system,
     table,
-    utilitas,
     web3,
     yargs,
 };

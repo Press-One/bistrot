@@ -1,6 +1,10 @@
+import { fileURLToPath } from 'url';
 import { utilitas } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
     'ABCDE', 'FIJKL', '12.3456', '26621512',
@@ -63,17 +67,18 @@ const getEnding = (skip) => {
     return ending;
 };
 
-const func = async (argv) => {
+const action = async (argv) => {
     argv.command = String(argv.command || '').toLowerCase();
     const acts = {};
-    fs.readdirSync(__dirname).filter((file) => {
+    const files = fs.readdirSync(__dirname).filter((file) => {
         return argv.command
-            ? (`act${argv.command}.js` === file.toLowerCase())
-            : (/\.js$/i.test(file) && file !== 'bistrot.js');
-    }).forEach((file) => {
-        let actName = file.replace(/^(.*)\.js$/, '$1').replace(/^act/i, '');
-        acts[actName] = require(path.join(__dirname, file));
+            ? (`act${argv.command}.mjs` === file.toLowerCase())
+            : (/\.mjs$/i.test(file) && file !== 'bistrot.mjs');
     });
+    for (let file of files) {
+        let actName = file.replace(/^(.*)\.mjs$/, '$1').replace(/^act/i, '');
+        acts[actName] = { ...await import(path.join(__dirname, file)) };
+    };
     const info = [`${(await utilitas.which(
         path.join(__dirname, '..', 'package.json')
     )).title}`, '', 'usage: bistrot <command> [<args>]'];
@@ -144,7 +149,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'List help info',
     example: [
         {

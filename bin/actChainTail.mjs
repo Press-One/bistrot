@@ -16,7 +16,7 @@ const rawRender = (content, argv) => {
     );
 };
 
-const func = async (argv) => {
+const action = async (argv) => {
     argv.blocknum = utilitas.ensureInt(argv.blocknum, { min: 0 });
     await pacman.init({
         callbacks: {
@@ -28,7 +28,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Trace the lastest block of the chain',
     help: [
         '    --blocknum Initial block num                 [NUMBER  / OPTIONAL]',

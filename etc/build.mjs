@@ -1,7 +1,10 @@
+import { fileURLToPath } from 'url';
 import { utilitas, shot, quorum } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const externalSource = {};
 const fileCont = {};
 const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };

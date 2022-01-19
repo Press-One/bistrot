@@ -13,7 +13,7 @@ const checkRaw = (key) => {
     }
 };
 
-const func = async (argv) => {
+const action = async (argv) => {
     const [input, conf] = [{
         email: argv.email,
         debug: argv.debug,
@@ -40,7 +40,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Configuration',
     help: [
         '    --email    Notification email address         [EMAIL / UNDEFINED]',

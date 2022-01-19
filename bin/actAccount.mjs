@@ -1,11 +1,11 @@
 import { account } from '../index.mjs';
 
-const func = async (argv) => {
+const action = async (argv) => {
     return await account.getByAddress(argv.address);
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Check an Account',
     help: [
         '    --address  Quorum account address            [STRING  / REQUIRED]',
