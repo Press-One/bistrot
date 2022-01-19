@@ -1,11 +1,11 @@
 import { quorum } from '../index.mjs';
 
-const func = async (argv) => {
+const action = async (argv) => {
     return await quorum.getInfo();
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Check QUORUM-chain Information',
     help: [
         '    ┌---------------------------------------------------------------┐',

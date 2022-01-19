@@ -11,7 +11,7 @@ const ensurePassword = (argv) => {
     }
 };
 
-const func = async (argv, options = {}) => {
+const action = async (argv, options = {}) => {
     let [filename, config, resp] = [null, null, []];
     if (argv.delete) {
         const {
@@ -74,7 +74,7 @@ const func = async (argv, options = {}) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Manage Keychain',
     help: [
         '    --address  Quorum address                    [STRING  / REQUIRED]',

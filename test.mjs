@@ -1,8 +1,13 @@
 'use strict';
 
-const { utilitas, encryption, storage, shell } = require('utilitas');
-const path = require('path');
-const fs = require('fs');
+import { fileURLToPath } from 'url';
+import { utilitas, encryption, storage, shell } from 'utilitas';
+import fs from 'fs';
+import path from 'path';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
@@ -115,35 +120,33 @@ const test = async (func) => {
     }
 };
 
-(async () => {
-    (process.argv || []).map(c => {
-        /case[=:]/i.test(c) && c.split(/=|:/)[1].split(/,|;/).map(
-            d => { d && (toTest[d.toLowerCase()] = true); }
-        );
-    });
-    toTest = Object.keys(toTest).length ? toTest : null;
-    const start = process.hrtime.bigint();
-    try {
-        await checkKeystore();
-        await getAllCommands();
-    } catch (e) { log(e.message); process.exit(1); }
-    for (let func in tests) {
-        const tt = func.toLowerCase();
-        if (toTest && !toTest[tt]) { continue; }
-        if (toTest && toTest[tt]) {
-            tests[func].rawResult = true; delete toTest[tt];
-        }
-        await test(func);
+(process.argv || []).map(c => {
+    /case[=:]/i.test(c) && c.split(/=|:/)[1].split(/,|;/).map(
+        d => { d && (toTest[d.toLowerCase()] = true); }
+    );
+});
+toTest = Object.keys(toTest).length ? toTest : null;
+const start = process.hrtime.bigint();
+try {
+    await checkKeystore();
+    await getAllCommands();
+} catch (e) { log(e.message); process.exit(1); }
+for (let func in tests) {
+    const tt = func.toLowerCase();
+    if (toTest && !toTest[tt]) { continue; }
+    if (toTest && toTest[tt]) {
+        tests[func].rawResult = true; delete toTest[tt];
     }
-    for (let i in toTest) { failure(`Test case not found: \`${i}\`.`); }
-    const end = process.hrtime.bigint();
-    const duration = Math.round(parseInt((end - start) / 10000000n)) / 100;
-    split();
-    log(`Success: ${successTest}, Failed: ${failedTest}, `
-        + `Skipped: ${skippedTest}, Time consuming: ${duration} seconds.`);
-    split();
-    if (errors.length) {
-        throw Object.assign(new Error(`${failedTest} test failed.`),
-            { details: errors });
-    }
-})()
+    await test(func);
+}
+for (let i in toTest) { failure(`Test case not found: \`${i}\`.`); }
+const end = process.hrtime.bigint();
+const duration = Math.round(parseInt((end - start) / 10000000n)) / 100;
+split();
+log(`Success: ${successTest}, Failed: ${failedTest}, `
+    + `Skipped: ${skippedTest}, Time consuming: ${duration} seconds.`);
+split();
+if (errors.length) {
+    throw Object.assign(new Error(`${failedTest} test failed.`),
+        { details: errors });
+}

@@ -1,5 +1,9 @@
+import { fileURLToPath } from 'url';
 import { utilitas, config, system } from '../index.mjs';
 import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const [exportSsConfig, packed, failed, merged] = [[
     'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
@@ -20,7 +24,7 @@ const verboseCheck = {
     },
 };
 
-const func = async (argv) => {
+const action = async (argv) => {
     const pkg = path.join(__dirname, '..', 'package.json');
     let data = await utilitas.which(pkg);
     data = data ? {
@@ -34,7 +38,7 @@ const func = async (argv) => {
         license: data.license,
         time: new Date().toISOString(),
     } : {};
-    for (let p of ['sushitrain', 'utilitas']) {
+    for (let p of ['utilitas']) {
         try {
             data[`${p}_version`] = (await utilitas.which(
                 path.join(__dirname, `../node_modules/${p}/package.json`)
@@ -53,7 +57,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'List version info',
     help: [
         '    ┌---------------------------------------------------------------┐',

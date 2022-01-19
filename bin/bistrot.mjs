@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
+import { hideBin } from 'yargs/helpers';
 import { table as table } from 'table';
 import { utilitas, config, crypto, keychain, system } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
 import yargs from 'yargs';
 
-const argv = yargs
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const argv = yargs(hideBin(process.argv))
     .option('address', { string: true })
     .option('id', { string: true })
     .option('hash', { string: true })
@@ -31,7 +36,7 @@ const toArray = (input) => {
 
 const unlockKeystore = async (options = {}) => {
     if (argv.keystore) {
-        const result = await require('./actKeystoreUnlock').func(argv, options);
+        const result = await (await import('./actKeystoreUnlock')).func(argv, options);
         argv.address = result.address;
         argv.pvtkey = result.privateKey;
         return;
@@ -129,13 +134,13 @@ global.chainConfig = await config({
 try {
     const cmds = {};
     fs.readdirSync(__dirname).filter((file) => {
-        return /\.js$/i.test(file) && file !== 'bistrot.js';
+        return /\.mjs$/i.test(file) && file !== 'bistrot.mjs';
     }).forEach((file) => {
         cmds[file.toLowerCase(
-        ).replace(/^act|\.js$/ig, '')] = path.join(__dirname, file);
+        ).replace(/^act|\.mjs$/ig, '')] = path.join(__dirname, file);
     });
     utilitas.assert(cmds[command], errNotFound);
-    const act = require(cmds[command]);
+    const act = await import(cmds[command]);
     utilitas.assert(act && act.func, errNotFound);
     if (act.pvtkey || act.address) {
         await unlockKeystore(argv, { addressOnly: !act.pvtkey });

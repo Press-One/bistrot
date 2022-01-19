@@ -1,11 +1,11 @@
 import { quorum } from '../index.mjs';
 
-const func = async (argv) => {
+const action = async (argv) => {
     return await quorum.getTransactionByHash(argv.hash);
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Get transaction by hash',
     help: [
         '    --hash     Transaction hash                  [STRING  / REQUIRED]',

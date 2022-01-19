@@ -1,7 +1,7 @@
 import { crypto, etc } from '../index.mjs';
 import readline from 'readline-sync';
 
-const func = async (argv) => {
+const action = async (argv) => {
     let repeat = argv.password;
     while (!argv.password || !repeat || argv.password !== repeat) {
         console.log('Input password to encrypt the keystore.');
@@ -23,7 +23,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Create a new Keystore (can also import keys)',
     help: [
         '    --password Use to encrypt the keystore       [STRING  / OPTIONAL]',
