@@ -1,6 +1,4 @@
-'use strict';
-
-const { quorum } = require('..');
+import { quorum } from '../index.mjs';
 
 const maxTrxLength = 288;
 
@@ -14,7 +12,7 @@ const func = async (argv) => {
     return resp;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Get block by block id or block number',
     help: [

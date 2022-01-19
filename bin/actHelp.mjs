@@ -1,8 +1,6 @@
-'use strict';
-
-const { utilitas } = require('..');
-const path = require('path');
-const fs = require('fs');
+import { utilitas } from '../index.mjs';
+import fs from 'fs';
+import path from 'path';
 
 const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
     'ABCDE', 'FIJKL', '12.3456', '26621512',
@@ -145,7 +143,7 @@ const func = async (argv) => {
     console.log(info.join('\n') + '\n');
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'List help info',
     example: [

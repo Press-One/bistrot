@@ -1,12 +1,10 @@
-'use strict';
-
-const { quorum } = require('..');
+import { quorum } from '../index.mjs';
 
 const func = async (argv) => {
     return await quorum.getInfo();
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Check QUORUM-chain Information',
     help: [

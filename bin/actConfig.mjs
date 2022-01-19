@@ -1,6 +1,4 @@
-'use strict';
-
-const { preference, utilitas } = require('..');
+import { preference, utilitas } from '../index.mjs';
 
 const allowedMap = { speedTest: 'spdtest' };
 
@@ -41,7 +39,7 @@ const func = async (argv) => {
     return config;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Configuration',
     help: [
