@@ -1,7 +1,5 @@
-'use strict';
-
-const { utilitas, config, system } = require('..');
-const path = require('path');
+import { utilitas, config, system } from '../index.mjs';
+import path from 'path';
 
 const [exportSsConfig, packed, failed, merged] = [[
     'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
@@ -54,7 +52,7 @@ const func = async (argv) => {
     return data;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'List version info',
     help: [

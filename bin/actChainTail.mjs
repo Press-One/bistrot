@@ -1,6 +1,4 @@
-'use strict';
-
-const { pacman, utilitas } = require('..');
+import { pacman, utilitas } from '../index.mjs';
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };
@@ -29,7 +27,7 @@ const func = async (argv) => {
     });
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Trace the lastest block of the chain',
     help: [

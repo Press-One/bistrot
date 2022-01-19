@@ -1,13 +1,11 @@
-'use strict';
-
-const { quorum } = require('..');
+import { quorum } from '../index.mjs';
 
 const func = async (argv) => {
     Object.assign(global.chainConfig, { speedTest: true, debug: true });
     await quorum.getRpcUrl();
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Evaluate the connection speed of server nodes',
     help: [

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-'use strict';
+import { table as table } from 'table';
+import { utilitas, config, crypto, keychain, system } from '../index.mjs';
+import fs from 'fs';
+import path from 'path';
+import yargs from 'yargs';
 
-const { utilitas, config, crypto, keychain, system } = require('..');
-const table = require('table').table;
-const path = require('path');
-const fs = require('fs');
-const argv = require('yargs')
+const argv = yargs
     .option('address', { string: true })
     .option('id', { string: true })
     .option('hash', { string: true })
@@ -117,35 +117,34 @@ const errNotFound = `Command not found: \`${command}\`.`;
 command = command.toLowerCase();
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
-(async () => {
-    system.testNet(argv);
-    global.chainConfig = await config({
-        debug: argv.debug,
-        secret: argv.secret,
-        rpcApi: argv.rpcapi,
-        chainApi: argv.chainapi,
-        speedTest: argv.spdtest,
+system.testNet(argv);
+global.chainConfig = await config({
+    debug: argv.debug,
+    secret: argv.secret,
+    rpcApi: argv.rpcapi,
+    chainApi: argv.chainapi,
+    speedTest: argv.spdtest,
+});
+
+try {
+    const cmds = {};
+    fs.readdirSync(__dirname).filter((file) => {
+        return /\.js$/i.test(file) && file !== 'bistrot.js';
+    }).forEach((file) => {
+        cmds[file.toLowerCase(
+        ).replace(/^act|\.js$/ig, '')] = path.join(__dirname, file);
     });
-    try {
-        const cmds = {};
-        fs.readdirSync(__dirname).filter((file) => {
-            return /\.js$/i.test(file) && file !== 'bistrot.js';
-        }).forEach((file) => {
-            cmds[file.toLowerCase(
-            ).replace(/^act|\.js$/ig, '')] = path.join(__dirname, file);
-        });
-        utilitas.assert(cmds[command], errNotFound);
-        const act = require(cmds[command]);
-        utilitas.assert(act && act.func, errNotFound);
-        if (act.pvtkey || act.address) {
-            await unlockKeystore(argv, { addressOnly: !act.pvtkey });
-        }
-        if (act.address && !argv.address && argv.pvtkey) {
-            argv.address = crypto.privateKeyToAddress(argv.pvtkey);
-        }
-        const result = await act.func(argv);
-        randerResult(result, act.render);
-    } catch (err) {
-        console.error(global.chainConfig.debug ? err.stack : err.toString());
+    utilitas.assert(cmds[command], errNotFound);
+    const act = require(cmds[command]);
+    utilitas.assert(act && act.func, errNotFound);
+    if (act.pvtkey || act.address) {
+        await unlockKeystore(argv, { addressOnly: !act.pvtkey });
     }
-})();
+    if (act.address && !argv.address && argv.pvtkey) {
+        argv.address = crypto.privateKeyToAddress(argv.pvtkey);
+    }
+    const result = await act.func(argv);
+    randerResult(result, act.render);
+} catch (err) {
+    console.error(global.chainConfig.debug ? err.stack : err.toString());
+}

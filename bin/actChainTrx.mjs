@@ -1,12 +1,10 @@
-'use strict';
-
-const { quorum } = require('..');
+import { quorum } from '../index.mjs';
 
 const func = async (argv) => {
     return await quorum.getTransactionByHash(argv.hash);
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Get transaction by hash',
     help: [

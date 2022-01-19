@@ -1,8 +1,6 @@
-'use strict';
-
-const { utilitas } = require('..');
-const path = require('path');
-const fs = require('fs');
+import { utilitas } from '../index.mjs';
+import fs from 'fs';
+import path from 'path';
 
 const func = async (argv) => {
     const acts = {};
@@ -33,7 +31,7 @@ const func = async (argv) => {
     return info;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'List available commands',
     example: [
