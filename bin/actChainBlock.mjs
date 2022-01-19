@@ -2,7 +2,7 @@ import { quorum } from '../index.mjs';
 
 const maxTrxLength = 288;
 
-const func = async (argv) => {
+const action = async (argv) => {
     let resp = await quorum.getBlockByNumberOrHash(argv.id);
     if (!argv.json) {
         const trx = JSON.stringify(resp.transactions);
@@ -13,7 +13,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Get block by block id or block number',
     help: [
         '    --id       `block id` or `block number`      [STR|NUM / REQUIRED]',

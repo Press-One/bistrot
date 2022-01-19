@@ -2,7 +2,7 @@ import { utilitas, crypto } from '../index.mjs';
 import fs from 'fs';
 import readline from 'readline-sync';
 
-const func = async (argv, options = {}) => {
+const action = async (argv, options = {}) => {
     utilitas.assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
@@ -20,7 +20,7 @@ const func = async (argv, options = {}) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'Unlock a Keystore',
     help: [
         '    --keystore Path to the keystore JSON file    [STRING  / REQUIRED]',

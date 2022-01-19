@@ -1,17 +1,22 @@
+import { fileURLToPath } from 'url';
 import { utilitas } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
 
-const func = async (argv) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const action = async (argv) => {
     const acts = {};
-    fs.readdirSync(__dirname).filter((file) => {
-        return /\.js$/i.test(file) && file.toLowerCase() !== 'bistrot.js';
-    }).forEach((file) => {
-        let actName = file.replace(
-            /^(.*)\.js$/, '$1'
-        ).replace(/^act/i, '').toLowerCase();
-        acts[actName] = require(path.join(__dirname, file));
+    const files = fs.readdirSync(__dirname).filter((file) => {
+        return /\.mjs$/i.test(file) && file.toLowerCase() !== 'bistrot.mjs';
     });
+    for (let file of files) {
+        let actName = file.replace(
+            /^(.*)\.mjs$/, '$1'
+        ).replace(/^act/i, '').toLowerCase();
+        acts[actName] = { ...await import(path.join(__dirname, file)) };
+    };
     const info = {};
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     const find = {};
@@ -32,7 +37,7 @@ const func = async (argv) => {
 };
 
 export const { func, name, help, example, render } = {
-    func,
+    func: action,
     name: 'List available commands',
     example: [
         {
