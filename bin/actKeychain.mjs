@@ -1,8 +1,7 @@
-'use strict';
+import { utilitas, preference, keychain, crypto } from '../index.mjs';
+import fs from 'fs';
+import readline from 'readline-sync';
 
-const { utilitas, preference, keychain, crypto } = require('..');
-const readline = require('readline-sync');
-const fs = require('fs');
 const privatekeyLength = 64;
 
 const ensurePassword = (argv) => {
@@ -74,7 +73,7 @@ const func = async (argv, options = {}) => {
     return resp;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Manage Keychain',
     help: [

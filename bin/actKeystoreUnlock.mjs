@@ -1,8 +1,6 @@
-'use strict';
-
-const { utilitas, crypto } = require('..');
-const readline = require('readline-sync');
-const fs = require('fs');
+import { utilitas, crypto } from '../index.mjs';
+import fs from 'fs';
+import readline from 'readline-sync';
 
 const func = async (argv, options = {}) => {
     utilitas.assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
@@ -21,7 +19,7 @@ const func = async (argv, options = {}) => {
     return crypto.recoverPrivateKey(argv.password, kObj);
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Unlock a Keystore',
     help: [

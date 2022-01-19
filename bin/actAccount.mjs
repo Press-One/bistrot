@@ -1,12 +1,10 @@
-'use strict';
-
-const { account } = require('..');
+import { account } from '../index.mjs';
 
 const func = async (argv) => {
     return await account.getByAddress(argv.address);
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Check an Account',
     help: [

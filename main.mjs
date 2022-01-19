@@ -1,47 +1,108 @@
-'use strict';
+// dependencies
+import * as abiDecoder from 'abi-decoder';
+import * as elliptic from 'elliptic';
+import * as ethereumUtil from 'ethereumjs-util';
+import * as hdwalletProvider from '@truffle/hdwallet-provider';
+import * as keythereum from 'keythereum-pure-js';
+import * as readlineSync from 'readline-sync';
+import * as secp256k1 from 'secp256k1';
+import * as solc from 'solc';
+import * as table from 'table';
+import * as utilitas from 'utilitas';
+import * as web3 from 'web3';
+import * as yargs from 'yargs';
+// features
+import * as account from './lib/account.mjs';
+import * as crypto from './lib/crypto.mjs';
+import * as erc20 from './lib/erc20.mjs';
+import * as etc from './lib/etc.mjs';
+import * as finance from './lib/finance.mjs';
+import * as keychain from './lib/keychain.mjs';
+import * as mixin from './lib/mixin.mjs';
+import * as pacman from './lib/pacman.mjs';
+import * as quorum from './lib/quorum.mjs';
+import * as rumsc from './lib/rumsc.mjs';
+import * as sushibar from './lib/sushibar.mjs';
+import * as system from './lib/system.mjs';
+import config from './lib/config.mjs';
+import preference from './lib/preference.mjs';
 
 let runningInBrowser = false;
 try { runningInBrowser = !!window; } catch (e) { }
 if (runningInBrowser) { global = window; }
 
-global._bistrot = Object.assign(require('./package.json'), {
+// import * as package from './package.json'; {
+// https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const npmPackage = require('./package.json');
+// }
+
+global._bistrot = {
+    ...npmPackage,
     // testNetRpcApi: 'http://51.255.133.170:8888',
     // testNetChainApi: 'https://elm-sushibar.ngrok.io',
     testNetOfficialMixin: '14da6c0c-0cbf-483c-987a-c44477dcad1b',
     runningInBrowser,
-});
+};
 
-const modExp = Object.assign(require('utilitas'), {
-    abiDecoder: require('abi-decoder'),
-    elliptic: require('elliptic'),
-    ethereumUtil: require('ethereumjs-util'),
-    hdwalletProvider: require('@truffle/hdwallet-provider'),
-    keythereum: require('keythereum-pure-js'),
-    readlineSync: require('readline-sync'),
-    secp256k1: require('secp256k1'),
-    solc: require('solc'),
-    table: require('table'),
-    web3: require('web3'),
-    yargs: require('yargs'),
-}, {
-    account: require('./lib/account'),
-    config: require('./lib/config'),
-    crypto: require('./lib/crypto'),
-    erc20: require('./lib/erc20'),
-    etc: require('./lib/etc'),
-    finance: require('./lib/finance'),
-    keychain: require('./lib/keychain'),
-    mixin: require('./lib/mixin'),
-    pacman: require('./lib/pacman'),
-    preference: require('./lib/preference'),
-    quorum: require('./lib/quorum'),
-    rumsc: require('./lib/rumsc'),
-    sushibar: require('./lib/sushibar'),
-    system: require('./lib/system'),
-    wasm_exec: require('./lib/wasm_exec'),
-});
-
-if (runningInBrowser) {
-    global.bistrot = modExp;
-    console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
-} else { module.exports = modExp; }
+// if (runningInBrowser) {
+//     global.bistrot = {
+//         abiDecoder,
+//         account,
+//         config,
+//         crypto,
+//         elliptic,
+//         erc20,
+//         etc,
+//         ethereumUtil,
+//         finance,
+//         hdwalletProvider,
+//         keychain,
+//         keythereum,
+//         mixin,
+//         pacman,
+//         preference,
+//         quorum,
+//         readlineSync,
+//         rumsc,
+//         secp256k1,
+//         solc,
+//         sushibar,
+//         system,
+//         table,
+//         utilitas,
+//         web3,
+//         yargs,
+//     };
+//     console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready! 🍻');
+// } else {
+export {
+    abiDecoder,
+    account,
+    config,
+    crypto,
+    elliptic,
+    erc20,
+    etc,
+    ethereumUtil,
+    finance,
+    hdwalletProvider,
+    keychain,
+    keythereum,
+    mixin,
+    pacman,
+    preference,
+    quorum,
+    readlineSync,
+    rumsc,
+    secp256k1,
+    solc,
+    sushibar,
+    system,
+    table,
+    utilitas,
+    web3,
+    yargs,
+};
+// }

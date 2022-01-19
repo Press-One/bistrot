@@ -1,7 +1,5 @@
-'use strict';
-
-const { crypto, etc } = require('..');
-const readline = require('readline-sync');
+import { crypto, etc } from '../index.mjs';
+import readline from 'readline-sync';
 
 const func = async (argv) => {
     let repeat = argv.password;
@@ -24,7 +22,7 @@ const func = async (argv) => {
     return result;
 };
 
-module.exports = {
+export const { func, name, help, example, render } = {
     func,
     name: 'Create a new Keystore (can also import keys)',
     help: [
