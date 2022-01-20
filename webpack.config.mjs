@@ -58,38 +58,36 @@ export default [{
             library: { type: 'module' },
         },
     },
-},
-    // {
-    // ...base, ...{
-    //     target: ['web'],
-    //     output: {
-    //         path: dist,
-    //         filename: 'index.web.mjs',
-    //         asyncChunks,
-    //     },
-    //     plugins: [
-    //         new webpack.ProvidePlugin({ process: 'process/browser.js' }),
-    //         new NodePolyfillPlugin()
-    //     ],
-    //     resolve: {
-    //         ...base.resolve,
-    //         alias: {
-    //             ...base.resolve.alias,
-    //             child_process: false,
-    //             module: false,
-    //             ping: false,
-    //             solc: false,
-    //         },
-    //         fallback: {
-    //             fs: require.resolve('browserify-fs'),
-    //             web3: require.resolve('web3/dist/web3.min.js'),
-    //         },
-    //     },
-    //     externals: [
-    //         ...base.externals,
-    //         { 'node:buffer': '{}' },
-    //         { 'node:stream': '{}' },
-    //     ]
-    // },
-    // }
-];
+}, {
+    ...base, ...{
+        target: ['web'],
+        output: {
+            path: dist,
+            filename: 'index.web.mjs',
+            asyncChunks,
+        },
+        plugins: [
+            new webpack.ProvidePlugin({ process: 'process/browser.js' }),
+            new NodePolyfillPlugin()
+        ],
+        resolve: {
+            ...base.resolve,
+            alias: {
+                ...base.resolve.alias,
+                child_process: false,
+                module: false,
+                ping: false,
+                solc: false,
+            },
+            fallback: {
+                fs: require.resolve('browserify-fs'),
+                web3: require.resolve('web3/dist/web3.min.js'),
+            },
+        },
+        externals: [
+            ...base.externals,
+            { 'node:buffer': '{}' },
+            { 'node:stream': '{}' },
+        ]
+    },
+}];
