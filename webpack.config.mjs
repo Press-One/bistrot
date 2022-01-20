@@ -50,7 +50,7 @@ export default [{
         target: ['node14', 'electron14-main'],
         output: {
             path: dist,
-            filename: 'index.js',
+            filename: 'index.mjs',
             asyncChunks,
             libraryTarget: 'commonjs',
         },
@@ -60,7 +60,7 @@ export default [{
         target: ['web'],
         output: {
             path: dist,
-            filename: 'index.web.js',
+            filename: 'index.web.mjs',
             asyncChunks,
         },
         plugins: [
