@@ -11,5 +11,5 @@ main.mjs
 package-lock.json
 template.md
 test.mjs
-webpack.config.js
+webpack.config.mjs
 wiki
