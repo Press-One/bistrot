@@ -22,7 +22,7 @@
         "gitsync": "git pull && git push",
         "wasmbuild": "GOOS=js GOARCH=wasm go build -o ./wasm/main.wasm ./wasm/main.go",
         "ncuinit": "npm install -g npm-check-updates",
-        "pack": "node ./etc/build.mjs && ./node_modules/.bin/webpack-cli --config webpack.config.js",
+        "pack": "node ./etc/build.mjs && ./node_modules/.bin/webpack-cli --config webpack.config.mjs",
         "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.mjs --json >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
         "docker-build-us": "docker build --no-cache -t pressone/bistrot .",
@@ -50,20 +50,14 @@
         "secp256k1": "^4.0.3",
         "solc": "^0.8.11",
         "table": "^6.8.0",
-        "utilitas": "^1989.9.8",
+        "utilitas": "^1989.9.10",
         "web3": "^1.7.0",
         "yargs": "^17.3.1"
     },
     "devDependencies": {
-        "assert": "^2.0.0",
         "@openzeppelin/contracts": "^4.4.2",
         "browserify-fs": "^1.0.0",
-        "buffer": "^6.0.3",
-        "https-browserify": "^1.0.0",
-        "path-browserify": "^1.0.1",
-        "stream-browserify": "^3.0.0",
-        "stream-http": "^3.2.0",
-        "url": "^0.11.0",
+        "node-polyfill-webpack-plugin": "^1.1.4",
         "webpack": "^5.66.0",
         "webpack-cli": "^4.9.1"
     }
