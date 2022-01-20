@@ -52,7 +52,7 @@ export default [{
             path: dist,
             filename: 'index.mjs',
             asyncChunks,
-            libraryTarget: 'commonjs',
+            libraryTarget: 'umd',
         },
     },
 }, {
