@@ -26,7 +26,6 @@ const base = {
             'mailgun-js': false,
             'mysql2': false,
             'node-mailjet': false,
-            'public-ip': false,
             'readline-sync': false,
             'table': false,
             'telesignsdk': false,
