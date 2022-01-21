@@ -11,7 +11,7 @@
         "bistrot": "bin/bistrot.mjs"
     },
     "engines": {
-        "node": ">=14.x"
+        "node": ">=16.x"
     },
     "scripts": {
         "start": "node --no-deprecation bin/bistrot.mjs",
