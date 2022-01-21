@@ -15,7 +15,7 @@ const asyncChunks = false;
 const base = {
     mode: 'production',
     entry: './main.mjs',
-    optimization: { minimize: true },
+    optimization: { minimize: false },
     experiments: { topLevelAwait: true },
     resolve: {
         extensions: ['.mjs', '.cjs', '.js', '.json', '.node'],
@@ -44,7 +44,7 @@ const base = {
             && warning?.loc?.end?.column === 57
         ));
     }],
-    node: { __dirname: false, __filename: false, },
+    node: { __dirname: false, __filename: false },
 };
 
 export default [{
