@@ -15,7 +15,7 @@ const asyncChunks = false;
 const base = {
     mode: 'production',
     entry: './main.mjs',
-    optimization: { minimize: false },
+    optimization: { minimize: true },
     experiments: { topLevelAwait: true },
     resolve: {
         extensions: ['.mjs', '.cjs', '.js', '.json', '.node'],
@@ -34,6 +34,7 @@ const base = {
             'winston-papertrail-mproved': false,
             'winston': false,
             'yargs': false,
+            'solc': false, // @todo: because solc is not a node module yet
         },
     },
     externals: [/cardinal/, { got: 'commonjs got' }],
@@ -77,7 +78,6 @@ export default [{
                 child_process: false,
                 module: false,
                 ping: false,
-                solc: false,
             },
             fallback: {
                 fs: require.resolve('browserify-fs'),
