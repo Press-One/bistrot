@@ -7,7 +7,7 @@ Dockerfile
 etc
 gears
 lib
-main.mjs
+# main.mjs
 package-lock.json
 template.md
 test.mjs
