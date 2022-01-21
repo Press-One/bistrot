@@ -4,7 +4,7 @@ archived
 debug
 debug.mjs
 Dockerfile
-etc
+# etc // stop packing now
 gears
 # lib // stop packing now
 # main.mjs // stop packing now
