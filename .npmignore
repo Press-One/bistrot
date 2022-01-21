@@ -6,8 +6,8 @@ debug.mjs
 Dockerfile
 etc
 gears
-lib
-# main.mjs
+# lib // stop packing now
+# main.mjs // stop packing now
 package-lock.json
 template.md
 test.mjs
