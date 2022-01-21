@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import { utilitas, shot, } from 'utilitas';
+import { utilitas, shot } from 'utilitas';
 import * as quorum from '../lib/quorum.mjs';
 import fs from 'fs';
 import path from 'path';
