@@ -23,8 +23,8 @@ import * as readlineSync from 'readline-sync';
 import * as secp256k1 from 'secp256k1';
 import * as solc from 'solc';
 import * as table from 'table';
-import * as web3 from 'web3';
 import * as yargs from 'yargs';
+import web3 from 'web3';
 // features
 import * as account from './lib/account.mjs';
 import * as crypto from './lib/crypto.mjs';
