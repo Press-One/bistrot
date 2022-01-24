@@ -2,14 +2,14 @@
 .history
 archived
 debug
-debug.js
+debug.mjs
 Dockerfile
-etc
+# etc // stop packing now
 gears
-lib
-main.js
+# lib // stop packing now
+# main.mjs // stop packing now
 package-lock.json
 template.md
-test.js
-webpack.config.js
+test.mjs
+webpack.config.mjs
 wiki
