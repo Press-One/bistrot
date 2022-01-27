@@ -13,13 +13,6 @@ const patches = { /* 'file': [['x', 'y']], */ };
 const targetFile = 'index.json';
 const utf8 = 'utf8';
 
-const trimCode = (content, separator) => {
-    const lines = content.split('\n');
-    content = [];
-    lines.map(x => { (x = x.trim()) && content.push(x); });
-    return content.join(separator || '');
-};
-
 modLog('Patching files...');
 for (let f in patches) {
     const filename = path.join(__dirname, '..', f);
@@ -47,15 +40,10 @@ modLog('Loading files...');
 }).forEach(file => {
     modLog(`> ${file}`);
     let content = fs.readFileSync(path.join(__dirname, file), utf8);
-    if (/\.json$/.test(file)) { content = trimCode(content); }
+    if (/\.json$/.test(file)) { content = quorum.trimCode(content); }
     if (/\.sol$/.test(file)) {
-        const resp = quorum.compile(content, { refresh: true });
-        for (let i in resp) {
-            fileCont[`abi${i}.json`] = JSON.stringify({ abi: resp[i].abi });
-            for (let j in resp[i].dependencies) {
-                fileCont[j] = trimCode(resp[i].dependencies[j], '\n');
-            }
-        }
+        const resp = quorum.prepareContract(content);
+        for (let i in resp) { fileCont[i] = resp[i]; }
     }
     fileCont[file] = content;
 });
