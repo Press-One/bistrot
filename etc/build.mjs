@@ -39,13 +39,14 @@ modLog('Loading files...');
         && !new Set([path.basename(__filename), targetFile]).has(file);
 }).forEach(file => {
     modLog(`> ${file}`);
-    let content = fs.readFileSync(path.join(__dirname, file), utf8);
-    if (/\.json$/.test(file)) { content = quorum.trimCode(content); }
+    const filename = path.join(__dirname, file);
+    if (/\.json$/.test(file)) {
+        fileCont[file] = quorum.trimCode(fs.readFileSync(filename, utf8));
+    }
     if (/\.sol$/.test(file)) {
-        const resp = quorum.prepareContract(content);
+        const resp = quorum.prepareContract(filename);
         for (let i in resp) { fileCont[i] = resp[i]; }
     }
-    fileCont[file] = content;
 });
 
 modLog('Updating bundle...');
