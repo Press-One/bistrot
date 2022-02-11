@@ -27,22 +27,25 @@ const base = {
             'mysql2': false,
             'node-mailjet': false,
             'readline-sync': false,
+            'solc': false, // @todo: because solc is not a node module yet
             'table': false,
+            'telegraf': false,
             'telesignsdk': false,
             'twilio': false,
-            'winston-papertrail-mproved': false,
-            'winston': false,
             'yargs': false,
-            'solc': false, // @todo: because solc is not a node module yet
         },
     },
     externals: [/cardinal/, { got: 'commonjs got' }],
     ignoreWarnings: [warning => {
-        return ((warning?.loc?.start?.line === 84 // utilitas.event
-            && warning?.loc?.start?.column === 26
-            && warning?.loc?.end?.line === 84
-            && warning?.loc?.end?.column === 57
-        ));
+        return ((warning?.loc?.start?.line === 83 // utilitas.event
+            && warning?.loc?.start?.column === 31
+            && warning?.loc?.end?.line === 83
+            && warning?.loc?.end?.column === 62
+        ) || (warning?.loc?.start?.line === 75 // utilitas.bot
+            && warning?.loc?.start?.column === 32
+            && warning?.loc?.end?.line === 75
+            && warning?.loc?.end?.column === 63
+            ));
     }],
     node: { __dirname: false, __filename: false },
 };
