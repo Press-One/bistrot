@@ -48,9 +48,9 @@
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
         "secp256k1": "^4.0.3",
-        "solc": "^0.8.11",
+        "solc": "^0.8.12",
         "table": "^6.8.0",
-        "utilitas": "^1989.9.40",
+        "utilitas": "^1989.9.41",
         "web3": "^1.7.0",
         "yargs": "^17.3.1"
     },
