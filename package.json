@@ -58,7 +58,7 @@
         "@openzeppelin/contracts": "^4.5.0",
         "browserify-fs": "^1.0.0",
         "node-polyfill-webpack-plugin": "^1.1.4",
-        "webpack": "^5.69.0",
+        "webpack": "^5.69.1",
         "webpack-cli": "^4.9.2"
     }
 }
