@@ -1,7 +1,7 @@
 {
     "name": "bistrot",
     "description": "A CLI client and also an API library for RumSystem.net.",
-    "version": "7.3.30",
+    "version": "7.4.0",
     "private": false,
     "homepage": "https://github.com/Press-One/bistrot",
     "main": "index.mjs",
@@ -21,7 +21,6 @@
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
         "ncuinit": "npm install -g npm-check-updates",
-        "pack_pause": "node ./etc/build.mjs && ./node_modules/.bin/webpack-cli --config webpack.config.mjs",
         "pack": "node ./etc/build.mjs",
         "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
         "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.mjs --json >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
@@ -55,10 +54,6 @@
         "yargs": "^17.3.1"
     },
     "devDependencies": {
-        "@openzeppelin/contracts": "^4.5.0",
-        "browserify-fs": "^1.0.0",
-        "node-polyfill-webpack-plugin": "^1.1.4",
-        "webpack": "^5.69.1",
-        "webpack-cli": "^4.9.2"
+        "@openzeppelin/contracts": "^4.5.0"
     }
 }
