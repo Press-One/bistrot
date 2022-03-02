@@ -1,32 +1,32 @@
-# PRS-ATM
+# Bistrot
 
-A CLI client for [PRESS.one](https://press.one/) .
+A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
-![defichart](https://github.com/Press-One/prs-atm/blob/master/wiki/defichart.jpg?raw=true "defichart")
+![banner](https://github.com/Press-One/bistrot/blob/master/wiki/banner.jpg?raw=true "banner")
 
-## Install with [npm](https://www.npmjs.com/package/prs-atm)
+## Install with [npm](https://www.npmjs.com/package/bistrot)
 
 ```console
 $ sudo npm config set unsafe-perm true
-$ sudo npm install -g prs-atm
-$ prs-atm help
+$ sudo npm install -g bistrot
+$ bistrot help
 ```
 
-## Run a [prs-atm container](https://hub.docker.com/repository/docker/pressone/prs-atm)
+## Run a [bistrot container](https://hub.docker.com/repository/docker/pressone/bistrot)
 
 ### From Docker Hub
 
 ```console
-$ docker pull pressone/prs-atm
-$ docker run -it --rm pressone/prs-atm prs-atm help
+$ docker pull pressone/bistrot
+$ docker run -it --rm pressone/bistrot bistrot help
 ```
 
 ### From a Mirror Server (inside China)
 
 ```console
 $ docker login -u prs-os -p pressone dockerhub.qingcloud.com
-$ docker pull dockerhub.qingcloud.com/pressone/prs-atm
-$ docker run -it --rm dockerhub.qingcloud.com/pressone/prs-atm prs-atm help
+$ docker pull dockerhub.qingcloud.com/pressone/bistrot
+$ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ```
 
 *Important: If you want to use a keystore file with the docker version, be sure to mount the path to the keystore file.*

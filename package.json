@@ -1,50 +1,64 @@
 {
-    "name": "prs-atm",
-    "description": "A CLI client for PRESS.one .",
-    "version": "4.0.10",
+    "name": "bistrot",
+    "description": "A CLI client and also an API library for RumSystem.net.",
+    "version": "7.3.30",
     "private": false,
-    "homepage": "https://github.com/Press-One/prs-atm",
-    "main": "index.js",
+    "homepage": "https://github.com/Press-One/bistrot",
+    "main": "index.mjs",
+    "test": "test.mjs",
+    "type": "module",
     "bin": {
-        "prs-atm": "bin/prs-atm.js"
+        "bistrot": "bin/bistrot.mjs"
     },
     "engines": {
-        "node": ">=14.x"
+        "node": ">=16.x"
     },
     "scripts": {
-        "start": "node bin/prs-atm.js",
-        "debug": "node --inspect --trace-warnings debug.js",
-        "test": "node --inspect --trace-warnings test.js",
-        "ncuinit": "npm install -g npm-check-updates",
+        "start": "node --no-deprecation bin/bistrot.mjs",
+        "debug": "node --inspect --trace-warnings debug.mjs",
+        "test": "node --inspect --trace-warnings test.mjs",
+        "devinit": "npm install -g npm-check-updates && npm install -s dev",
         "updep": "npx ncu -u && npm install && ( git commit -am 'update dependencies' || true )",
         "gitsync": "git pull && git push",
-        "prepublishOnly": "npm run readme && npm version patch && npm run updep && npm run gitsync",
-        "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/prs-atm.js >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
-        "docker-build-us": "docker build --no-cache -t pressone/prs-atm .",
-        "docker-build-cn": "docker build --no-cache -t dockerhub.qingcloud.com/pressone/prs-atm .",
-        "docker-push-us": "docker push pressone/prs-atm",
-        "docker-push-cn": "docker push dockerhub.qingcloud.com/pressone/prs-atm",
+        "ncuinit": "npm install -g npm-check-updates",
+        "pack_pause": "node ./etc/build.mjs && ./node_modules/.bin/webpack-cli --config webpack.config.mjs",
+        "pack": "node ./etc/build.mjs",
+        "prepublishOnly": "npm run pack && npm run readme && npm version patch && npm run updep && npm run gitsync",
+        "readme": "cat template.md > README.md && echo '\n```markdown' >> README.md && ./bin/bistrot.mjs --json >> README.md && echo '```' >> README.md && ( git commit -am 'update README.md' || true )",
+        "docker-build-us": "docker build --no-cache -t pressone/bistrot .",
+        "docker-build-cn": "docker build --no-cache -t dockerhub.qingcloud.com/pressone/bistrot .",
+        "docker-push-us": "docker push pressone/bistrot",
+        "docker-push-cn": "docker push dockerhub.qingcloud.com/pressone/bistrot",
         "docker-publish-us": "npm run docker-build-us && npm run docker-push-us",
         "docker-publish-cn": "npm run docker-build-cn && npm run docker-push-cn",
         "docker-publish": "npm run docker-publish-us && npm run docker-publish-cn",
-        "publish-beta": "npm publish --tag beta",
-        "pack": "./node_modules/.bin/webpack-cli --config webpack.config.js"
+        "beta": "npm publish --tag beta"
     },
     "author": "Leask Wong <i@leaskh.com>",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Press-One/prs-atm.git"
+        "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
+        "@truffle/hdwallet-provider": "^2.0.3",
+        "abi-decoder": "^2.4.0",
+        "elliptic": "^6.5.4",
+        "ethereumjs-util": "^7.1.4",
         "keythereum-pure-js": "^1.1.9",
         "readline-sync": "^1.4.10",
-        "sushitrain": "^1989.9.4",
-        "table": "^6.0.7",
-        "yargs": "^16.2.0"
+        "secp256k1": "^4.0.3",
+        "solc": "^0.8.12",
+        "table": "^6.8.0",
+        "utilitas": "^1989.9.41",
+        "web3": "^1.7.0",
+        "yargs": "^17.3.1"
     },
     "devDependencies": {
-        "webpack": "^5.12.1",
-        "webpack-cli": "^4.3.1"
+        "@openzeppelin/contracts": "^4.5.0",
+        "browserify-fs": "^1.0.0",
+        "node-polyfill-webpack-plugin": "^1.1.4",
+        "webpack": "^5.69.1",
+        "webpack-cli": "^4.9.2"
     }
 }
