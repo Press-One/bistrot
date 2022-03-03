@@ -1,13 +1,11 @@
 .github
 .history
-archived
 debug
 debug.mjs
 Dockerfile
-# etc // stop packing now
+etc
+!etc/index.json
 gears
-# lib // stop packing now
-# main.mjs // stop packing now
 package-lock.json
 template.md
 test.mjs
