@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.4.17
+bistrot v7.4.18
 
 usage: bistrot <command> [<args>]
 
@@ -50,6 +50,20 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
+* `Block` > Get block by block id or block number:
+
+    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Please use option `--json` to get complete block data.     |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ bistrot Block \
+              --id=26621512 \
+              --json
+
+=====================================================================
+
 * `Chain` > Check QUORUM-chain Information:
 
     ┌---------------------------------------------------------------┐
@@ -62,56 +76,6 @@ usage: bistrot <command> [<args>]
     > Example of checking specific QUORUM-node Information:
     $ bistrot Chain \
               --rpcapi=http://51.68.201.144:8888
-
-=====================================================================
-
-* `ChainBlock` > Get block by block id or block number:
-
-    --id       `block id` or `block number`      [STR|NUM / REQUIRED]
-    ┌---------------------------------------------------------------┐
-    | 1. Please use option `--json` to get complete block data.     |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot ChainBlock \
-              --id=26621512 \
-              --json
-
-=====================================================================
-
-* `ChainTail` > Trace the lastest block of the chain:
-
-    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
-    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
-    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
-    ┌---------------------------------------------------------------┐
-    | 1. Start from the latest block while `blocknum` is missing.   |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot ChainTail \
-              --blocknum=26621512 \
-              --json
-
-    > Example:
-    $ bistrot ChainTail \
-              --blocknum=26621512 \
-              --json \
-              --grep=PIP:2001
-
-=====================================================================
-
-* `ChainTrx` > Get transaction by hash:
-
-    --hash     Transaction hash                  [STRING  / REQUIRED]
-    ┌---------------------------------------------------------------┐
-    | 1. Use option `--json` to get complete transaction data.      |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot ChainTrx \
-              --hash=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --json
 
 =====================================================================
 
@@ -233,6 +197,42 @@ usage: bistrot <command> [<args>]
     $ bistrot SpdTest \
               --rpcapi=http://51.68.201.144:8888 \
               --chainapi=https://prs-bp1.press.one
+
+=====================================================================
+
+* `Tail` > Trace the lastest block of the chain:
+
+    --blocknum Initial block num                 [NUMBER  / OPTIONAL]
+    --grep     Match keyword or RegExp           [STRING  / OPTIONAL]
+    --detail   Show socket channel status        [WITH  OR  WITHOUT ]
+    ┌---------------------------------------------------------------┐
+    | 1. Start from the latest block while `blocknum` is missing.   |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ bistrot Tail \
+              --blocknum=26621512 \
+              --json
+
+    > Example:
+    $ bistrot Tail \
+              --blocknum=26621512 \
+              --json \
+              --grep=PIP:2001
+
+=====================================================================
+
+* `Trx` > Get transaction by hash:
+
+    --hash     Transaction hash                  [STRING  / REQUIRED]
+    ┌---------------------------------------------------------------┐
+    | 1. Use option `--json` to get complete transaction data.      |
+    └---------------------------------------------------------------┘
+
+    > Example:
+    $ bistrot Trx \
+              --hash=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+              --json
 
 =====================================================================
 
