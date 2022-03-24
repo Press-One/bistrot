@@ -1,33 +1,10 @@
 {
-    "address": "0xb63a2800413f141E8755B6A1Ca441913663d3c6c",
+    "address": "0xEc84bbE271149D08d566B0b31a7d4cF0d31F473C",
     "abi": [
         {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "_groupId",
-                    "type": "uint128"
-                },
-                {
-                    "internalType": "bytes",
-                    "name": "receiver",
-                    "type": "bytes"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_duration",
-                    "type": "uint64"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_price",
-                    "type": "uint64"
-                }
-            ],
-            "name": "addPrice",
-            "outputs": [],
+            "inputs": [],
             "stateMutability": "nonpayable",
-            "type": "function"
+            "type": "constructor"
         },
         {
             "anonymous": false,
@@ -177,24 +154,6 @@
             "type": "event"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint128",
-                    "name": "groupId",
-                    "type": "uint128"
-                }
-            ],
-            "name": "pay",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "anonymous": false,
             "inputs": [
                 {
@@ -233,29 +192,6 @@
         {
             "stateMutability": "payable",
             "type": "fallback"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "_groupId",
-                    "type": "uint128"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_duration",
-                    "type": "uint64"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_price",
-                    "type": "uint64"
-                }
-            ],
-            "name": "updatePrice",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
         },
         {
             "inputs": [
@@ -330,52 +266,6 @@
         {
             "inputs": [
                 {
-                    "internalType": "bytes",
-                    "name": "extra",
-                    "type": "bytes"
-                }
-            ],
-            "name": "_parse_extra",
-            "outputs": [
-                {
-                    "components": [
-                        {
-                            "internalType": "enum PaidGroup.Action",
-                            "name": "action",
-                            "type": "uint8"
-                        },
-                        {
-                            "internalType": "uint128",
-                            "name": "groupId",
-                            "type": "uint128"
-                        },
-                        {
-                            "internalType": "address",
-                            "name": "rumAddress",
-                            "type": "address"
-                        },
-                        {
-                            "internalType": "uint64",
-                            "name": "amount",
-                            "type": "uint64"
-                        },
-                        {
-                            "internalType": "uint64",
-                            "name": "duration",
-                            "type": "uint64"
-                        }
-                    ],
-                    "internalType": "struct PaidGroup.Extra",
-                    "name": "",
-                    "type": "tuple"
-                }
-            ],
-            "stateMutability": "pure",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
                     "internalType": "uint128",
                     "name": "",
                     "type": "uint128"
@@ -387,6 +277,51 @@
                     "internalType": "uint256",
                     "name": "",
                     "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getDappInfo",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "version",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "developer",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "invokeFee",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "shareRatio",
+                            "type": "uint64"
+                        }
+                    ],
+                    "internalType": "struct PaidGroup.DappInfo",
+                    "name": "",
+                    "type": "tuple"
                 }
             ],
             "stateMutability": "view",
