@@ -35,7 +35,7 @@ import * as keychain from './lib/keychain.mjs';
 import * as mixin from './lib/mixin.mjs';
 import * as mvm from './lib/mvm.mjs';
 import * as pacman from './lib/pacman.mjs';
-import * as paidGroup from './lib/paidGroupMvm.mjs';
+import * as paidGroupMvm from './lib/paidGroupMvm.mjs';
 import * as quorum from './lib/quorum.mjs';
 import * as rumsc from './lib/rumsc.mjs';
 import * as sushibar from './lib/sushibar.mjs';
@@ -62,7 +62,7 @@ if (runningInBrowser) {
         mixin,
         mvm,
         pacman,
-        paidGroup,
+        paidGroupMvm,
         preference,
         quorum,
         readlineSync,
