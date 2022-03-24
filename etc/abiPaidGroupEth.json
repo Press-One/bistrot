@@ -1,0 +1,435 @@
+{
+    "address": "0xF1DaEBDe3d76d50C1dda503C3c15d7A38249aCCf",
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint128",
+                            "name": "groupId",
+                            "type": "uint128"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "price",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "expiredAt",
+                            "type": "uint256"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct PaidGroup.Member",
+                    "name": "member",
+                    "type": "tuple"
+                }
+            ],
+            "name": "AlreadyPaid",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address payable",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "price",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "duration",
+                            "type": "uint64"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct PaidGroup.Price",
+                    "name": "price",
+                    "type": "tuple"
+                }
+            ],
+            "name": "AnnouncePrice",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address payable",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "price",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "duration",
+                            "type": "uint64"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct PaidGroup.Price",
+                    "name": "price",
+                    "type": "tuple"
+                }
+            ],
+            "name": "UpdatePrice",
+            "type": "event"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "fallback"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_duration",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_price",
+                    "type": "uint64"
+                }
+            ],
+            "name": "addPrice",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getBalance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getDappInfo",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "version",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "developer",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address payable",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "invokeFee",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "shareRatio",
+                            "type": "uint64"
+                        }
+                    ],
+                    "internalType": "struct PaidGroup.DappInfo",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "getMemberKey",
+            "outputs": [
+                {
+                    "internalType": "bytes",
+                    "name": "",
+                    "type": "bytes"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "getPaidDetail",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint128",
+                            "name": "groupId",
+                            "type": "uint128"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "price",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "expiredAt",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct PaidGroup.Member",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "getPrice",
+            "outputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "",
+                    "type": "uint64"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "getPriceDetail",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address payable",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "price",
+                            "type": "uint64"
+                        },
+                        {
+                            "internalType": "uint64",
+                            "name": "duration",
+                            "type": "uint64"
+                        }
+                    ],
+                    "internalType": "struct PaidGroup.Price",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "isPaid",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes",
+                    "name": "",
+                    "type": "bytes"
+                }
+            ],
+            "name": "memberList",
+            "outputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "price",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "expiredAt",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "pay",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "x",
+                    "type": "uint256"
+                }
+            ],
+            "name": "toBytes",
+            "outputs": [
+                {
+                    "internalType": "bytes",
+                    "name": "b",
+                    "type": "bytes"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_duration",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_price",
+                    "type": "uint64"
+                }
+            ],
+            "name": "updatePrice",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "receive"
+        }
+    ]
+}
