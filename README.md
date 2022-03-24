@@ -34,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.4.30
+bistrot v7.4.31
 
 usage: bistrot <command> [<args>]
 
