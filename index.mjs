@@ -95,7 +95,7 @@ export {
     mixin,
     mvm,
     pacman,
-    paidGroup,
+    paidGroupMvm,
     preference,
     quorum,
     readlineSync,
