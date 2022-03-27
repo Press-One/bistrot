@@ -1,11 +1,9 @@
-import { fileURLToPath } from 'url';
 import { utilitas, shot } from 'utilitas';
 import * as quorum from '../lib/quorum.mjs';
 import fs from 'fs';
 import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __filename, __dirname } = utilitas.__(import.meta.url);
 const externalSource = {};
 const fileCont = {};
 const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
@@ -28,7 +26,7 @@ modLog('Fetching files online...');
 for (let i in externalSource) {
     modLog(`> ${externalSource[i]}`);
     let content = (await shot.get(externalSource[i])).content;
-    utilitas.assert(content, `Failed to fetch file: ${i}.`);
+    assert(content, `Failed to fetch file: ${i}.`);
     // switch (path.extname(i).toLocaleLowerCase()) { }
     fs.writeFileSync(path.join(__dirname, i), content, utf8);
 }

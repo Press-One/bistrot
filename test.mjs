@@ -1,13 +1,11 @@
 'use strict';
 
-import { fileURLToPath } from 'url';
 import { utilitas, encryption, storage, shell } from 'utilitas';
 import fs from 'fs';
 import path from 'path';
 import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __filename, __dirname } = utilitas.__(import.meta.url);
 const log = (content) => { return utilitas.modLog(content, __filename); };
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
@@ -46,7 +44,7 @@ const checkKeystore = async () => {
     } catch (e) {
         utilitas.throwError(`Error loading keystore: ${address}.`, 400);
     }
-    utilitas.assert(ks, `Keystore not found: ${address}.`, 400);
+    assert(ks, `Keystore not found: ${address}.`, 400);
     log('OK');
 };
 
@@ -57,9 +55,7 @@ const getAllCommands = async () => {
         return /\.js$/i.test(file) && file !== 'bistrot.js';
     }).forEach((file) => {
         const cmd = file.replace(/^act|\.js$/ig, '');
-        utilitas.assert(
-            tests[cmd], `Test case not found for command (${cmd}).`, 400
-        );
+        assert(tests[cmd], `Test case not found for command (${cmd}).`, 400);
         resp.push(cmd);
     });
     log('OK');

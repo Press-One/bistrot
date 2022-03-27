@@ -1,10 +1,8 @@
-import { fileURLToPath } from 'url';
 import { utilitas } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __dirname } = utilitas.__(import.meta.url);
 
 const action = async (argv) => {
     const acts = {};
@@ -32,7 +30,7 @@ const action = async (argv) => {
         } else if (acts[i].hide) { continue; }
         info[i] = acts[i].name;
     }
-    utilitas.assert(Object.keys(info).length, 'Command not found.', 400);
+    assert(Object.keys(info).length, 'Command not found.', 400);
     return info;
 };
 

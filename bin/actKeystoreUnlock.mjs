@@ -3,7 +3,7 @@ import fs from 'fs';
 import readline from 'readline-sync';
 
 const action = async (argv, options = {}) => {
-    utilitas.assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
+    assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
     let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
     try {
         kObj = JSON.parse(kFile);

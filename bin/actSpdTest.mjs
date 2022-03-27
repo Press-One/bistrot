@@ -1,7 +1,7 @@
 import { quorum } from '../index.mjs';
 
 const action = async (argv) => {
-    Object.assign(global.chainConfig, { speedTest: true, debug: true });
+    Object.assign(globalThis.chainConfig, { speedTest: true, debug: true });
     await quorum.getRpcUrl();
 };
 

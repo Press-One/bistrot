@@ -76,7 +76,7 @@ if (runningInBrowser) {
         yargs,
     };
     console.log('[BISTROT](https://github.com/Press-One/bistrot) is ready!');
-} else { global._bistrot = pack; }
+} else { globalThis._bistrot = pack; }
 
 export * from 'utilitas';
 export {

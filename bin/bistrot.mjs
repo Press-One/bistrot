@@ -7,16 +7,13 @@ import fs from 'fs';
 import path from 'path';
 import yargs from 'yargs';
 
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const argv = yargs(hideBin(process.argv))
     .option('address', { string: true })
     .option('id', { string: true })
     .option('hash', { string: true })
     .help(false).argv;
 
+const { __dirname } = utilitas.__(import.meta.url);
 const map = { /** transactions_trx_id: 'transaction_id' **/ };
 const verbose = [/** 'transaction', 'options' **/];
 const json = [/** 'transaction' **/];
@@ -57,7 +54,7 @@ const unlockKeystore = async (options = {}) => {
 const randerResult = (result, options) => {
     if (utilitas.isUndefined(result)) { return; }
     const deep = Array.isArray(result);
-    options = utilitas.isFunction(options) ? options(argv) : options;
+    options = Function.isFunction(options) ? options(argv) : options;
     options = options || { table: { KeyValue: true } };
     let out = [];
     result = deep ? result : [result];
@@ -67,7 +64,7 @@ const randerResult = (result, options) => {
             if (j === 'transaction' && result[i][j]) {
                 out[i].transaction_id = result[i][j].transaction_id;
             }
-            // if (!global.chainConfig.debug && verbose.includes(i)) {
+            // if (!globalThis.chainConfig.debug && verbose.includes(i)) {
             if (!options.renderAll && verbose.includes(j)) {
                 continue;
             } else if (json.includes(j)) {
@@ -123,7 +120,7 @@ command = command.toLowerCase();
 argv.readlineConf = { hideEchoBack: true, mask: '' };
 
 system.testNet(argv);
-global.chainConfig = await config({
+globalThis.chainConfig = await config({
     debug: argv.debug,
     secret: argv.secret,
     rpcApi: argv.rpcapi,
@@ -139,9 +136,9 @@ try {
         cmds[file.toLowerCase(
         ).replace(/^act|\.mjs$/ig, '')] = path.join(__dirname, file);
     });
-    utilitas.assert(cmds[command], errNotFound);
+    assert(cmds[command], errNotFound);
     const act = await import(cmds[command]);
-    utilitas.assert(act && act.func, errNotFound);
+    assert(act && act.func, errNotFound);
     if (act.pvtkey || act.address) {
         await unlockKeystore(argv, { addressOnly: !act.pvtkey });
     }
@@ -151,5 +148,5 @@ try {
     const result = await act.func(argv);
     randerResult(result, act.render);
 } catch (err) {
-    console.error(global.chainConfig.debug ? err.stack : err.toString());
+    console.error(globalThis.chainConfig.debug ? err.stack : err.toString());
 }

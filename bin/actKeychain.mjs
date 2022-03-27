@@ -38,9 +38,7 @@ const action = async (argv, options = {}) => {
         config = cnfg;
     } else if (argv.keystore) {
         ensurePassword(argv);
-        utilitas.assert(
-            fs.existsSync(argv.keystore), 'File does not exist.', 400
-        );
+        assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
         let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8'), null];
         try {
             kObj = JSON.parse(kFile);

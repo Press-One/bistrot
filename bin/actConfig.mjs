@@ -4,7 +4,7 @@ const allowedMap = { speedTest: 'spdtest' };
 
 const checkRaw = (key) => {
     key = (allowedMap[key] || key).toLowerCase();
-    for (let arg of global.process.argv) {
+    for (let arg of globalThis.process.argv) {
         if (arg.toLowerCase() === `--${key}=undefined`) {
             return 'UNDEFINED';
         } else if (arg.toLowerCase().startsWith(`--${key}`)) {

@@ -1,10 +1,8 @@
-import { fileURLToPath } from 'url';
 import { utilitas } from '../index.mjs';
 import fs from 'fs';
 import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const { __dirname } = utilitas.__(import.meta.url);
 
 const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
     'ABCDE', 'FIJKL', '12.3456', '26621512',
@@ -107,7 +105,7 @@ const action = async (argv) => {
         }
         utilitas.ensureArray(acts[i].example || {}).map((e) => {
             const strArgs = [`    $ bistrot ${e.cmd || i}`];
-            if (utilitas.isString(e.args)) {
+            if (String.isString(e.args)) {
                 strArgs[0] += ` ${e.args}`;
             } else {
                 for (let i in e.args) {
