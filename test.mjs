@@ -3,7 +3,6 @@
 import { utilitas, encryption, storage, shell } from 'utilitas';
 import fs from 'fs';
 import path from 'path';
-import path from 'path';
 
 const { __filename, __dirname } = utilitas.__(import.meta.url);
 const log = (content) => { return utilitas.modLog(content, __filename); };

@@ -1,9 +1,11 @@
-import { utilitas, shot } from 'utilitas';
-import * as quorum from '../lib/quorum.mjs';
+import { utilitas, shot, storage } from 'utilitas';
+import * as quorum from './lib/quorum.mjs';
 import fs from 'fs';
+import manifest from './package.json' assert { type: 'json' };
 import path from 'path';
 
-const { __filename, __dirname } = utilitas.__(import.meta.url);
+const { __dirname } = utilitas.__(import.meta.url);
+const __etc = path.join(__dirname, 'etc');
 const externalSource = {};
 const fileCont = {};
 const modLog = (content) => { return utilitas.modLog(content, 'BUILD ETC'); };
@@ -11,9 +13,18 @@ const patches = { /* 'file': [['x', 'y']], */ };
 const targetFile = 'index.json';
 const utf8 = 'utf8';
 
+modLog('Packing manifest...');
+// https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/
+delete manifest.scripts;
+const strManifest = [
+    `const manifest = ${JSON.stringify(manifest, null, 4)};`,
+    'export default manifest;',
+].join('\n\n');
+await storage.writeFile('./lib/manifest.mjs', strManifest);
+
 modLog('Patching files...');
 for (let f in patches) {
-    const filename = path.join(__dirname, '..', f);
+    const filename = path.join(__dirname, f);
     let file = fs.readFileSync(filename, utf8).split('\n');
     for (let p of patches[f]) {
         modLog(`> ${f}: \`${p[0]}\` => \`${p[1]}\``);
@@ -27,17 +38,15 @@ for (let i in externalSource) {
     modLog(`> ${externalSource[i]}`);
     let content = (await shot.get(externalSource[i])).content;
     assert(content, `Failed to fetch file: ${i}.`);
-    // switch (path.extname(i).toLocaleLowerCase()) { }
-    fs.writeFileSync(path.join(__dirname, i), content, utf8);
+    fs.writeFileSync(path.join(__etc, i), content, utf8);
 }
 
 modLog('Loading files...');
-(fs.readdirSync(__dirname) || []).filter(file => {
-    return file.indexOf('.') !== 0
-        && !new Set([path.basename(__filename), targetFile]).has(file);
-}).forEach(file => {
+(fs.readdirSync(__etc) || []).filter(
+    file => file.indexOf('.') !== 0 && file !== targetFile
+).forEach(file => {
     modLog(`> ${file}`);
-    const filename = path.join(__dirname, file);
+    const filename = path.join(__etc, file);
     if (/\.json$/.test(file)) {
         fileCont[file] = quorum.trimCode(fs.readFileSync(filename, utf8));
     }
@@ -49,10 +58,8 @@ modLog('Loading files...');
 
 modLog('Updating bundle...');
 modLog(`> ${targetFile}`);
-fs.writeFileSync(
-    path.join(__dirname, targetFile),
-    JSON.stringify(fileCont),
-    { encoding: utf8, flag: 'w' }
-);
+fs.writeFileSync(path.join(__etc, targetFile), JSON.stringify(fileCont), {
+    encoding: utf8, flag: 'w'
+});
 
 modLog('Done!');
