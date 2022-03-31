@@ -1,6 +1,29 @@
 {
-    "address": "0xEc84bbE271149D08d566B0b31a7d4cF0d31F473C",
+    "address": "0x2607358cF086005E2d1373d6FC883Aa43fBf28c1",
     "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_duration",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_price",
+                    "type": "uint64"
+                }
+            ],
+            "name": "addPrice",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
         {
             "inputs": [],
             "stateMutability": "nonpayable",
@@ -79,6 +102,19 @@
             "type": "event"
         },
         {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "pay",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
             "anonymous": false,
             "inputs": [
                 {
@@ -136,10 +172,14 @@
                     "type": "uint64"
                 }
             ],
-            "name": "addPrice",
+            "name": "updatePrice",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "receive"
         },
         {
             "inputs": [],
@@ -375,19 +415,6 @@
         {
             "inputs": [
                 {
-                    "internalType": "uint128",
-                    "name": "groupId",
-                    "type": "uint128"
-                }
-            ],
-            "name": "pay",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
                     "internalType": "uint256",
                     "name": "x",
                     "type": "uint256"
@@ -403,33 +430,6 @@
             ],
             "stateMutability": "pure",
             "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "_groupId",
-                    "type": "uint128"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_duration",
-                    "type": "uint64"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_price",
-                    "type": "uint64"
-                }
-            ],
-            "name": "updatePrice",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "stateMutability": "payable",
-            "type": "receive"
         }
     ]
 }
