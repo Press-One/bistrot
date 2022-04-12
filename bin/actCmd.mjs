@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs';
-import { storage, utilitas } from '../index.mjs';
+import { utilitas } from '../index.mjs';
 
 const { __dirname } = utilitas.__(import.meta.url);
 
@@ -10,10 +10,10 @@ const action = async (argv) => {
     });
     for (let f of files) {
         let name = f.replace(/^(.*)\.mjs$/, '$1').replace(/^act/i, '').toLowerCase();
-        acts[name] = { ...await import(storage.relative(import.meta.url, f)) };
+        acts[name] = { ...await import(utilitas.__(import.meta.url, f)) };
     };
     const info = {};
-    argv._ = argv._.map((x) => { return x.toLowerCase(); });
+    argv._ = argv._.map(x => x.toLowerCase());
     const find = {};
     for (let i in acts) {
         if (argv._.length) {

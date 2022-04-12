@@ -136,7 +136,7 @@ try {
         return /\.mjs$/i.test(file) && file !== 'bistrot.mjs';
     }).forEach(file => {
         cmds[file.toLowerCase().replace(/^act|\.mjs$/ig, '')]
-            = storage.relative(import.meta.url, file);
+            = utilitas.__(import.meta.url, file);
     });
     assert(cmds[command], errNotFound);
     const act = await import(cmds[command]);

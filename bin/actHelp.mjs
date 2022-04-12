@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs';
-import { storage, utilitas } from '../index.mjs';
+import { utilitas } from '../index.mjs';
 
 const { __dirname } = utilitas.__(import.meta.url);
 
@@ -67,17 +67,16 @@ const getEnding = (skip) => {
 const action = async (argv) => {
     argv.command = String(argv.command || '').toLowerCase();
     const acts = {};
-    const files = readdirSync(__dirname).filter((file) => {
-        return argv.command
-            ? (`act${argv.command}.mjs` === file.toLowerCase())
-            : (/\.mjs$/i.test(file) && file !== 'bistrot.mjs');
-    });
+    const files = readdirSync(__dirname).filter(file => argv.command
+        ? (`act${argv.command}.mjs` === file.toLowerCase())
+        : (/\.mjs$/i.test(file) && file !== 'bistrot.mjs')
+    );
     for (let f of files) {
         let name = f.replace(/^(.*)\.mjs$/, '$1').replace(/^act/i, '');
-        acts[name] = { ...await import(storage.relative(import.meta.url, f)) };
+        acts[name] = { ...await import(utilitas.__(import.meta.url, f)) };
     };
     const info = [`${(await utilitas.which(
-        storage.relative(import.meta.url, '../package.json')
+        utilitas.__(import.meta.url, '../package.json')
     )).title}`, '', 'usage: bistrot <command> [<args>]'];
     argv._ = argv._.map((x) => { return x.toLowerCase(); });
     let find = {};

@@ -1,4 +1,4 @@
-import { config, storage, system, utilitas } from '../index.mjs';
+import { config, system, utilitas } from '../index.mjs';
 
 const [exportSsConfig, packed, failed, merged] = [[
     'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
@@ -14,13 +14,11 @@ const verboseCheck = {
         return merged;
     },
     sushibar: system.chkCpVer,
-    latest_released_version: async () => {
-        return (await system.chkNwVer()).version;
-    },
+    latest_released_version: async () => (await system.chkNwVer()).version,
 };
 
 const action = async (argv) => {
-    const pkg = storage.relative(import.meta.url, '../package.json');
+    const pkg = utilitas.__(import.meta.url, '../package.json');
     let data = await utilitas.which(pkg);
     data = data ? {
         package_name: data.name,
@@ -35,7 +33,7 @@ const action = async (argv) => {
     } : {};
     for (let p of ['utilitas']) {
         try {
-            data[`${p}_version`] = (await utilitas.which(storage.relative(
+            data[`${p}_version`] = (await utilitas.which(utilitas.__(
                 import.meta.url, `../node_modules/${p}/package.json`
             ))).version || packed;
         } catch (e) { data[`${p}_version`] = packed; }
@@ -44,9 +42,7 @@ const action = async (argv) => {
         try {
             const resp = await verboseCheck[i](argv, data);
             if (resp !== merged) { data[i] = resp || failed; }
-        } catch (e) {
-            data[i] = `${failed}: ${e.message}`;
-        }
+        } catch (e) { data[i] = `${failed}: ${e.message}`; }
     }
     return data;
 };

@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, writeFileSync } from 'fs';
 import { shot, storage, utilitas } from 'utilitas';
 import manifest from './package.json' assert { type: 'json' };
 
-const __etc = storage.relative(import.meta.url, 'etc');
+const __etc = utilitas.__(import.meta.url, 'etc');
 const externalSource = {};
 const fileCont = {};
 const log = (content) => utilitas.log(content, import.meta.url);
@@ -23,7 +23,7 @@ await storage.writeFile('./lib/manifest.mjs', strManifest);
 
 log('Patching files...');
 for (let f in patches) {
-    const filename = storage.relative(import.meta.url, f);
+    const filename = utilitas.__(import.meta.url, f);
     let file = readFileSync(filename, utf8).split('\n');
     for (let p of patches[f]) {
         log(`> ${f}: \`${p[0]}\` => \`${p[1]}\``);
