@@ -1,15 +1,13 @@
 import { crypto, etc } from '../index.mjs';
-import readline from 'readline-sync';
+import { question } from 'readline-sync';
 
 const action = async (argv) => {
     let repeat = argv.password;
     while (!argv.password || !repeat || argv.password !== repeat) {
         console.log('Input password to encrypt the keystore.');
-        argv.password = readline.question('New password: ', argv.readlineConf);
-        repeat = readline.question('Repeat password: ', argv.readlineConf);
-        if (argv.password !== repeat) {
-            console.log('Passwords do not match.');
-        }
+        argv.password = question('New password: ', argv.readlineConf);
+        repeat = question('Repeat password: ', argv.readlineConf);
+        argv.password !== repeat && console.log('Passwords do not match.');
     }
     const result = await crypto.createKeystore(
         String(argv.password || ''), argv.pvtkey,

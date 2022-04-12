@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 import { hideBin } from 'yargs/helpers';
-import { table as table } from 'table';
-import { utilitas, config, crypto, keychain, system } from '../index.mjs';
-import fs from 'fs';
-import path from 'path';
+import { readdirSync } from 'fs';
+import { table } from 'table';
 import yargs from 'yargs';
+
+import {
+    config, crypto, keychain, storage, system, utilitas
+} from '../index.mjs';
 
 const argv = yargs(hideBin(process.argv))
     .option('address', { string: true })
@@ -130,11 +132,11 @@ globalThis.chainConfig = await config({
 
 try {
     const cmds = {};
-    fs.readdirSync(__dirname).filter((file) => {
+    readdirSync(__dirname).filter((file) => {
         return /\.mjs$/i.test(file) && file !== 'bistrot.mjs';
-    }).forEach((file) => {
-        cmds[file.toLowerCase(
-        ).replace(/^act|\.mjs$/ig, '')] = path.join(__dirname, file);
+    }).forEach(file => {
+        cmds[file.toLowerCase().replace(/^act|\.mjs$/ig, '')]
+            = storage.relative(import.meta.url, file);
     });
     assert(cmds[command], errNotFound);
     const act = await import(cmds[command]);

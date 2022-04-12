@@ -50,7 +50,7 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
         mixin, pacman, paidGroup, preference, quorum, readlineSync, rumsc,
         secp256k1, solc, sushibar, system, table, web3, yargs,
     };
-    utilitas.utilitas.modLog(
+    utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
         `${(await utilitas.utilitas.which(manifest)).title}.*`
     );

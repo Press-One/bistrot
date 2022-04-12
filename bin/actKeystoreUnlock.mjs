@@ -1,20 +1,16 @@
-import { utilitas, crypto } from '../index.mjs';
-import fs from 'fs';
-import readline from 'readline-sync';
+import { crypto, utilitas } from '../index.mjs';
+import { existsSync, readFileSync } from 'fs';
+import { question } from 'readline-sync';
 
 const action = async (argv, options = {}) => {
-    assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
-    let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8')];
-    try {
-        kObj = JSON.parse(kFile);
-        argv.address = kObj.address;
-    } catch (e) {
-        utilitas.throwError('Invalid keystore file.', 400);
-    }
+    assert(existsSync(argv.keystore), 'File does not exist.', 400);
+    let [kFile, kObj] = [readFileSync(argv.keystore, 'utf8')];
+    try { kObj = JSON.parse(kFile); argv.address = kObj.address; }
+    catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
     if (options.addressOnly) { return; }
     while (!argv.password) {
         console.log('Input password to decrypt the keystore.');
-        argv.password = readline.question('Password: ', argv.readlineConf);
+        argv.password = question('Password: ', argv.readlineConf);
     }
     return crypto.recoverPrivateKey(argv.password, kObj);
 };

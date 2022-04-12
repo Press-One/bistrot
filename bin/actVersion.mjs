@@ -1,7 +1,4 @@
-import { utilitas, config, system } from '../index.mjs';
-import path from 'path';
-
-const { __dirname } = utilitas.__(import.meta.url);
+import { config, storage, system, utilitas } from '../index.mjs';
 
 const [exportSsConfig, packed, failed, merged] = [[
     'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
@@ -23,7 +20,7 @@ const verboseCheck = {
 };
 
 const action = async (argv) => {
-    const pkg = path.join(__dirname, '..', 'package.json');
+    const pkg = storage.relative(import.meta.url, '../package.json');
     let data = await utilitas.which(pkg);
     data = data ? {
         package_name: data.name,
@@ -38,9 +35,9 @@ const action = async (argv) => {
     } : {};
     for (let p of ['utilitas']) {
         try {
-            data[`${p}_version`] = (await utilitas.which(
-                path.join(__dirname, `../node_modules/${p}/package.json`)
-            )).version || packed;
+            data[`${p}_version`] = (await utilitas.which(storage.relative(
+                import.meta.url, `../node_modules/${p}/package.json`
+            ))).version || packed;
         } catch (e) { data[`${p}_version`] = packed; }
     }
     for (let i in argv.debug ? verboseCheck : {}) {

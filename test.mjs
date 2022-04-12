@@ -4,8 +4,8 @@ import { utilitas, encryption, storage, shell } from 'utilitas';
 import fs from 'fs';
 import path from 'path';
 
-const { __filename, __dirname } = utilitas.__(import.meta.url);
-const log = (content) => { return utilitas.modLog(content, __filename); };
+const { __dirname } = utilitas.__(import.meta.url);
+const log = (content) => utilitas.log(content, import.meta.url);
 const split = () => { console.log(''); };
 const [results, errors] = [{}, []];
 const address = '0x2AeF3da35e9A2EC29aE25A04d9C9e92110910A51';

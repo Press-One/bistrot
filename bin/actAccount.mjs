@@ -1,8 +1,6 @@
 import { account } from '../index.mjs';
 
-const action = async (argv) => {
-    return await account.getByAddress(argv.address);
-};
+const action = async (argv) => await account.getByAddress(argv.address);
 
 export const { func, name, help, example, render } = {
     func: action,

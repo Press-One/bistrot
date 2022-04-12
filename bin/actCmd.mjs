@@ -1,19 +1,16 @@
-import { utilitas } from '../index.mjs';
-import fs from 'fs';
-import path from 'path';
+import { readdirSync } from 'fs';
+import { storage, utilitas } from '../index.mjs';
 
 const { __dirname } = utilitas.__(import.meta.url);
 
 const action = async (argv) => {
     const acts = {};
-    const files = fs.readdirSync(__dirname).filter((file) => {
+    const files = readdirSync(__dirname).filter((file) => {
         return /\.mjs$/i.test(file) && file.toLowerCase() !== 'bistrot.mjs';
     });
-    for (let file of files) {
-        let actName = file.replace(
-            /^(.*)\.mjs$/, '$1'
-        ).replace(/^act/i, '').toLowerCase();
-        acts[actName] = { ...await import(path.join(__dirname, file)) };
+    for (let f of files) {
+        let name = f.replace(/^(.*)\.mjs$/, '$1').replace(/^act/i, '').toLowerCase();
+        acts[name] = { ...await import(storage.relative(import.meta.url, f)) };
     };
     const info = {};
     argv._ = argv._.map((x) => { return x.toLowerCase(); });

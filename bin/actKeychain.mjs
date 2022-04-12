@@ -1,13 +1,13 @@
-import { utilitas, preference, keychain, crypto } from '../index.mjs';
-import fs from 'fs';
-import readline from 'readline-sync';
+import { crypto, keychain, preference, utilitas } from '../index.mjs';
+import { existsSync, readFileSync } from 'fs';
+import { question } from 'readline-sync';
 
 const privatekeyLength = 64;
 
 const ensurePassword = (argv) => {
     while (!argv.password) {
         console.log('Input password for the keystore.');
-        argv.password = readline.question('Password: ', argv.readlineConf);
+        argv.password = question('Password: ', argv.readlineConf);
     }
 };
 
@@ -38,8 +38,8 @@ const action = async (argv, options = {}) => {
         config = cnfg;
     } else if (argv.keystore) {
         ensurePassword(argv);
-        assert(fs.existsSync(argv.keystore), 'File does not exist.', 400);
-        let [kFile, kObj] = [fs.readFileSync(argv.keystore, 'utf8'), null];
+        assert(existsSync(argv.keystore), 'File does not exist.', 400);
+        let [kFile, kObj] = [readFileSync(argv.keystore, 'utf8'), null];
         try {
             kObj = JSON.parse(kFile);
         } catch (e) { utilitas.throwError('Invalid keystore file.', 400); }
