@@ -46,8 +46,5 @@
         "utilitas": "^1990.1.22",
         "web3": "^1.7.3",
         "yargs": "^17.4.1"
-    },
-    "devDependencies": {
-        "@openzeppelin/contracts": "^4.5.0"
     }
 }
