@@ -1,9 +1,8 @@
 {
-    "address": "0x54AeAEe174aC273d01aa5038C016281040E7b1dB",
+    "address": "0x03d0217c1e00E0A5eE3534Ea88D0108bF872bAD1",
     "abi": [
         {
             "inputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "constructor"
         },
@@ -45,7 +44,25 @@
             "type": "event"
         },
         {
-            "constant": true,
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                }
+            ],
+            "name": "UnBind",
+            "type": "event"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -86,12 +103,11 @@
                     "type": "string"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         },
         {
-            "constant": true,
             "inputs": [
                 {
                     "internalType": "address",
@@ -107,12 +123,11 @@
                     "type": "bool"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         },
         {
-            "constant": true,
             "inputs": [],
             "name": "owner",
             "outputs": [
@@ -122,12 +137,11 @@
                     "type": "address"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         },
         {
-            "constant": true,
             "inputs": [
                 {
                     "internalType": "string",
@@ -148,12 +162,11 @@
                     "type": "address"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         },
         {
-            "constant": false,
             "inputs": [
                 {
                     "internalType": "address",
@@ -163,12 +176,10 @@
             ],
             "name": "changeOwner",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": false,
             "inputs": [
                 {
                     "internalType": "address",
@@ -178,12 +189,10 @@
             ],
             "name": "addManager",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": false,
             "inputs": [
                 {
                     "internalType": "address",
@@ -193,12 +202,10 @@
             ],
             "name": "removeManager",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": false,
             "inputs": [
                 {
                     "internalType": "address",
@@ -228,12 +235,69 @@
             ],
             "name": "bind",
             "outputs": [],
-            "payable": false,
             "stateMutability": "nonpayable",
             "type": "function"
         },
         {
-            "constant": true,
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "payment_account",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "meta",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "memo",
+                    "type": "string"
+                }
+            ],
+            "name": "selfBind",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                }
+            ],
+            "name": "unBind",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "payment_provider",
+                    "type": "string"
+                }
+            ],
+            "name": "selfUnBind",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -276,12 +340,11 @@
                     "type": "tuple[]"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         },
         {
-            "constant": true,
             "inputs": [
                 {
                     "internalType": "string",
@@ -297,9 +360,9 @@
                     "type": "uint256"
                 }
             ],
-            "payable": false,
             "stateMutability": "view",
-            "type": "function"
+            "type": "function",
+            "constant": true
         }
     ]
 }
