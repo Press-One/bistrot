@@ -1,8 +1,5 @@
 # Bistrot
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
-[![Node.js Package](https://github.com/Press-One/bistrot/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/Press-One/bistrot/actions/workflows/npm-publish.yml)
-
 A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
 ![banner](https://github.com/Press-One/bistrot/blob/master/wiki/banner.jpg?raw=true "banner")
@@ -37,7 +34,7 @@ $ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.4.79
+bistrot v7.4.80
 
 usage: bistrot <command> [<args>]
 
@@ -276,7 +273,7 @@ usage: bistrot <command> [<args>]
 
     Using passwords or private keys on the command line interface can
     be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive
+    private keys in parameters. The program will request sensitive 
     information in a secure way.
 
 ```
