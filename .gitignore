@@ -80,9 +80,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-# Disabled by @LeaskH {
-# dist
-# }
+dist
 
 # Gatsby files
 .cache/
@@ -105,14 +103,17 @@ typings/
 # TernJS port file
 .tern-port
 
-# IDE - VSCode
-.history/*
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
 
-# OS
+# System Files by @leaskh
 .DS_Store
+.sync
+.swp
+Thumbs.db
+tmp
 
-# Leask
+# Config by @leaskh
 package-lock.json
-debug.mjs
 debug
-*.wasm
+debug.mjs
