@@ -1,6 +1,16 @@
-import { account } from '../index.mjs';
+import { account, utilitas } from '../index.mjs';
 
-const action = async (argv) => await account.getByAddress(argv.address);
+const action = async (argv) => {
+    const resp = await account.getByAddress(argv.address, { amountOnly: !argv.json });
+    if (!argv.json) {
+        const assets = [];
+        for (let i in resp.assets) {
+            assets.push(`${i}: ${resp.assets[i]}`);
+        }
+        resp.assets = assets.join('\n');
+    }
+    return resp;
+};
 
 export const { func, name, help, example, render } = {
     func: action,
