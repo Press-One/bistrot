@@ -1,34 +1,6 @@
 {
-    "address": "0x2607358cF086005E2d1373d6FC883Aa43fBf28c1",
+    "address": "0xA8815021Cdb005677d81f11116eBC501b3018589",
     "abi": [
-        {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "_groupId",
-                    "type": "uint128"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_duration",
-                    "type": "uint64"
-                },
-                {
-                    "internalType": "uint64",
-                    "name": "_price",
-                    "type": "uint64"
-                }
-            ],
-            "name": "addPrice",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
         {
             "anonymous": false,
             "inputs": [
@@ -46,9 +18,14 @@
                             "type": "uint128"
                         },
                         {
-                            "internalType": "uint64",
-                            "name": "price",
-                            "type": "uint64"
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddr",
+                            "type": "address"
                         },
                         {
                             "internalType": "uint256",
@@ -82,9 +59,14 @@
                             "type": "address"
                         },
                         {
-                            "internalType": "uint64",
-                            "name": "price",
-                            "type": "uint64"
+                            "internalType": "address",
+                            "name": "tokenAddr",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
                         },
                         {
                             "internalType": "uint64",
@@ -100,19 +82,6 @@
             ],
             "name": "AnnouncePrice",
             "type": "event"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "groupId",
-                    "type": "uint128"
-                }
-            ],
-            "name": "pay",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
         },
         {
             "anonymous": false,
@@ -131,9 +100,14 @@
                             "type": "address"
                         },
                         {
-                            "internalType": "uint64",
-                            "name": "price",
-                            "type": "uint64"
+                            "internalType": "address",
+                            "name": "tokenAddr",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
                         },
                         {
                             "internalType": "uint64",
@@ -167,19 +141,20 @@
                     "type": "uint64"
                 },
                 {
-                    "internalType": "uint64",
-                    "name": "_price",
-                    "type": "uint64"
+                    "internalType": "address",
+                    "name": "_tokenAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
                 }
             ],
-            "name": "updatePrice",
+            "name": "addPrice",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
-        },
-        {
-            "stateMutability": "payable",
-            "type": "receive"
         },
         {
             "inputs": [],
@@ -217,13 +192,18 @@
                         },
                         {
                             "internalType": "address payable",
-                            "name": "owner",
+                            "name": "receiver",
                             "type": "address"
                         },
                         {
-                            "internalType": "uint64",
+                            "internalType": "address payable",
+                            "name": "deployer",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
                             "name": "invokeFee",
-                            "type": "uint64"
+                            "type": "uint256"
                         },
                         {
                             "internalType": "uint64",
@@ -286,9 +266,14 @@
                             "type": "uint128"
                         },
                         {
-                            "internalType": "uint64",
-                            "name": "price",
-                            "type": "uint64"
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "tokenAddr",
+                            "type": "address"
                         },
                         {
                             "internalType": "uint256",
@@ -315,25 +300,6 @@
             "name": "getPrice",
             "outputs": [
                 {
-                    "internalType": "uint64",
-                    "name": "",
-                    "type": "uint64"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint128",
-                    "name": "_groupId",
-                    "type": "uint128"
-                }
-            ],
-            "name": "getPriceDetail",
-            "outputs": [
-                {
                     "components": [
                         {
                             "internalType": "address payable",
@@ -341,9 +307,14 @@
                             "type": "address"
                         },
                         {
-                            "internalType": "uint64",
-                            "name": "price",
-                            "type": "uint64"
+                            "internalType": "address",
+                            "name": "tokenAddr",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
                         },
                         {
                             "internalType": "uint64",
@@ -357,6 +328,53 @@
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_version",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_invokeFee",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_shareRatio",
+                    "type": "uint64"
+                }
+            ],
+            "name": "initialize",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "a",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "b",
+                    "type": "string"
+                }
+            ],
+            "name": "isEqualString",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "pure",
             "type": "function"
         },
         {
@@ -399,9 +417,14 @@
                     "type": "uint128"
                 },
                 {
-                    "internalType": "uint64",
-                    "name": "price",
-                    "type": "uint64"
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "tokenAddr",
+                    "type": "address"
                 },
                 {
                     "internalType": "uint256",
@@ -410,6 +433,19 @@
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "groupId",
+                    "type": "uint128"
+                }
+            ],
+            "name": "pay",
+            "outputs": [],
+            "stateMutability": "payable",
             "type": "function"
         },
         {
@@ -430,6 +466,61 @@
             ],
             "stateMutability": "pure",
             "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_version",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_invokeFee",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_shareRatio",
+                    "type": "uint64"
+                }
+            ],
+            "name": "updateDappInfo",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint128",
+                    "name": "_groupId",
+                    "type": "uint128"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "_duration",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_tokenAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "updatePrice",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "stateMutability": "payable",
+            "type": "receive"
         }
     ]
 }
