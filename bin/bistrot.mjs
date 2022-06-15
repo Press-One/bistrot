@@ -31,10 +31,10 @@ const toArray = (input) => {
 };
 
 const unlockKeystore = async (options = {}) => {
-    const result = await (await import('./actKeystoreUnlock')).func(argv, options);
-    argv.address = result.address;
-    argv.pvtkey = result.privateKey;
-    return result;
+    const rst = await (await import('./actKeystoreUnlock')).func(argv, options);
+    argv.address = rst.address;
+    argv.pvtkey = rst.privateKey;
+    return rst;
 };
 
 const randerResult = (result, options) => {
