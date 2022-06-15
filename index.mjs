@@ -4,7 +4,6 @@ import * as elliptic from 'elliptic';
 import * as ethereumUtil from 'ethereumjs-util';
 import * as hdwalletProvider from '@truffle/hdwallet-provider';
 import * as keythereum from 'keythereum-pure-js';
-import * as readlineSync from 'readline-sync';
 import * as secp256k1 from 'secp256k1';
 import * as solc from 'solc';
 import * as table from 'table';
@@ -31,8 +30,7 @@ export * from 'utilitas';
 export {
     abiDecoder, account, config, crypto, elliptic, erc20, etc, ethereumUtil,
     finance, hdwalletProvider, keythereum, manifest, mixin, pacman, paidGroup,
-    quorum, readlineSync, rumsc, secp256k1, solc, sushibar, system, table, web3,
-    yargs,
+    quorum, rumsc, secp256k1, solc, sushibar, system, table, web3, yargs,
 };
 
 globalThis._bistrot = {
@@ -45,8 +43,8 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
     globalThis.bistrot = {
         ...utilitas, abiDecoder, account, config, crypto, elliptic, erc20, etc,
         ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
-        pacman, paidGroup, quorum, readlineSync, rumsc, secp256k1, solc,
-        sushibar, system, table, web3, yargs,
+        pacman, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
+        table, web3, yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
