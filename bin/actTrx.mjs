@@ -1,6 +1,6 @@
 import { quorum } from '../index.mjs';
 
-const action = async (argv) => await quorum.getTransactionByHash(argv.hash);
+const action = async (argv) => await quorum.getTransactionByHash(argv.hash, argv);
 
 export const { func, name, help, example, render } = {
     func: action,

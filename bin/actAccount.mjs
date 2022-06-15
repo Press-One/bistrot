@@ -1,7 +1,9 @@
 import { account, utilitas } from '../index.mjs';
 
 const action = async (argv) => {
-    const resp = await account.getByAddress(argv.address, { amountOnly: !argv.json });
+    const resp = await account.getByAddress(
+        argv.address, { ...argv, amountOnly: !argv.json }
+    );
     if (!argv.json) {
         const assets = [];
         for (let i in resp.assets) {

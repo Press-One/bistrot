@@ -1,6 +1,6 @@
 import { quorum } from '../index.mjs';
 
-const action = async (argv) => await quorum.getInfo();
+const action = (argv) => quorum.getInfo(argv);
 
 export const { func, name, help, example, render } = {
     func: action,
