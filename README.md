@@ -188,19 +188,15 @@ usage: bistrot <command> [<args>]
     --compact  Printing JSON in compact style    [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
-    --secret   Show sensitive info in debug logs [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
     --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
-    | 2. WARNING: `secret` option may cause private key leaks.      |
     └---------------------------------------------------------------┘
 
 * Security:
 
     Using passwords or private keys on the command line interface can
-    be insecure. In most cases you don't need to provide passwords or
-    private keys in parameters. The program will request sensitive 
-    information in a secure way.
+    be insecure.
 
 ```
