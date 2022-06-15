@@ -16,9 +16,9 @@ const argv = yargs(hideBin(process.argv))
     .help(false).argv;
 
 const { __dirname } = utilitas.__(import.meta.url);
-const map = { /** transactions_trx_id: 'transaction_id' **/ };
-const verbose = [/** 'transaction', 'options' **/];
-const json = [/** 'transaction' **/];
+const map = {};
+const verbose = [];
+const json = [];
 
 const toBoolean = (input) => {
     const str = String(input || '').toLowerCase();
