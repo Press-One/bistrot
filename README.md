@@ -129,22 +129,6 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `SpdTest` > Evaluate the connection speed of server nodes:
-
-    ┌---------------------------------------------------------------┐
-    | 1. `spdtest` feature depends on the system `ping` command.    |
-    └---------------------------------------------------------------┘
-
-    > Example of evaluating all pre-configured nodes:
-    $ bistrot SpdTest
-
-    > Example of evaluating a designated node:
-    $ bistrot SpdTest \
-              --rpcapi=http://51.68.201.144:8888 \
-              --chainapi=https://prs-bp1.press.one
-
-=====================================================================
-
 * `Tail` > Trace the lastest block of the chain:
 
     --blocknum Initial block num                 [NUMBER  / OPTIONAL]
@@ -203,15 +187,13 @@ usage: bistrot <command> [<args>]
     --json     Printing the result as JSON       [WITH  OR  WITHOUT ]
     --compact  Printing JSON in compact style    [WITH  OR  WITHOUT ]
     --force    Force overwrite existing file     [WITH  OR  WITHOUT ]
-    --spdtest  Test and pick the fastest node    [WITH  OR  WITHOUT ]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
     --secret   Show sensitive info in debug logs [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
     --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
-    | 2. `spdtest` feature depends on the system `ping` command.    |
-    | 3. WARNING: `secret` option may cause private key leaks.      |
+    | 2. WARNING: `secret` option may cause private key leaks.      |
     └---------------------------------------------------------------┘
 
 * Security:
