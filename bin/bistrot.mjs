@@ -53,7 +53,6 @@ const randerResult = (result, options) => {
             if (j === 'transaction' && result[i][j]) {
                 out[i].transaction_id = result[i][j].transaction_id;
             }
-            // if (!globalThis.chainConfig.debug && verbose.includes(i)) {
             if (!options.renderAll && verbose.includes(j)) {
                 continue;
             } else if (json.includes(j)) {
