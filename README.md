@@ -1,4 +1,4 @@
-# Bistrot
+# 🍻 Bistrot
 
 A CLI client and also an API library for [RumSystem.net](https://RumSystem.net).
 
@@ -21,20 +21,12 @@ $ docker pull pressone/bistrot
 $ docker run -it --rm pressone/bistrot bistrot help
 ```
 
-### From a Mirror Server (inside China)
-
-```console
-$ docker login -u prs-os -p pressone dockerhub.qingcloud.com
-$ docker pull dockerhub.qingcloud.com/pressone/bistrot
-$ docker run -it --rm dockerhub.qingcloud.com/pressone/bistrot bistrot help
-```
-
 *Important: If you want to use a keystore file with the docker version, be sure to mount the path to the keystore file.*
 
 ## Instruction
 
 ```markdown
-bistrot v7.4.84
+bistrot v7.5.10
 
 usage: bistrot <command> [<args>]
 
@@ -89,26 +81,6 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `Config` > Configuration:
-
-    --email    Notification email address         [EMAIL / UNDEFINED]
-    --spdtest  Test and pick the fastest node     [T / F / UNDEFINED]
-    --debug    Enable or disable debug mode       [T / F / UNDEFINED]
-    --secret   Show sensitive info in debug logs  [T / F / UNDEFINED]
-    ┌---------------------------------------------------------------┐
-    | 1. Leave empty args to view current configuration.            |
-    | 2. `spdtest` feature depends on the system `ping` command.    |
-    | 3. WARNING: `secret` option may cause private key leaks.      |
-    └---------------------------------------------------------------┘
-
-    > Example:
-    $ bistrot Config \
-              --spdtest=true \
-              --debug=false \
-              --secret=undefined
-
-=====================================================================
-
 * `Help` > List help info:
 
     > Example of listing all help info:
@@ -123,42 +95,15 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
-* `Keychain` > Manage Keychain:
-
-    --address  Quorum address                    [STRING  / REQUIRED]
-    --keystore Path to the keystore JSON file    [STRING  / OPTIONAL]
-    --pvtkey   Private key of Quorum account     [STRING  / OPTIONAL]
-    --password Use to `verify` the keystore      [STRING  / OPTIONAL]
-    --memo     Memo for the keystore             [STRING  / OPTIONAL]
-    --savepswd Save password (DANGEROUS)         [WITH  OR  WITHOUT ]
-    --delete   To `delete` instead of to `save`  [WITH  OR  WITHOUT ]
-    ┌---------------------------------------------------------------┐
-    | 1. Leave empty args to view current keychain.                 |
-    | 2. Save keys to the keychain for simplified use.              |
-    | 3. The password is for keystore verification only.            |
-    | 4. This program will `NOT` save your password by default.     |
-    | 5. `savepswd` is `EXTREMELY DANGEROUS`, use on your own risk. |
-    └---------------------------------------------------------------┘
-
-    > Example of saving a new key:
-    $ bistrot Keychain \
-              --keystore=keystore.json
-
-    > Example of deleting an existing key:
-    $ bistrot Keychain \
-              --address=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \
-              --delete
-
-=====================================================================
-
 * `KeystoreCreate` > Create a new Keystore (can also import keys):
 
-    --password Use to encrypt the keystore       [STRING  / OPTIONAL]
+    --password Use to encrypt the keystore       [STRING  / REQUIRED]
     --pvtkey   Import existing private key       [STRING  / OPTIONAL]
     --dump     Save keystore to a JSON file      [STRING  / OPTIONAL]
 
     > Example of creating a new keystore:
     $ bistrot KeystoreCreate \
+              --password=nopassword \
               --dump=keystore.json
 
     > Example of creating a keystore with existing keys:
@@ -171,7 +116,7 @@ usage: bistrot <command> [<args>]
 * `KeystoreUnlock` > Unlock a Keystore:
 
     --keystore Path to the keystore JSON file    [STRING  / REQUIRED]
-    --password Use to decrypt the keystore       [STRING  / OPTIONAL]
+    --password Use to decrypt the keystore       [STRING  / REQUIRED]
     ┌---------------------------------------------------------------┐
     | This command will decrypt your keystore and display the       |
     | address and private key. It's for advanced users only.        |
