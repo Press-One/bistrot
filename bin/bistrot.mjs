@@ -96,7 +96,7 @@ const randerResult = (result, options) => {
 ['add', 'remove'].map(i => { argv[i] = toArray(argv[i]); });
 [
     'compact', 'daemon', 'debug', 'delete', 'detail', 'dryrun', 'force', 'help',
-    'json', 'reverse', 'savepswd', 'secret', 'spdtest', 'testnet', 'trxonly',
+    'json', 'reverse', 'secret', 'testnet', 'trxonly',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
 let command = String(argv._.shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
@@ -110,7 +110,6 @@ globalThis.chainConfig = await config({
     secret: argv.secret,
     rpcApi: argv.rpcapi,
     chainApi: argv.chainapi,
-    speedTest: argv.spdtest,
 });
 
 try {

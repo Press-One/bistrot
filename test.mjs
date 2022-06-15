@@ -29,7 +29,6 @@ const tests = {
     Help: { hideResult: true },
     KeystoreCreate: { args: { password, dump: keystore, force: true } },
     KeystoreUnlock: { args: { keystore, password } },
-    SpdTest: { compactResult: true },
     Version: {},
 };
 

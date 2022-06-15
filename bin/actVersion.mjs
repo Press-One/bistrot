@@ -1,7 +1,7 @@
 import { config, system, utilitas } from '../index.mjs';
 
 const [exportSsConfig, packed, failed, merged] = [[
-    'debug', 'secret', 'speedTest', 'keosApi', 'rpcApi', 'chainApi'
+    'debug', 'secret', 'keosApi', 'rpcApi', 'chainApi'
 ], 'PACKED', 'FAILED', '[MERGED]'];
 
 const verboseCheck = {
