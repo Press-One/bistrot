@@ -6,7 +6,7 @@ import { table } from 'table';
 import yargs from 'yargs';
 
 import {
-    config, crypto, keychain, storage, system, utilitas
+    config, crypto, system, utilitas
 } from '../index.mjs';
 
 const argv = yargs(hideBin(process.argv))
@@ -34,23 +34,10 @@ const toArray = (input) => {
 };
 
 const unlockKeystore = async (options = {}) => {
-    if (argv.keystore) {
-        const result = await (await import('./actKeystoreUnlock')).func(argv, options);
-        argv.address = result.address;
-        argv.pvtkey = result.privateKey;
-        return;
-    }
-    try {
-        const { config } = await keychain.get(argv.account, argv.prmsn, {
-            unique: true, unlock: true, password: argv.password
-        });
-        const keystore = Object.values(config && config.keystores || {})[0];
-        if (keystore) {
-            argv.email = argv.email || config.email;
-            argv.address = argv.address || keystore.keystore.address;
-            argv.pvtkey = keystore.keystore.privateKey;
-        }
-    } catch (err) { }
+    const result = await (await import('./actKeystoreUnlock')).func(argv, options);
+    argv.address = result.address;
+    argv.pvtkey = result.privateKey;
+    return result;
 };
 
 const randerResult = (result, options) => {

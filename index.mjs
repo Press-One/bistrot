@@ -17,7 +17,6 @@ import * as crypto from './lib/crypto.mjs';
 import * as erc20 from './lib/erc20.mjs';
 import * as etc from './lib/etc.mjs';
 import * as finance from './lib/finance.mjs';
-import * as keychain from './lib/keychain.mjs';
 import * as mixin from './lib/mixin.mjs';
 import * as pacman from './lib/pacman.mjs';
 import * as paidGroup from './lib/paidGroup.mjs';
@@ -27,14 +26,13 @@ import * as sushibar from './lib/sushibar.mjs';
 import * as system from './lib/system.mjs';
 import config from './lib/config.mjs';
 import manifest from './lib/manifest.mjs';
-import preference from './lib/preference.mjs';
 
 export * from 'utilitas';
 export {
-    abiDecoder, account, config, crypto, elliptic, erc20, etc,
-    ethereumUtil, finance, hdwalletProvider, keychain, keythereum, manifest,
-    mixin, pacman, paidGroup, preference, quorum, readlineSync, rumsc,
-    secp256k1, solc, sushibar, system, table, web3, yargs,
+    abiDecoder, account, config, crypto, elliptic, erc20, etc, ethereumUtil,
+    finance, hdwalletProvider, keythereum, manifest, mixin, pacman, paidGroup,
+    quorum, readlineSync, rumsc, secp256k1, solc, sushibar, system, table, web3,
+    yargs,
 };
 
 globalThis._bistrot = {
@@ -46,9 +44,9 @@ globalThis._bistrot = {
 if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
     globalThis.bistrot = {
         ...utilitas, abiDecoder, account, config, crypto, elliptic, erc20, etc,
-        ethereumUtil, finance, hdwalletProvider, keychain, keythereum, manifest,
-        mixin, pacman, paidGroup, preference, quorum, readlineSync, rumsc,
-        secp256k1, solc, sushibar, system, table, web3, yargs,
+        ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
+        pacman, paidGroup, quorum, readlineSync, rumsc, secp256k1, solc,
+        sushibar, system, table, web3, yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,

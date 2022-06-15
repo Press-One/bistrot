@@ -27,7 +27,6 @@ const tests = {
     Cmd: {},
     Config: { args: { debug: true } },
     Help: { hideResult: true },
-    Keychain: {},
     KeystoreCreate: { args: { password, dump: keystore, force: true } },
     KeystoreUnlock: { args: { keystore, password } },
     SpdTest: { compactResult: true },
