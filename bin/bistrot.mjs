@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
+import { config, crypto, system, utilitas } from '../index.mjs';
 import { hideBin } from 'yargs/helpers';
 import { readdirSync } from 'fs';
 import { table } from 'table';
 import yargs from 'yargs';
-
-import {
-    config, crypto, system, utilitas
-} from '../index.mjs';
 
 const argv = yargs(hideBin(process.argv))
     .option('address', { string: true })
