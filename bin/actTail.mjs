@@ -1,4 +1,4 @@
-import { pacman, utilitas } from '../index.mjs';
+import { pacman, pacmvm, utilitas } from '../index.mjs';
 
 const rawRender = (content, argv) => {
     if (!Object.keys(content).length) { return; };
@@ -18,7 +18,7 @@ const rawRender = (content, argv) => {
 
 const action = async (argv) => {
     argv.blocknum = utilitas.ensureInt(argv.blocknum, { min: 0 });
-    await pacman.init({
+    await (argv.mvm ? pacmvm : pacman).init({
         callbacks: {
             newBlock: (content) => { return rawRender(content, argv); },
             initIdGet: argv.blocknum && (async () => { return argv.blocknum; }),
