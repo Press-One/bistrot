@@ -17,7 +17,7 @@ import * as erc20 from './lib/erc20.mjs';
 import * as etc from './lib/etc.mjs';
 import * as finance from './lib/finance.mjs';
 import * as mixin from './lib/mixin.mjs';
-import * as pacman from './lib/pacman.mjs';
+import pacman from './lib/pacman.mjs';
 import * as paidGroup from './lib/paidGroup.mjs';
 import * as quorum from './lib/quorum.mjs';
 import * as rumsc from './lib/rumsc.mjs';
