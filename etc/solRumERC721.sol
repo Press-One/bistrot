@@ -1366,8 +1366,6 @@ abstract contract ERC165 is IERC165 {
 
 // OpenZeppelin Contracts (last updated v4.7.0) (utils/Strings.sol)
 
-pragma solidity ^0.8.0;
-
 /**
  * @dev String operations.
  */
@@ -1466,8 +1464,6 @@ abstract contract Context {
 }
 
 // OpenZeppelin Contracts (last updated v4.7.0) (utils/Address.sol)
-
-pragma solidity ^0.8.1;
 
 /**
  * @dev Collection of functions related to the address type
@@ -1798,8 +1794,6 @@ interface IERC721Metadata is IERC721 {
 
 // OpenZeppelin Contracts (last updated v4.6.0) (token/ERC721/IERC721Receiver.sol)
 
-pragma solidity ^0.8.0;
-
 /**
  * @title ERC721 token receiver interface
  * @dev Interface for any contract that wants to support safeTransfers
@@ -1824,8 +1818,6 @@ interface IERC721Receiver {
 }
 
 // OpenZeppelin Contracts v4.4.1 (utils/introspection/IERC165.sol)
-
-pragma solidity ^0.8.0;
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
