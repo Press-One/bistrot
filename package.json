@@ -35,7 +35,7 @@
     },
     "dependencies": {
         "@truffle/hdwallet-provider": "^2.0.13",
-        "abi-decoder": "^2.4.0",
+        "abi-decoder": "git+https://github.com/Leask/abi-decoder.git",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
         "keythereum-pure-js": "^1.1.9",
