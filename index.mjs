@@ -14,6 +14,7 @@ import web3 from 'web3';
 import * as account from './lib/account.mjs';
 import * as crypto from './lib/crypto.mjs';
 import * as erc20 from './lib/erc20.mjs';
+import * as erc721 from './lib/erc721.mjs';
 import * as etc from './lib/etc.mjs';
 import * as finance from './lib/finance.mjs';
 import * as mixin from './lib/mixin.mjs';
@@ -31,10 +32,10 @@ const pacmvm = new PACMAN({ mvm: true });
 
 export * from 'utilitas';
 export {
-    abiDecoder, account, config, crypto, elliptic, erc20, etc, ethereumUtil,
-    finance, hdwalletProvider, keythereum, manifest, mixin, pacman, pacmvm,
-    paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system, table, web3,
-    yargs,
+    abiDecoder, account, config, crypto, elliptic, erc20, erc721, etc,
+    ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
+    pacman, pacmvm, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
+    table, web3, yargs,
 };
 
 globalThis._bistrot = {
@@ -45,10 +46,10 @@ globalThis._bistrot = {
 
 if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
     globalThis.bistrot = {
-        ...utilitas, abiDecoder, account, config, crypto, elliptic, erc20, etc,
-        ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
-        pacman, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
-        table, web3, yargs,
+        ...utilitas, abiDecoder, account, config, crypto, elliptic, erc20,
+        erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
+        manifest, mixin, pacman, paidGroup, quorum, rumsc, secp256k1, solc,
+        sushibar, system, table, web3, yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
