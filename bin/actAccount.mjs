@@ -1,4 +1,4 @@
-import { account, utilitas } from '../index.mjs';
+import { account } from '../index.mjs';
 
 const action = async (argv) => {
     const resp = await account.getByAddress(
