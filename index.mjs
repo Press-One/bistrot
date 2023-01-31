@@ -1,6 +1,6 @@
 // dependencies
+import { default as createTorrent } from 'create-torrent';
 import * as abiDecoder from 'abi-decoder';
-import * as createTorrent from 'create-torrent';
 import * as elliptic from 'elliptic';
 import * as ethereumUtil from 'ethereumjs-util';
 import * as hdwalletProvider from '@truffle/hdwallet-provider';
