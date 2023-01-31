@@ -26,7 +26,7 @@ $ docker run -it --rm pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.5.10
+bistrot v7.5.54
 
 usage: bistrot <command> [<args>]
 
@@ -129,6 +129,18 @@ usage: bistrot <command> [<args>]
 
 =====================================================================
 
+* `PtCreate` > Create a torrent file for RUM-PT:
+
+    --path     Dir or file to seed               [STRING  / REQUIRED]
+    --announce Trackers: T1_A,T1_B;T2_C,T2_D     [STRING  / OPTIONAL]
+    --out      Output file                       [STRING  / OPTIONAL]
+
+    > Example:
+    $ bistrot PtCreate \
+              --path=.
+
+=====================================================================
+
 * `Tail` > Trace the lastest block of the chain:
 
     --blocknum Initial block num                 [NUMBER  / OPTIONAL]
@@ -190,6 +202,7 @@ usage: bistrot <command> [<args>]
     --debug    Enable or disable debug mode      [WITH  OR  WITHOUT ]
     --rpcapi   Customize PRS RPC-API endpoint    [STRING  / OPTIONAL]
     --chainapi Customize PRS Chain-API endpoint  [STRING  / OPTIONAL]
+    --mvm      Use MVM RPC-API endpoint          [STRING  / OPTIONAL]
     ┌---------------------------------------------------------------┐
     | 1. Using param `force` will increase the risk of losing data. |
     └---------------------------------------------------------------┘
