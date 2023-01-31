@@ -36,6 +36,7 @@
     "dependencies": {
         "@truffle/hdwallet-provider": "^2.1.5",
         "abi-decoder": "github:Leask/abi-decoder",
+        "bencode": "^3.0.1",
         "create-torrent": "^6.0.6",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
