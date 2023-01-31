@@ -33,6 +33,9 @@
         "type": "git",
         "url": "https://github.com/Press-One/bistrot.git"
     },
+    "todo": [
+        "bencode should be deleted"
+    ],
     "dependencies": {
         "@truffle/hdwallet-provider": "^2.1.5",
         "abi-decoder": "github:Leask/abi-decoder",
