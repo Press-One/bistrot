@@ -3,30 +3,31 @@ import { utilitas } from '../index.mjs';
 
 const { __dirname } = utilitas.__(import.meta.url);
 
-const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
-    'ABCDE', 'FIJKL', '12.3456', '26621512',
-    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'keystore.json'
+const [defName, receiver, defAmount, defBlockId, defOut, defHash, defFile] = [
+    'ABCDE', 'FIJKL', '12.3456', '26621512', 'MAGNET',
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'keystore.json',
 ];
 
 const defaultArgs = {
-    blocknum: defBlockId,
-    id: defBlockId,
+    'mx-id': '01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV',
+    'mx-num': '12345',
     account: defName,
-    name: defName,
-    payee: receiver,
-    dump: defFile,
-    keystore: defFile,
     address: defHash,
+    amount: defAmount,
+    blocknum: defBlockId,
+    chainapi: 'https://prs-bp1.press.one',
+    dump: defFile,
+    email: 'abc@def.com',
+    id: defBlockId,
+    keystore: defFile,
+    name: defName,
+    out: defOut,
+    path: '.',
+    payee: receiver,
     prevkey: defHash,
     pubkey: defHash,
     pvtkey: defHash,
-    amount: defAmount,
-    email: 'abc@def.com',
-    chainapi: 'https://prs-bp1.press.one',
     rpcapi: 'http://51.68.201.144:8888',
-    path: '.',
-    'mx-num': '12345',
-    'mx-id': '01234567-89AB-CDEF-GHIJ-KLMNOPQRSTUV',
 };
 
 let l = '=====================================================================';
