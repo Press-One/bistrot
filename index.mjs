@@ -16,7 +16,6 @@ import * as yargs from 'yargs';
 import web3 from 'web3';
 // features
 import * as account from './lib/account.mjs';
-import * as bitBorrent from './lib/bitBorrent.mjs';
 import * as blockScout from './lib/blockScout.mjs';
 import * as crypto from './lib/crypto.mjs';
 import * as erc20 from './lib/erc20.mjs';
@@ -29,6 +28,7 @@ import * as quorum from './lib/quorum.mjs';
 import * as rumsc from './lib/rumsc.mjs';
 import * as sushibar from './lib/sushibar.mjs';
 import * as system from './lib/system.mjs';
+import * as torrent from './lib/torrent.mjs';
 import config from './lib/config.mjs';
 import manifest from './lib/manifest.mjs';
 import PACMAN from './lib/pacman.mjs';
@@ -38,11 +38,11 @@ const pacmvm = new PACMAN({ mvm: true });
 
 export * from 'utilitas';
 export {
-    abiDecoder, account, bitBorrent, blockScout, config, createTorrent, crypto,
-    elliptic, erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider,
-    keythereum, manifest, mixin, pacman, pacmvm, paidGroup, parseTorrent,
-    prettierBytes, quorum, rumsc, secp256k1, solc, sushibar, system, table,
-    web3, webTorrent, yargs,
+    abiDecoder, account, blockScout, config, createTorrent, crypto, elliptic,
+    erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
+    manifest, mixin, pacman, pacmvm, paidGroup, parseTorrent, prettierBytes,
+    quorum, rumsc, secp256k1, solc, sushibar, system, table, torrent, web3,
+    webTorrent, yargs,
 };
 
 globalThis._bistrot = {
@@ -53,11 +53,11 @@ globalThis._bistrot = {
 
 if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
     globalThis.bistrot = {
-        ...utilitas, abiDecoder, account, bitBorrent, blockScout, config,
-        createTorrent, crypto, elliptic, erc20, erc721, etc, ethereumUtil,
-        finance, hdwalletProvider, keythereum, manifest, mixin, pacman,
-        paidGroup, parseTorrent, prettierBytes, quorum, rumsc, secp256k1, solc,
-        sushibar, system, table, web3, webTorrent, yargs,
+        ...utilitas, abiDecoder, account, blockScout, config, createTorrent,
+        crypto, elliptic, erc20, erc721, etc, ethereumUtil, finance,
+        hdwalletProvider, keythereum, manifest, mixin, pacman, paidGroup,
+        parseTorrent, prettierBytes, quorum, rumsc, secp256k1, solc, sushibar,
+        system, table, torrent, web3, webTorrent, yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,

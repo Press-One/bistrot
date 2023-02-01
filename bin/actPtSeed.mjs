@@ -9,28 +9,16 @@ const action = async (argv) => {
             tier => tier.split(',').filter(item => !!item)
         ).filter(tier => tier.length);
     }
-    const resp = await torrent.createTorrent(argv.path, options);
-    if (argv.out) {
-        await etc.dumpFile(argv.out, resp.torrent, {
-            overwrite: argv.force,
-            encoding: 'binary',
-        });
-    }
-    delete resp.details.info;
-    delete resp.details.infoHashBuffer;
-    delete resp.details.infoBuffer;
-    delete resp.details.pieces;
-    delete resp.torrent;
-    return { ...resp.details, magnet: resp.magnet };
+    const { name, magnetURI: magnet } = await torrent.seed(argv.path, options);
+    return { name, magnet };
 };
 
 export const { func, name, help, example, render } = {
     func: action,
-    name: 'Create a torrent file for RUM-PT',
+    name: 'Seed content via RUM-PT network',
     help: [
         '    --path     Dir or file to seed               [STRING  / REQUIRED]',
         '    --announce Trackers: T1_A,T1_B;T2_C,T2_D     [STRING  / OPTIONAL]',
-        '    --out      Output file                       [STRING  / OPTIONAL]',
     ],
     example: {
         args: {
