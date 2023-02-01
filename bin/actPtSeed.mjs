@@ -1,4 +1,3 @@
-import { etc } from '../index.mjs';
 import { torrent } from '../index.mjs';
 
 const action = async (argv) => {
