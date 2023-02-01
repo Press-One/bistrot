@@ -10,6 +10,8 @@ import * as secp256k1 from 'secp256k1';
 import * as solc from 'solc';
 import * as table from 'table';
 import * as utilitas from 'utilitas';
+import * as webTorrent from 'webtorrent';
+import * as prettierBytes from 'prettier-bytes';
 import * as yargs from 'yargs';
 import web3 from 'web3';
 // features
@@ -39,7 +41,8 @@ export {
     abiDecoder, account, bitBorrent, blockScout, config, createTorrent, crypto,
     elliptic, erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider,
     keythereum, manifest, mixin, pacman, pacmvm, paidGroup, parseTorrent,
-    quorum, rumsc, secp256k1, solc, sushibar, system, table, web3, yargs,
+    prettierBytes, quorum, rumsc, secp256k1, solc, sushibar, system, table,
+    web3, webTorrent, yargs,
 };
 
 globalThis._bistrot = {
@@ -53,8 +56,8 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
         ...utilitas, abiDecoder, account, bitBorrent, blockScout, config,
         createTorrent, crypto, elliptic, erc20, erc721, etc, ethereumUtil,
         finance, hdwalletProvider, keythereum, manifest, mixin, pacman,
-        paidGroup, parseTorrent, quorum, rumsc, secp256k1, solc, sushibar,
-        system, table, web3, yargs,
+        paidGroup, parseTorrent, prettierBytes, quorum, rumsc, secp256k1, solc,
+        sushibar, system, table, web3, webTorrent, yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
