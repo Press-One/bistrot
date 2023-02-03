@@ -14,9 +14,9 @@ const action = async (argv) => {
 
 export const { func, name, help, example, render } = {
     func: action,
-    name: 'Seed content via RUM-PT network',
+    name: 'Seed or download content via RUM-PT network',
     help: [
-        '    --path     Dir or file to seed               [STRING  / REQUIRED]',
+        '    --path     Filename, .torrent or MagnetURI   [STRING  / REQUIRED]',
         '    --announce Trackers: T1_A,T1_B;T2_C,T2_D     [STRING  / OPTIONAL]',
     ],
     example: {
