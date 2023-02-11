@@ -35,14 +35,15 @@ import PACMAN from './lib/pacman.mjs';
 
 const pacman = new PACMAN();
 const pacmvm = new PACMAN({ mvm: true });
+const repackUtilitas = { ...utilitas.utilitas, manifest: utilitas.manifest };
 
 export * from 'utilitas';
 export {
     abiDecoder, account, blockScout, config, createTorrent, crypto, elliptic,
     erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
     manifest, mixin, pacman, pacmvm, paidGroup, parseTorrent, prettierBytes,
-    quorum, rumsc, secp256k1, solc, sushibar, system, table, torrent, web3,
-    webTorrent, yargs,
+    quorum, rumsc, secp256k1, solc, sushibar, system, table, torrent,
+    repackUtilitas as utilitas, web3, webTorrent, yargs,
 };
 
 globalThis._bistrot = {
@@ -57,7 +58,8 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
         crypto, elliptic, erc20, erc721, etc, ethereumUtil, finance,
         hdwalletProvider, keythereum, manifest, mixin, pacman, paidGroup,
         parseTorrent, prettierBytes, quorum, rumsc, secp256k1, solc, sushibar,
-        system, table, torrent, web3, webTorrent, yargs,
+        system, table, torrent, utilitas: repackUtilitas, web3, webTorrent,
+        yargs,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
