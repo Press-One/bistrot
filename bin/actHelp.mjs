@@ -3,8 +3,8 @@ import { utilitas } from '../index.mjs';
 
 const { __dirname } = utilitas.__(import.meta.url);
 
-const [defName, receiver, defAmount, defBlockId, defOut, defHash, defFile] = [
-    'ABCDE', 'FIJKL', '12.3456', '26621512', 'MAGNET',
+const [defName, receiver, defAmount, defBlockId, defHash, defFile] = [
+    'ABCDE', 'FIJKL', '12.3456', '26621512',
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'keystore.json',
 ];
 
@@ -21,7 +21,6 @@ const defaultArgs = {
     id: defBlockId,
     keystore: defFile,
     name: defName,
-    out: defOut,
     path: '.',
     payee: receiver,
     prevkey: defHash,
