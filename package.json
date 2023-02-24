@@ -34,16 +34,16 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
-        "@truffle/hdwallet-provider": "^2.1.6",
+        "@truffle/hdwallet-provider": "^2.1.7",
         "abi-decoder": "github:Leask/abi-decoder",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
         "keythereum-pure-js": "^1.1.9",
         "secp256k1": "^5.0.0",
-        "solc": "0.8.18",
+        "solc": "0.8.19",
         "table": "^6.8.1",
-        "utilitas": "^1991.1.20",
+        "utilitas": "^1991.1.37",
         "web3": "^1.8.2",
-        "yargs": "^17.6.2"
+        "yargs": "^17.7.1"
     }
 }
