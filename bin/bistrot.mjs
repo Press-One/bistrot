@@ -1,17 +1,12 @@
 #!/usr/bin/env node
 
 import { config, crypto, system, utilitas } from '../index.mjs';
-import { hideBin } from 'yargs/helpers';
+import { parseArgs } from 'node:util';
 import { readdirSync } from 'fs';
 import { table } from 'table';
-import yargs from 'yargs';
 
-const argv = yargs(hideBin(process.argv))
-    .option('address', { string: true })
-    .option('id', { string: true })
-    .option('hash', { string: true })
-    .help(false).argv;
-
+// https://kgrz.io/node-has-native-arg-parsing.html
+const { values: argv, positionals } = parseArgs({ strict: false });
 const { __dirname } = utilitas.__(import.meta.url);
 const map = {};
 const verbose = [];
@@ -98,7 +93,7 @@ const randerResult = (result, options) => {
     'compact', 'daemon', 'debug', 'delete', 'detail', 'dryrun', 'force', 'help',
     'json', 'mvm', 'reverse', 'testnet', 'trxonly',
 ].map(i => { argv[i] = toBoolean(argv[i]); });
-let command = String(argv._.shift() || 'help');
+let command = String((argv._ = positionals).shift() || 'help');
 if (argv.help) { argv.command = command; command = 'help'; }
 const errNotFound = `Command not found: \`${command}\`.`;
 command = command.toLowerCase();

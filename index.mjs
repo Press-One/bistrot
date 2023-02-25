@@ -8,7 +8,6 @@ import * as secp256k1 from 'secp256k1';
 import * as solc from 'solc';
 import * as table from 'table';
 import * as utilitas from 'utilitas';
-import * as yargs from 'yargs';
 import web3 from 'web3';
 // features
 import * as account from './lib/account.mjs';
@@ -36,7 +35,7 @@ export {
     abiDecoder, account, blockScout, config, crypto, elliptic, erc20, erc721,
     etc, ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
     pacman, pacmvm, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
-    table, web3, yargs,
+    table, web3,
 };
 
 globalThis._bistrot = {
@@ -50,7 +49,7 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
         ...utilitas, abiDecoder, account, blockScout, config, crypto, elliptic,
         erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
         manifest, mixin, pacman, paidGroup, quorum, rumsc, secp256k1, solc,
-        sushibar, system, table, web3, yargs,
+        sushibar, system, table, web3,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
