@@ -27,6 +27,8 @@ jobs:
       - run: npm install
       - run: node build.mjs
       - run: npm run readme
+      - run: git add .
+      - run: git commit -m "[BUILD] ${{ github.sha }}"
       - run: git push
       - run: npm publish
         env:
