@@ -26,7 +26,7 @@ $ docker run -it --rm pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.5.54
+bistrot v7.5.84
 
 usage: bistrot <command> [<args>]
 
@@ -126,18 +126,6 @@ usage: bistrot <command> [<args>]
     > Example:
     $ bistrot KeystoreUnlock \
               --keystore=keystore.json
-
-=====================================================================
-
-* `PtCreate` > Create a torrent file for RUM-PT:
-
-    --path     Dir or file to seed               [STRING  / REQUIRED]
-    --announce Trackers: T1_A,T1_B;T2_C,T2_D     [STRING  / OPTIONAL]
-    --out      Output file                       [STRING  / OPTIONAL]
-
-    > Example:
-    $ bistrot PtCreate \
-              --path=.
 
 =====================================================================
 
