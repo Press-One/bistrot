@@ -1,7 +1,7 @@
 {
     "name": "bistrot",
     "description": "A CLI client and also an API library for RumSystem.net.",
-    "version": "7.5.84",
+    "version": "7.5.85",
     "private": false,
     "homepage": "https://github.com/Press-One/bistrot",
     "main": "index.mjs",
