@@ -26,7 +26,7 @@ $ docker run -it --rm pressone/bistrot bistrot help
 ## Instruction
 
 ```markdown
-bistrot v7.5.89
+bistrot v7.5.90
 
 usage: bistrot <command> [<args>]
 
