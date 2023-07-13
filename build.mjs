@@ -48,16 +48,13 @@ log('Loading files...');
     const filename = join(__etc, file);
     if (/\.json$/.test(file)) {
         fileCont[file] = trimCode(readFileSync(filename, utf8));
-        console.log(fileCont[file]);
     }
     if (/\.sol$/.test(file)) {
         const resp = prepareContract(filename);
-        for (let i in resp) {
-            fileCont[i] = resp[i];
-            console.log(fileCont[i]);
-        }
+        for (let i in resp) { fileCont[i] = resp[i]; }
     }
 });
+console.log(fileCont);
 
 log('Updating bundle...');
 log(`> ${targetFile}`);
