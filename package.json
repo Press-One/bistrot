@@ -34,7 +34,7 @@
         "url": "https://github.com/Press-One/bistrot.git"
     },
     "dependencies": {
-        "@truffle/hdwallet-provider": "^2.1.12",
+        "@truffle/hdwallet-provider": "^2.1.13",
         "abi-decoder": "github:Leask/abi-decoder",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
