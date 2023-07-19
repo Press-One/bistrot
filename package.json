@@ -40,9 +40,9 @@
         "ethereumjs-util": "^7.1.5",
         "keythereum-pure-js": "^1.1.9",
         "secp256k1": "^5.0.0",
-        "solc": "0.8.20",
+        "solc": "0.8.21",
         "table": "^6.8.1",
-        "utilitas": "^1995.0.8",
+        "utilitas": "^1995.0.9",
         "web3": "^4.0.3"
     }
 }
