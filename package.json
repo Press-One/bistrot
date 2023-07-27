@@ -38,6 +38,7 @@
         "abi-decoder": "github:Leask/abi-decoder",
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
+        "ethers": "^6.6.5",
         "keythereum-pure-js": "^1.1.9",
         "secp256k1": "^5.0.0",
         "solc": "0.8.21",
