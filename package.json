@@ -39,7 +39,6 @@
         "elliptic": "^6.5.4",
         "ethereumjs-util": "^7.1.5",
         "keythereum-pure-js": "^1.1.9",
-        "mime-types": "^2.1.35",
         "secp256k1": "^5.0.0",
         "solc": "0.8.21",
         "table": "^6.8.1",
