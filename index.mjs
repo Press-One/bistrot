@@ -23,6 +23,7 @@ import * as quorum from './lib/quorum.mjs';
 import * as rumsc from './lib/rumsc.mjs';
 import * as sushibar from './lib/sushibar.mjs';
 import * as system from './lib/system.mjs';
+import * as yonJigen from './lib/yonJigen.mjs';
 import config from './lib/config.mjs';
 import manifest from './lib/manifest.mjs';
 import PACMAN from './lib/pacman.mjs';
@@ -35,7 +36,7 @@ export {
     abiDecoder, account, blockScout, config, crypto, elliptic, erc20, erc721,
     etc, ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
     pacman, pacmvm, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
-    table, web3,
+    table, web3, yonJigen,
 };
 
 globalThis._bistrot = {
@@ -49,7 +50,7 @@ if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
         ...utilitas, abiDecoder, account, blockScout, config, crypto, elliptic,
         erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
         manifest, mixin, pacman, paidGroup, quorum, rumsc, secp256k1, solc,
-        sushibar, system, table, web3,
+        sushibar, system, table, web3, yonJigen,
     };
     utilitas.utilitas.log(
         `(${manifest.homepage}) is ready!`,
