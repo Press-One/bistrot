@@ -1,5 +1,4 @@
 // dependencies
-import * as abiDecoder from 'abi-decoder';
 import * as elliptic from 'elliptic';
 import * as ethereumUtil from 'ethereumjs-util';
 import * as hdwalletProvider from '@truffle/hdwallet-provider';
@@ -33,8 +32,8 @@ const pacmvm = new PACMAN({ mvm: true });
 
 export * from 'utilitas';
 export {
-    abiDecoder, account, blockScout, config, crypto, elliptic, erc20, erc721,
-    etc, ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
+    account, blockScout, config, crypto, elliptic, erc20, erc721, etc,
+    ethereumUtil, finance, hdwalletProvider, keythereum, manifest, mixin,
     pacman, pacmvm, paidGroup, quorum, rumsc, secp256k1, solc, sushibar, system,
     table, web3, yonJigen,
 };
@@ -47,8 +46,8 @@ globalThis._bistrot = {
 
 if (utilitas.utilitas.inBrowser() && !globalThis.bistrot) {
     globalThis.bistrot = {
-        ...utilitas, abiDecoder, account, blockScout, config, crypto, elliptic,
-        erc20, erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
+        ...utilitas, account, blockScout, config, crypto, elliptic, erc20,
+        erc721, etc, ethereumUtil, finance, hdwalletProvider, keythereum,
         manifest, mixin, pacman, paidGroup, quorum, rumsc, secp256k1, solc,
         sushibar, system, table, web3, yonJigen,
     };
